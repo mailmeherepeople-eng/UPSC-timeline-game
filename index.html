@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>UnacademyX — UPSC Timeline</title>
+<title>Chronology: UnacademyX UPSC</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
@@ -32,19 +32,53 @@
   .screen.active { display: flex; }
 
   /* ── START ── */
-  #screen-start { align-items:center; justify-content:center; flex-direction:column; padding:48px 24px; text-align:center; }
+  #screen-start { align-items:center; justify-content:center; flex-direction:column; padding:48px 24px; text-align:center; position:relative; }
   .start-eyebrow { font-size:11px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:18px; }
   .start-title { font-size:clamp(36px,6vw,56px); font-weight:700; color:var(--text); letter-spacing:-1px; line-height:1.1; margin-bottom:16px; }
   .start-title span { color:var(--accent); }
   .start-desc { font-size:16px; color:var(--muted); max-width:440px; line-height:1.75; margin-bottom:36px; }
-  .category-pills { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; max-width:540px; margin-bottom:40px; }
-  .pill { font-size:11px; font-weight:600; padding:4px 12px; border-radius:20px; border:1.5px solid currentColor; }
+  .category-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    max-width: 560px;
+    margin-bottom: 40px;
+  }
+  /* Option B - soft coloured chips. Larger, flat, no border.
+     Reads as information, not interaction. */
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: none;
+    cursor: default;
+    user-select: none;
+    letter-spacing: 0.1px;
+    line-height: 1;
+  }
   .btn-primary { background:var(--accent); color:#fff; border:none; border-radius:var(--radius); padding:14px 40px; font-size:15px; font-weight:600; font-family:'Source Sans 3',sans-serif; cursor:pointer; letter-spacing:0.3px; transition:background 0.15s,transform 0.1s; }
   .btn-primary:hover { background:var(--accent-dark); transform:translateY(-1px); }
   .btn-primary:active { transform:translateY(0); }
   .btn-secondary { background:transparent; color:var(--muted); border:1.5px solid var(--border); border-radius:var(--radius); padding:12px 36px; font-size:14px; font-weight:600; font-family:'Source Sans 3',sans-serif; cursor:pointer; transition:border-color 0.15s,color 0.15s; }
   .btn-secondary:hover { border-color:var(--muted); color:var(--text); }
   .start-note { margin-top:16px; font-size:12px; color:#bbb; }
+
+  /* ── BACK BUTTON - small, top-left of any screen ── */
+  .btn-back {
+    position:absolute; top:18px; left:20px;
+    background:none; border:none; cursor:pointer;
+    font-size:13px; font-weight:600; color:var(--muted);
+    font-family:'Source Sans 3',sans-serif;
+    display:flex; align-items:center; gap:5px;
+    padding:6px 10px; border-radius:8px;
+    transition:color 0.15s, background 0.15s;
+  }
+  .btn-back:hover { color:var(--text); background:var(--border); }
 
   /* ── GAME ── */
   #screen-game { flex-direction:column; align-items:stretch; }
@@ -80,13 +114,22 @@
   .event-card {
     background:var(--surface); border:1.5px solid var(--border); border-radius:var(--radius);
     cursor:grab; user-select:none; box-shadow:var(--shadow-sm);
-    transition:box-shadow 0.15s,transform 0.15s;
+    transition:box-shadow 0.15s, transform 0.15s, border-color 0.1s;
     position:relative; overflow:hidden;
     width:210px;
     animation:slideUp 0.3s ease;
     display:flex; flex-direction:column;
+    /* Prevents browser scroll-then-drag delay on touch */
+    touch-action: none;
   }
   .event-card:hover { box-shadow:var(--shadow-md); transform:translateY(-2px); }
+  /* Instant visual on press - shows user the card is ready to drag */
+  .event-card.pressing {
+    transform: scale(0.97);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent);
+    cursor: grabbing;
+  }
   .event-card.dragging { box-shadow:var(--shadow-lg); transform:rotate(2deg) scale(1.04); cursor:grabbing; opacity:0.9; }
 
   /* Emoji banner at top of draggable card */
@@ -152,7 +195,7 @@
   .tl-card {
     background:var(--surface); border:1.5px solid var(--border);
     border-radius:var(--radius);
-    /* Fixed dimensions — cards are always identical size */
+    /* Fixed dimensions - cards are always identical size */
     width: var(--tl-card-w);
     height: var(--tl-card-h);
     position:relative; overflow:hidden;
@@ -161,7 +204,7 @@
     flex-shrink:0;
   }
 
-  /* Emoji band — fixed height */
+  /* Emoji band - fixed height */
   .tl-emoji {
     width:100%;
     height: var(--tl-emoji-h);
@@ -227,7 +270,7 @@
     box-shadow: 0 0 0 5px var(--accent-light);
   }
 
-  /* End drop zones — much wider, extending into empty space on their open side */
+  /* End drop zones - much wider, extending into empty space on their open side */
   .drop-zone.drop-zone-start {
     width: 300px;
     /* Only pull into the first card on the right side, leave the left open */
@@ -300,7 +343,7 @@
   .end-game-bar.visible { display:block; }
   .end-game-bar p { font-size:13px; color:var(--muted); margin-bottom:10px; }
 
-  /* ── TOAST (year pill — sits in the gap between card stage and timeline) ── */
+  /* ── TOAST (year pill - sits in the gap between card stage and timeline) ── */
   #toast {
     display: none;
     padding: 7px 18px;
@@ -327,7 +370,7 @@
   }
 
   /* ── GAME OVER ── */
-  #screen-gameover { align-items:center; justify-content:center; flex-direction:column; padding:48px 24px; text-align:center; }
+  #screen-gameover { align-items:center; justify-content:center; flex-direction:column; padding:48px 24px; text-align:center; position:relative; }
   .gameover-emoji { font-size:64px; margin-bottom:12px; }
   .gameover-title { font-size:34px; font-weight:700; color:var(--text); margin-bottom:10px; }
   .gameover-sub { font-size:16px; color:var(--muted); margin-bottom:20px; line-height:1.6; max-width:420px; }
@@ -341,11 +384,143 @@
   .gameover-stats strong { color:var(--text); font-size:16px; }
   .btn-group { display:flex; flex-direction:column; gap:10px; align-items:center; }
 
+  /* ── TUTORIAL SCREEN ── */
+  #screen-tutorial {
+    align-items:center; justify-content:center;
+    flex-direction:column; padding:40px 24px; text-align:center;
+    background: var(--bg); position:relative;
+  }
+  .tut-eyebrow { font-size:11px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+  .tut-title { font-family:'Lora',serif; font-size:28px; font-weight:700; color:var(--text); margin-bottom:32px; }
+
+  /* Step indicator dots */
+  .tut-dots { display:flex; gap:8px; justify-content:center; margin-bottom:32px; }
+  .tut-dot { width:8px; height:8px; border-radius:50%; background:var(--border); transition:background 0.2s; }
+  .tut-dot.active { background:var(--accent); }
+
+  /* Step panels */
+  .tut-steps { width:100%; max-width:480px; position:relative; }
+  .tut-step { display:none; flex-direction:column; align-items:center; }
+  .tut-step.active { display:flex; animation:slideUp 0.35s ease; }
+
+  .tut-step-num { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+  .tut-step-heading { font-family:'Lora',serif; font-size:20px; font-weight:700; color:var(--text); margin-bottom:10px; }
+  .tut-step-body { font-size:14px; color:var(--muted); line-height:1.75; max-width:380px; margin-bottom:28px; }
+  .tut-step-body strong { color:var(--text); }
+
+  /* ── DEMO AREA - the animated illustration ── */
+  .tut-demo {
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    padding:24px 20px; width:100%; max-width:440px; margin-bottom:28px;
+    min-height:160px; display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+
+  /* Mini card used in demos */
+  .demo-card {
+    background:#fff; border:1.5px solid var(--border); border-radius:8px;
+    padding:10px 14px; text-align:left; width:130px; flex-shrink:0;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08); position:relative; overflow:hidden;
+  }
+  .demo-card .dc-stripe { position:absolute;top:0;left:0;right:0;height:3px;border-radius:8px 8px 0 0; }
+  .demo-card .dc-emoji { font-size:22px; margin-bottom:4px; display:block; }
+  .demo-card .dc-label { font-family:'Lora',serif; font-size:11px; font-weight:600; color:var(--text); line-height:1.3; }
+  .demo-card .dc-sub { font-size:9px; color:var(--muted); font-style:italic; margin-top:2px; }
+  .demo-card .dc-year { font-size:12px; font-weight:700; font-family:'Lora',serif; color:var(--text); border-top:1px solid #eee; padding-top:5px; margin-top:6px; }
+
+  /* Mini timeline in demo */
+  .demo-timeline {
+    display:flex; align-items:flex-start; gap:0; position:relative;
+  }
+  .demo-timeline::before {
+    content:''; position:absolute; top:16px; left:0; right:0; height:2px;
+    background:var(--border); z-index:0;
+  }
+  .demo-tl-item { display:flex; flex-direction:column; align-items:center; z-index:1; }
+  .demo-tl-tick { width:2px; height:14px; background:#ccc; }
+  .demo-tl-card {
+    background:#fff; border:1.5px solid var(--border); border-radius:6px;
+    padding:6px 8px; width:100px; position:relative; overflow:hidden;
+  }
+  .demo-tl-card .dc-stripe { position:absolute;top:0;left:0;right:0;height:2px;border-radius:6px 6px 0 0; }
+  .demo-tl-card .dc-label { font-family:'Lora',serif; font-size:9px; font-weight:600; color:var(--text); line-height:1.3; }
+  .demo-tl-card .dc-year { font-size:10px; font-weight:700; font-family:'Lora',serif; color:var(--text); border-top:1px solid #eee; padding-top:3px; margin-top:4px; }
+  .demo-drop-gap {
+    width:44px; height:90px; display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; z-index:1;
+  }
+  .demo-drop-line {
+    width:3px; height:70px; border-radius:3px; background:transparent; transition:background 0.3s, box-shadow 0.3s;
+  }
+  .demo-drop-line.lit { background:var(--accent); box-shadow:0 0 0 5px var(--accent-light); }
+
+  /* Animated card that "flies" across in step 2 */
+  .demo-flying-card {
+    position:absolute; z-index:10;
+    transition:left 0.7s cubic-bezier(.4,0,.2,1), top 0.5s cubic-bezier(.4,0,.2,1), opacity 0.3s;
+  }
+
+  /* Press-hold ring animation for step 1 */
+  .demo-press-ring {
+    position:absolute; width:60px; height:60px;
+    border-radius:50%; border:3px solid var(--accent);
+    opacity:0; transform:scale(0.4);
+    animation:pressRing 2s ease infinite;
+  }
+  @keyframes pressRing {
+    0%   { opacity:0; transform:scale(0.4); }
+    20%  { opacity:0.9; transform:scale(1); }
+    60%  { opacity:0.9; transform:scale(1); }
+    80%  { opacity:0; transform:scale(1.3); }
+    100% { opacity:0; transform:scale(1.3); }
+  }
+
+  /* Step 3 - correct/wrong feedback demo */
+  .demo-result-correct { border-color:var(--success) !important; background:#edf7ef !important; }
+  .demo-result-wrong   { border-color:var(--danger)  !important; background:#fdf0ee !important; }
+
+  .tut-nav { display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap:wrap; }
+
+  /* Hold hint pill on the actual game card */
   /* ── ANIMATIONS ── */
   @keyframes slideUp { from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)} }
+  @keyframes dropArrow { 0%,100%{transform:translateY(0);opacity:1} 50%{transform:translateY(6px);opacity:0.5} }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
   @keyframes popIn { 0%{transform:scale(1)}45%{transform:scale(1.07)}100%{transform:scale(1)} }
   @keyframes shake { 0%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}100%{transform:translateX(0)} }
   @keyframes toastIn { from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)} }
+
+  /* ── QUIT MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(28, 26, 22, 0.45);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px);
+    animation: fadeIn 0.15s ease;
+  }
+  .modal-overlay.visible { display: flex; }
+  .modal-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 28px 24px;
+    max-width: 340px;
+    width: 90%;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.2s ease;
+  }
+  .modal-icon { font-size: 36px; margin-bottom: 12px; }
+  .modal-title { font-family: 'Lora', serif; font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .modal-body { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 24px; }
+  .modal-actions { display: flex; gap: 10px; justify-content: center; }
+  .modal-actions .btn-primary { padding: 11px 28px; font-size: 14px; }
+  .modal-actions .btn-secondary { padding: 10px 24px; font-size: 14px; }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
   .timeline-wrapper::-webkit-scrollbar{height:4px}
   .timeline-wrapper::-webkit-scrollbar-track{background:#ece8e0}
@@ -357,30 +532,163 @@
 <!-- START -->
 <div id="screen-start" class="screen active">
   <div class="start-eyebrow">by <span style="color:var(--accent);font-weight:700;">Unacademy</span><span style="font-style:italic;font-weight:700;">X</span> · UPSC History & Polity</div>
-  <h1 class="start-title">Place the <span>Event</span></h1>
-  <p class="start-desc">Cards appear one at a time. Drag each to its correct chronological position on the timeline. Three wrong placements and the game ends — but the timeline stays so you can review!</p>
+  <h1 class="start-title"><span>Chronology</span></h1>
+  <p class="start-desc">Test your UPSC history knowledge by placing events in the correct chronological order. Three wrong placements and the game ends.</p>
   <div class="category-pills" id="category-pills"></div>
-  <button class="btn-primary" onclick="startGame()">Start Game →</button>
+  <div style="display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;">
+    <button class="btn-primary" onclick="showScreen('tutorial')">How to Play →</button>
+    <button class="btn-secondary" onclick="startGame()">Start Game</button>
+  </div>
   <p class="start-note">220+ curated events · 9 UPSC categories · 3 lives · Made with ❤️ by UnacademyX</p>
+</div>
+
+<!-- TUTORIAL -->
+<div id="screen-tutorial" class="screen">
+  <button class="btn-back" onclick="showScreen('start')">← Back</button>
+  <div class="tut-eyebrow">Quick Guide</div>
+  <h2 class="tut-title">How to Play</h2>
+
+  <div class="tut-dots">
+    <div class="tut-dot active" id="dot-0"></div>
+    <div class="tut-dot" id="dot-1"></div>
+    <div class="tut-dot" id="dot-2"></div>
+  </div>
+
+  <div class="tut-steps">
+
+    <!-- STEP 1: Press & Hold -->
+    <div class="tut-step active" id="tut-step-0">
+      <div class="tut-step-num">Step 1 of 3</div>
+      <div class="tut-step-heading">Press & Hold the Card</div>
+      <div class="tut-step-body">
+        A card appears showing a historical event, but <strong>no date</strong>. To move it, <strong>press and hold</strong> the card for a moment until it lifts, then drag it.
+        <br><br>
+        ⚠️ Simply tapping or clicking won't work. You must <strong>press, hold, then drag</strong>.
+      </div>
+      <div class="tut-demo" id="demo-0">
+        <div style="position:relative;display:flex;align-items:center;justify-content:center;">
+          <div class="demo-press-ring"></div>
+          <div class="demo-card" style="border-color:#4a5e7a;">
+            <div class="dc-stripe" style="background:#4a5e7a;"></div>
+            <span class="dc-emoji">⚔️</span>
+            <div class="dc-label">Battle of Plassey</div>
+            <div class="dc-sub">fought</div>
+          </div>
+        </div>
+        <div style="margin-left:20px;font-size:13px;color:var(--muted);line-height:1.6;text-align:left;max-width:140px;">
+          👆 <strong>Press & hold</strong> here until the card lifts up
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: Drag to Timeline -->
+    <div class="tut-step" id="tut-step-1">
+      <div class="tut-step-num">Step 2 of 3</div>
+      <div class="tut-step-heading">Place It in the Right Era</div>
+      <div class="tut-step-body">
+        The timeline shows events in <strong>chronological order</strong>: oldest on the left, most recent on the right. Every card already on the timeline shows its date.
+        <br><br>
+        Your job is to <strong>guess when the new event happened</strong> and drop it in the correct position. For example, if the timeline shows <em>322 BCE</em> on the left and <em>1947 CE</em> on the right, and your card is the <em>Battle of Plassey</em>. You know it happened in colonial times, so you'd drop it closer to the right, before 1947.
+        <br><br>
+        A <strong>green line</strong> lights up in the gap as you hover. That's where your card will land. Drop it there.
+        <br><br>
+        At the very <strong>start or end</strong> of the timeline, the drop area is extra wide. Just drag into the open space and release.
+      </div>
+      <div class="tut-demo" id="demo-1">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;">
+          <!-- Floating card above timeline -->
+          <div class="demo-card" id="demo-flying" style="opacity:0.9;transform:translateY(0);transition:transform 0.8s ease,opacity 0.4s;border-color:#4a5e7a;">
+            <div class="dc-stripe" style="background:#4a5e7a;"></div>
+            <span class="dc-emoji">⚔️</span>
+            <div class="dc-label">Battle of Plassey</div>
+            <div class="dc-sub">fought</div>
+          </div>
+          <div style="font-size:18px;animation:dropArrow 1.2s ease infinite;">↓</div>
+          <!-- Mini timeline -->
+          <div class="demo-timeline">
+            <div class="demo-drop-gap"><div class="demo-drop-line" id="demo-line-0"></div></div>
+            <div class="demo-tl-item">
+              <div class="demo-tl-tick"></div>
+              <div class="demo-tl-card">
+                <div class="dc-stripe" style="background:#7a5c2e;"></div>
+                <div class="dc-label">Maurya Empire founded</div>
+                <div class="dc-year">322 BCE</div>
+              </div>
+            </div>
+            <div class="demo-drop-gap"><div class="demo-drop-line lit" id="demo-line-1"></div></div>
+            <div class="demo-tl-item">
+              <div class="demo-tl-tick"></div>
+              <div class="demo-tl-card">
+                <div class="dc-stripe" style="background:#5e4a7a;"></div>
+                <div class="dc-label">Indian Independence</div>
+                <div class="dc-year">1947 CE</div>
+              </div>
+            </div>
+            <div class="demo-drop-gap"><div class="demo-drop-line" id="demo-line-2"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: Feedback -->
+    <div class="tut-step" id="tut-step-2">
+      <div class="tut-step-num">Step 3 of 3</div>
+      <div class="tut-step-heading">See the Result</div>
+      <div class="tut-step-body">
+        <strong style="color:var(--success);">Correct:</strong> the card joins the timeline in green and the date is revealed. Your score goes up.
+        <br><br>
+        <strong style="color:var(--danger);">Wrong:</strong> the card still joins the timeline but turns red, and you lose a life. Three wrong and it's game over.
+        <br><br>
+        The timeline stays after the game ends so you can review every placement.
+      </div>
+      <div class="tut-demo" id="demo-2">
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+          <div style="text-align:center;">
+            <div style="font-size:11px;font-weight:700;color:var(--success);margin-bottom:6px;letter-spacing:1px;">✓ CORRECT</div>
+            <div class="demo-tl-card demo-result-correct" style="width:110px;">
+              <div class="dc-stripe" style="background:var(--success);"></div>
+              <div class="dc-label">Battle of Plassey</div>
+              <div class="dc-year" style="border-top-color:#c3e6cb;">1757 CE</div>
+            </div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:11px;font-weight:700;color:var(--danger);margin-bottom:6px;letter-spacing:1px;">✗ WRONG</div>
+            <div class="demo-tl-card demo-result-wrong" style="width:110px;">
+              <div class="dc-stripe" style="background:var(--danger);"></div>
+              <div class="dc-label">Battle of Plassey</div>
+              <div class="dc-year" style="border-top-color:#f5c6c6;">1757 CE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end tut-steps -->
+
+  <div class="tut-nav" id="tut-nav">
+    <button class="btn-secondary" id="tut-prev" onclick="tutNav(-1)" style="display:none;">← Back</button>
+    <button class="btn-primary" id="tut-next" onclick="tutNav(1)">Next →</button>
+  </div>
 </div>
 
 <!-- GAME -->
 <div id="screen-game" class="screen">
   <header class="game-header">
-    <div class="game-logo"><span class="brand-u">Unacademy</span><span class="brand-x">X</span> &nbsp;·&nbsp; UPSC Timeline</div>
+    <div class="game-logo"><span class="brand-u">Unacademy</span><span class="brand-x">X</span> &nbsp;·&nbsp; Chronology</div>
     <div class="game-stats">
       <div class="score-display">Score <strong id="score-display">0</strong></div>
       <div class="lives" id="lives-display"></div>
+      <button onclick="quitGame()" style="background:none;border:none;cursor:pointer;font-size:12px;font-weight:600;color:var(--muted);font-family:'Source Sans 3',sans-serif;padding:6px 10px;border-radius:8px;transition:color 0.15s,background 0.15s;" onmouseover="this.style.color='var(--text)';this.style.background='var(--border)';" onmouseout="this.style.color='var(--muted)';this.style.background='none';">✕ Quit</button>
     </div>
   </header>
-  <!-- Quip banner — slides in above the card stage after each answer -->
+  <!-- Quip banner: slides in above the card stage after each answer -->
   <div class="quip-banner" id="quip-banner"></div>
   <div class="card-stage">
     <div class="stage-label">Where does this event belong?</div>
     <div id="current-card-container"></div>
-    <div class="drag-hint">↓ Drag into any gap on the timeline below</div>
+    <div class="drag-hint">👆 Press &amp; hold the card, then drag it to the timeline below</div>
   </div>
-  <!-- Toast lives here — in the natural gap between card and timeline -->
+  <!-- Toast: sits in the natural gap between card and timeline -->
   <div class="toast-row">
     <div id="toast"></div>
   </div>
@@ -398,6 +706,7 @@
 
 <!-- GAME OVER -->
 <div id="screen-gameover" class="screen">
+  <button class="btn-back" onclick="showScreen('start')">← Back to Start</button>
   <div class="gameover-emoji" id="go-emoji"></div>
   <h2 class="gameover-title" id="go-title"></h2>
   <p class="gameover-sub" id="go-sub"></p>
@@ -406,6 +715,19 @@
   <div class="btn-group">
     <button class="btn-primary" onclick="startGame()">Play Again →</button>
     <button class="btn-secondary" onclick="showScreen('start')">Back to Start</button>
+  </div>
+</div>
+
+<!-- QUIT MODAL: in-app confirmation, no browser dialog -->
+<div class="modal-overlay" id="quit-modal" onclick="if(event.target===this)closeQuitModal()">
+  <div class="modal-box">
+    <div class="modal-icon">🚪</div>
+    <div class="modal-title">Quit this game?</div>
+    <div class="modal-body">Your progress will be lost. You'll go back to the start screen.</div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeQuitModal()">Keep Playing</button>
+      <button class="btn-primary" onclick="confirmQuit()">Yes, Quit</button>
+    </div>
   </div>
 </div>
 
@@ -426,7 +748,7 @@ const CAT = {
 };
 
 // ═══════════════════════════════════════════════════════════
-//  EVENTS — 220+ curated UPSC events
+//  EVENTS - 220+ curated UPSC events
 // ═══════════════════════════════════════════════════════════
 const EVENTS = [
   // ── ANCIENT INDIA ──
@@ -456,8 +778,8 @@ const EVENTS = [
   // ── MEDIEVAL INDIA ──
   { id:23,  label:"Arab conquest of Sindh by Muhammad bin Qasim", sublabel:"occurred",                  year:712,   cat:"Medieval India" },
   { id:24,  label:"Prithviraj Chauhan",                       sublabel:"born",                           year:1149,  cat:"Medieval India" },
-  { id:25,  label:"First Battle of Tarain",                   sublabel:"fought — Prithviraj won",        year:1191,  cat:"Medieval India" },
-  { id:26,  label:"Second Battle of Tarain",                  sublabel:"fought — Muhammad Ghori won",    year:1192,  cat:"Medieval India" },
+  { id:25,  label:"First Battle of Tarain",                   sublabel:"fought, Prithviraj won",        year:1191,  cat:"Medieval India" },
+  { id:26,  label:"Second Battle of Tarain",                  sublabel:"fought, Muhammad Ghori won",    year:1192,  cat:"Medieval India" },
   { id:27,  label:"Delhi Sultanate",                          sublabel:"established by Qutb ud-Din Aibak",year:1206, cat:"Medieval India" },
   { id:28,  label:"Qutb Minar",                               sublabel:"construction began",             year:1193,  cat:"Medieval India" },
   { id:29,  label:"Razia Sultana",                            sublabel:"became first female ruler of Delhi",year:1236,cat:"Medieval India" },
@@ -494,7 +816,7 @@ const EVENTS = [
   { id:58,  label:"Pitt's India Act",                         sublabel:"enacted",                        year:1784,  cat:"Colonial India" },
   { id:59,  label:"Permanent Settlement of Bengal",           sublabel:"introduced by Cornwallis",        year:1793,  cat:"Colonial India" },
   { id:60,  label:"Subsidiary Alliance system",               sublabel:"introduced by Wellesley",         year:1798,  cat:"Colonial India" },
-  { id:61,  label:"Fourth Anglo-Mysore War — Tipu Sultan killed",sublabel:"occurred",                    year:1799,  cat:"Colonial India" },
+  { id:61,  label:"Fourth Anglo-Mysore War, Tipu Sultan killed",sublabel:"occurred",                    year:1799,  cat:"Colonial India" },
   { id:62,  label:"Second Anglo-Maratha War",                 sublabel:"fought",                         year:1803,  cat:"Colonial India" },
   { id:63,  label:"Charter Act",                              sublabel:"ended EIC's trade monopoly",     year:1813,  cat:"Colonial India" },
   { id:64,  label:"Doctrine of Lapse",                        sublabel:"introduced by Dalhousie",         year:1848,  cat:"Colonial India" },
@@ -506,7 +828,7 @@ const EVENTS = [
   { id:70,  label:"Partition of Bengal",                      sublabel:"by Lord Curzon",                 year:1905,  cat:"Colonial India" },
   { id:71,  label:"Swadeshi Movement",                        sublabel:"launched",                       year:1905,  cat:"Colonial India" },
   { id:72,  label:"Muslim League",                            sublabel:"founded at Dhaka",               year:1906,  cat:"Colonial India" },
-  { id:73,  label:"Morley-Minto Reforms",                     sublabel:"enacted — separate electorates", year:1909,  cat:"Colonial India" },
+  { id:73,  label:"Morley-Minto Reforms",                     sublabel:"enacted, separate electorates introduced", year:1909,  cat:"Colonial India" },
   { id:74,  label:"Capital shifted from Calcutta to Delhi",   sublabel:"announced by British",           year:1911,  cat:"Colonial India" },
   { id:75,  label:"Lucknow Pact",                             sublabel:"Congress-League agreement",       year:1916,  cat:"Colonial India" },
   { id:76,  label:"Montagu-Chelmsford Reforms",               sublabel:"enacted",                        year:1919,  cat:"Colonial India" },
@@ -514,51 +836,51 @@ const EVENTS = [
   { id:78,  label:"Jallianwala Bagh Massacre",                sublabel:"General Dyer's order",           year:1919,  cat:"Colonial India" },
   { id:79,  label:"Khilafat Movement",                        sublabel:"launched",                       year:1919,  cat:"Colonial India" },
   { id:80,  label:"Non-Cooperation Movement",                 sublabel:"launched by Gandhi",              year:1920,  cat:"Colonial India" },
-  { id:81,  label:"Chauri Chaura incident",                   sublabel:"occurred — NCM withdrawn",       year:1922,  cat:"Colonial India" },
-  { id:82,  label:"Simon Commission",                         sublabel:"arrived — boycotted by Congress", year:1928,  cat:"Colonial India" },
-  { id:83,  label:"Lahore Session — Purna Swaraj Declaration",sublabel:"adopted by Congress",            year:1929,  cat:"Colonial India" },
+  { id:81,  label:"Chauri Chaura incident",                   sublabel:"occurred, NCM withdrawn",       year:1922,  cat:"Colonial India" },
+  { id:82,  label:"Simon Commission",                         sublabel:"arrived, boycotted by Congress", year:1928,  cat:"Colonial India" },
+  { id:83,  label:"Lahore Session: Purna Swaraj Declaration",sublabel:"adopted by Congress",            year:1929,  cat:"Colonial India" },
   { id:84,  label:"Dandi March / Salt Satyagraha",            sublabel:"Gandhi's 241-mile march",        year:1930,  cat:"Colonial India" },
   { id:85,  label:"First Round Table Conference",             sublabel:"held in London",                 year:1930,  cat:"Colonial India" },
   { id:86,  label:"Gandhi-Irwin Pact",                        sublabel:"signed",                         year:1931,  cat:"Colonial India" },
   { id:87,  label:"Poona Pact",                               sublabel:"Gandhi-Ambedkar agreement",       year:1932,  cat:"Colonial India" },
-  { id:88,  label:"Government of India Act",                  sublabel:"enacted — provinces given autonomy",year:1935,cat:"Colonial India" },
+  { id:88,  label:"Government of India Act",                  sublabel:"enacted, provinces given autonomy",year:1935,cat:"Colonial India" },
   { id:89,  label:"Congress wins provincial elections",        sublabel:"occurred",                       year:1937,  cat:"Colonial India" },
-  { id:90,  label:"Cripps Mission",                           sublabel:"arrived — rejected by Congress",  year:1942,  cat:"Colonial India" },
-  { id:91,  label:"Quit India Movement",                      sublabel:"Do or Die — Gandhi's call",      year:1942,  cat:"Colonial India" },
+  { id:90,  label:"Cripps Mission",                           sublabel:"arrived, rejected by Congress",  year:1942,  cat:"Colonial India" },
+  { id:91,  label:"Quit India Movement",                      sublabel:"Do or Die, Gandhi's call",      year:1942,  cat:"Colonial India" },
   { id:92,  label:"INA trials at Red Fort",                   sublabel:"began",                          year:1945,  cat:"Colonial India" },
   { id:93,  label:"Cabinet Mission Plan",                     sublabel:"proposed",                       year:1946,  cat:"Colonial India" },
   { id:94,  label:"Direct Action Day",                        sublabel:"called by Muslim League",         year:1946,  cat:"Colonial India" },
-  { id:95,  label:"Mountbatten Plan",                         sublabel:"announced — India partitioned",  year:1947,  cat:"Colonial India" },
-  { id:96,  label:"Indian Independence",                      sublabel:"achieved — 15 August",           year:1947,  cat:"Colonial India" },
+  { id:95,  label:"Mountbatten Plan",                         sublabel:"announced, India partitioned",  year:1947,  cat:"Colonial India" },
+  { id:96,  label:"Indian Independence",                      sublabel:"achieved on 15 August",           year:1947,  cat:"Colonial India" },
   { id:97,  label:"Subhas Chandra Bose founded INA",          sublabel:"in Southeast Asia",              year:1943,  cat:"Colonial India" },
 
   // ── POST-INDEPENDENCE ──
   { id:98,  label:"Integration of Hyderabad (Operation Polo)",sublabel:"by Sardar Patel",               year:1948,  cat:"Post-Independence" },
   { id:99,  label:"Mahatma Gandhi assassinated",              sublabel:"by Nathuram Godse",              year:1948,  cat:"Post-Independence" },
   { id:100, label:"Constitution of India",                    sublabel:"adopted by Constituent Assembly", year:1949,  cat:"Post-Independence" },
-  { id:101, label:"Constitution of India",                    sublabel:"came into force — Republic Day",  year:1950,  cat:"Post-Independence" },
+  { id:101, label:"Constitution of India",                    sublabel:"came into force, Republic Day",  year:1950,  cat:"Post-Independence" },
   { id:102, label:"Planning Commission",                      sublabel:"established",                    year:1950,  cat:"Post-Independence" },
   { id:103, label:"First Five-Year Plan",                     sublabel:"launched",                       year:1951,  cat:"Post-Independence" },
-  { id:104, label:"First General Elections of India",         sublabel:"held — Congress won",             year:1951,  cat:"Post-Independence" },
+  { id:104, label:"First General Elections of India",         sublabel:"held, Congress won",             year:1951,  cat:"Post-Independence" },
   { id:105, label:"States Reorganisation Act",                sublabel:"linguistic states created",       year:1956,  cat:"Post-Independence" },
   { id:106, label:"Non-Aligned Movement",                     sublabel:"co-founded by Nehru",            year:1961,  cat:"Post-Independence" },
-  { id:107, label:"Sino-Indian War",                          sublabel:"India defeated — Nehru shocked", year:1962,  cat:"Post-Independence" },
+  { id:107, label:"Sino-Indian War",                          sublabel:"India defeated, Nehru shocked", year:1962,  cat:"Post-Independence" },
   { id:108, label:"Indo-Pak War",                             sublabel:"Tashkent Agreement followed",     year:1965,  cat:"Post-Independence" },
   { id:109, label:"Green Revolution in India",                sublabel:"M.S. Swaminathan led it",        year:1966,  cat:"Post-Independence" },
   { id:110, label:"Indira Gandhi became PM",                  sublabel:"first woman PM of India",        year:1966,  cat:"Post-Independence" },
   { id:111, label:"Bank Nationalisation",                     sublabel:"14 banks nationalised by Indira", year:1969,  cat:"Post-Independence" },
   { id:112, label:"Bangladesh Liberation War",                sublabel:"India defeated Pakistan",         year:1971,  cat:"Post-Independence" },
   { id:113, label:"Simla Agreement",                          sublabel:"signed with Pakistan",            year:1972,  cat:"Post-Independence" },
-  { id:114, label:"India's first nuclear test (Pokhran-I)",   sublabel:"Smiling Buddha — peaceful test",  year:1974,  cat:"Post-Independence" },
+  { id:114, label:"India's first nuclear test (Pokhran-I)",   sublabel:"Smiling Buddha, declared peaceful",  year:1974,  cat:"Post-Independence" },
   { id:115, label:"Emergency in India",                       sublabel:"declared by Indira Gandhi",       year:1975,  cat:"Post-Independence" },
   { id:116, label:"Operation Blue Star",                      sublabel:"Golden Temple stormed",           year:1984,  cat:"Post-Independence" },
-  { id:117, label:"Bhopal Gas Tragedy",                       sublabel:"Union Carbide leak — thousands died",year:1984,cat:"Post-Independence"},
+  { id:117, label:"Bhopal Gas Tragedy",                       sublabel:"Union Carbide leak, thousands died",year:1984,cat:"Post-Independence"},
   { id:118, label:"Indira Gandhi assassinated",               sublabel:"by her bodyguards",              year:1984,  cat:"Post-Independence" },
   { id:119, label:"Rajiv Gandhi became PM",                   sublabel:"youngest PM of India at 40",     year:1984,  cat:"Post-Independence" },
   { id:120, label:"Liberalisation Reforms (LPG)",             sublabel:"Manmohan Singh's budget",        year:1991,  cat:"Post-Independence" },
   { id:121, label:"Babri Masjid demolished",                  sublabel:"in Ayodhya",                     year:1992,  cat:"Post-Independence" },
   { id:122, label:"Pokhran-II (Operation Shakti)",            sublabel:"5 nuclear tests conducted",      year:1998,  cat:"Post-Independence" },
-  { id:123, label:"Kargil War",                               sublabel:"Operation Vijay — Pakistan evicted",year:1999,cat:"Post-Independence"},
+  { id:123, label:"Kargil War",                               sublabel:"Operation Vijay, Pakistan evicted",year:1999,cat:"Post-Independence"},
   { id:124, label:"Parliament of India attacked",             sublabel:"by terrorists",                  year:2001,  cat:"Post-Independence" },
   { id:125, label:"Right to Information Act",                 sublabel:"enacted",                        year:2005,  cat:"Post-Independence" },
   { id:126, label:"MNREGA",                                   sublabel:"100 days of guaranteed work",    year:2005,  cat:"Post-Independence" },
@@ -579,10 +901,10 @@ const EVENTS = [
   { id:139, label:"American Declaration of Independence",     sublabel:"from British rule",              year:1776,  cat:"World History" },
   { id:140, label:"French Revolution",                        sublabel:"storming of the Bastille",       year:1789,  cat:"World History" },
   { id:141, label:"Napoleon became Emperor of France",        sublabel:"self-crowned at Notre-Dame",     year:1804,  cat:"World History" },
-  { id:142, label:"Battle of Waterloo — Napoleon's final defeat",sublabel:"occurred",                    year:1815,  cat:"World History" },
+  { id:142, label:"Battle of Waterloo: Napoleon's final defeat",sublabel:"occurred",                    year:1815,  cat:"World History" },
   { id:143, label:"Communist Manifesto",                      sublabel:"Marx and Engels published it",   year:1848,  cat:"World History" },
   { id:144, label:"Suez Canal",                               sublabel:"opened",                         year:1869,  cat:"World History" },
-  { id:145, label:"Berlin Conference — Africa partitioned",   sublabel:"by European powers",             year:1884,  cat:"World History" },
+  { id:145, label:"Berlin Conference: Africa partitioned",   sublabel:"by European powers",             year:1884,  cat:"World History" },
   { id:146, label:"First World War",                          sublabel:"assassination of Archduke Franz Ferdinand",year:1914,cat:"World History"},
   { id:147, label:"Balfour Declaration",                      sublabel:"British support for Jewish homeland",year:1917,cat:"World History"},
   { id:148, label:"Russian Revolution",                       sublabel:"Bolsheviks seized power",        year:1917,  cat:"World History" },
@@ -591,17 +913,17 @@ const EVENTS = [
   { id:151, label:"Great Depression",                         sublabel:"Wall Street Crash",              year:1929,  cat:"World History" },
   { id:152, label:"Hitler became Chancellor of Germany",      sublabel:"Nazi regime began",              year:1933,  cat:"World History" },
   { id:153, label:"Second World War",                         sublabel:"Germany invaded Poland",         year:1939,  cat:"World History" },
-  { id:154, label:"Hiroshima atomic bombing",                 sublabel:"by US — 140,000 killed",         year:1945,  cat:"World History" },
-  { id:155, label:"United Nations",                           sublabel:"founded — 51 charter members",   year:1945,  cat:"World History" },
+  { id:154, label:"Hiroshima atomic bombing",                 sublabel:"by US, 140,000 killed",         year:1945,  cat:"World History" },
+  { id:155, label:"United Nations",                           sublabel:"founded, 51 charter members",   year:1945,  cat:"World History" },
   { id:156, label:"Universal Declaration of Human Rights",    sublabel:"adopted by UN General Assembly", year:1948,  cat:"World History" },
   { id:157, label:"NATO",                                     sublabel:"founded",                        year:1949,  cat:"World History" },
   { id:158, label:"Korean War",                               sublabel:"began",                          year:1950,  cat:"World History" },
-  { id:159, label:"Sputnik — first artificial satellite",     sublabel:"launched by Soviet Union",       year:1957,  cat:"World History" },
+  { id:159, label:"Sputnik: first artificial satellite",     sublabel:"launched by Soviet Union",       year:1957,  cat:"World History" },
   { id:160, label:"Cuban Missile Crisis",                     sublabel:"Cold War nuclear standoff",      year:1962,  cat:"World History" },
   { id:161, label:"Moon landing (Apollo 11)",                 sublabel:"Neil Armstrong walked on Moon",  year:1969,  cat:"World History" },
   { id:162, label:"Vietnam War ended",                        sublabel:"fall of Saigon",                 year:1975,  cat:"World History" },
   { id:163, label:"Berlin Wall",                              sublabel:"fell",                           year:1989,  cat:"World History" },
-  { id:164, label:"Soviet Union",                             sublabel:"dissolved — Cold War ended",     year:1991,  cat:"World History" },
+  { id:164, label:"Soviet Union",                             sublabel:"dissolved, Cold War ended",     year:1991,  cat:"World History" },
   { id:165, label:"World Trade Organization",                 sublabel:"replaced GATT",                  year:1995,  cat:"World History" },
   { id:166, label:"9/11 attacks on USA",                      sublabel:"Al-Qaeda struck Twin Towers",    year:2001,  cat:"World History" },
   { id:167, label:"Global Financial Crisis",                  sublabel:"Lehman Brothers collapsed",      year:2008,  cat:"World History" },
@@ -656,7 +978,7 @@ const EVENTS = [
   { id:210, label:"Self-Respect Movement",                     sublabel:"founded by E.V. Ramasamy (Periyar)",year:1925,cat:"Social Reform"},
   { id:211, label:"Ambedkar's Mahad Satyagraha",               sublabel:"Dalits claimed right to public water",year:1927,cat:"Social Reform"},
   { id:212, label:"Devadasi system abolished",                 sublabel:"in Madras Presidency",            year:1947,  cat:"Social Reform" },
-  { id:213, label:"Hindu Code Bills",                          sublabel:"passed — reformed personal law",  year:1955,  cat:"Social Reform" },
+  { id:213, label:"Hindu Code Bills",                          sublabel:"passed, reformed personal law",  year:1955,  cat:"Social Reform" },
   { id:214, label:"Untouchability Offences Act",               sublabel:"enacted",                        year:1955,  cat:"Social Reform" },
   { id:215, label:"Mandal Commission report",                  sublabel:"implemented by V.P. Singh govt",  year:1990,  cat:"Social Reform" },
 
@@ -664,18 +986,18 @@ const EVENTS = [
   { id:216, label:"Indian Independence Act",                   sublabel:"by British Parliament",          year:1947,  cat:"Constitutional" },
   { id:217, label:"Constituent Assembly first met",            sublabel:"to draft India's Constitution",  year:1946,  cat:"Constitutional" },
   { id:218, label:"B.R. Ambedkar became Law Minister",         sublabel:"chairman of drafting committee", year:1947,  cat:"Constitutional" },
-  { id:219, label:"42nd Constitutional Amendment",             sublabel:"'Mini Constitution' — Emergency era",year:1976,cat:"Constitutional"},
+  { id:219, label:"42nd Constitutional Amendment",             sublabel:"Mini Constitution of the Emergency era",year:1976,cat:"Constitutional"},
   { id:220, label:"44th Constitutional Amendment",             sublabel:"reversed Emergency-era changes",  year:1978,  cat:"Constitutional" },
-  { id:221, label:"52nd Amendment — Anti-Defection Law",       sublabel:"enacted",                        year:1985,  cat:"Constitutional" },
-  { id:222, label:"73rd Amendment — Panchayati Raj",           sublabel:"local self-governance guaranteed",year:1992, cat:"Constitutional" },
-  { id:223, label:"74th Amendment — Urban Local Bodies",       sublabel:"municipalities empowered",        year:1992,  cat:"Constitutional" },
-  { id:224, label:"86th Amendment — Right to Education",       sublabel:"made fundamental right",         year:2002,  cat:"Constitutional" },
+  { id:221, label:"52nd Amendment: Anti-Defection Law",       sublabel:"enacted",                        year:1985,  cat:"Constitutional" },
+  { id:222, label:"73rd Amendment: Panchayati Raj",           sublabel:"local self-governance guaranteed",year:1992, cat:"Constitutional" },
+  { id:223, label:"74th Amendment: Urban Local Bodies",       sublabel:"municipalities empowered",        year:1992,  cat:"Constitutional" },
+  { id:224, label:"86th Amendment: Right to Education",       sublabel:"made fundamental right",         year:2002,  cat:"Constitutional" },
   { id:225, label:"Right to Education Act",                    sublabel:"free education for 6–14 year olds",year:2009,cat:"Constitutional" },
   { id:226, label:"National Food Security Act",                sublabel:"right to subsidised food",        year:2013,  cat:"Constitutional" },
 ];
 
 // ═══════════════════════════════════════════════════════════
-//  CORRECT QUIPS — shown in toast when user gets one right
+//  CORRECT QUIPS - shown in toast when user gets one right
 // ═══════════════════════════════════════════════════════════
 const CORRECT_QUIPS = [
   "🔥 Bilkul sahi! Even Mrunal would be proud.",
@@ -691,12 +1013,12 @@ const CORRECT_QUIPS = [
   "💡 Waah! That's the kind of answer that gets you an IAS posting.",
   "🏆 Perfect! Rank 1 se kam kuch nahi tere liye.",
   "😎 Ek dum sahi! Desh mein ek aur IAS officer aa raha hai.",
-  "🔑 Right answer! Now imagine knowing ALL of these — subscribe to Unacademy Prime 😉",
+  "🔑 Right answer! Now imagine knowing ALL of these. Subscribe to Unacademy Prime 😉",
   "🌟 Brilliant! Nehru would've written a letter about you.",
 ];
 
 // ═══════════════════════════════════════════════════════════
-//  WRONG QUIPS — shown in toast when user gets one wrong
+//  WRONG QUIPS - shown in toast when user gets one wrong
 // ═══════════════════════════════════════════════════════════
 const WRONG_QUIPS = [
   "❌ Oops! You would've known this if you subscribed to Unacademy Prime. Just saying. 😇",
@@ -706,12 +1028,12 @@ const WRONG_QUIPS = [
   "😬 Wrong! UPSC is merciless, but Unacademy Prime is not. Subscribe karo.",
   "📖 This one's in Chapter 3 of the Unacademy study material. We forgive you. Subscribe?",
   "🔔 Notification miss kar diya? This was literally yesterday's current affairs on UnacademyX.",
-  "😅 Galat jawab! Don't worry — Unacademy Prime ka 7-day free trial hai. Hint hint.",
-  "🤦 Our toppers have answered this in their sleep. You can too — after subscribing.",
+  "😅 Galat jawab! Don't worry. Unacademy Prime ka 7-day free trial hai. Hint hint.",
+  "🤦 Our toppers have answered this in their sleep. You can too. Just subscribe first.",
   "⚡ Wrong! Even our mock test Series 1 had this. Just saying. No pressure.",
   "🎓 Incorrect! The Unacademy educator who taught this is currently crying somewhere.",
   "😤 Nahi hua! Itna toh 11th class NCERT mein tha yaar.",
-  "🙏 Galat! Unacademy Prime mein ek baar dekh lo — ek baar hi kaafi hai.",
+  "🙏 Galat! Unacademy Prime mein ek baar dekh lo. Ek baar hi kaafi hai.",
   "📱 Wrong! This was literally trending on the UnacademyX app. Just saying.",
   "🤷 Oops! Humne bataya tha, tum soya the. Unacademy Prime subscribe karo, aur alarm bhi lagao.",
 ];
@@ -724,13 +1046,13 @@ function getRandFrom(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 const JOKES = {
   terrible: [
     "You placed the 1857 Revolt after Chandrayaan-3. The British would like a word. Also, so would Unacademy.",
-    "UPSC mains mein ek essay hai — 'Describe your biggest failure.' You just got a practice run. Unacademy Prime still has time to save you. 🙏",
-    "History repeated itself — first as tragedy, then as your timeline. Subscribe karo, ek baar aur try karo.",
+    "UPSC mains mein ek essay hai: 'Describe your biggest failure.' You just got a practice run. Unacademy Prime still has time to save you. 🙏",
+    "History repeated itself. First as tragedy, then as your timeline. Subscribe karo, ek baar aur try karo.",
     "Babur aur APJ Abdul Kalam ek hi zamane mein nahi the. But after a Unacademy Prime subscription, you'll know exactly when they were.",
     "Your score suggests you may have been studying the wrong subject. Unacademy covers 12. Pick one.",
   ],
   low: [
-    "A UPSC topper sees this timeline and has flashbacks to their 4th attempt. You're building character — and Unacademy is building you.",
+    "A UPSC topper sees this timeline and has flashbacks to their 4th attempt. You're building character. And Unacademy is building you.",
     "Pandit Nehru gave his 'Tryst with Destiny' speech. Your timeline gave us a 'Twist of Destiny.' Very creative. Unacademy can uncreative-ify you.",
     "You got some right! Prelims ke liye 33% cutoff hoti hai. Aap almost wahan hain. Unacademy Prime will close that gap.",
     "The Gupta Age was India's Golden Age. Yours is still under construction. Let Unacademy be your Chandragupta.",
@@ -744,8 +1066,8 @@ const JOKES = {
   high: [
     "IAS material! Your GS-1 score would make Bipin Chandra proud. Now let Unacademy handle your GS-2, 3, 4 and Essay too.",
     "Outstanding! You ARE the testimonial that our sales team puts on the website. We're calling you.",
-    "Shabash! Even Chanakya would give you a passing grade. Now ace Ethics Paper with Unacademy — Chanakya didn't have ethics, you need to.",
-    "Excellent! At this rate, the only thing between you and an IAS posting is a 45-minute interview. UnacademyX interview prep — you know what to do.",
+    "Shabash! Even Chanakya would give you a passing grade. Now ace Ethics Paper with Unacademy. Chanakya didn't have ethics, you need to.",
+    "Excellent! At this rate, the only thing between you and an IAS posting is a 45-minute interview. UnacademyX interview prep is the next step.",
   ],
 };
 
@@ -775,9 +1097,85 @@ function shuffle(arr) {
   return a;
 }
 
-function showScreen(id) {
+// ═══════════════════════════════════════════════════════════
+//  QUIT MODAL - in-app, no browser confirm()
+// ═══════════════════════════════════════════════════════════
+function quitGame(){
+  document.getElementById('quit-modal').classList.add('visible');
+}
+function closeQuitModal(){
+  document.getElementById('quit-modal').classList.remove('visible');
+}
+function confirmQuit(){
+  document.getElementById('quit-modal').classList.remove('visible');
+  gameEnded=true;
+  clearQuip();
+  document.getElementById('end-game-bar').classList.remove('visible');
+  showScreen('start');
+}
+
+// ═══════════════════════════════════════════════════════════
+//  TUTORIAL NAV
+// ═══════════════════════════════════════════════════════════
+let tutStep = 0;
+let tutDemoTimer = null;
+
+function tutNav(dir){
+  tutStep += dir;
+  if(tutStep < 0) tutStep = 0;
+
+  // Update steps
+  document.querySelectorAll('.tut-step').forEach((s,i)=>{
+    s.classList.toggle('active', i===tutStep);
+  });
+  // Update dots
+  document.querySelectorAll('.tut-dot').forEach((d,i)=>{
+    d.classList.toggle('active', i===tutStep);
+  });
+
+  // Update buttons
+  document.getElementById('tut-prev').style.display = tutStep===0 ? 'none' : '';
+  const nextBtn = document.getElementById('tut-next');
+  if(tutStep===2){
+    nextBtn.textContent = 'Got it. Start Game →';
+    nextBtn.onclick = ()=>{ tutStep=0; startGame(); };
+  } else {
+    nextBtn.textContent = 'Next →';
+    nextBtn.onclick = ()=>tutNav(1);
+  }
+
+  // Run demo animations for step 2
+  clearInterval(tutDemoTimer);
+  if(tutStep===1) runDemo1();
+}
+
+function runDemo1(){
+  // Animate the green line blinking through gaps
+  const lines = ['demo-line-0','demo-line-1','demo-line-2'];
+  let li = 1; // start on the lit one
+  // Already lit on line-1, cycle through
+  tutDemoTimer = setInterval(()=>{
+    lines.forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.remove('lit'); });
+    li = (li+1) % lines.length;
+    const el=document.getElementById(lines[li]); if(el) el.classList.add('lit');
+  }, 1200);
+}
+
+// Reset tutorial state when navigating away
+function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-'+id).classList.add('active');
+  if(id !== 'tutorial'){
+    clearInterval(tutDemoTimer);
+    // Reset tutorial to step 0 for next time
+    tutStep=0;
+    document.querySelectorAll('.tut-step').forEach((s,i)=>s.classList.toggle('active',i===0));
+    document.querySelectorAll('.tut-dot').forEach((d,i)=>d.classList.toggle('active',i===0));
+    const nb=document.getElementById('tut-next');
+    if(nb){ nb.textContent='Next →'; nb.onclick=()=>tutNav(1); }
+    const pb=document.getElementById('tut-prev');
+    if(pb) pb.style.display='none';
+  }
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -787,8 +1185,10 @@ function showScreen(id) {
   const c=document.getElementById('category-pills');
   Object.entries(CAT).forEach(([cat,col])=>{
     const p=document.createElement('div');
-    p.className='pill'; p.textContent=col.emoji+' '+cat;
-    p.style.color=col.text; p.style.borderColor=col.text; p.style.background=col.bg;
+    p.className='pill';
+    p.innerHTML=`<span style="font-size:16px;line-height:1;">${col.emoji}</span><span>${cat}</span>`;
+    p.style.color=col.text;
+    p.style.background=col.bg;
     c.appendChild(p);
   });
 })();
@@ -840,10 +1240,17 @@ function renderCurrentCard(){
     </div>
   `;
 
+  card.addEventListener('mousedown', ()=>{ card.classList.add('pressing'); });
+  card.addEventListener('touchstart', ()=>{ card.classList.add('pressing'); }, {passive:true});
+  card.addEventListener('mouseup', ()=>{ card.classList.remove('pressing'); });
+  card.addEventListener('touchend', ()=>{ card.classList.remove('pressing'); });
+  card.addEventListener('mouseleave', ()=>{ card.classList.remove('pressing'); });
+
   card.addEventListener('dragstart', e=>{
+    card.classList.remove('pressing');
     e.dataTransfer.setData('text/plain','card');
     e.dataTransfer.effectAllowed='move';
-    // Hide the source card the moment drag begins — nothing left behind
+    // Hide the source card the moment drag begins - nothing left behind
     requestAnimationFrame(()=>{ card.style.visibility='hidden'; });
   });
 
@@ -909,14 +1316,14 @@ function renderTimeline(flashIdx=null, flashClass=''){
   const sorted=[...timeline].sort((a,b)=>a.ev.year-b.ev.year);
   const last=sorted.length;
 
-  // First drop zone — wide, extends far left
+  // First drop zone - wide, extends far left
   track.appendChild(makeDropZone(0, 'drop-zone-start'));
 
   sorted.forEach((item,i)=>{
     const flash=(i===flashIdx)?flashClass:'';
     const {wrap}=makeTlCard(item,flash);
     track.appendChild(wrap);
-    // Last drop zone — wide, extends far right. Middle ones — normal.
+    // Last drop zone - wide, extends far right. Middle ones - normal.
     const isLast = (i === last-1);
     track.appendChild(makeDropZone(i+1, isLast ? 'drop-zone-end' : ''));
   });
@@ -927,7 +1334,7 @@ function renderAll(){
 }
 
 // ═══════════════════════════════════════════════════════════
-//  SCROLL — measures actual DOM position of placed card
+//  SCROLL - measures actual DOM position of placed card
 // ═══════════════════════════════════════════════════════════
 function scrollToCard(idx){
   setTimeout(()=>{
@@ -947,7 +1354,7 @@ function scrollToCard(idx){
 }
 
 // ═══════════════════════════════════════════════════════════
-//  SOUND — Web Audio API (no external files)
+//  SOUND - Web Audio API (no external files)
 // ═══════════════════════════════════════════════════════════
 let audioCtx = null;
 function getAudioCtx(){
@@ -1014,7 +1421,7 @@ function showToast(msg,type){
 }
 
 // ═══════════════════════════════════════════════════════════
-//  QUIP BANNER — stays until next card is placed, never auto-hides
+//  QUIP BANNER - stays until next card is placed, never auto-hides
 // ═══════════════════════════════════════════════════════════
 function showQuip(text, year, type){
   const banner = document.getElementById('quip-banner');
@@ -1039,7 +1446,7 @@ function handleDrop(dropIdx){
   if(locked||!currentCard||gameEnded)return;
   locked=true;
 
-  // Immediately wipe the card from the stage — no remnant
+  // Immediately wipe the card from the stage - no remnant
   document.getElementById('current-card-container').innerHTML='';
 
   // Clear the previous quip
@@ -1052,7 +1459,7 @@ function handleDrop(dropIdx){
     (!before||before.ev.year<=currentCard.year)&&
     (!after ||after.ev.year >=currentCard.year);
   const placed=currentCard;
-  currentCard=null; // clear immediately — card container already wiped by pointerup
+  currentCard=null; // clear immediately, card container already wiped by pointerup
 
   if(correct){
     score++; renderScore();
@@ -1076,7 +1483,7 @@ function handleDrop(dropIdx){
     const pi=ns.findIndex(i=>i.ev.id===placed.id);
     renderTimeline(pi,'wrong-flash');
     const livesMsg = lives>0 ? lives+' life'+(lives===1?'':'s')+' left' : 'Game over!';
-    showToast('✗ ' + fy(placed.year) + ' — ' + livesMsg, 'wrong');
+    showToast('✗ ' + fy(placed.year) + ': ' + livesMsg, 'wrong');
     showQuip(getRandFrom(WRONG_QUIPS), fy(placed.year), 'wrong');
     scrollToCard(pi);
     setTimeout(()=>{
@@ -1093,7 +1500,7 @@ function nextCard(){
 }
 
 // ═══════════════════════════════════════════════════════════
-//  GAME OVER — show banner in game screen, NOT auto-redirect
+//  GAME OVER - show banner in game screen, NOT auto-redirect
 // ═══════════════════════════════════════════════════════════
 function triggerGameOver(){
   gameEnded=true;
@@ -1114,7 +1521,7 @@ function triggerGameOver(){
 function prepareGameOverScreen(){
   const tiers=[
     {e:'😬', m:"Yeh toh Prelims bhi clear nahi hoga..."},
-    {e:'📚', m:'Keep Practicing — UPSC hai, easy nahi hai!'},
+    {e:'📚', m:'Keep Practicing. UPSC hai, easy nahi hai!'},
     {e:'🌟', m:'Good Effort! You know your history.'},
     {e:'🏆', m:'Outstanding! IAS material confirmed.'},
   ];
