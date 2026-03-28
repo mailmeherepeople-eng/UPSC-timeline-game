@@ -130,7 +130,7 @@
     letter-spacing: 0.1px;
     line-height: 1;
   }
-  /* How to Play — Unacademy blue */
+  /* How to Play: Unacademy blue */
   .btn-primary {
     background: #1380D0;
     color: #fff;
@@ -155,7 +155,7 @@
     box-shadow: 0 2px 8px rgba(19,128,208,0.25);
   }
 
-  /* Start Game — Unacademy green */
+  /* Start Game: Unacademy green */
   .btn-start {
     background: var(--accent);
     color: #fff;
@@ -271,7 +271,7 @@
     opacity: 0.92;
   }
 
-  /* Emoji banner — same height as timeline emoji band */
+  /* Emoji banner: same height as timeline emoji band */
   .card-emoji-banner {
     width:100%; height: var(--tl-emoji-h);
     display:flex; align-items:center; justify-content:center;
@@ -477,19 +477,18 @@
     to   { opacity:1; transform:translateY(0); }
   }
 
-  /* ── END GAME BUTTON (shown in card stage area after game over) ── */
+  /* ── END GAME BUTTON ── */
   .end-game-bar {
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
     width: var(--tl-card-w);
-    min-height: var(--tl-card-h);
-    margin-top: calc(var(--tl-card-h) * -1); /* sit over the now-empty card slot */
+    min-height: 48px;
+    visibility: hidden;  /* reserves space always, shown when game ends */
   }
-  .end-game-bar.visible { display: flex; }
-  .end-game-bar p { font-size:12px; color:var(--muted); text-align:center; line-height:1.5; }
+  .end-game-bar.visible { visibility: visible; }
 
   /* ── TOAST (year pill - sits in the gap between card stage and timeline) ── */
   #toast {
@@ -648,7 +647,7 @@
   @keyframes dropArrow { 0%,100%{transform:translateY(0);opacity:1} 50%{transform:translateY(6px);opacity:0.5} }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
 
-  /* ── CORRECT — spring snap with bounce ── */
+  /* ── CORRECT: spring snap with bounce ── */
   @keyframes popIn {
     0%   { transform: scale(1); }
     25%  { transform: scale(1.12); }
@@ -664,7 +663,7 @@
     100% { box-shadow: 0 0 0 0 rgba(8,189,128,0); }
   }
 
-  /* ── WRONG — weighted shake, heavier than before ── */
+  /* ── WRONG: weighted shake, heavier than before ── */
   @keyframes shake {
     0%   { transform: translateX(0) rotate(0deg); }
     15%  { transform: translateX(-10px) rotate(-1.5deg); }
@@ -728,7 +727,7 @@
     transition: transform 0.2s;
   }
 
-  /* Multiplier badge — floats next to streak */
+  /* Multiplier badge: floats next to streak */
   .multiplier-badge {
     font-size: 10px;
     font-weight: 800;
@@ -829,7 +828,7 @@
     color: var(--muted);
     margin-bottom: 14px;
   }
-  /* Stats inside the card — no outer border, tighter */
+  /* Stats inside the card: no outer border, tighter */
   .share-card .gameover-stats {
     border: none;
     padding: 0;
@@ -1347,9 +1346,7 @@
   <div class="card-stage">
     <div class="stage-label" id="stage-label">Where does this event belong?</div>
     <div id="current-card-container"></div>
-    <!-- End game bar — same slot as card, shown when game ends -->
     <div class="end-game-bar" id="end-game-bar">
-      <p>Game over!</p>
       <button class="btn-primary" style="width:100%;" onclick="showScreen('gameover')">See My Score</button>
     </div>
     <div class="drag-hint" id="drag-hint">👆 Press &amp; hold the card, then drag it to the timeline below</div>
@@ -1367,7 +1364,6 @@
 
 <!-- GAME OVER -->
 <div id="screen-gameover" class="screen">
-  <div class="gameover-emoji" id="go-emoji"></div>
   <h2 class="gameover-title" id="go-title"></h2>
 
   <!-- Single result card -->
@@ -1522,7 +1518,7 @@ function trackPlacement(cat, isCorrect, ev){
   // Track individual mistakes with card info
   if(!isCorrect && ev){
     const list = getMistakes();
-    // Check if same card already recorded — increment count instead of duplicating
+    // Check if same card already recorded: increment count instead of duplicating
     const existing = list.find(m => m.id === ev.id);
     if(existing){
       existing.count++;
@@ -1602,7 +1598,7 @@ function buildCategoryBreakdown(){
 
   if(entries.length === 0) return '';
 
-  // Pick 3 worst and 2 best — no duplicates if fewer than 5 categories
+  // Pick 3 worst and 2 best: no duplicates if fewer than 5 categories
   const worst = entries.slice(0, Math.min(3, entries.length));
   const best  = entries.slice(-Math.min(2, Math.max(0, entries.length - worst.length))).reverse();
 
@@ -1632,6 +1628,24 @@ function buildCategoryBreakdown(){
 
   return `<div class="cat-breakdown">${html}${buildWeakestEras()}</div>`;
 }
+
+// ═══════════════════════════════════════════════════════════
+//  CARD INFO — loaded from data/cards.json on GitHub
+//  Falls back gracefully if file is unavailable (offline etc.)
+// ═══════════════════════════════════════════════════════════
+(async function loadCardInfo(){
+  try {
+    const res = await fetch('data/cards.json');
+    if(!res.ok) return;
+    const info = await res.json();
+    // Merge info into EVENTS by card ID
+    EVENTS.forEach(ev => {
+      if(info[ev.id]) ev.info = info[ev.id];
+    });
+  } catch(e){
+    // Silently fail — game works fine without info
+  }
+})();
 
 // ═══════════════════════════════════════════════════════════
 //  CATEGORY CONFIG
@@ -1709,51 +1723,96 @@ const EVENTS = [
   { id:52,  label:"Nadir Shah's invasion of Delhi",           sublabel:"occurred",                       year:1739,  cat:"Medieval India" },
 
   // ── COLONIAL INDIA ──
-  { id:53,  label:"Vasco da Gama arrived in India",           sublabel:"at Calicut",                     year:1498,  cat:"Colonial India" },
-  { id:54,  label:"Portuguese captured Goa",                  sublabel:"occurred",                       year:1510,  cat:"Colonial India" },
-  { id:55,  label:"East India Company",                       sublabel:"founded",                        year:1600,  cat:"Colonial India" },
-  { id:56,  label:"Battle of Buxar",                          sublabel:"Company defeated Nawabs",        year:1764,  cat:"Colonial India" },
-  { id:57,  label:"Regulating Act",                           sublabel:"passed by British Parliament",   year:1773,  cat:"Colonial India" },
-  { id:58,  label:"Pitt's India Act",                         sublabel:"enacted",                        year:1784,  cat:"Colonial India" },
-  { id:59,  label:"Permanent Settlement of Bengal",           sublabel:"introduced by Cornwallis",        year:1793,  cat:"Colonial India" },
-  { id:60,  label:"Subsidiary Alliance system",               sublabel:"introduced by Wellesley",         year:1798,  cat:"Colonial India" },
-  { id:61,  label:"Fourth Anglo-Mysore War, Tipu Sultan killed",sublabel:"occurred",                    year:1799,  cat:"Colonial India" },
-  { id:62,  label:"Second Anglo-Maratha War",                 sublabel:"fought",                         year:1803,  cat:"Colonial India" },
-  { id:63,  label:"Charter Act",                              sublabel:"ended EIC's trade monopoly",     year:1813,  cat:"Colonial India" },
-  { id:64,  label:"Doctrine of Lapse",                        sublabel:"introduced by Dalhousie",         year:1848,  cat:"Colonial India" },
-  { id:65,  label:"Revolt of 1857",                           sublabel:"began at Meerut",                year:1857,  cat:"Colonial India" },
-  { id:66,  label:"British Crown took over from EIC",         sublabel:"Queen's Proclamation issued",    year:1858,  cat:"Colonial India" },
-  { id:67,  label:"Indian Councils Act",                      sublabel:"enacted",                        year:1861,  cat:"Colonial India" },
-  { id:68,  label:"Indian National Congress",                 sublabel:"founded by A.O. Hume",            year:1885,  cat:"Colonial India" },
-  { id:69,  label:"Age of Consent Act",                       sublabel:"raised marriage age to 12",      year:1891,  cat:"Colonial India" },
-  { id:70,  label:"Partition of Bengal",                      sublabel:"by Lord Curzon",                 year:1905,  cat:"Colonial India" },
-  { id:71,  label:"Swadeshi Movement",                        sublabel:"launched",                       year:1905,  cat:"Colonial India" },
-  { id:72,  label:"Muslim League",                            sublabel:"founded at Dhaka",               year:1906,  cat:"Colonial India" },
-  { id:73,  label:"Morley-Minto Reforms",                     sublabel:"enacted, separate electorates introduced", year:1909,  cat:"Colonial India" },
-  { id:74,  label:"Capital shifted from Calcutta to Delhi",   sublabel:"announced by British",           year:1911,  cat:"Colonial India" },
-  { id:75,  label:"Lucknow Pact",                             sublabel:"Congress-League agreement",       year:1916,  cat:"Colonial India" },
-  { id:76,  label:"Montagu-Chelmsford Reforms",               sublabel:"enacted",                        year:1919,  cat:"Colonial India" },
-  { id:77,  label:"Rowlatt Act",                              sublabel:"passed",                         year:1919,  cat:"Colonial India" },
-  { id:78,  label:"Jallianwala Bagh Massacre",                sublabel:"General Dyer's order",           year:1919,  cat:"Colonial India" },
-  { id:79,  label:"Khilafat Movement",                        sublabel:"launched",                       year:1919,  cat:"Colonial India" },
-  { id:80,  label:"Non-Cooperation Movement",                 sublabel:"launched by Gandhi",              year:1920,  cat:"Colonial India" },
-  { id:81,  label:"Chauri Chaura incident",                   sublabel:"occurred, NCM withdrawn",       year:1922,  cat:"Colonial India" },
-  { id:82,  label:"Simon Commission",                         sublabel:"arrived, boycotted by Congress", year:1928,  cat:"Colonial India" },
-  { id:83,  label:"Lahore Session: Purna Swaraj Declaration",sublabel:"adopted by Congress",            year:1929,  cat:"Colonial India" },
-  { id:84,  label:"Dandi March / Salt Satyagraha",            sublabel:"Gandhi's 241-mile march",        year:1930,  cat:"Colonial India" },
-  { id:85,  label:"First Round Table Conference",             sublabel:"held in London",                 year:1930,  cat:"Colonial India" },
-  { id:86,  label:"Gandhi-Irwin Pact",                        sublabel:"signed",                         year:1931,  cat:"Colonial India" },
-  { id:87,  label:"Poona Pact",                               sublabel:"Gandhi-Ambedkar agreement",       year:1932,  cat:"Colonial India" },
-  { id:88,  label:"Government of India Act",                  sublabel:"enacted, provinces given autonomy",year:1935,cat:"Colonial India" },
-  { id:89,  label:"Congress wins provincial elections",        sublabel:"occurred",                       year:1937,  cat:"Colonial India" },
-  { id:90,  label:"Cripps Mission",                           sublabel:"arrived, rejected by Congress",  year:1942,  cat:"Colonial India" },
-  { id:91,  label:"Quit India Movement",                      sublabel:"Do or Die, Gandhi's call",      year:1942,  cat:"Colonial India" },
-  { id:92,  label:"INA trials at Red Fort",                   sublabel:"began",                          year:1945,  cat:"Colonial India" },
-  { id:93,  label:"Cabinet Mission Plan",                     sublabel:"proposed",                       year:1946,  cat:"Colonial India" },
-  { id:94,  label:"Direct Action Day",                        sublabel:"called by Muslim League",         year:1946,  cat:"Colonial India" },
-  { id:95,  label:"Mountbatten Plan",                         sublabel:"announced, India partitioned",  year:1947,  cat:"Colonial India" },
-  { id:96,  label:"Indian Independence",                      sublabel:"achieved on 15 August",           year:1947,  cat:"Colonial India" },
-  { id:97,  label:"Subhas Chandra Bose founded INA",          sublabel:"in Southeast Asia",              year:1943,  cat:"Colonial India" },
+  { id:53,  label:"Vasco da Gama arrived in India",           sublabel:"at Calicut",                     year:1498,  cat:"Colonial India" 
+  },
+  { id:54,  label:"Portuguese captured Goa",                  sublabel:"occurred",                       year:1510,  cat:"Colonial India" 
+  },
+  { id:55,  label:"East India Company",                       sublabel:"founded",                        year:1600,  cat:"Colonial India" 
+  },
+  { id:56,  label:"Battle of Buxar",                          sublabel:"Company defeated Nawabs",        year:1764,  cat:"Colonial India" 
+  },
+  { id:57,  label:"Regulating Act",                           sublabel:"passed by British Parliament",   year:1773,  cat:"Colonial India" 
+  },
+  { id:58,  label:"Pitt's India Act",                         sublabel:"enacted",                        year:1784,  cat:"Colonial India" 
+  },
+  { id:59,  label:"Permanent Settlement of Bengal",           sublabel:"introduced by Cornwallis",        year:1793,  cat:"Colonial India" 
+  },
+  { id:60,  label:"Subsidiary Alliance system",               sublabel:"introduced by Wellesley",         year:1798,  cat:"Colonial India" 
+  },
+  { id:61,  label:"Fourth Anglo-Mysore War, Tipu Sultan killed",sublabel:"occurred",                    year:1799,  cat:"Colonial India" 
+  },
+  { id:62,  label:"Second Anglo-Maratha War",                 sublabel:"fought",                         year:1803,  cat:"Colonial India" 
+  },
+  { id:63,  label:"Charter Act",                              sublabel:"ended EIC's trade monopoly",     year:1813,  cat:"Colonial India" 
+  },
+  { id:64,  label:"Doctrine of Lapse",                        sublabel:"introduced by Dalhousie",         year:1848,  cat:"Colonial India" 
+  },
+  { id:65,  label:"Revolt of 1857",                           sublabel:"began at Meerut",                year:1857,  cat:"Colonial India" 
+  },
+  { id:66,  label:"British Crown took over from EIC",         sublabel:"Queen's Proclamation issued",    year:1858,  cat:"Colonial India" 
+  },
+  { id:67,  label:"Indian Councils Act",                      sublabel:"enacted",                        year:1861,  cat:"Colonial India" 
+  },
+  { id:68,  label:"Indian National Congress",                 sublabel:"founded by A.O. Hume",            year:1885,  cat:"Colonial India" 
+  },
+  { id:69,  label:"Age of Consent Act",                       sublabel:"raised marriage age to 12",      year:1891,  cat:"Colonial India" 
+  },
+  { id:70,  label:"Partition of Bengal",                      sublabel:"by Lord Curzon",                 year:1905,  cat:"Colonial India" 
+  },
+  { id:71,  label:"Swadeshi Movement",                        sublabel:"launched",                       year:1905,  cat:"Colonial India" 
+  },
+  { id:72,  label:"Muslim League",                            sublabel:"founded at Dhaka",               year:1906,  cat:"Colonial India" 
+  },
+  { id:73,  label:"Morley-Minto Reforms",                     sublabel:"enacted, separate electorates introduced", year:1909,  cat:"Colonial India" 
+  },
+  { id:74,  label:"Capital shifted from Calcutta to Delhi",   sublabel:"announced by British",           year:1911,  cat:"Colonial India" 
+  },
+  { id:75,  label:"Lucknow Pact",                             sublabel:"Congress-League agreement",       year:1916,  cat:"Colonial India" 
+  },
+  { id:76,  label:"Montagu-Chelmsford Reforms",               sublabel:"enacted",                        year:1919,  cat:"Colonial India" 
+  },
+  { id:77,  label:"Rowlatt Act",                              sublabel:"passed",                         year:1919,  cat:"Colonial India" 
+  },
+  { id:78,  label:"Jallianwala Bagh Massacre",                sublabel:"General Dyer's order",           year:1919,  cat:"Colonial India" 
+  },
+  { id:79,  label:"Khilafat Movement",                        sublabel:"launched",                       year:1919,  cat:"Colonial India" 
+  },
+  { id:80,  label:"Non-Cooperation Movement",                 sublabel:"launched by Gandhi",              year:1920,  cat:"Colonial India" 
+  },
+  { id:81,  label:"Chauri Chaura incident",                   sublabel:"occurred, NCM withdrawn",       year:1922,  cat:"Colonial India" 
+  },
+  { id:82,  label:"Simon Commission",                         sublabel:"arrived, boycotted by Congress", year:1928,  cat:"Colonial India" 
+  },
+  { id:83,  label:"Lahore Session: Purna Swaraj Declaration",sublabel:"adopted by Congress",            year:1929,  cat:"Colonial India" 
+  },
+  { id:84,  label:"Dandi March / Salt Satyagraha",            sublabel:"Gandhi's 241-mile march",        year:1930,  cat:"Colonial India" 
+  },
+  { id:85,  label:"First Round Table Conference",             sublabel:"held in London",                 year:1930,  cat:"Colonial India" 
+  },
+  { id:86,  label:"Gandhi-Irwin Pact",                        sublabel:"signed",                         year:1931,  cat:"Colonial India" 
+  },
+  { id:87,  label:"Poona Pact",                               sublabel:"Gandhi-Ambedkar agreement",       year:1932,  cat:"Colonial India" 
+  },
+  { id:88,  label:"Government of India Act",                  sublabel:"enacted, provinces given autonomy",year:1935,cat:"Colonial India" 
+  },
+  { id:89,  label:"Congress wins provincial elections",        sublabel:"occurred",                       year:1937,  cat:"Colonial India" 
+  },
+  { id:90,  label:"Cripps Mission",                           sublabel:"arrived, rejected by Congress",  year:1942,  cat:"Colonial India" 
+  },
+  { id:91,  label:"Quit India Movement",                      sublabel:"Do or Die, Gandhi's call",      year:1942,  cat:"Colonial India" 
+  },
+  { id:92,  label:"INA trials at Red Fort",                   sublabel:"began",                          year:1945,  cat:"Colonial India" 
+  },
+  { id:93,  label:"Cabinet Mission Plan",                     sublabel:"proposed",                       year:1946,  cat:"Colonial India" 
+  },
+  { id:94,  label:"Direct Action Day",                        sublabel:"called by Muslim League",         year:1946,  cat:"Colonial India" 
+  },
+  { id:95,  label:"Mountbatten Plan",                         sublabel:"announced, India partitioned",  year:1947,  cat:"Colonial India" 
+  },
+  { id:96,  label:"Indian Independence",                      sublabel:"achieved on 15 August",           year:1947,  cat:"Colonial India" 
+  },
+  { id:97,  label:"Subhas Chandra Bose founded INA",          sublabel:"in Southeast Asia",              year:1943,  cat:"Colonial India" 
+  },
 
   // ── POST-INDEPENDENCE ──
   { id:98,  label:"Integration of Hyderabad (Operation Polo)",sublabel:"by Sardar Patel",               year:1948,  cat:"Post-Independence" },
@@ -1930,7 +1989,7 @@ function renderCollection(){
       card.addEventListener('click', ()=>openCardDetail(ev));
       grid.appendChild(card);
     } else {
-      // Locked card — show category colour hint but no content
+      // Locked card: show category colour hint but no content
       const card = document.createElement('div');
       card.className = 'col-card-locked';
       card.innerHTML = `
@@ -1954,7 +2013,7 @@ function openCardDetail(ev){
   document.getElementById('cd-year').textContent         = fy(ev.year);
   document.getElementById('cd-sublabel').textContent     = ev.sublabel;
 
-  // Detail body — use extended info if available, fallback to sublabel
+  // Detail body: use extended info if available, fallback to sublabel
   const info = ev.info || null;
   const body = document.getElementById('cd-body');
   if(info){
@@ -2091,9 +2150,8 @@ function confirmQuit(){
   document.getElementById('quit-modal').classList.remove('visible');
   gameEnded=true;
   clearQuip();
+  document.getElementById('current-card-container').innerHTML='';
   document.getElementById('end-game-bar').classList.remove('visible');
-  document.getElementById('stage-label').style.visibility = '';
-  document.getElementById('drag-hint').style.visibility = '';
   showScreen('start');
 }
 
@@ -2188,9 +2246,8 @@ function startGame() {
   deck=s.slice(2);
   lives=3; score=0; locked=false; gameEnded=false;
   streak=0; maxStreak=0;
+  document.getElementById('current-card-container').innerHTML='';
   document.getElementById('end-game-bar').classList.remove('visible');
-  document.getElementById('stage-label').style.visibility = '';
-  document.getElementById('drag-hint').style.visibility = '';
   clearQuip();
   showScreen('game');
   renderAll();
@@ -2271,14 +2328,14 @@ function triggerMilestoneBurst(streakVal){
   label.offsetHeight; // reflow to restart animation
   label.classList.add('visible');
 
-  // Play video — reset to start then show + play
+  // Play video: reset to start then show + play
   const vid = document.getElementById('fire-video');
   vid.currentTime = 0;
   vid.classList.add('visible');
   const playPromise = vid.play();
   if(playPromise !== undefined){
     playPromise.catch(()=>{
-      // Autoplay blocked — still show label, just no video
+      // Autoplay blocked: still show label, just no video
       console.warn('Chronology: fire video autoplay blocked');
     });
   }
@@ -2306,7 +2363,7 @@ function renderCurrentCard(){
   const card=document.createElement('div');
   card.className='event-card';
   card.setAttribute('draggable','true');
-  // Mirror makeTlCard structure exactly — same layout, year row hidden
+  // Mirror makeTlCard structure exactly: same layout, year row hidden
   card.innerHTML=`
     <div class="card-stripe" style="background:${col.text}"></div>
     <div class="tl-emoji" style="background:${col.bg};border-bottom-color:var(--border);">${col.emoji}</div>
@@ -2321,24 +2378,97 @@ function renderCurrentCard(){
   `;
 
   card.addEventListener('mousedown', ()=>{ card.classList.add('pressing'); });
-  card.addEventListener('touchstart', ()=>{ card.classList.add('pressing'); }, {passive:true});
-  card.addEventListener('mouseup', ()=>{ card.classList.remove('pressing'); });
-  card.addEventListener('touchend', ()=>{ card.classList.remove('pressing'); });
-  card.addEventListener('mouseleave', ()=>{ card.classList.remove('pressing'); });
+  card.addEventListener('mouseup',   ()=>{ card.classList.remove('pressing'); });
+  card.addEventListener('mouseleave',()=>{ card.classList.remove('pressing'); });
 
   card.addEventListener('dragstart', e=>{
     card.classList.remove('pressing');
     e.dataTransfer.setData('text/plain','card');
     e.dataTransfer.effectAllowed='move';
-    // Hide the source card the moment drag begins - nothing left behind
     requestAnimationFrame(()=>{ card.style.visibility='hidden'; });
   });
+  card.addEventListener('dragend', ()=>{ card.style.visibility=''; });
 
-  card.addEventListener('dragend', ()=>{
-    // If drop was handled, container is already cleared.
-    // If dropped outside a zone, restore visibility.
-    card.style.visibility='';
-  });
+  // ── Touch drag for iOS / Android ──
+  let touchClone = null;
+  let touchOffsetX = 0, touchOffsetY = 0;
+  let isDragging = false;
+
+  function cleanupTouch(){
+    isDragging = false;
+    if(touchClone){ touchClone.remove(); touchClone = null; }
+    card.style.visibility = '';
+    card.classList.remove('pressing');
+    document.querySelectorAll('.drop-zone').forEach(dz=>dz.classList.remove('drag-over'));
+  }
+
+  card.addEventListener('touchstart', e=>{
+    if(locked || gameEnded) return;
+    card.classList.add('pressing');
+    const t = e.touches[0];
+    const rect = card.getBoundingClientRect();
+    touchOffsetX = t.clientX - rect.left;
+    touchOffsetY = t.clientY - rect.top;
+    isDragging = false;
+
+    // Create floating clone after a tiny delay to distinguish tap from drag
+    touchClone = card.cloneNode(true);
+    touchClone.style.cssText = `
+      position:fixed; z-index:1000; pointer-events:none;
+      width:${rect.width}px; height:${rect.height}px;
+      left:${rect.left}px; top:${rect.top}px;
+      opacity:0; transform:rotate(3deg) scale(1.05);
+      box-shadow:0 8px 32px rgba(0,0,0,0.2);
+      border-radius:10px; overflow:hidden;
+      transition:opacity 0.1s;
+    `;
+    document.body.appendChild(touchClone);
+  }, {passive:true});
+
+  card.addEventListener('touchmove', e=>{
+    e.preventDefault();
+    if(!touchClone) return;
+    const t = e.touches[0];
+
+    if(!isDragging){
+      isDragging = true;
+      touchClone.style.opacity = '0.92';
+      card.style.visibility = 'hidden';
+      card.classList.remove('pressing');
+    }
+
+    touchClone.style.left = (t.clientX - touchOffsetX) + 'px';
+    touchClone.style.top  = (t.clientY - touchOffsetY) + 'px';
+
+    // Highlight drop zone under finger
+    document.querySelectorAll('.drop-zone').forEach(dz=>{
+      const r = dz.getBoundingClientRect();
+      const over = t.clientX>=r.left && t.clientX<=r.right && t.clientY>=r.top && t.clientY<=r.bottom;
+      dz.classList.toggle('drag-over', over);
+    });
+  }, {passive:false});
+
+  function onTouchEnd(e){
+    const t = e.changedTouches[0];
+    const wasDragging = isDragging;
+    cleanupTouch();
+
+    if(wasDragging){
+      // Find which drop zone finger lifted from
+      let handled = false;
+      document.querySelectorAll('.drop-zone').forEach(dz=>{
+        if(handled) return;
+        const r = dz.getBoundingClientRect();
+        if(t.clientX>=r.left && t.clientX<=r.right && t.clientY>=r.top && t.clientY<=r.bottom){
+          const idx = parseInt(dz.dataset.idx);
+          if(!isNaN(idx)){ handleDrop(idx); handled=true; }
+        }
+      });
+    }
+  }
+
+  card.addEventListener('touchend',    onTouchEnd);
+  card.addEventListener('touchcancel', cleanupTouch);
 
   c.appendChild(card);
 }
@@ -2380,6 +2510,7 @@ function var_border(){ return '#e4e0d8'; }
 function makeDropZone(idx, extraClass=''){
   const dz=document.createElement('div');
   dz.className='drop-zone' + (extraClass ? ' '+extraClass : '');
+  dz.dataset.idx = idx;  // used by touch handler
   const ind=document.createElement('div');
   ind.className='drop-zone-indicator';
   dz.appendChild(ind);
@@ -2456,7 +2587,7 @@ async function loadSound(url){
   } catch(e){ console.warn('Chronology audio: error loading', url, e); return null; }
 }
 
-// Load all sounds — called once on first user interaction
+// Load all sounds: called once on first user interaction
 async function initAudio(){
   if(_audioReady) return;
   _audioReady = true;
@@ -2624,13 +2755,12 @@ function triggerGameOver(){
   gameEnded=true;
   currentCard=null;
   clearQuip();
-  renderCurrentCard(); // clears the card area
   prepareGameOverScreen();
-  // Show See My Score in the card slot, hide stage UI
+
+  // Clear the card slot and show the See My Score button
+  document.getElementById('current-card-container').innerHTML='';
   document.getElementById('end-game-bar').classList.add('visible');
-  document.getElementById('stage-label').style.visibility = 'hidden';
-  document.getElementById('drag-hint').style.visibility = 'hidden';
-  // Scroll timeline to beginning so user can review from start
+
   setTimeout(()=>{
     const w=document.getElementById('timeline-wrapper');
     if(w) w.scrollTo({left:0,behavior:'smooth'});
@@ -2639,13 +2769,12 @@ function triggerGameOver(){
 
 function prepareGameOverScreen(){
   const tiers=[
-    {e:'😬', m:"Yeh toh Prelims bhi clear nahi hoga..."},
-    {e:'📚', m:'Keep Practicing. UPSC hai, easy nahi hai!'},
-    {e:'🌟', m:'Good Effort! You know your history.'},
-    {e:'🏆', m:'Outstanding! IAS material confirmed.'},
+    {m:"Yeh toh Prelims bhi clear nahi hoga..."},
+    {m:'Keep Practicing. UPSC hai, easy nahi hai!'},
+    {m:'Good Effort! You know your history.'},
+    {m:'Outstanding! IAS material confirmed.'},
   ];
   const t=score>=40?3:score>=20?2:score>=8?1:0;
-  document.getElementById('go-emoji').textContent=tiers[t].e;
   document.getElementById('go-title').textContent=tiers[t].m;
   const correct=timeline.filter(i=>!i.wrong).length - 1;
   const wrong=timeline.filter(i=>i.wrong).length;
@@ -2675,7 +2804,7 @@ function prepareGameOverScreen(){
     </div>
   `;
 
-  // Show Unacademy Iconic CTA — personalised with weakest category if available
+  // Show Unacademy Iconic CTA: personalised with weakest category if available
   const weakest = getWeakestCategory();
   const ctaEl = document.getElementById('iconic-cta');
   const ctaLink = ctaEl.querySelector('a');
@@ -2688,7 +2817,7 @@ function prepareGameOverScreen(){
     ctaEl.style.display = 'none';
   }
 
-  // Category breakdown — shows history across all sessions
+  // Category breakdown: shows history across all sessions
   document.getElementById('sc-cats').innerHTML = buildCategoryBreakdown();
 }
 
@@ -2706,7 +2835,7 @@ function shareScore(){
   const text =
 `🏛️ Chronology by UnacademyX
 
-${tierLabel} — ${score} pts on the UPSC timeline!
+${tierLabel}: ${score} pts on the UPSC timeline!
 🔥 Best streak: ${maxStreak} | ✅ ${correct} correct | ❌ ${wrong} wrong
 
 ${grid}
@@ -2717,7 +2846,7 @@ https://mailmeherepeople-eng.github.io/UPSC-timeline-game`;
   // Web Share API with clipboard fallback
   if(navigator.share){
     navigator.share({
-      title: 'Chronology — UnacademyX',
+      title: 'Chronology: UnacademyX',
       text: text,
     }).catch(()=>{});
   } else {
