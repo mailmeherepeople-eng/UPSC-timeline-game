@@ -1186,7 +1186,7 @@
   <div class="category-pills" id="category-pills"></div>
   <div style="display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;max-width:280px;margin:0 auto;">
     <button class="btn-primary" style="width:100%;" onclick="showScreen('tutorial')">How to Play</button>
-    <button class="btn-start" style="width:100%;" onclick="startGame()">Start Game</button>
+    <button class="btn-start" id="btn-start" style="width:100%;" onclick="startGame()">Start Game</button>
     <button class="btn-secondary" style="width:100%;" onclick="showScreen('collection');renderCollection()">My Collection</button>
   </div>
   <p class="start-note">220+ curated events · 9 UPSC categories · 3 lives · Made with ❤️ by UnacademyX</p>
@@ -1478,13 +1478,6 @@ function toggleDark(){
   applyDark(isDark);
 }
 
-// Apply saved preference on page load
-(function(){
-  const saved = localStorage.getItem('chronology-dark');
-  // Default to light; apply dark only if explicitly saved
-  applyDark(saved === '1');
-})();
-
 // ═══════════════════════════════════════════════════════════
 //  CATEGORY TRACKING - persists across all sessions
 // ═══════════════════════════════════════════════════════════
@@ -1647,311 +1640,61 @@ const CAT = {
 // ═══════════════════════════════════════════════════════════
 //  EVENTS - 220+ curated UPSC events
 // ═══════════════════════════════════════════════════════════
-const EVENTS = [
-  // ── ANCIENT INDIA ──
-  { id:1,   label:"Indus Valley Civilization",                sublabel:"began",                          year:-3300, cat:"Ancient India" },
-  { id:2,   label:"Harappan city of Mohenjo-daro",            sublabel:"established",                    year:-2600, cat:"Ancient India" },
-  { id:3,   label:"Rigveda",                                  sublabel:"composed",                       year:-1500, cat:"Ancient India" },
-  { id:4,   label:"Indus Valley Civilization",                sublabel:"declined",                       year:-1900, cat:"Ancient India" },
-  { id:5,   label:"Later Vedic period",                       sublabel:"began",                          year:-1000, cat:"Ancient India" },
-  { id:6,   label:"Buddhism",                                 sublabel:"founded by Siddhartha Gautama",  year:-528,  cat:"Ancient India" },
-  { id:7,   label:"Jainism",                                  sublabel:"systematised by Mahavira",       year:-527,  cat:"Ancient India" },
-  { id:8,   label:"Mahajanapada period",                      sublabel:"began",                          year:-600,  cat:"Ancient India" },
-  { id:9,   label:"Battle of Hydaspes (Alexander vs Porus)",  sublabel:"fought",                         year:-326,  cat:"Ancient India" },
-  { id:10,  label:"Maurya Empire",                            sublabel:"founded by Chandragupta",         year:-322,  cat:"Ancient India" },
-  { id:11,  label:"Chanakya's Arthashastra",                  sublabel:"written",                        year:-300,  cat:"Ancient India" },
-  { id:12,  label:"Ashoka's Kalinga War",                     sublabel:"fought",                         year:-261,  cat:"Ancient India" },
-  { id:13,  label:"Maurya Empire",                            sublabel:"ended",                          year:-185,  cat:"Ancient India" },
-  { id:14,  label:"Sangam literature period",                 sublabel:"began",                          year:-300,  cat:"Ancient India" },
-  { id:15,  label:"Gupta Empire",                             sublabel:"founded by Chandragupta I",       year:320,   cat:"Ancient India" },
-  { id:16,  label:"Aryabhatta's Aryabhatiya",                 sublabel:"written",                        year:499,   cat:"Ancient India" },
-  { id:17,  label:"Nalanda University",                       sublabel:"founded",                        year:427,   cat:"Ancient India" },
-  { id:18,  label:"Harshavardhana's reign",                   sublabel:"began",                          year:606,   cat:"Ancient India" },
-  { id:19,  label:"Hieun Tsang's visit to India",             sublabel:"began",                          year:629,   cat:"Ancient India" },
-  { id:20,  label:"Pallava dynasty at its peak",              sublabel:"occurred under Narasimhavarman I",year:630,   cat:"Ancient India" },
-  { id:21,  label:"Chola dynasty",                            sublabel:"rose to prominence",             year:850,   cat:"Ancient India" },
-  { id:22,  label:"Kalidasa's Shakuntalam",                   sublabel:"written",                        year:400,   cat:"Ancient India" },
 
-  // ── MEDIEVAL INDIA ──
-  { id:23,  label:"Arab conquest of Sindh by Muhammad bin Qasim", sublabel:"occurred",                  year:712,   cat:"Medieval India" },
-  { id:24,  label:"Prithviraj Chauhan",                       sublabel:"born",                           year:1149,  cat:"Medieval India" },
-  { id:25,  label:"First Battle of Tarain",                   sublabel:"fought, Prithviraj won",        year:1191,  cat:"Medieval India" },
-  { id:26,  label:"Second Battle of Tarain",                  sublabel:"fought, Muhammad Ghori won",    year:1192,  cat:"Medieval India" },
-  { id:27,  label:"Delhi Sultanate",                          sublabel:"established by Qutb ud-Din Aibak",year:1206, cat:"Medieval India" },
-  { id:28,  label:"Qutb Minar",                               sublabel:"construction began",             year:1193,  cat:"Medieval India" },
-  { id:29,  label:"Razia Sultana",                            sublabel:"became first female ruler of Delhi",year:1236,cat:"Medieval India" },
-  { id:30,  label:"Alauddin Khilji's reign",                  sublabel:"began",                          year:1296,  cat:"Medieval India" },
-  { id:31,  label:"Market reforms of Alauddin Khilji",        sublabel:"introduced",                     year:1300,  cat:"Medieval India" },
-  { id:32,  label:"Ibn Battuta's visit to India",             sublabel:"began",                          year:1333,  cat:"Medieval India" },
-  { id:33,  label:"Vijayanagara Empire",                      sublabel:"founded by Harihara I",           year:1336,  cat:"Medieval India" },
-  { id:34,  label:"Timur's invasion of India",                sublabel:"occurred",                       year:1398,  cat:"Medieval India" },
-  { id:35,  label:"Bhakti movement",                          sublabel:"flourished under Kabir",          year:1440,  cat:"Medieval India" },
-  { id:36,  label:"First Battle of Panipat",                  sublabel:"Babur defeated Ibrahim Lodi",    year:1526,  cat:"Medieval India" },
-  { id:37,  label:"Mughal Empire",                            sublabel:"established by Babur",            year:1526,  cat:"Medieval India" },
-  { id:38,  label:"Battle of Khanwa",                         sublabel:"Babur defeated Rana Sanga",       year:1527,  cat:"Medieval India" },
-  { id:39,  label:"Battle of Chausa",                         sublabel:"Humayun defeated by Sher Shah",  year:1539,  cat:"Medieval India" },
-  { id:40,  label:"Sher Shah Suri",                           sublabel:"introduced Grand Trunk Road",    year:1540,  cat:"Medieval India" },
-  { id:41,  label:"Second Battle of Panipat",                 sublabel:"Akbar defeated Hemu",            year:1556,  cat:"Medieval India" },
-  { id:42,  label:"Akbar's Din-i-Ilahi",                      sublabel:"proclaimed",                     year:1582,  cat:"Medieval India" },
-  { id:43,  label:"Battle of Haldighati",                     sublabel:"Akbar vs Maharana Pratap",       year:1576,  cat:"Medieval India" },
-  { id:44,  label:"Ain-i-Akbari",                             sublabel:"written by Abul Fazl",            year:1598,  cat:"Medieval India" },
-  { id:45,  label:"East India Company first trading post in India",sublabel:"established at Surat",      year:1608,  cat:"Medieval India" },
-  { id:46,  label:"Shivaji",                                  sublabel:"born",                           year:1630,  cat:"Medieval India" },
-  { id:47,  label:"Shivaji crowned Chhatrapati",              sublabel:"occurred at Raigad",             year:1674,  cat:"Medieval India" },
-  { id:48,  label:"Taj Mahal",                                sublabel:"completed",                      year:1653,  cat:"Medieval India" },
-  { id:49,  label:"Aurangzeb reimposed Jizya tax",            sublabel:"occurred",                       year:1679,  cat:"Medieval India" },
-  { id:50,  label:"Battle of Plassey",                        sublabel:"Clive defeated Siraj ud-Daulah", year:1757,  cat:"Medieval India" },
-  { id:51,  label:"Third Battle of Panipat",                  sublabel:"Marathas defeated by Ahmad Shah Abdali",year:1761,cat:"Medieval India"},
-  { id:52,  label:"Nadir Shah's invasion of Delhi",           sublabel:"occurred",                       year:1739,  cat:"Medieval India" },
 
-  // ── COLONIAL INDIA ──
-  { id:53,  label:"Vasco da Gama arrived in India",           sublabel:"at Calicut",                     year:1498,  cat:"Colonial India" 
-  },
-  { id:54,  label:"Portuguese captured Goa",                  sublabel:"occurred",                       year:1510,  cat:"Colonial India" 
-  },
-  { id:55,  label:"East India Company",                       sublabel:"founded",                        year:1600,  cat:"Colonial India" 
-  },
-  { id:56,  label:"Battle of Buxar",                          sublabel:"Company defeated Nawabs",        year:1764,  cat:"Colonial India" 
-  },
-  { id:57,  label:"Regulating Act",                           sublabel:"passed by British Parliament",   year:1773,  cat:"Colonial India" 
-  },
-  { id:58,  label:"Pitt's India Act",                         sublabel:"enacted",                        year:1784,  cat:"Colonial India" 
-  },
-  { id:59,  label:"Permanent Settlement of Bengal",           sublabel:"introduced by Cornwallis",        year:1793,  cat:"Colonial India" 
-  },
-  { id:60,  label:"Subsidiary Alliance system",               sublabel:"introduced by Wellesley",         year:1798,  cat:"Colonial India" 
-  },
-  { id:61,  label:"Fourth Anglo-Mysore War, Tipu Sultan killed",sublabel:"occurred",                    year:1799,  cat:"Colonial India" 
-  },
-  { id:62,  label:"Second Anglo-Maratha War",                 sublabel:"fought",                         year:1803,  cat:"Colonial India" 
-  },
-  { id:63,  label:"Charter Act",                              sublabel:"ended EIC's trade monopoly",     year:1813,  cat:"Colonial India" 
-  },
-  { id:64,  label:"Doctrine of Lapse",                        sublabel:"introduced by Dalhousie",         year:1848,  cat:"Colonial India" 
-  },
-  { id:65,  label:"Revolt of 1857",                           sublabel:"began at Meerut",                year:1857,  cat:"Colonial India" 
-  },
-  { id:66,  label:"British Crown took over from EIC",         sublabel:"Queen's Proclamation issued",    year:1858,  cat:"Colonial India" 
-  },
-  { id:67,  label:"Indian Councils Act",                      sublabel:"enacted",                        year:1861,  cat:"Colonial India" 
-  },
-  { id:68,  label:"Indian National Congress",                 sublabel:"founded by A.O. Hume",            year:1885,  cat:"Colonial India" 
-  },
-  { id:69,  label:"Age of Consent Act",                       sublabel:"raised marriage age to 12",      year:1891,  cat:"Colonial India" 
-  },
-  { id:70,  label:"Partition of Bengal",                      sublabel:"by Lord Curzon",                 year:1905,  cat:"Colonial India" 
-  },
-  { id:71,  label:"Swadeshi Movement",                        sublabel:"launched",                       year:1905,  cat:"Colonial India" 
-  },
-  { id:72,  label:"Muslim League",                            sublabel:"founded at Dhaka",               year:1906,  cat:"Colonial India" 
-  },
-  { id:73,  label:"Morley-Minto Reforms",                     sublabel:"enacted, separate electorates introduced", year:1909,  cat:"Colonial India" 
-  },
-  { id:74,  label:"Capital shifted from Calcutta to Delhi",   sublabel:"announced by British",           year:1911,  cat:"Colonial India" 
-  },
-  { id:75,  label:"Lucknow Pact",                             sublabel:"Congress-League agreement",       year:1916,  cat:"Colonial India" 
-  },
-  { id:76,  label:"Montagu-Chelmsford Reforms",               sublabel:"enacted",                        year:1919,  cat:"Colonial India" 
-  },
-  { id:77,  label:"Rowlatt Act",                              sublabel:"passed",                         year:1919,  cat:"Colonial India" 
-  },
-  { id:78,  label:"Jallianwala Bagh Massacre",                sublabel:"General Dyer's order",           year:1919,  cat:"Colonial India" 
-  },
-  { id:79,  label:"Khilafat Movement",                        sublabel:"launched",                       year:1919,  cat:"Colonial India" 
-  },
-  { id:80,  label:"Non-Cooperation Movement",                 sublabel:"launched by Gandhi",              year:1920,  cat:"Colonial India" 
-  },
-  { id:81,  label:"Chauri Chaura incident",                   sublabel:"occurred, NCM withdrawn",       year:1922,  cat:"Colonial India" 
-  },
-  { id:82,  label:"Simon Commission",                         sublabel:"arrived, boycotted by Congress", year:1928,  cat:"Colonial India" 
-  },
-  { id:83,  label:"Lahore Session: Purna Swaraj Declaration",sublabel:"adopted by Congress",            year:1929,  cat:"Colonial India" 
-  },
-  { id:84,  label:"Dandi March / Salt Satyagraha",            sublabel:"Gandhi's 241-mile march",        year:1930,  cat:"Colonial India" 
-  },
-  { id:85,  label:"First Round Table Conference",             sublabel:"held in London",                 year:1930,  cat:"Colonial India" 
-  },
-  { id:86,  label:"Gandhi-Irwin Pact",                        sublabel:"signed",                         year:1931,  cat:"Colonial India" 
-  },
-  { id:87,  label:"Poona Pact",                               sublabel:"Gandhi-Ambedkar agreement",       year:1932,  cat:"Colonial India" 
-  },
-  { id:88,  label:"Government of India Act",                  sublabel:"enacted, provinces given autonomy",year:1935,cat:"Colonial India" 
-  },
-  { id:89,  label:"Congress wins provincial elections",        sublabel:"occurred",                       year:1937,  cat:"Colonial India" 
-  },
-  { id:90,  label:"Cripps Mission",                           sublabel:"arrived, rejected by Congress",  year:1942,  cat:"Colonial India" 
-  },
-  { id:91,  label:"Quit India Movement",                      sublabel:"Do or Die, Gandhi's call",      year:1942,  cat:"Colonial India" 
-  },
-  { id:92,  label:"INA trials at Red Fort",                   sublabel:"began",                          year:1945,  cat:"Colonial India" 
-  },
-  { id:93,  label:"Cabinet Mission Plan",                     sublabel:"proposed",                       year:1946,  cat:"Colonial India" 
-  },
-  { id:94,  label:"Direct Action Day",                        sublabel:"called by Muslim League",         year:1946,  cat:"Colonial India" 
-  },
-  { id:95,  label:"Mountbatten Plan",                         sublabel:"announced, India partitioned",  year:1947,  cat:"Colonial India" 
-  },
-  { id:96,  label:"Indian Independence",                      sublabel:"achieved on 15 August",           year:1947,  cat:"Colonial India" 
-  },
-  { id:97,  label:"Subhas Chandra Bose founded INA",          sublabel:"in Southeast Asia",              year:1943,  cat:"Colonial India" 
-  },
-
-  // ── POST-INDEPENDENCE ──
-  { id:98,  label:"Integration of Hyderabad (Operation Polo)",sublabel:"by Sardar Patel",               year:1948,  cat:"Post-Independence" },
-  { id:99,  label:"Mahatma Gandhi assassinated",              sublabel:"by Nathuram Godse",              year:1948,  cat:"Post-Independence" },
-  { id:100, label:"Constitution of India",                    sublabel:"adopted by Constituent Assembly", year:1949,  cat:"Post-Independence" },
-  { id:101, label:"Constitution of India",                    sublabel:"came into force, Republic Day",  year:1950,  cat:"Post-Independence" },
-  { id:102, label:"Planning Commission",                      sublabel:"established",                    year:1950,  cat:"Post-Independence" },
-  { id:103, label:"First Five-Year Plan",                     sublabel:"launched",                       year:1951,  cat:"Post-Independence" },
-  { id:104, label:"First General Elections of India",         sublabel:"held, Congress won",             year:1951,  cat:"Post-Independence" },
-  { id:105, label:"States Reorganisation Act",                sublabel:"linguistic states created",       year:1956,  cat:"Post-Independence" },
-  { id:106, label:"Non-Aligned Movement",                     sublabel:"co-founded by Nehru",            year:1961,  cat:"Post-Independence" },
-  { id:107, label:"Sino-Indian War",                          sublabel:"India defeated, Nehru shocked", year:1962,  cat:"Post-Independence" },
-  { id:108, label:"Indo-Pak War",                             sublabel:"Tashkent Agreement followed",     year:1965,  cat:"Post-Independence" },
-  { id:109, label:"Green Revolution in India",                sublabel:"M.S. Swaminathan led it",        year:1966,  cat:"Post-Independence" },
-  { id:110, label:"Indira Gandhi became PM",                  sublabel:"first woman PM of India",        year:1966,  cat:"Post-Independence" },
-  { id:111, label:"Bank Nationalisation",                     sublabel:"14 banks nationalised by Indira", year:1969,  cat:"Post-Independence" },
-  { id:112, label:"Bangladesh Liberation War",                sublabel:"India defeated Pakistan",         year:1971,  cat:"Post-Independence" },
-  { id:113, label:"Simla Agreement",                          sublabel:"signed with Pakistan",            year:1972,  cat:"Post-Independence" },
-  { id:114, label:"India's first nuclear test (Pokhran-I)",   sublabel:"Smiling Buddha, declared peaceful",  year:1974,  cat:"Post-Independence" },
-  { id:115, label:"Emergency in India",                       sublabel:"declared by Indira Gandhi",       year:1975,  cat:"Post-Independence" },
-  { id:116, label:"Operation Blue Star",                      sublabel:"Golden Temple stormed",           year:1984,  cat:"Post-Independence" },
-  { id:117, label:"Bhopal Gas Tragedy",                       sublabel:"Union Carbide leak, thousands died",year:1984,cat:"Post-Independence"},
-  { id:118, label:"Indira Gandhi assassinated",               sublabel:"by her bodyguards",              year:1984,  cat:"Post-Independence" },
-  { id:119, label:"Rajiv Gandhi became PM",                   sublabel:"youngest PM of India at 40",     year:1984,  cat:"Post-Independence" },
-  { id:120, label:"Liberalisation Reforms (LPG)",             sublabel:"Manmohan Singh's budget",        year:1991,  cat:"Post-Independence" },
-  { id:121, label:"Babri Masjid demolished",                  sublabel:"in Ayodhya",                     year:1992,  cat:"Post-Independence" },
-  { id:122, label:"Pokhran-II (Operation Shakti)",            sublabel:"5 nuclear tests conducted",      year:1998,  cat:"Post-Independence" },
-  { id:123, label:"Kargil War",                               sublabel:"Operation Vijay, Pakistan evicted",year:1999,cat:"Post-Independence"},
-  { id:124, label:"Parliament of India attacked",             sublabel:"by terrorists",                  year:2001,  cat:"Post-Independence" },
-  { id:125, label:"Right to Information Act",                 sublabel:"enacted",                        year:2005,  cat:"Post-Independence" },
-  { id:126, label:"MNREGA",                                   sublabel:"100 days of guaranteed work",    year:2005,  cat:"Post-Independence" },
-  { id:127, label:"26/11 Mumbai Attacks",                     sublabel:"Pakistan-linked terror attack",  year:2008,  cat:"Post-Independence" },
-  { id:128, label:"Right to Education Act",                   sublabel:"free education 6–14 years",      year:2009,  cat:"Post-Independence" },
-  { id:129, label:"Jan Dhan Yojana",                          sublabel:"financial inclusion scheme launched",year:2014,cat:"Post-Independence"},
-  { id:130, label:"Goods and Services Tax",                   sublabel:"one nation one tax",             year:2017,  cat:"Post-Independence" },
-  { id:131, label:"Surgical Strikes across LoC",              sublabel:"by Indian Army",                 year:2016,  cat:"Post-Independence" },
-  { id:132, label:"Balakot airstrike",                        sublabel:"IAF struck JeM camp in Pakistan",year:2019,  cat:"Post-Independence" },
-  { id:133, label:"Article 370 abrogated",                    sublabel:"J&K became Union Territory",     year:2019,  cat:"Post-Independence" },
-  { id:134, label:"COVID-19 first case in India",             sublabel:"detected in Kerala",             year:2020,  cat:"Post-Independence" },
-
-  // ── WORLD HISTORY ──
-  { id:135, label:"Magna Carta",                              sublabel:"signed by King John of England",  year:1215,  cat:"World History" },
-  { id:136, label:"Gutenberg's Printing Press",               sublabel:"invented in Germany",            year:1440,  cat:"World History" },
-  { id:137, label:"Columbus reached the Americas",            sublabel:"landed at Bahamas",              year:1492,  cat:"World History" },
-  { id:138, label:"Protestant Reformation",                   sublabel:"Martin Luther's 95 Theses",      year:1517,  cat:"World History" },
-  { id:139, label:"American Declaration of Independence",     sublabel:"from British rule",              year:1776,  cat:"World History" },
-  { id:140, label:"French Revolution",                        sublabel:"storming of the Bastille",       year:1789,  cat:"World History" },
-  { id:141, label:"Napoleon became Emperor of France",        sublabel:"self-crowned at Notre-Dame",     year:1804,  cat:"World History" },
-  { id:142, label:"Battle of Waterloo: Napoleon's final defeat",sublabel:"occurred",                    year:1815,  cat:"World History" },
-  { id:143, label:"Communist Manifesto",                      sublabel:"Marx and Engels published it",   year:1848,  cat:"World History" },
-  { id:144, label:"Suez Canal",                               sublabel:"opened",                         year:1869,  cat:"World History" },
-  { id:145, label:"Berlin Conference: Africa partitioned",   sublabel:"by European powers",             year:1884,  cat:"World History" },
-  { id:146, label:"First World War",                          sublabel:"assassination of Archduke Franz Ferdinand",year:1914,cat:"World History"},
-  { id:147, label:"Balfour Declaration",                      sublabel:"British support for Jewish homeland",year:1917,cat:"World History"},
-  { id:148, label:"Russian Revolution",                       sublabel:"Bolsheviks seized power",        year:1917,  cat:"World History" },
-  { id:149, label:"Treaty of Versailles",                     sublabel:"ended World War I",              year:1919,  cat:"World History" },
-  { id:150, label:"League of Nations",                        sublabel:"founded",                        year:1920,  cat:"World History" },
-  { id:151, label:"Great Depression",                         sublabel:"Wall Street Crash",              year:1929,  cat:"World History" },
-  { id:152, label:"Hitler became Chancellor of Germany",      sublabel:"Nazi regime began",              year:1933,  cat:"World History" },
-  { id:153, label:"Second World War",                         sublabel:"Germany invaded Poland",         year:1939,  cat:"World History" },
-  { id:154, label:"Hiroshima atomic bombing",                 sublabel:"by US, 140,000 killed",         year:1945,  cat:"World History" },
-  { id:155, label:"United Nations",                           sublabel:"founded, 51 charter members",   year:1945,  cat:"World History" },
-  { id:156, label:"Universal Declaration of Human Rights",    sublabel:"adopted by UN General Assembly", year:1948,  cat:"World History" },
-  { id:157, label:"NATO",                                     sublabel:"founded",                        year:1949,  cat:"World History" },
-  { id:158, label:"Korean War",                               sublabel:"began",                          year:1950,  cat:"World History" },
-  { id:159, label:"Sputnik: first artificial satellite",     sublabel:"launched by Soviet Union",       year:1957,  cat:"World History" },
-  { id:160, label:"Cuban Missile Crisis",                     sublabel:"Cold War nuclear standoff",      year:1962,  cat:"World History" },
-  { id:161, label:"Moon landing (Apollo 11)",                 sublabel:"Neil Armstrong walked on Moon",  year:1969,  cat:"World History" },
-  { id:162, label:"Vietnam War ended",                        sublabel:"fall of Saigon",                 year:1975,  cat:"World History" },
-  { id:163, label:"Berlin Wall",                              sublabel:"fell",                           year:1989,  cat:"World History" },
-  { id:164, label:"Soviet Union",                             sublabel:"dissolved, Cold War ended",     year:1991,  cat:"World History" },
-  { id:165, label:"World Trade Organization",                 sublabel:"replaced GATT",                  year:1995,  cat:"World History" },
-  { id:166, label:"9/11 attacks on USA",                      sublabel:"Al-Qaeda struck Twin Towers",    year:2001,  cat:"World History" },
-  { id:167, label:"Global Financial Crisis",                  sublabel:"Lehman Brothers collapsed",      year:2008,  cat:"World History" },
-  { id:168, label:"Paris Climate Agreement",                  sublabel:"signed by 196 countries",        year:2015,  cat:"World History" },
-
-  // ── SCIENCE & TECH ──
-  { id:169, label:"ISRO",                                     sublabel:"established by Vikram Sarabhai",  year:1969,  cat:"Science & Tech" },
-  { id:170, label:"India's first satellite Aryabhata",        sublabel:"launched by Soviet rocket",       year:1975,  cat:"Science & Tech" },
-  { id:171, label:"India's first indigenous satellite APPLE", sublabel:"launched",                       year:1981,  cat:"Science & Tech" },
-  { id:172, label:"India's first SLV-3 rocket launch",        sublabel:"by Abdul Kalam's team",          year:1980,  cat:"Science & Tech" },
-  { id:173, label:"PSLV first successful flight",             sublabel:"launched",                       year:1994,  cat:"Science & Tech" },
-  { id:174, label:"Chandrayaan-1",                            sublabel:"discovered water on Moon",        year:2008,  cat:"Science & Tech" },
-  { id:175, label:"Mangalyaan (Mars Orbiter Mission)",         sublabel:"first Asian mission to Mars",    year:2013,  cat:"Science & Tech" },
-  { id:176, label:"GSLV Mk-III first flight",                 sublabel:"India's heavy-lift rocket",      year:2017,  cat:"Science & Tech" },
-  { id:177, label:"Chandrayaan-3",                            sublabel:"first soft landing near Moon's south pole",year:2023,cat:"Science & Tech"},
-  { id:178, label:"Aditya-L1 solar mission",                  sublabel:"launched by ISRO",               year:2023,  cat:"Science & Tech" },
-  { id:179, label:"India's first nuclear reactor Apsara",     sublabel:"went critical",                  year:1956,  cat:"Science & Tech" },
-  { id:180, label:"India's first computer TIFRAC",            sublabel:"operational at TIFR Mumbai",     year:1960,  cat:"Science & Tech" },
-  { id:181, label:"India's Green Revolution wheat variety",   sublabel:"HYV seeds introduced",           year:1966,  cat:"Science & Tech" },
-  { id:182, label:"Operation Flood (White Revolution)",       sublabel:"dairy cooperative model began",  year:1970,  cat:"Science & Tech" },
-
-  // ── PERSONALITIES ──
-  { id:183, label:"Raja Ram Mohan Roy",                        sublabel:"born",                           year:1772,  cat:"Personalities" },
-  { id:184, label:"Swami Dayananda Saraswati",                 sublabel:"born",                           year:1824,  cat:"Personalities" },
-  { id:185, label:"Ramakrishna Paramahamsa",                   sublabel:"born",                           year:1836,  cat:"Personalities" },
-  { id:186, label:"Rabindranath Tagore",                       sublabel:"born",                           year:1861,  cat:"Personalities" },
-  { id:187, label:"Bal Gangadhar Tilak",                       sublabel:"born",                           year:1856,  cat:"Personalities" },
-  { id:188, label:"Bipin Chandra Pal",                         sublabel:"born",                           year:1858,  cat:"Personalities" },
-  { id:189, label:"Swami Vivekananda",                         sublabel:"born",                           year:1863,  cat:"Personalities" },
-  { id:190, label:"Swami Vivekananda's Chicago speech",        sublabel:"at Parliament of World Religions",year:1893, cat:"Personalities" },
-  { id:191, label:"Mahatma Gandhi",                            sublabel:"born",                           year:1869,  cat:"Personalities" },
-  { id:192, label:"Lala Lajpat Rai",                           sublabel:"born",                           year:1865,  cat:"Personalities" },
-  { id:193, label:"Sardar Vallabhbhai Patel",                  sublabel:"born",                           year:1875,  cat:"Personalities" },
-  { id:194, label:"Muhammad Ali Jinnah",                       sublabel:"born",                           year:1876,  cat:"Personalities" },
-  { id:195, label:"Jawaharlal Nehru",                          sublabel:"born",                           year:1889,  cat:"Personalities" },
-  { id:196, label:"B.R. Ambedkar",                             sublabel:"born",                           year:1891,  cat:"Personalities" },
-  { id:197, label:"Subhas Chandra Bose",                       sublabel:"born",                           year:1897,  cat:"Personalities" },
-  { id:198, label:"Bhagat Singh",                              sublabel:"born",                           year:1907,  cat:"Personalities" },
-  { id:199, label:"APJ Abdul Kalam",                           sublabel:"born",                           year:1931,  cat:"Personalities" },
-  { id:200, label:"Rabindranath Tagore won Nobel Prize",        sublabel:"for Gitanjali",                  year:1913,  cat:"Personalities" },
-  { id:201, label:"Mother Teresa received Nobel Peace Prize",  sublabel:"for her work in Calcutta",       year:1979,  cat:"Personalities" },
-  { id:202, label:"Amartya Sen won Nobel Prize in Economics",  sublabel:"for welfare economics",          year:1998,  cat:"Personalities" },
-
-  // ── SOCIAL REFORM ──
-  { id:203, label:"Brahmo Samaj",                              sublabel:"founded by Raja Ram Mohan Roy",  year:1828,  cat:"Social Reform" },
-  { id:204, label:"Sati Abolition Act",                        sublabel:"by Lord William Bentinck",       year:1829,  cat:"Social Reform" },
-  { id:205, label:"Widow Remarriage Act",                      sublabel:"championed by Ishwar Chandra Vidyasagar",year:1856,cat:"Social Reform"},
-  { id:206, label:"Arya Samaj",                                sublabel:"founded by Dayananda Saraswati",  year:1875,  cat:"Social Reform" },
-  { id:207, label:"Aligarh Muslim University",                 sublabel:"founded by Sir Syed Ahmed Khan",  year:1875,  cat:"Social Reform" },
-  { id:208, label:"Ramakrishna Mission",                       sublabel:"founded by Swami Vivekananda",    year:1897,  cat:"Social Reform" },
-  { id:209, label:"Servants of India Society",                 sublabel:"founded by Gopal Krishna Gokhale",year:1905, cat:"Social Reform" },
-  { id:210, label:"Self-Respect Movement",                     sublabel:"founded by E.V. Ramasamy (Periyar)",year:1925,cat:"Social Reform"},
-  { id:211, label:"Ambedkar's Mahad Satyagraha",               sublabel:"Dalits claimed right to public water",year:1927,cat:"Social Reform"},
-  { id:212, label:"Devadasi system abolished",                 sublabel:"in Madras Presidency",            year:1947,  cat:"Social Reform" },
-  { id:213, label:"Hindu Code Bills",                          sublabel:"passed, reformed personal law",  year:1955,  cat:"Social Reform" },
-  { id:214, label:"Untouchability Offences Act",               sublabel:"enacted",                        year:1955,  cat:"Social Reform" },
-  { id:215, label:"Mandal Commission report",                  sublabel:"implemented by V.P. Singh govt",  year:1990,  cat:"Social Reform" },
-
-  // ── CONSTITUTIONAL ──
-  { id:216, label:"Indian Independence Act",                   sublabel:"by British Parliament",          year:1947,  cat:"Constitutional" },
-  { id:217, label:"Constituent Assembly first met",            sublabel:"to draft India's Constitution",  year:1946,  cat:"Constitutional" },
-  { id:218, label:"B.R. Ambedkar became Law Minister",         sublabel:"chairman of drafting committee", year:1947,  cat:"Constitutional" },
-  { id:219, label:"42nd Constitutional Amendment",             sublabel:"Mini Constitution of the Emergency era",year:1976,cat:"Constitutional"},
-  { id:220, label:"44th Constitutional Amendment",             sublabel:"reversed Emergency-era changes",  year:1978,  cat:"Constitutional" },
-  { id:221, label:"52nd Amendment: Anti-Defection Law",       sublabel:"enacted",                        year:1985,  cat:"Constitutional" },
-  { id:222, label:"73rd Amendment: Panchayati Raj",           sublabel:"local self-governance guaranteed",year:1992, cat:"Constitutional" },
-  { id:223, label:"74th Amendment: Urban Local Bodies",       sublabel:"municipalities empowered",        year:1992,  cat:"Constitutional" },
-  { id:224, label:"86th Amendment: Right to Education",       sublabel:"made fundamental right",         year:2002,  cat:"Constitutional" },
-  { id:225, label:"Right to Education Act",                    sublabel:"free education for 6–14 year olds",year:2009,cat:"Constitutional" },
-  { id:226, label:"National Food Security Act",                sublabel:"right to subsidised food",        year:2013,  cat:"Constitutional" },
-];
 
 
 // ═══════════════════════════════════════════════════════════
-//  CARD INFO — loaded from data/cards.json
-//  Placed here so EVENTS is already defined when fetch resolves
+//  EVENTS — loaded from data/events.json with localStorage cache
+//  v2 cache key: bump to v3 when events.json content changes
 // ═══════════════════════════════════════════════════════════
-(async function loadCardInfo(){
+const EVENTS_CACHE_KEY = 'chronology-events-v2';
+let EVENTS = [];
+
+async function loadEvents(){
+  // Try cache first
   try {
-    const res = await fetch('data/cards.json');
-    if(!res.ok) return;
-    const info = await res.json();
-    EVENTS.forEach(ev => {
-      if(info[ev.id]) ev.info = info[ev.id];
-    });
+    const cached = localStorage.getItem(EVENTS_CACHE_KEY);
+    if(cached){
+      buildEvents(JSON.parse(cached));
+      return;
+    }
   } catch(e){}
+
+  // Fetch from server
+  try {
+    const res = await fetch('data/events.json');
+    if(!res.ok) throw new Error('fetch failed');
+    const data = await res.json();
+    try { localStorage.setItem(EVENTS_CACHE_KEY, JSON.stringify(data)); } catch(e){}
+    buildEvents(data);
+  } catch(e){
+    console.warn('Chronology: could not load events.json', e);
+  }
+}
+
+function buildEvents(data){
+  // Convert JSON object to array the game expects
+  EVENTS = Object.entries(data).map(([id, ev]) => ({
+    id:       parseInt(id),
+    label:    ev.label,
+    sublabel: ev.sublabel,
+    year:     ev.year,
+    cat:      ev.cat,
+    info:     ev.what ? { what: ev.what, upsc: ev.upsc, remember: ev.remember } : null
+  }));
+}
+
+// Load events then initialise the game UI
+(function(){
+  const btn = document.getElementById('btn-start');
+  if(btn) { btn.textContent = 'Loading...'; btn.disabled = true; }
+
+  loadEvents().then(() => {
+    initCategoryPills();
+    applyDark(localStorage.getItem('chronology-dark') === '1');
+    if(btn){ btn.textContent = 'Start Game'; btn.disabled = false; }
+  });
 })();
 
 // ═══════════════════════════════════════════════════════════
@@ -2219,8 +1962,9 @@ function showScreen(id){
 // ═══════════════════════════════════════════════════════════
 //  INIT PILLS
 // ═══════════════════════════════════════════════════════════
-(function(){
+function initCategoryPills(){
   const c=document.getElementById('category-pills');
+  if(!c || c.children.length > 0) return; // already initialised
   Object.entries(CAT).forEach(([cat,col])=>{
     const p=document.createElement('div');
     p.className='pill';
@@ -2229,7 +1973,7 @@ function showScreen(id){
     p.style.background=col.bg;
     c.appendChild(p);
   });
-})();
+}
 
 // ═══════════════════════════════════════════════════════════
 //  START GAME
