@@ -33,7 +33,7 @@
   .screen { display: none; min-height: 100vh; }
   .screen.active { display: flex; }
   #screen-start, #screen-tutorial, #screen-gameover { overflow-y: auto; }
-  #screen-game { overflow: hidden; height: 100vh; }
+  #screen-game { height: 100vh; }
 
   /* ── START ── */
   #screen-start { align-items:center; justify-content:center; flex-direction:column; padding:48px 24px; text-align:center; position:relative; }
@@ -398,19 +398,19 @@
     to   { opacity:1; transform:translateY(0); }
   }
 
-  /* ── END GAME BUTTON (shown after game over, inside game screen) ── */
+  /* ── END GAME BUTTON (shown in card stage area after game over) ── */
   .end-game-bar {
-    display:none;
-    position:sticky; bottom:0; left:0; right:0;
-    background:rgba(247,245,240,0.96);
-    border-top:1px solid var(--border);
-    padding:16px 24px;
-    text-align:center;
-    z-index:30;
-    backdrop-filter:blur(6px);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: var(--tl-card-w);
+    min-height: var(--tl-card-h);
+    margin-top: calc(var(--tl-card-h) * -1); /* sit over the now-empty card slot */
   }
-  .end-game-bar.visible { display:block; }
-  .end-game-bar p { font-size:13px; color:var(--muted); margin-bottom:10px; }
+  .end-game-bar.visible { display: flex; }
+  .end-game-bar p { font-size:12px; color:var(--muted); text-align:center; line-height:1.5; }
 
   /* ── TOAST (year pill - sits in the gap between card stage and timeline) ── */
   #toast {
@@ -439,18 +439,31 @@
   }
 
   /* ── GAME OVER ── */
-  #screen-gameover { align-items:center; justify-content:center; flex-direction:column; padding:48px 24px; text-align:center; position:relative; }
-  .gameover-emoji { font-size:64px; margin-bottom:12px; }
-  .gameover-title { font-size:34px; font-weight:700; color:var(--text); margin-bottom:10px; }
-  .gameover-sub { font-size:16px; color:var(--muted); margin-bottom:20px; line-height:1.6; max-width:420px; }
-  .gameover-joke {
-    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-    padding:18px 24px; margin-bottom:24px; max-width:460px;
-    font-size:14px; color:var(--text); line-height:1.7; font-style:italic;
-    border-left:4px solid var(--accent);
+  #screen-gameover { align-items:center; justify-content:flex-start; flex-direction:column; padding:28px 24px 32px; text-align:center; position:relative; overflow-y:auto; }
+  .gameover-emoji { font-size:44px; margin-bottom:6px; }
+  .gameover-title { font-size:22px; font-weight:700; color:var(--text); margin-bottom:6px; }
+  .gameover-sub { font-size:13px; color:var(--muted); margin-bottom:16px; line-height:1.5; max-width:360px; }
+  .gameover-stats {
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:14px 24px;
+    margin-bottom:16px;
+    font-size:13px;
+    color:var(--muted);
+    min-width:240px;
+    width:100%;
+    max-width:320px;
   }
-  .gameover-stats { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px 32px; margin-bottom:28px; font-size:14px; color:var(--muted); line-height:2.2; min-width:260px; }
-  .gameover-stats strong { color:var(--text); font-size:16px; }
+  .gameover-stats .stat-row {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:6px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .gameover-stats .stat-row:last-child { border-bottom:none; }
+  .gameover-stats .stat-label { color:var(--muted); font-size:12px; font-weight:500; letter-spacing:0.2px; }
+  .gameover-stats .stat-value { color:var(--text); font-size:15px; font-weight:700; }
   .btn-group { display:flex; flex-direction:column; gap:10px; align-items:center; }
 
   /* ── TUTORIAL SCREEN ── */
@@ -963,9 +976,14 @@
   <!-- Quip banner: slides in above the card stage after each answer -->
   <div class="quip-banner" id="quip-banner"></div>
   <div class="card-stage">
-    <div class="stage-label">Where does this event belong?</div>
+    <div class="stage-label" id="stage-label">Where does this event belong?</div>
     <div id="current-card-container"></div>
-    <div class="drag-hint">👆 Press &amp; hold the card, then drag it to the timeline below</div>
+    <!-- End game bar — same slot as card, shown when game ends -->
+    <div class="end-game-bar" id="end-game-bar">
+      <p>Game over!</p>
+      <button class="btn-primary" style="width:100%;" onclick="showScreen('gameover')">See My Score</button>
+    </div>
+    <div class="drag-hint" id="drag-hint">👆 Press &amp; hold the card, then drag it to the timeline below</div>
   </div>
   <!-- Toast: sits in the natural gap between card and timeline -->
   <div class="toast-row">
@@ -976,20 +994,13 @@
       <div class="timeline-line"></div>
     </div>
   </div>
-  <!-- Shown after game ends, inside game screen -->
-  <div class="end-game-bar" id="end-game-bar">
-    <p>Game over! Scroll through your timeline, then check your <strong>UnacademyX</strong> score report.</p>
-    <button class="btn-primary" onclick="showScreen('gameover')">See My Score</button>
-  </div>
 </div>
 
 <!-- GAME OVER -->
 <div id="screen-gameover" class="screen">
-  <button class="btn-back" onclick="showScreen('start')">← Back to Start</button>
   <div class="gameover-emoji" id="go-emoji"></div>
   <h2 class="gameover-title" id="go-title"></h2>
   <p class="gameover-sub" id="go-sub"></p>
-  <div class="gameover-joke" id="go-joke"></div>
 
   <!-- Share card -->
   <div class="share-card" id="share-card">
@@ -1008,7 +1019,7 @@
        target="_blank" rel="noopener"
        class="btn-primary"
        style="display:block;text-align:center;text-decoration:none;width:100%;box-sizing:border-box;">
-      💡 Fix those wrong answers with Unacademy Iconic
+      Fix those wrong answers with Unacademy Iconic
     </a>
   </div>
   <div class="btn-group" style="width:100%;max-width:320px;">
@@ -1421,6 +1432,8 @@ function confirmQuit(){
   gameEnded=true;
   clearQuip();
   document.getElementById('end-game-bar').classList.remove('visible');
+  document.getElementById('stage-label').style.visibility = '';
+  document.getElementById('drag-hint').style.visibility = '';
   showScreen('start');
 }
 
@@ -1507,7 +1520,7 @@ function showScreen(id){
 //  START GAME
 // ═══════════════════════════════════════════════════════════
 function startGame() {
-  initAudio(); // unlock + load audio on first real user gesture
+  initAudio();
   const s=shuffle(EVENTS);
   timeline=[{ev:s[0],wrong:false}];
   currentCard=s[1];
@@ -1515,6 +1528,8 @@ function startGame() {
   lives=3; score=0; locked=false; gameEnded=false;
   streak=0; maxStreak=0;
   document.getElementById('end-game-bar').classList.remove('visible');
+  document.getElementById('stage-label').style.visibility = '';
+  document.getElementById('drag-hint').style.visibility = '';
   clearQuip();
   showScreen('game');
   renderAll();
@@ -1941,10 +1956,11 @@ function triggerGameOver(){
   clearQuip();
   renderCurrentCard(); // clears the card area
   prepareGameOverScreen();
-  // Show sticky bar at bottom of game screen
-  const bar=document.getElementById('end-game-bar');
-  bar.classList.add('visible');
-  // scroll timeline to beginning so user can review from start
+  // Show See My Score in the card slot, hide stage UI
+  document.getElementById('end-game-bar').classList.add('visible');
+  document.getElementById('stage-label').style.visibility = 'hidden';
+  document.getElementById('drag-hint').style.visibility = 'hidden';
+  // Scroll timeline to beginning so user can review from start
   setTimeout(()=>{
     const w=document.getElementById('timeline-wrapper');
     if(w) w.scrollTo({left:0,behavior:'smooth'});
@@ -1963,14 +1979,23 @@ function prepareGameOverScreen(){
   document.getElementById('go-title').textContent=tiers[t].m;
   document.getElementById('go-sub').innerHTML=
     `You scored <strong>${score} points</strong> on the <strong>UnacademyX</strong> Chronology timeline.`;
-  document.getElementById('go-joke').innerHTML='💬 &nbsp;' + getJoke(score);
   const correct=timeline.filter(i=>!i.wrong).length - 1;
   const wrong=timeline.filter(i=>i.wrong).length;
+
+  // Clean professional stats — no emojis, no wrong placements
   document.getElementById('go-stats').innerHTML=`
-    <div>🏆 Total score &nbsp;·&nbsp; <strong>${score} pts</strong></div>
-    <div>✅ Correct placements &nbsp;·&nbsp; <strong>${correct}</strong></div>
-    <div>❌ Wrong placements &nbsp;·&nbsp; <strong>${wrong}</strong></div>
-    <div>🔥 Best streak &nbsp;·&nbsp; <strong>${maxStreak}</strong></div>
+    <div class="stat-row">
+      <span class="stat-label">Total Score</span>
+      <span class="stat-value">${score} pts</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Correct Placements</span>
+      <span class="stat-value">${correct}</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Best Streak</span>
+      <span class="stat-value">${maxStreak}</span>
+    </div>
   `;
 
   // Show Unacademy Iconic CTA only if player got answers wrong
@@ -1981,12 +2006,12 @@ function prepareGameOverScreen(){
   document.getElementById('sc-meta').textContent =
     `🔥 Best streak: ${maxStreak}  ·  ✅ ${correct} correct  ·  ❌ ${wrong} wrong`;
 
-  // Build grid — sorted timeline, skip the seed card (first one, never wrong)
+  // Build grid — sorted timeline, skip the seed card
   const sorted = [...timeline].sort((a,b)=>a.ev.year - b.ev.year);
   const grid = document.getElementById('sc-grid');
   grid.innerHTML = '';
   sorted.forEach((item, i) => {
-    if(i === 0) return; // skip seed card
+    if(i === 0) return;
     const sq = document.createElement('div');
     sq.className = 'share-sq ' + (item.wrong ? 'wrong' : 'correct');
     grid.appendChild(sq);
