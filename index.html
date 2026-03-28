@@ -25,6 +25,70 @@
     --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
     --radius: 10px;
   }
+
+  /* ── DARK MODE ── */
+  body.dark {
+    --bg: #0f0f0f;
+    --surface: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #f0ede8;
+    --muted: #888480;
+    --accent: #08bd80;
+    --accent-dark: #06a06c;
+    --accent-light: #0a2a1f;
+    --accent-text: #08bd80;
+    --danger: #e05c4b;
+    --danger-light: #2a1210;
+    --success: #4caf7a;
+    --success-light: #0a2016;
+    --shadow-sm: 0 1px 4px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+  }
+
+  /* ── DARK MODE TOGGLE ── */
+  .dark-toggle {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-weight: 600;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .dark-toggle:hover {
+    border-color: var(--muted);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  .dark-toggle:active { transform: translateY(0); }
+
+  /* Dark mode toggle inside game header */
+  .dark-toggle-header {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .dark-toggle-header:hover { border-color: var(--muted); }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
   body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--text); }
@@ -192,14 +256,20 @@
     animation:slideUp 0.3s ease;
     touch-action: none;
   }
-  .event-card:hover { box-shadow:var(--shadow-md); transform:translateY(-2px); }
+  .event-card:hover { box-shadow:var(--shadow-md); transform:translateY(-3px); }
   .event-card.pressing {
-    transform: scale(0.97);
-    box-shadow: var(--shadow-md);
+    transform: scale(0.95) rotate(-1deg);
+    box-shadow: var(--shadow-lg);
     border-color: var(--accent);
     cursor: grabbing;
+    transition: transform 0.1s, box-shadow 0.1s;
   }
-  .event-card.dragging { box-shadow:var(--shadow-lg); transform:rotate(2deg) scale(1.04); cursor:grabbing; opacity:0.9; }
+  .event-card.dragging {
+    box-shadow: var(--shadow-lg);
+    transform: rotate(3deg) scale(1.05) translateY(-4px);
+    cursor: grabbing;
+    opacity: 0.92;
+  }
 
   /* Emoji banner — same height as timeline emoji band */
   .card-emoji-banner {
@@ -292,11 +362,19 @@
     justify-content:space-between;
   }
 
-  .tl-card.just-correct { border-color:var(--success); background:var(--success-light); animation:popIn 0.45s ease; }
+  .tl-card.just-correct {
+    border-color:var(--success);
+    background:var(--success-light);
+    animation: popIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), correctRipple 0.6s ease;
+  }
   .tl-card.just-correct .tl-emoji { border-bottom-color:#c3e6cb; }
   .tl-card.wrong { border-color:var(--danger) !important; background:var(--danger-light) !important; }
   .tl-card.wrong .tl-emoji { border-bottom-color:#f5c6c6 !important; }
-  .tl-card.wrong-flash { border-color:var(--danger); background:var(--danger-light); animation:shake 0.45s ease; }
+  .tl-card.wrong-flash {
+    border-color:var(--danger);
+    background:var(--danger-light);
+    animation: shake 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97), wrongPulse 0.6s ease;
+  }
   .tl-card.wrong-flash .tl-emoji { border-bottom-color:#f5c6c6; }
 
   /* ── DROP ZONES ──
@@ -337,6 +415,7 @@
   .drop-zone.drag-over .drop-zone-indicator {
     background: var(--accent);
     box-shadow: 0 0 0 5px var(--accent-light);
+    animation: dzBreathe 0.8s ease infinite;
   }
 
   /* End drop zones - much wider, extending into empty space on their open side */
@@ -568,8 +647,60 @@
   @keyframes slideUp { from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)} }
   @keyframes dropArrow { 0%,100%{transform:translateY(0);opacity:1} 50%{transform:translateY(6px);opacity:0.5} }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
-  @keyframes popIn { 0%{transform:scale(1)}45%{transform:scale(1.07)}100%{transform:scale(1)} }
-  @keyframes shake { 0%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}100%{transform:translateX(0)} }
+
+  /* ── CORRECT — spring snap with bounce ── */
+  @keyframes popIn {
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1.12); }
+    50%  { transform: scale(0.96); }
+    70%  { transform: scale(1.04); }
+    85%  { transform: scale(0.99); }
+    100% { transform: scale(1); }
+  }
+  /* Green ripple on correct card */
+  @keyframes correctRipple {
+    0%   { box-shadow: 0 0 0 0 rgba(8,189,128,0.5); }
+    60%  { box-shadow: 0 0 0 12px rgba(8,189,128,0); }
+    100% { box-shadow: 0 0 0 0 rgba(8,189,128,0); }
+  }
+
+  /* ── WRONG — weighted shake, heavier than before ── */
+  @keyframes shake {
+    0%   { transform: translateX(0) rotate(0deg); }
+    15%  { transform: translateX(-10px) rotate(-1.5deg); }
+    30%  { transform: translateX(10px) rotate(1.5deg); }
+    45%  { transform: translateX(-8px) rotate(-1deg); }
+    60%  { transform: translateX(8px) rotate(1deg); }
+    75%  { transform: translateX(-4px) rotate(-0.5deg); }
+    90%  { transform: translateX(4px) rotate(0.5deg); }
+    100% { transform: translateX(0) rotate(0deg); }
+  }
+  /* Red pulse on wrong card */
+  @keyframes wrongPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(192,57,43,0.5); }
+    60%  { box-shadow: 0 0 0 12px rgba(192,57,43,0); }
+    100% { box-shadow: 0 0 0 0 rgba(192,57,43,0); }
+  }
+
+  /* Score pop when points added */
+  @keyframes scorePop {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.35); color: var(--accent); }
+    100% { transform: scale(1); }
+  }
+  /* Lives shudder on wrong */
+  @keyframes livesShudder {
+    0%,100% { transform: translateX(0); }
+    20%  { transform: translateX(-4px); }
+    40%  { transform: translateX(4px); }
+    60%  { transform: translateX(-3px); }
+    80%  { transform: translateX(3px); }
+  }
+  /* Drop zone breathe on hover */
+  @keyframes dzBreathe {
+    0%,100% { box-shadow: 0 0 0 3px rgba(8,189,128,0.3); }
+    50%     { box-shadow: 0 0 0 7px rgba(8,189,128,0.1); }
+  }
   @keyframes toastIn { from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)} }
 
   /* ── STREAK DISPLAY ── */
@@ -685,7 +816,7 @@
     border: 1.5px solid var(--border);
     border-radius: 16px;
     padding: 20px 24px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     max-width: 360px;
     width: 100%;
     text-align: center;
@@ -696,41 +827,17 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 10px;
-  }
-  .share-card-score {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 42px;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .share-card-score span {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--muted);
-    font-family: 'Source Sans 3', sans-serif;
-  }
-  .share-card-meta {
-    font-size: 13px;
-    color: var(--muted);
     margin-bottom: 14px;
   }
-  .share-card-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    justify-content: center;
+  /* Stats inside the card — no outer border, tighter */
+  .share-card .gameover-stats {
+    border: none;
+    padding: 0;
     margin-bottom: 14px;
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
   }
-  .share-sq {
-    width: 18px;
-    height: 18px;
-    border-radius: 3px;
-  }
-  .share-sq.correct { background: var(--accent); }
-  .share-sq.wrong   { background: var(--danger); }
   .share-card-brand {
     font-size: 11px;
     color: var(--muted);
@@ -750,7 +857,211 @@
   }
   .share-feedback.show { opacity: 1; }
 
-  /* ── QUIT BUTTON ── */
+  /* ── COLLECTION SCREEN ── */
+  #screen-collection {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px 40px;
+    position: relative;
+    overflow-y: auto;
+  }
+  .collection-header {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 40px 0 16px;
+  }
+  .collection-title {
+    font-family: 'Lora', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .collection-count {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  /* Unlocked collection card */
+  .col-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    aspect-ratio: 2/3;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .col-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .col-card:active { transform: scale(0.96); }
+  .col-card-stripe { height: 3px; flex-shrink: 0; }
+  .col-card-emoji {
+    font-size: 22px;
+    text-align: center;
+    padding: 8px 4px 4px;
+    flex-shrink: 0;
+  }
+  .col-card-body { padding: 0 6px 6px; flex: 1; overflow: hidden; }
+  .col-card-cat {
+    font-size: 7px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .col-card-label {
+    font-family: 'Lora', serif;
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  .col-card-year {
+    font-size: 8px;
+    font-weight: 700;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* Locked collection card */
+  .col-card-locked {
+    background: var(--border);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 2/3;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    opacity: 0.55;
+  }
+  .col-card-locked-stripe { height: 3px; flex-shrink: 0; opacity: 0.4; }
+  .col-card-locked-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .col-card-locked-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  /* ── CARD DETAIL MODAL ── */
+  .card-detail-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 600;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.15s ease;
+    padding: 24px;
+  }
+  .card-detail-overlay.visible { display: flex; }
+  .card-detail-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 0;
+    max-width: 320px;
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.25s ease;
+    overflow: hidden;
+    position: relative;
+  }
+  .card-detail-close {
+    position: absolute;
+    top: 12px; right: 14px;
+    background: none; border: none;
+    font-size: 16px; color: var(--muted);
+    cursor: pointer; z-index: 1;
+  }
+  .card-detail-stripe { height: 5px; width: 100%; }
+  .card-detail-emoji { font-size: 40px; text-align: center; padding: 20px 0 8px; }
+  .card-detail-cat {
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    padding: 0 20px;
+  }
+  .card-detail-label {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    text-align: center;
+    padding: 0 20px;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .card-detail-year {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .card-detail-sublabel {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    padding: 0 20px;
+    margin-bottom: 14px;
+  }
+  .card-detail-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 20px 14px;
+  }
+  .card-detail-body {
+    padding: 0 20px 24px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    text-align: left;
+  }
+  .card-detail-body .cd-fact {
+    margin-bottom: 10px;
+  }
+  .card-detail-body .cd-fact-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
   .btn-quit {
     background: transparent;
     color: var(--danger);
@@ -805,7 +1116,59 @@
   .modal-actions .btn-secondary { padding: 10px 24px; font-size: 14px; }
   @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
-  .timeline-wrapper::-webkit-scrollbar{height:4px}
+  /* ── CATEGORY BREAKDOWN (inside result card) ── */
+  .cat-breakdown {
+    width: 100%;
+    margin: 10px 0 14px;
+    text-align: left;
+  }
+  .cat-breakdown-title {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .cat-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+  }
+  .cat-row:last-child { border-bottom: none; }
+  .cat-row-name { color: var(--text); font-weight: 500; }
+  .cat-row-bar-wrap {
+    flex: 1;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 0 10px;
+    overflow: hidden;
+  }
+  .cat-row-bar {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.6s ease;
+  }
+  .cat-row-bar.strong { background: var(--accent); }
+  .cat-row-bar.weak   { background: var(--danger); }
+  .cat-row-bar.mid    { background: #e6a817; }
+  .cat-row-pct { font-weight: 700; font-size: 11px; min-width: 34px; text-align: right; }
+  .cat-row-pct.strong { color: var(--accent); }
+  .cat-row-pct.weak   { color: var(--danger); }
+  .cat-row-pct.mid    { color: #e6a817; }
+
+  /* Weakest era pills */
+  .era-pills { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px; }
+  .era-pill {
+    font-size:10px; font-weight:500; color:var(--muted);
+    background:var(--bg); border:1px solid var(--border);
+    border-radius:20px; padding:3px 10px;
+  }
+  .era-pill strong { color:var(--danger); font-weight:700; margin-left:4px; }
   .timeline-wrapper::-webkit-scrollbar-track{background:#ece8e0}
   .timeline-wrapper::-webkit-scrollbar-thumb{background:#c8c2b6;border-radius:2px}
 </style>
@@ -814,6 +1177,10 @@
 
 <!-- START -->
 <div id="screen-start" class="screen active">
+  <button class="dark-toggle" id="dark-toggle-start" onclick="toggleDark()">
+    <span id="dark-icon-start">🌙</span>
+    <span id="dark-label-start">Dark</span>
+  </button>
   <div class="start-eyebrow">by <span style="color:var(--accent);font-weight:700;">Unacademy</span><span style="font-style:italic;font-weight:700;">X</span> · UPSC History & Polity</div>
   <h1 class="start-title"><span class="ch">Ch</span><span class="rest">ronology</span></h1>
   <p class="start-desc">Test your UPSC history knowledge by placing events in the correct chronological order. Three wrong placements and the game ends.</p>
@@ -821,6 +1188,7 @@
   <div style="display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;max-width:280px;margin:0 auto;">
     <button class="btn-primary" style="width:100%;" onclick="showScreen('tutorial')">How to Play</button>
     <button class="btn-start" style="width:100%;" onclick="startGame()">Start Game</button>
+    <button class="btn-secondary" style="width:100%;" onclick="showScreen('collection');renderCollection()">My Collection</button>
   </div>
   <p class="start-note">220+ curated events · 9 UPSC categories · 3 lives · Made with ❤️ by UnacademyX</p>
 </div>
@@ -971,6 +1339,7 @@
       <div class="score-display">Score <strong id="score-display">0</strong></div>
       <div class="lives" id="lives-display"></div>
       <button class="btn-quit" onclick="quitGame()">✕ Quit</button>
+      <button class="dark-toggle-header" onclick="toggleDark()" id="dark-toggle-game">🌙</button>
     </div>
   </header>
   <!-- Quip banner: slides in above the card stage after each answer -->
@@ -1000,20 +1369,17 @@
 <div id="screen-gameover" class="screen">
   <div class="gameover-emoji" id="go-emoji"></div>
   <h2 class="gameover-title" id="go-title"></h2>
-  <p class="gameover-sub" id="go-sub"></p>
 
-  <!-- Share card -->
+  <!-- Single result card -->
   <div class="share-card" id="share-card">
     <div class="share-card-title">Your Result</div>
-    <div class="share-card-score" id="sc-score">0 <span>pts</span></div>
-    <div class="share-card-meta" id="sc-meta"></div>
-    <div class="share-card-grid" id="sc-grid"></div>
+    <div class="gameover-stats" id="go-stats"></div>
+    <div id="sc-cats"></div>
     <div class="share-card-brand">Chronology &nbsp;·&nbsp; <strong>UnacademyX</strong></div>
   </div>
 
   <div class="share-feedback" id="share-feedback">Copied to clipboard!</div>
 
-  <div class="gameover-stats" id="go-stats"></div>
   <div id="iconic-cta" style="display:none;margin-bottom:16px;width:100%;max-width:320px;">
     <a href="https://unacademy.com/goal/upsc-civil-services-examination-ias-preparation/KSCGY/subscriptions"
        target="_blank" rel="noopener"
@@ -1029,7 +1395,30 @@
   </div>
 </div>
 
-<!-- QUIT MODAL: in-app confirmation, no browser dialog -->
+<!-- COLLECTION -->
+<div id="screen-collection" class="screen">
+  <button class="btn-back" onclick="showScreen('start')">← Back</button>
+  <div class="collection-header">
+    <div class="collection-title">My Collection</div>
+    <div class="collection-count" id="collection-count">0 / 226 unlocked</div>
+  </div>
+  <div class="collection-grid" id="collection-grid"></div>
+</div>
+
+<!-- CARD DETAIL MODAL -->
+<div class="card-detail-overlay" id="card-detail-overlay" onclick="if(event.target===this)closeCardDetail()">
+  <div class="card-detail-box" id="card-detail-box">
+    <button class="card-detail-close" onclick="closeCardDetail()">✕</button>
+    <div class="card-detail-stripe" id="cd-stripe"></div>
+    <div class="card-detail-emoji" id="cd-emoji"></div>
+    <div class="card-detail-cat" id="cd-cat"></div>
+    <div class="card-detail-label" id="cd-label"></div>
+    <div class="card-detail-year" id="cd-year"></div>
+    <div class="card-detail-sublabel" id="cd-sublabel"></div>
+    <div class="card-detail-divider"></div>
+    <div class="card-detail-body" id="cd-body"></div>
+  </div>
+</div>
 <div class="modal-overlay" id="quit-modal" onclick="if(event.target===this)closeQuitModal()">
   <div class="modal-box">
     <div class="modal-icon">🚪</div>
@@ -1052,6 +1441,198 @@
 </div>
 
 <script>
+// ═══════════════════════════════════════════════════════════
+//  COLLECTION - tracks every card the player has ever seen
+// ═══════════════════════════════════════════════════════════
+const SEEN_KEY = 'chronology-seen';
+
+function getSeenIds(){
+  try { return new Set(JSON.parse(localStorage.getItem(SEEN_KEY) || '[]')); }
+  catch(e){ return new Set(); }
+}
+function markSeen(id){
+  const seen = getSeenIds();
+  if(seen.has(id)) return;
+  seen.add(id);
+  try { localStorage.setItem(SEEN_KEY, JSON.stringify([...seen])); } catch(e){}
+}
+
+// Call this from handleDrop for every placed card (correct or wrong)
+function trackSeen(ev){ if(ev) markSeen(ev.id); }
+
+
+
+// Hook: renderCollection called directly from button onclick
+function applyDark(isDark){
+  document.body.classList.toggle('dark', isDark);
+  // Update all toggle buttons
+  const icon  = isDark ? '☀️' : '🌙';
+  const label = isDark ? 'Light' : 'Dark';
+  const s = document.getElementById('dark-icon-start');
+  const l = document.getElementById('dark-label-start');
+  const g = document.getElementById('dark-toggle-game');
+  if(s) s.textContent = icon;
+  if(l) l.textContent = label;
+  if(g) g.textContent = icon;
+}
+
+function toggleDark(){
+  const isDark = !document.body.classList.contains('dark');
+  localStorage.setItem('chronology-dark', isDark ? '1' : '0');
+  applyDark(isDark);
+}
+
+// Apply saved preference on page load
+(function(){
+  const saved = localStorage.getItem('chronology-dark');
+  // Default to light; apply dark only if explicitly saved
+  applyDark(saved === '1');
+})();
+
+// ═══════════════════════════════════════════════════════════
+//  CATEGORY TRACKING - persists across all sessions
+// ═══════════════════════════════════════════════════════════
+const CAT_STATS_KEY     = 'chronology-cat-stats';
+const MISTAKES_KEY      = 'chronology-mistakes';
+
+function getCategoryStats(){
+  try { return JSON.parse(localStorage.getItem(CAT_STATS_KEY) || '{}'); }
+  catch(e){ return {}; }
+}
+function saveCategoryStats(stats){
+  try { localStorage.setItem(CAT_STATS_KEY, JSON.stringify(stats)); } catch(e){}
+}
+
+function getMistakes(){
+  try { return JSON.parse(localStorage.getItem(MISTAKES_KEY) || '[]'); }
+  catch(e){ return []; }
+}
+function saveMistakes(list){
+  try { localStorage.setItem(MISTAKES_KEY, JSON.stringify(list)); } catch(e){}
+}
+
+function trackPlacement(cat, isCorrect, ev){
+  // Track category accuracy
+  const stats = getCategoryStats();
+  if(!stats[cat]) stats[cat] = { attempts: 0, correct: 0 };
+  stats[cat].attempts++;
+  if(isCorrect) stats[cat].correct++;
+  saveCategoryStats(stats);
+
+  // Track individual mistakes with card info
+  if(!isCorrect && ev){
+    const list = getMistakes();
+    // Check if same card already recorded — increment count instead of duplicating
+    const existing = list.find(m => m.id === ev.id);
+    if(existing){
+      existing.count++;
+      existing.lastSeen = Date.now();
+    } else {
+      list.push({
+        id:       ev.id,
+        label:    ev.label,
+        year:     ev.year,
+        cat:      ev.cat,
+        count:    1,
+        lastSeen: Date.now(),
+      });
+    }
+    saveMistakes(list);
+  }
+}
+
+function getWeakestCategory(){
+  const stats = getCategoryStats();
+  let weakest = null, lowestAcc = 1;
+  Object.entries(stats).forEach(([cat, d]) => {
+    if(d.attempts < 2) return;
+    const acc = d.correct / d.attempts;
+    if(acc < lowestAcc){ lowestAcc = acc; weakest = cat; }
+  });
+  return weakest;
+}
+
+// Label a year into a human-readable era
+function yearToEra(year){
+  if(year < 0)    return 'Ancient (pre-CE)';
+  if(year < 1200) return '0–1200 CE';
+  if(year < 1500) return '1200–1500 CE';
+  if(year < 1700) return '1500–1700 CE';
+  if(year < 1800) return '1700s';
+  if(year < 1850) return 'Early 1800s';
+  if(year < 1900) return 'Late 1800s';
+  if(year < 1950) return '1900–1950';
+  if(year < 2000) return '1950–2000';
+  return '2000s';
+}
+
+function buildWeakestEras(){
+  const mistakes = getMistakes();
+  if(mistakes.length === 0) return '';
+
+  // Group by era, sum mistake counts
+  const eraMap = {};
+  mistakes.forEach(m => {
+    const era = yearToEra(m.year);
+    eraMap[era] = (eraMap[era] || 0) + m.count;
+  });
+
+  // Sort by count descending, take top 3
+  const top = Object.entries(eraMap)
+    .sort((a,b) => b[1] - a[1])
+    .slice(0, 3);
+
+  if(top.length === 0) return '';
+
+  const pills = top.map(([era, cnt]) =>
+    `<span class="era-pill">${era} <strong>${cnt}</strong></span>`
+  ).join('');
+
+  return `
+    <div class="cat-breakdown-title" style="margin-top:10px;">Weakest Eras</div>
+    <div class="era-pills">${pills}</div>`;
+}
+
+function buildCategoryBreakdown(){
+  const stats = getCategoryStats();
+  const entries = Object.entries(stats)
+    .filter(([,d]) => d.attempts > 0)
+    .map(([cat, d]) => ({ cat, attempts: d.attempts, correct: d.correct, acc: d.correct / d.attempts }))
+    .sort((a, b) => a.acc - b.acc); // weakest first
+
+  if(entries.length === 0) return '';
+
+  // Pick 3 worst and 2 best — no duplicates if fewer than 5 categories
+  const worst = entries.slice(0, Math.min(3, entries.length));
+  const best  = entries.slice(-Math.min(2, Math.max(0, entries.length - worst.length))).reverse();
+
+  const makeRow = (e) => {
+    const pct  = Math.round(e.acc * 100);
+    const tier = pct >= 75 ? 'strong' : pct >= 50 ? 'mid' : 'weak';
+    return `
+      <div class="cat-row">
+        <span class="cat-row-name">${e.cat}</span>
+        <div class="cat-row-bar-wrap">
+          <div class="cat-row-bar ${tier}" style="width:${pct}%"></div>
+        </div>
+        <span class="cat-row-pct ${tier}">${pct}%</span>
+      </div>`;
+  };
+
+  let html = '';
+
+  if(worst.length > 0){
+    html += `<div class="cat-breakdown-title">Needs Work</div>`;
+    html += worst.map(makeRow).join('');
+  }
+  if(best.length > 0){
+    html += `<div class="cat-breakdown-title" style="margin-top:10px;">Strongest</div>`;
+    html += best.map(makeRow).join('');
+  }
+
+  return `<div class="cat-breakdown">${html}${buildWeakestEras()}</div>`;
+}
+
 // ═══════════════════════════════════════════════════════════
 //  CATEGORY CONFIG
 // ═══════════════════════════════════════════════════════════
@@ -1316,6 +1897,85 @@ const EVENTS = [
   { id:226, label:"National Food Security Act",                sublabel:"right to subsidised food",        year:2013,  cat:"Constitutional" },
 ];
 
+
+// ═══════════════════════════════════════════════════════════
+//  COLLECTION RENDER - needs EVENTS and CAT
+// ═══════════════════════════════════════════════════════════
+function renderCollection(){
+  const seen   = getSeenIds();
+  const grid   = document.getElementById('collection-grid');
+  const count  = document.getElementById('collection-count');
+  const total  = EVENTS.length;
+  count.textContent = `${seen.size} / ${total} unlocked`;
+  grid.innerHTML = '';
+
+  // Sort events chronologically so the grid feels like a timeline
+  const sorted = [...EVENTS].sort((a,b)=>a.year - b.year);
+
+  sorted.forEach((ev, i) => {
+    const col = CAT[ev.cat] || { text:'#555', bg:'#eee', emoji:'📌' };
+    if(seen.has(ev.id)){
+      // Unlocked card
+      const card = document.createElement('div');
+      card.className = 'col-card';
+      card.innerHTML = `
+        <div class="col-card-stripe" style="background:${col.text}"></div>
+        <div class="col-card-emoji">${col.emoji}</div>
+        <div class="col-card-body">
+          <div class="col-card-cat" style="color:${col.text}">${ev.cat}</div>
+          <div class="col-card-label">${ev.label}</div>
+          <div class="col-card-year">${fy(ev.year)}</div>
+        </div>
+      `;
+      card.addEventListener('click', ()=>openCardDetail(ev));
+      grid.appendChild(card);
+    } else {
+      // Locked card — show category colour hint but no content
+      const card = document.createElement('div');
+      card.className = 'col-card-locked';
+      card.innerHTML = `
+        <div class="col-card-locked-stripe" style="background:${col.text}"></div>
+        <div class="col-card-locked-body">
+          <div class="col-card-locked-num">#${i+1}</div>
+        </div>
+      `;
+      grid.appendChild(card);
+    }
+  });
+}
+
+function openCardDetail(ev){
+  const col = CAT[ev.cat] || { text:'#555', bg:'#eee', emoji:'📌' };
+  document.getElementById('cd-stripe').style.background  = col.text;
+  document.getElementById('cd-emoji').textContent        = col.emoji;
+  document.getElementById('cd-cat').textContent          = ev.cat;
+  document.getElementById('cd-cat').style.color          = col.text;
+  document.getElementById('cd-label').textContent        = ev.label;
+  document.getElementById('cd-year').textContent         = fy(ev.year);
+  document.getElementById('cd-sublabel').textContent     = ev.sublabel;
+
+  // Detail body — use extended info if available, fallback to sublabel
+  const info = ev.info || null;
+  const body = document.getElementById('cd-body');
+  if(info){
+    body.innerHTML = `
+      ${info.what  ? `<div class="cd-fact"><div class="cd-fact-label">What happened</div>${info.what}</div>` : ''}
+      ${info.upsc  ? `<div class="cd-fact"><div class="cd-fact-label">Why UPSC tests this</div>${info.upsc}</div>` : ''}
+      ${info.remember ? `<div class="cd-fact"><div class="cd-fact-label">Key fact</div>${info.remember}</div>` : ''}
+    `;
+  } else {
+    body.innerHTML = `<div class="cd-fact" style="color:var(--muted);font-style:italic;">
+      Detailed notes coming soon. For now: ${ev.sublabel}.
+    </div>`;
+  }
+
+  document.getElementById('card-detail-overlay').classList.add('visible');
+}
+
+function closeCardDetail(){
+  document.getElementById('card-detail-overlay').classList.remove('visible');
+}
+
 // ═══════════════════════════════════════════════════════════
 //  CORRECT QUIPS - shown in toast when user gets one right
 // ═══════════════════════════════════════════════════════════
@@ -1523,6 +2183,7 @@ function startGame() {
   initAudio();
   const s=shuffle(EVENTS);
   timeline=[{ev:s[0],wrong:false}];
+  trackSeen(s[0]); // seed card is seen immediately
   currentCard=s[1];
   deck=s.slice(2);
   lives=3; score=0; locked=false; gameEnded=false;
@@ -1648,14 +2309,14 @@ function renderCurrentCard(){
   // Mirror makeTlCard structure exactly — same layout, year row hidden
   card.innerHTML=`
     <div class="card-stripe" style="background:${col.text}"></div>
-    <div class="tl-emoji" style="background:${col.bg};border-bottom-color:#e4e0d8;">${col.emoji}</div>
+    <div class="tl-emoji" style="background:${col.bg};border-bottom-color:var(--border);">${col.emoji}</div>
     <div class="tl-body">
       <div>
         <div style="font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:${col.text};margin-bottom:3px;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${currentCard.cat}</div>
-        <div style="font-family:'Lora',serif;font-size:11px;font-weight:600;line-height:1.35;color:#1c1a16;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;margin-bottom:2px;">${currentCard.label}</div>
-        <div style="font-size:9px;font-style:italic;color:#8a8478;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${currentCard.sublabel}</div>
+        <div style="font-family:'Lora',serif;font-size:11px;font-weight:600;line-height:1.35;color:var(--text);overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;margin-bottom:2px;">${currentCard.label}</div>
+        <div style="font-size:9px;font-style:italic;color:var(--muted);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${currentCard.sublabel}</div>
       </div>
-      <div style="font-size:13px;font-weight:700;font-family:'Lora',serif;border-top:1px solid #e4e0d8;padding-top:5px;color:transparent;margin-top:5px;flex-shrink:0;user-select:none;">?</div>
+      <div style="font-size:13px;font-weight:700;font-family:'Lora',serif;border-top:1px solid var(--border);padding-top:5px;color:transparent;margin-top:5px;flex-shrink:0;user-select:none;">?</div>
     </div>
   `;
 
@@ -1696,17 +2357,17 @@ function makeTlCard(item, extraClass=''){
   card.className=cls;
 
   const emojiBg = item.wrong ? '#fdf0ee' : col.bg;
-  const divColor = item.wrong ? '#f5c6c6' : '#e4e0d8';
+  const divColor = item.wrong ? 'var(--danger-light)' : 'var(--border)';
   card.innerHTML=`
     <div class="card-stripe" style="background:${col.text}"></div>
     <div class="tl-emoji" style="background:${emojiBg};border-bottom-color:${divColor};">${col.emoji}</div>
     <div class="tl-body">
       <div>
         <div style="font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:${col.text};margin-bottom:3px;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.ev.cat}</div>
-        <div style="font-family:'Lora',serif;font-size:11px;font-weight:600;line-height:1.35;color:#1c1a16;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;margin-bottom:2px;">${item.ev.label}</div>
-        <div style="font-size:9px;font-style:italic;color:#8a8478;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${item.ev.sublabel}</div>
+        <div style="font-family:'Lora',serif;font-size:11px;font-weight:600;line-height:1.35;color:var(--text);overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;margin-bottom:2px;">${item.ev.label}</div>
+        <div style="font-size:9px;font-style:italic;color:var(--muted);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${item.ev.sublabel}</div>
       </div>
-      <div style="font-size:13px;font-weight:700;font-family:'Lora',serif;border-top:1px solid ${divColor};padding-top:5px;color:#1c1a16;margin-top:5px;flex-shrink:0;">${fy(item.ev.year)}</div>
+      <div style="font-size:13px;font-weight:700;font-family:'Lora',serif;border-top:1px solid ${divColor};padding-top:5px;color:var(--text);margin-top:5px;flex-shrink:0;">${fy(item.ev.year)}</div>
     </div>
   `;
   wrap.appendChild(tick);
@@ -1891,7 +2552,8 @@ function handleDrop(dropIdx){
     (!before||before.ev.year<=currentCard.year)&&
     (!after ||after.ev.year >=currentCard.year);
   const placed=currentCard;
-  currentCard=null; // clear immediately, card container already wiped by pointerup
+  currentCard=null;
+  trackSeen(placed); // mark card as seen regardless of correct/wrong
 
   if(correct){
     streak++;
@@ -1901,6 +2563,10 @@ function handleDrop(dropIdx){
     score += points;
     renderScore();
     renderStreak();
+    // Score pop animation
+    const scoreEl = document.getElementById('score-display');
+    if(scoreEl){ scoreEl.style.animation='none'; scoreEl.offsetHeight; scoreEl.style.animation='scorePop 0.4s ease'; }
+    trackPlacement(placed.cat, true, placed);
     playCorrectSound();
     haptic([40]);
     timeline.push({ev:placed,wrong:false});
@@ -1921,6 +2587,10 @@ function handleDrop(dropIdx){
     lives--;
     renderLives();
     renderStreak();
+    // Lives shudder animation
+    const livesEl = document.getElementById('lives-display');
+    if(livesEl){ livesEl.style.animation='none'; livesEl.offsetHeight; livesEl.style.animation='livesShudder 0.4s ease'; }
+    trackPlacement(placed.cat, false, placed);
     playWrongSound();
     haptic([60, 40, 60]);
     timeline.push({ev:placed,wrong:true});
@@ -1977,16 +2647,23 @@ function prepareGameOverScreen(){
   const t=score>=40?3:score>=20?2:score>=8?1:0;
   document.getElementById('go-emoji').textContent=tiers[t].e;
   document.getElementById('go-title').textContent=tiers[t].m;
-  document.getElementById('go-sub').innerHTML=
-    `You scored <strong>${score} points</strong> on the <strong>UnacademyX</strong> Chronology timeline.`;
   const correct=timeline.filter(i=>!i.wrong).length - 1;
   const wrong=timeline.filter(i=>i.wrong).length;
 
-  // Clean professional stats — no emojis, no wrong placements
+  // High score via localStorage
+  const prevHigh = parseInt(localStorage.getItem('chronology-high') || '0');
+  const newHigh  = Math.max(prevHigh, score);
+  if(score > prevHigh) localStorage.setItem('chronology-high', String(score));
+
+  // Stats inside the single result card
   document.getElementById('go-stats').innerHTML=`
     <div class="stat-row">
-      <span class="stat-label">Total Score</span>
-      <span class="stat-value">${score} pts</span>
+      <span class="stat-label">Score</span>
+      <span class="stat-value">${score} pts${score > prevHigh && prevHigh > 0 ? ' 🏆' : ''}</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">High Score</span>
+      <span class="stat-value">${newHigh} pts</span>
     </div>
     <div class="stat-row">
       <span class="stat-label">Correct Placements</span>
@@ -1998,24 +2675,21 @@ function prepareGameOverScreen(){
     </div>
   `;
 
-  // Show Unacademy Iconic CTA only if player got answers wrong
-  document.getElementById('iconic-cta').style.display = wrong > 0 ? 'block' : 'none';
+  // Show Unacademy Iconic CTA — personalised with weakest category if available
+  const weakest = getWeakestCategory();
+  const ctaEl = document.getElementById('iconic-cta');
+  const ctaLink = ctaEl.querySelector('a');
+  if(wrong > 0){
+    ctaEl.style.display = 'block';
+    ctaLink.textContent = weakest
+      ? `Strengthen ${weakest} with Unacademy Iconic`
+      : 'Fix those wrong answers with Unacademy Iconic';
+  } else {
+    ctaEl.style.display = 'none';
+  }
 
-  // Populate share card
-  document.getElementById('sc-score').innerHTML = `${score} <span>pts</span>`;
-  document.getElementById('sc-meta').textContent =
-    `🔥 Best streak: ${maxStreak}  ·  ✅ ${correct} correct  ·  ❌ ${wrong} wrong`;
-
-  // Build grid — sorted timeline, skip the seed card
-  const sorted = [...timeline].sort((a,b)=>a.ev.year - b.ev.year);
-  const grid = document.getElementById('sc-grid');
-  grid.innerHTML = '';
-  sorted.forEach((item, i) => {
-    if(i === 0) return;
-    const sq = document.createElement('div');
-    sq.className = 'share-sq ' + (item.wrong ? 'wrong' : 'correct');
-    grid.appendChild(sq);
-  });
+  // Category breakdown — shows history across all sessions
+  document.getElementById('sc-cats').innerHTML = buildCategoryBreakdown();
 }
 
 // ── SHARE SCORE ──
