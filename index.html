@@ -922,12 +922,6 @@
     100% { opacity:1; transform:translate(-50%,-50%) scale(1); }
   }
 
-  /* Streak broken message */
-  .streak-broken {
-    font-size: 12px;
-    color: rgba(255,255,255,0.9);
-    font-weight: 600;
-  }
   /* ── SHARE CARD ── */
   .share-card {
     background: var(--surface);
@@ -2730,8 +2724,7 @@ function handleDrop(dropIdx){
     renderTimeline(pi,'wrong-flash');
     // Add streak-broken note to quip if streak was going
     const wrongQuip = getRandFrom(WRONG_QUIPS);
-    const streakNote = hadStreak>=3 ? `<br><span class="streak-broken">💔 ${hadStreak}-streak broken. Back to 1x.</span>` : '';
-    showQuip(wrongQuip + streakNote, fy(placed.year), 'wrong');
+    showQuip(wrongQuip, fy(placed.year), 'wrong');
     scrollToCard(pi);
     setTimeout(()=>{
       if(lives<=0){ triggerGameOver(); }
