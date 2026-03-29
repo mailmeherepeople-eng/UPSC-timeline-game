@@ -293,7 +293,7 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    height: 220px;
+    height: 225px;
     background: var(--bg);
     box-sizing: border-box;
     gap: 6px;
@@ -391,8 +391,8 @@
    * --dz-w: width of each drop zone (overlaps into adjacent cards)
    */
   :root {
-    --tl-card-w: 150px;
-    --tl-card-h: 177px;
+    --tl-card-w: 155px;
+    --tl-card-h: 180px;
     --tl-emoji-h: 52px;
     --tl-tick-h: 18px;
     --tl-line-top: 18px;
@@ -816,10 +816,31 @@
     z-index: 299;
     opacity: 0;
     transition: opacity 0.15s ease;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
   }
   #fire-video.visible {
-    opacity: 0.82;
-    filter: blur(3px);
+    opacity: 0.88;
+    filter: contrast(1.3) saturate(1.4);
+  }
+
+  /* ── LIFE LOST - DANGER VIDEO ── */
+  #danger-video {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 299;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+  #danger-video.visible {
+    opacity: 0.75;
+    filter: contrast(1.2) saturate(1.5) hue-rotate(0deg);
   }
 
   /* Milestone text label */
@@ -1485,6 +1506,11 @@
 <video id="fire-video" muted playsinline preload="auto">
   <source src="videos/flamefire.webm" type="video/webm">
 </video>
+
+<!-- WEBM DANGER - life lost effect (only on last life) -->
+<video id="danger-video" muted playsinline preload="auto">
+  <source src="videos/dangerpulse.webm" type="video/webm">
+</video>
 <div class="flame-label" id="flame-label">
   <span class="flame-label-text" id="flame-label-text"></span>
   <span class="flame-label-sub" id="flame-label-sub"></span>
@@ -2135,6 +2161,22 @@ const MILESTONES = {
 };
 
 let _fireTimeout = null;
+let _dangerTimeout = null;
+
+function triggerDangerBurst(){
+  const vid = document.getElementById('danger-video');
+  vid.currentTime = 0;
+  vid.classList.add('visible');
+  const p = vid.play();
+  if(p !== undefined) p.catch(()=>{});
+
+  if(_dangerTimeout) clearTimeout(_dangerTimeout);
+  _dangerTimeout = setTimeout(()=>{
+    vid.classList.remove('visible');
+    vid.pause();
+    _dangerTimeout = null;
+  }, 1800);
+}
 
 function triggerMilestoneBurst(streakVal){
   const m = MILESTONES[streakVal];
@@ -2145,8 +2187,11 @@ function triggerMilestoneBurst(streakVal){
   document.getElementById('flame-label-text').textContent = m.text;
   document.getElementById('flame-label-sub').textContent  = m.sub;
   label.classList.remove('visible');
-  label.offsetHeight; // reflow to restart animation
+  label.offsetHeight;
   label.classList.add('visible');
+
+  // Play milestone sound
+  playMilestoneSound();
 
   // Play video: reset to start then show + play
   const vid = document.getElementById('fire-video');
@@ -2448,7 +2493,7 @@ function scrollToCard(idx){
 //  SOUND - AudioContext with fetch decode (reliable on GitHub Pages)
 // ═══════════════════════════════════════════════════════════
 let _ac = null;
-const _sfxBuffers = { correct: null, wrong: [] };
+const _sfxBuffers = { correct: null, wrong: [], milestone: null, lifeLost: null };
 let _audioReady = false;
 
 function getAC(){
@@ -2471,12 +2516,13 @@ async function loadSound(url){
 async function initAudio(){
   if(_audioReady) return;
   _audioReady = true;
-  // Resume context (required on mobile)
   getAC().resume();
-  _sfxBuffers.correct = await loadSound('sounds/correct.mp3');
+  _sfxBuffers.correct   = await loadSound('sounds/correct.mp3');
+  _sfxBuffers.milestone = await loadSound('sounds/milestone.mp3');
+  _sfxBuffers.lifeLost  = await loadSound('sounds/life-lost.mp3');
   const wrongLoads = await Promise.all([1,2,3,4,5,6].map(n => loadSound(`sounds/wrong${n}.mp3`)));
   _sfxBuffers.wrong = wrongLoads.filter(b => b !== null);
-  console.log(`Chronology audio ready. Correct: ${!!_sfxBuffers.correct}, Wrong variants: ${_sfxBuffers.wrong.length}`);
+  console.log(`Chronology audio ready. Correct: ${!!_sfxBuffers.correct}, Wrong variants: ${_sfxBuffers.wrong.length}, Milestone: ${!!_sfxBuffers.milestone}, LifeLost: ${!!_sfxBuffers.lifeLost}`);
 }
 
 // Play a loaded buffer
@@ -2502,6 +2548,14 @@ function playWrongSound(){
   if(!_sfxBuffers.wrong.length) return;
   const idx = Math.floor(Math.random() * _sfxBuffers.wrong.length);
   playBuffer(_sfxBuffers.wrong[idx]);
+}
+
+function playMilestoneSound(){
+  playBuffer(_sfxBuffers.milestone);
+}
+
+function playLifeLostSound(){
+  playBuffer(_sfxBuffers.lifeLost);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -2590,6 +2644,14 @@ function handleDrop(dropIdx){
     trackPlacement(placed.cat, false, placed);
     playWrongSound();
     haptic([60, 40, 60]);
+
+    // On last life: play danger sound after wrong sound finishes (~800ms), then trigger danger video
+    if(lives === 1){
+      setTimeout(()=>{
+        playLifeLostSound();
+        triggerDangerBurst();
+      }, 800);
+    }
     timeline.push({ev:placed,wrong:true});
     const ns=[...timeline].sort((a,b)=>a.ev.year-b.ev.year);
     const pi=ns.findIndex(i=>i.ev.id===placed.id);
