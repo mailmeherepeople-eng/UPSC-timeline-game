@@ -6,7 +6,7 @@
     "cat": "Ancient India",
     "what": "The Indus Valley Civilisation (IVC), one of the world's earliest urban civilisations, began around 3300 BCE in the river valleys of northwest India and Pakistan.",
     "upsc": "Tests the extent of the civilisation (over 1,000 sites discovered), town planning, the undeciphered script, and the debate about its decline around 1900 BCE.",
-    "remember": "The Indus script remains undeciphered. Over 4000 inscribed objects exist but no bilingual text has been found to crack the code. It remains a great unsolved mystery."
+    "remember": "The script is history's greatest unsolved mystery. We have over 4000 objects with writing, but without a bilingual text like the Rosetta Stone, it's a giant 4,000-year-old encrypted file."
   },
   "2": {
     "label": "Harappan city of Mohenjo-daro",
@@ -51,7 +51,7 @@
     "cat": "Ancient India",
     "what": "Siddhartha Gautama attained enlightenment at Bodh Gaya (c. 528 BCE) and taught the Four Noble Truths and Eightfold Path, founding Buddhism.",
     "upsc": "Tests Four Noble Truths, Eightfold Path, Hinayana vs. Mahayana sects, Buddhist councils, and Ashoka's role in spreading the faith.",
-    "remember": "The Buddha's first sermon at Sarnath is called 'Dhammacakkappavattana Sutta' or 'Turning of the Wheel of Dharma'."
+    "remember": "The Buddha's first sermon at Sarnath is known as 'Turning of the Wheel of Dharma' (Dhammacakkappavattana Sutta)."
   },
   "7": {
     "label": "Jainism",
@@ -78,7 +78,7 @@
     "cat": "Ancient India",
     "what": "Alexander the Great defeated King Porus at the Battle of Hydaspes (Jhelum) in 326 BCE. His soldiers mutinied at the Beas river, refusing to go further east.",
     "upsc": "Tests the impact: introduction of Hellenistic culture, trade routes, and the power vacuum that allowed Chandragupta Maurya to rise.",
-    "remember": "Alexander was so impressed by Porus's dignity in defeat that he restored his kingdom. He reportedly wept when his soldiers forced a retreat."
+    "remember": "Alexander was so impressed by Porus's bravery that he actually gave him his kingdom back and made him an ally."
   },
   "10": {
     "label": "Maurya Empire",
@@ -105,7 +105,7 @@
     "cat": "Ancient India",
     "what": "Ashoka fought the Kalinga War around 261 BCE. His own inscriptions describe the massive suffering it caused. Horrified, he embraced Dhamma and replaced Bherighosha (drums of war) with Dhammaghosha (drums of righteousness).",
     "upsc": "Tests Ashoka's transformation, the concept of Dhamma, his Rock Edicts and Pillar Edicts, and his role in spreading Buddhism by sending missions to Sri Lanka and Southeast Asia.",
-    "remember": "Ashoka's lion capital is India's national emblem, and the 24-spoke Dharmachakra from his edicts appears on the national flag. His edicts are the oldest deciphered inscriptions in India."
+    "remember": "The 24-spoke 'Ashoka Chakra' on our national flag comes from his edicts, and the Lion Capital is our national emblem."
   },
   "13": {
     "label": "Maurya Empire",
@@ -149,8 +149,8 @@
     "year": 427,
     "cat": "Ancient India",
     "what": "Nalanda University was founded (c. 427 CE) during the Gupta era. It attracted 10,000 students from across Asia before its destruction in 1193 CE.",
-    "upsc": "Tests subjects (philosophy, medicine, logic), scholars like Nagarjuna, and its destruction by Bakhtiyar Khilji.",
-    "remember": "Nalanda's library, 'Dharmaganja', was so vast it reportedly took three months to burn after the university was destroyed."
+    "upsc": "Tests Nalanda as a centre of Buddhist learning, the subjects taught there, its links with foreign pilgrims like Xuanzang, and its destruction under Bakhtiyar Khalji.",
+    "remember": "Nalanda became famous across Asia, but exact numbers like '10,000 students' and stories like the library burning for months are better treated as traditional estimates, not hard exam facts."
   },
   "18": {
     "label": "Harshavardhana's reign",
@@ -175,9 +175,9 @@
     "sublabel": "occurred under Narasimhavarman I",
     "year": 630,
     "cat": "Ancient India",
-    "what": "The Pallava dynasty peaked under Narasimhavarman I (c. 630 CE), building the Mahabalipuram shore temples and developing Dravidian architecture.",
+    "what": "The Pallavas rose to major prominence under rulers like Narasimhavarman I in the 7th century CE and played a big role in the development of early Dravidian temple architecture. The Shore Temple at Mahabalipuram is generally associated with Narasimhavarman II (Rajasimha), not Narasimhavarman I.",
     "upsc": "Tests Pallava temples (Kailasanathar), the 'rathas' at Mahabalipuram, and their role in spreading Indian culture to SE Asia.",
-    "remember": "The Shore Temple at Mahabalipuram is one of the oldest stone temples in South India; ruins offshore were recently revealed by the 2004 tsunami."
+    "remember": "Easy way to avoid confusion: Narasimhavarman I is famous for defeating the Chalukyas, while the Shore Temple is linked to Narasimhavarman II."
   },
   "21": {
     "label": "Chola dynasty",
@@ -213,7 +213,7 @@
     "cat": "Medieval India",
     "what": "Prithviraj Chauhan (r. 1177–1192) was the last Hindu emperor of Delhi. His battles with Muhammad Ghori are pivotal in Indian history.",
     "upsc": "Tests the two Battles of Tarain (1191, 1192) and the consequences of his defeat: the end of Hindu supremacy in the north.",
-    "remember": "Prithviraj's romance with Sanyogita and his court poet Chand Bardai's 'Prithviraj Raso' are legendary staples of Indian culture."
+    "remember": "Stories about Prithviraj and Sanyogita, or the dramatic ending told in Prithviraj Raso, belong more to later literary tradition than to hard-source exam history."
   },
   "25": {
     "label": "First Battle of Tarain",
@@ -222,7 +222,7 @@
     "cat": "Medieval India",
     "what": "At the First Battle of Tarain (1191), Prithviraj Chauhan defeated Muhammad Ghori. Ghori was severely wounded and fled the field, returning a year later with a more mobile army.",
     "upsc": "Tests the sequence: 1191 (Prithviraj wins), 1192 (Ghori wins). The pair of battles marks the end of Rajput dominance in northern India. UPSC tests which battle happened first.",
-    "remember": "Ghori was not captured in 1191. He fled after being wounded, went home, rebuilt his strategy, and came back the next year with lighter, faster cavalry. Prithviraj's failure to pursue cost him everything."
+    "remember": "Ghori was NOT captured in 1191. He fled while bleeding out. The story about Prithviraj capturing and releasing him is a myth, Ghori just got away."
   },
   "26": {
     "label": "Second Battle of Tarain",
@@ -303,7 +303,7 @@
     "cat": "Medieval India",
     "what": "Timur (Tamerlane) invaded India in 1398, sacking Delhi. He decimated the Tughlaq power and left a vacuum that led to regional kingdoms.",
     "upsc": "Tests the devastation of Delhi and Timur's justification of jihad against 'Hindu-tolerant' Sultans. The city took a century to recover.",
-    "remember": "After Timur left, Delhi was so devastated that for two months no one moved in or out. Famine and plague followed. The once-magnificent city was reduced to a village. The Tughlaq dynasty never recovered."
+    "remember": "Delhi was so ruined that for two months 'not a bird moved its wing' in the city. Timur looted so much that he abolished taxes in his own capital (Samarkand) for years."
   },
   "35": {
     "label": "Bhakti movement",
@@ -319,9 +319,9 @@
     "sublabel": "Babur defeated Ibrahim Lodi",
     "year": 1526,
     "cat": "Medieval India",
-    "what": "At the First Battle of Panipat (1526), Babur defeated Ibrahim Lodi using artillery (first use of gunpowder in India) and 'Tulughma' tactics.",
+    "what": "At the First Battle of Panipat (1526), Babur defeated Ibrahim Lodi using field artillery, matchlocks, carts, and Tulughma tactics. The battle opened the way for Mughal power in north India.",
     "upsc": "Tests the three Battles of Panipat: 1526 (Babur vs Lodi), 1556 (Akbar vs Hemu), 1761 (Marathas vs Abdali). Panipat is called the graveyard of empires because these three battles changed India's history.",
-    "remember": "Babur's 12,000 men beat Lodi's 100,000 because Lodi's elephants panicked from the unknown sound of cannon fire."
+    "remember": "Babur only had 12,000 men against Lodi's 100,000. He won because his cannons terrified Lodi's elephants, making them trample their own soldiers."
   },
   "37": {
     "label": "Mughal Empire",
@@ -348,7 +348,7 @@
     "cat": "Medieval India",
     "what": "At the Battle of Chausa (1539), Sher Shah Suri defeated Humayun, forcing him into exile and establishing the Sur Empire.",
     "upsc": "Tests Sher Shah's administrative reforms: Grand Trunk Road, postal system, and the standardised silver 'Rupee'.",
-    "remember": "Humayun escaped the battle by crossing the Ganges on an inflated water skin; he later made the man who saved him 'King for a Day'."
+    "remember": "Humayun almost drowned in the Ganges while escaping! He was saved by a humble water-carrier whom he later made 'King for a Day'."
   },
   "40": {
     "label": "Sher Shah Suri",
@@ -373,9 +373,9 @@
     "sublabel": "proclaimed",
     "year": 1582,
     "cat": "Medieval India",
-    "what": "Akbar proclaimed 'Din-i-Ilahi' (1582), a syncretic faith blending Islam, Hinduism, and other religions. It had very few followers.",
+    "what": "Akbar introduced Din-i-Ilahi in 1582 as a small ethical-spiritual order linked to his wider policy of Sulh-i-Kul, not as a mass religion.",
     "upsc": "Tests 'Sulh-i-Kul' (universal peace), abolition of Jizya, and the 'Ibadat Khana' debates between religious scholars.",
-    "remember": "Only 18 people formally joined Din-i-Ilahi. It died with Akbar, but his tolerance policy changed India's social fabric."
+    "remember": "Din-i-Ilahi had very few adherents and did not outlive Akbar, but it shows how far he was willing to experiment intellectually."
   },
   "43": {
     "label": "Battle of Haldighati",
@@ -400,9 +400,9 @@
     "sublabel": "established at Surat",
     "year": 1608,
     "cat": "Medieval India",
-    "what": "The East India Company (EIC) established its first trading post at Surat (1608) after Captain William Hawkins met Emperor Jahangir.",
-    "upsc": "Tests the sequence of EIC trading posts: Surat (1608), Madras (1639), Bombay (1661), Calcutta (1690). Also tests how Thomas Roe obtained a formal firman from Jahangir in 1615.",
-    "remember": "Hawkins spoke Turkish and lived at the Mughal court for two years, but Portuguese influence initially blocked a formal trade treaty."
+    "what": "The East India Company first reached Surat in 1608, but its stable factory there followed after later permissions and military successes against the Portuguese. William Hawkins met Jahangir in this early phase, and Thomas Roe later secured more formal Mughal privileges.",
+    "upsc": "Tests the sequence of early EIC footholds: Surat, Madras, Bombay, and Calcutta. Be careful not to confuse the 1608 arrival with the later establishment of a regular factory.",
+    "remember": "Hawkins opened doors, but the Company's foothold became firmer only after diplomacy, naval power, and time did their work."
   },
   "46": {
     "label": "Shivaji",
@@ -411,7 +411,7 @@
     "cat": "Medieval India",
     "what": "Shivaji Bhonsle (1630–1680) founded the Maratha Empire, using 'Ganimi Kava' (guerrilla warfare) against the Mughals and Bijapur.",
     "upsc": "Tests his administrative innovations (Ashta Pradhan council), the navy he built, his escape from Agra after being imprisoned by Aurangzeb, and his coronation as Chhatrapati in 1674.",
-    "remember": "Shivaji escaped Aurangzeb's prison in Agra by hiding in giant fruit baskets, a daring feat that humiliated the Mughal emperor."
+    "remember": "Shivaji escaped from Agra by hiding in giant fruit baskets that were being sent out as gifts to the poor. Aurangzeb was humiliated."
   },
   "47": {
     "label": "Shivaji crowned Chhatrapati",
@@ -437,8 +437,8 @@
     "year": 1679,
     "cat": "Medieval India",
     "what": "Aurangzeb reimposed the Jizya tax (1679), reversing Akbar's policy. This alienation led to uprisings by Rajputs, Marathas, and Sikhs.",
-    "upsc": "Tests the Deccan wars (the 'Deccan Ulcer') that drained the Mughal treasury and the execution of Guru Tegh Bahadur.",
-    "remember": "When Hindus protested the Jizya in Delhi, Aurangzeb reportedly ordered his elephants to trample the crowds blocking the road."
+    "upsc": "Tests Jizya, the Deccan campaigns, relations with Rajputs, Marathas, and Sikhs, and the wider strains on the Mughal Empire.",
+    "remember": "For UPSC, the smart move is to treat Jizya as politically significant without turning it into a one-line explanation for every later revolt."
   },
   "50": {
     "label": "Battle of Plassey",
@@ -456,7 +456,7 @@
     "cat": "Medieval India",
     "what": "The Third Battle of Panipat (1761) saw Ahmad Shah Abdali defeat the Maratha Confederacy, decimating their power in Northern India.",
     "upsc": "Tests the reasons for defeat (betrayal by allies, lack of food) and how this vacuum allowed the British to rise.",
-    "remember": "The Maratha defeat was so severe that a coded message to the Peshwa said: 'Two pearls have been dissolved... and of the gold and silver, the total can not even be counted.'"
+    "remember": "The Maratha defeat was so bad that a coded message to the Peshwa said: 'Two pearls have been dissolved... and of the gold and silver, the total can not even be counted'."
   },
   "52": {
     "label": "Nadir Shah's invasion of Delhi",
@@ -699,7 +699,7 @@
     "cat": "Colonial India",
     "what": "The Jallianwala Bagh Massacre (13 April 1919) saw General Dyer order firing on a peaceful crowd in Amritsar, killing hundreds.",
     "upsc": "Tests the date (Baisakhi), Tagore's return of his knighthood, and the Hunter Commission's failure to punish Dyer.",
-    "remember": "Dyer blocked the only exit before firing. He faced no criminal charges in Britain and was even praised by the House of Lords."
+    "remember": "Dyer blocked the only exit before firing. He faced zero charges in Britain and was even praised by the House of Lords."
   },
   "79": {
     "label": "Khilafat Movement",
@@ -753,7 +753,7 @@
     "cat": "Colonial India",
     "what": "Gandhi's Dandi March (1930) was a 241-mile walk to the sea to make salt, defying the British salt tax and launching the Civil Disobedience Movement.",
     "upsc": "Tests the choice of salt as a symbol of common struggle and the mass arrests of 60,000 protesters that followed.",
-    "remember": "Salt was a brilliant choice: it was a necessity for everyone, taxed unfairly, and easy for the common person to make illegally."
+    "remember": "It triggered a wave of civil disobedience that saw 60,000 people arrested across India."
   },
   "85": {
     "label": "First Round Table Conference",
@@ -788,8 +788,8 @@
     "year": 1935,
     "cat": "Colonial India",
     "what": "The Government of India Act 1935 was the longest Act ever passed by the British Parliament, introducing Provincial Autonomy and planning a federation that was never implemented.",
-    "upsc": "The main blueprint for India's Constitution. About 75% of the Constitution's structure came from this Act. Tests what was new: Federal Court, RBI, and 451 clauses across 15 schedules.",
-    "remember": "Nehru called it a charter of slavery. Yet the same document became the skeleton of India's Constitution. Congress accepted provincial autonomy but rejected the federation provisions."
+    "upsc": "A major blueprint for later constitutional arrangements in India. Tests provincial autonomy, the Federal Court, the RBI, and the federal scheme that remained unimplemented.",
+    "remember": "Indian leaders criticised it heavily, but many of its administrative ideas quietly lived on into independent India."
   },
   "89": {
     "label": "Congress wins provincial elections",
@@ -816,7 +816,7 @@
     "cat": "Colonial India",
     "what": "Gandhi launched the Quit India Movement on 8 August 1942 with the call Do or Die. Top Congress leaders were arrested within hours, after which protests and underground activity spread across many parts of India.",
     "upsc": "Tests its spontaneous, leaderless nature, the August Kranti, role of Aruna Asaf Ali (hoisted flag at Gowalia Tank), and underground leaders like Jayaprakash Narayan.",
-    "remember": "Gandhi was arrested before he could deliver his main speech. The movement continued for nearly three years without central leadership, making it the most spontaneous uprising since 1857."
+    "remember": "Gandhi was arrested before he could even give his planned speech. The movement continued leaderless for three years."
   },
   "92": {
     "label": "INA trials at Red Fort",
@@ -868,9 +868,9 @@
     "sublabel": "in Southeast Asia",
     "year": 1943,
     "cat": "Colonial India",
-    "what": "Subhas Chandra Bose formed the Indian National Army (INA) in Singapore in 1943 with Japanese support, aiming to liberate India from the east. He established the Azad Hind government in exile.",
-    "upsc": "Tests the slogans Dilli Chalo and Jai Hind, the Rani of Jhansi Regiment (all-women combat unit), the Azad Hind government, the Red Fort trials, and Bose's disputed death in 1945.",
-    "remember": "Bose's escape from house arrest in Calcutta is legendary. Disguised as a Pathan insurance agent, he travelled through Peshawar, Kabul, and Berlin before reaching Japan. The Rani of Jhansi Regiment was the first all-women combat unit in Asia."
+    "what": "Subhas Chandra Bose reorganised and revitalised the Indian National Army in Southeast Asia in 1943 with Japanese backing, and also proclaimed the Azad Hind government.",
+    "upsc": "Tests the difference between the INA's initial formation under Mohan Singh in 1942 and Bose's later leadership in 1943, along with the slogans Dilli Chalo and Jai Hind, the Rani of Jhansi Regiment, and the Red Fort trials.",
+    "remember": "Bose did not create the INA from zero. What he did was give it new energy, clearer direction, and enormous symbolic power."
   },
   "98": {
     "label": "Integration of Hyderabad (Operation Polo)",
@@ -949,9 +949,9 @@
     "sublabel": "co-founded by Nehru",
     "year": 1961,
     "cat": "Post-Independence",
-    "what": "The Non-Aligned Movement (NAM) was co-founded by Nehru, Nasser, and Tito (1961) to avoid joining either US or Soviet Cold War blocs.",
+    "what": "The Non-Aligned Movement took institutional shape at Belgrade in 1961 under leaders including Nehru, Nasser, Tito, Sukarno, and Nkrumah, as newly independent states tried to avoid being locked into either Cold War bloc.",
     "upsc": "Tests the five 'Panchsheel' principles (1954) and India's leadership role in the decolonised 'Third World'.",
-    "remember": "Non-alignment meant 'strategic autonomy', not neutrality; India remained active in global affairs while refusing to sign military pacts."
+    "remember": "Non-alignment never meant sitting quietly on the fence. It meant keeping your freedom to choose."
   },
   "107": {
     "label": "Sino-Indian War",
@@ -960,7 +960,7 @@
     "cat": "Post-Independence",
     "what": "The India-China War (1962) saw China invade across the McMahon Line and Aksai Chin. India suffered a humiliating defeat.",
     "upsc": "Tests the border dispute, the failure of the 'Forward Policy', and the impact on Nehru's health and foreign policy legacy.",
-    "remember": "The Chinese called a unilateral ceasefire and withdrew to pre-war positions after winning decisively. They had made their point. Nehru's Hindi-Chini Bhai-Bhai (Indians and Chinese are brothers) slogan became an object of ridicule."
+    "remember": "The shock of this betrayal by China is often said to have contributed to Nehru's rapid decline in health shortly after."
   },
   "108": {
     "label": "Indo-Pak War",
@@ -1032,7 +1032,7 @@
     "cat": "Post-Independence",
     "what": "The Emergency (1975–77) was declared by Indira Gandhi, suspending fundamental rights and censoring the press for 21 months.",
     "upsc": "Tests the 44th Amendment that strengthened safeguards against Emergency abuse, the JP Movement that preceded it, the 1977 election defeat, and the Emergency as a turning point in Indian democracy.",
-    "remember": "Opposition leaders were arrested at midnight before the announcement; the 'light of democracy' was famously said to have gone out."
+    "remember": "Opponents were arrested at midnight before the announcement. It only ended when Indira called for elections in 1977 and lost."
   },
   "116": {
     "label": "Operation Blue Star",
@@ -1201,8 +1201,8 @@
     "sublabel": "detected in Kerala",
     "year": 2020,
     "cat": "Post-Independence",
-    "what": "India's COVID-19 Lockdown (2020) was one of the world's strictest. India later launched the world's largest vaccination drive.",
-    "upsc": "Tests the use of the Disaster Management Act 2005 and 'Vaccine Maitri' (exporting vaccines to other nations).",
+    "what": "India's first confirmed COVID-19 case was reported in Kerala on 30 January 2020. Later that year India imposed one of the world's strictest lockdowns and eventually launched one of the world's largest vaccination drives.",
+    "upsc": "Tests the Disaster Management Act, the public-health response, the lockdown, and Vaccine Maitri.",
     "remember": "India gave COVID vaccines to over 90 countries through the Vaccine Maitri programme before the Delta wave forced India to suspend exports. The programme was a major soft power success until domestic needs overwhelmed supply."
   },
   "135": {
@@ -1266,7 +1266,7 @@
     "cat": "World History",
     "what": "Napoleon Bonaparte crowned himself Emperor (1804). He conquered much of Europe but was finally defeated at Waterloo (1815).",
     "upsc": "Tests the 'Napoleonic Code' (civil law foundation) and his role in spreading nationalism across Europe.",
-    "remember": "The Napoleonic Code established equal legal status for all citizens, secular law, and property rights. It forms the basis of legal systems in France, Quebec, Louisiana, and many former French colonies including parts of Africa."
+    "remember": "Napoleon took the crown from the Pope's hands and put it on his own head to show he answered to no one."
   },
   "142": {
     "label": "Battle of Waterloo: Napoleon's final defeat",
@@ -1338,7 +1338,7 @@
     "cat": "World History",
     "what": "The Treaty of Versailles (1919) ended WWI but imposed harsh reparations and 'War Guilt' on Germany, fueling the rise of Hitler.",
     "upsc": "Tests the 'League of Nations' and Article 231 (War Guilt Clause). Reparations were set at 132 billion gold marks.",
-    "remember": "The economist John Maynard Keynes attended the Versailles conference and resigned in protest, writing The Economic Consequences of the Peace predicting the reparations would destroy Germany's economy and cause another war. He was right."
+    "remember": "The economist J.M. Keynes resigned in protest, warning that this 'Carthaginian Peace' would destroy the European economy. He was right."
   },
   "150": {
     "label": "League of Nations",
@@ -1437,7 +1437,7 @@
     "cat": "World History",
     "what": "The Cuban Missile Crisis (1962) was a 13-day standoff between the US and USSR over Soviet nukes in Cuba. It nearly led to nuclear war.",
     "upsc": "Tests the resolution (hotline established) and the shift toward 'Détente' (easing of tensions) between the superpowers.",
-    "remember": "One Soviet officer, Vasili Arkhipov, prevented a nuclear launch by refusing to authorize a torpedo during a US depth charge."
+    "remember": "One Soviet officer, Vasili Arkhipov, saved the world by refusing to authorize a nuclear torpedo launch during the crisis."
   },
   "161": {
     "label": "Moon landing (Apollo 11)",
@@ -1464,7 +1464,7 @@
     "cat": "World History",
     "what": "The Berlin Wall fell (1989), leading to German reunification (1990) and the collapse of communist regimes across Eastern Europe.",
     "upsc": "Tests the Cold War context, German reunification, and how the fall of the Wall triggered the collapse of communist regimes across Eastern Europe and ultimately the Soviet Union in 1991.",
-    "remember": "The Wall fell due to a bureaucratic mistake; an official accidentally announced that border crossings were open 'immediately'."
+    "remember": "The wall actually fell because of a mistake; a government official accidentally announced that border crossings were open 'immediately,' and the crowds just took over."
   },
   "164": {
     "label": "Soviet Union",
@@ -1626,7 +1626,7 @@
     "cat": "Science & Tech",
     "what": "The Green Revolution from 1966 introduced High Yielding Varieties of wheat and rice developed by Norman Borlaug and adapted by M.S. Swaminathan, transforming India from a food-deficit to a food-surplus nation.",
     "upsc": "Tests M.S. Swaminathan's role as father of Green Revolution in India, the states most affected (Punjab, Haryana, western UP), and the long-term problems: groundwater depletion, soil degradation, regional inequality.",
-    "remember": "The revolution was concentrated in Punjab and Haryana, creating regional economic disparities that still exist today."
+    "remember": "It helped India escape famine-era vulnerability, but the later bill showed up in groundwater stress, chemical dependence, and regional imbalance."
   },
   "182": {
     "label": "Operation Flood (White Revolution)",
@@ -1689,7 +1689,7 @@
     "cat": "Personalities",
     "what": "Bipin Chandra Pal was the 'Father of Revolutionary Thought' in India, part of the Extremist trio Lal-Bal-Pal.",
     "upsc": "Tests his advocacy for 'Swadeshi' and total independence long before it became the Congress's official goal.",
-    "remember": "Pal was a brilliant orator; his speeches in Madras in 1907 inspired thousands to join the freedom struggle."
+    "remember": "Pal was one of the fiercest public speakers of his generation. He helped make nationalism sound bold, impatient, and mass-facing."
   },
   "189": {
     "label": "Swami Vivekananda",
@@ -1716,7 +1716,7 @@
     "cat": "Personalities",
     "what": "Mahatma Gandhi led India's independence movement through Satyagraha (non-violent resistance), pioneering techniques like fasting, hartals and non-cooperation that influenced civil rights movements worldwide.",
     "upsc": "One of the most tested UPSC figures. Know his South Africa years, Champaran Satyagraha (1917), Non-Cooperation Movement (1920), Dandi March (1930), Quit India (1942), and assassination on 30 January 1948.",
-    "remember": "Gandhi was nominated for the Nobel Peace Prize five times but never won. The Nobel Committee later called it a great omission. He was shot at close range during his evening prayer meeting by Nathuram Godse."
+    "remember": "Gandhi was nominated for the Nobel Peace Prize five times but never won. The committee later admitted this was a 'great omission'."
   },
   "192": {
     "label": "Lala Lajpat Rai",
@@ -1779,7 +1779,7 @@
     "cat": "Personalities",
     "what": "Bhagat Singh (1907–1931) was a revolutionary socialist who was hanged at 23 for the Lahore Conspiracy Case.",
     "upsc": "Tests his 'HSRA' role, his pamphlet 'Why I am an Atheist', and his push for political prisoner status for revolutionaries.",
-    "remember": "Bhagat Singh was 23 when hanged. He spent his last night in jail reading Lenin. He refused to request clemency. He asked his executioners to let him finish the chapter he was reading before they hanged him."
+    "remember": "He spent his last night in jail reading a book by Lenin. He asked his executioners to let him finish the chapter before they took him."
   },
   "199": {
     "label": "APJ Abdul Kalam",
@@ -1814,7 +1814,7 @@
     "year": 1998,
     "cat": "Personalities",
     "what": "Amartya Sen won the Nobel Prize in Economics in 1998 for contributions to welfare economics, social choice theory, and his analysis showing famines result from policy failure and inequality, not food shortage.",
-    "upsc": "Tests his famine analysis in Poverty and Famines (1981), the Capability Approach to development, and the Human Development Index he helped design for the UNDP.",
+    "upsc": "Know his 'Capability Approach' and his finding that no functioning democracy has ever had a major famine because a free press and elections force leaders to act.",
     "remember": "Sen proved that famines almost never happen in functioning democracies because a free press and elections force governments to act. The 1943 Bengal famine killed 2 to 3 million people while food was being exported from India."
   },
   "203": {
@@ -1905,7 +1905,7 @@
     "cat": "Social Reform",
     "what": "The Devadasi system (temple sexual servitude) was abolished in Madras (1947) through the efforts of Dr. Muthulakshmi Reddi.",
     "upsc": "UPSC tests the social reform context, Dr. Muthulakshmi Reddi's campaign, and the intersection of religion, caste, and gender in colonial and early post-colonial reform.",
-    "remember": "Muthulakshmi Reddi faced fierce opposition from traditionalists who claimed the system was a 'divine religious custom'."
+    "remember": "The reform debate was difficult because defenders called it tradition, while reformers pointed out the exploitation hiding inside that tradition."
   },
   "213": {
     "label": "Hindu Code Bills",
@@ -2032,5 +2032,1211 @@
     "what": "The National Food Security Act (2013) legally entitles 67% of India's population to subsidised food grains.",
     "upsc": "Tests the coverage (75% rural, 50% urban) and the prices: Rice ₹3, Wheat ₹2, Coarse grains ₹1 per kg.",
     "remember": "The act also provides for a maternity benefit of ₹6,000 for pregnant women, a key part of India's nutritional safety net."
+  },
+  "227": {
+    "label": "Junagadh accession to India",
+    "sublabel": "referendum held after Nawab fled",
+    "year": 1948,
+    "cat": "Post-Independence",
+    "what": "The Nawab of Junagadh signed accession to Pakistan despite a Hindu-majority population. After the Nawab fled to Pakistan, India held a referendum in which 99% voted to join India.",
+    "upsc": "Tests the three difficult integrations alongside Hyderabad and Kashmir. Junagadh is the only one resolved by referendum. Pakistan still claims Junagadh legally as the original accession was to Pakistan.",
+    "remember": "Pakistan technically still has a government-in-exile for Junagadh. It is a forgotten irony that Pakistan claims Junagadh by the same accession logic India uses to claim Kashmir."
+  },
+  "228": {
+    "label": "Nehru's Tryst with Destiny speech",
+    "sublabel": "delivered at midnight, 14-15 August 1947",
+    "year": 1947,
+    "cat": "Post-Independence",
+    "what": "Nehru delivered his Tryst with Destiny speech to the Constituent Assembly at the stroke of midnight on 14-15 August 1947, marking India's independence from British rule.",
+    "upsc": "Tests the exact date and occasion of the speech, the phrase at the stroke of the midnight hour, and its significance as the founding oratorical moment of the Indian republic.",
+    "remember": "The speech was broadcast live on All India Radio. Nehru wrote it himself the night before. It is considered one of the greatest speeches in history and is still studied in political science curricula worldwide."
+  },
+  "229": {
+    "label": "First Republic Day parade",
+    "sublabel": "held on Rajpath, New Delhi",
+    "year": 1950,
+    "cat": "Post-Independence",
+    "what": "The first Republic Day parade was held on 26 January 1950 on Rajpath (now Kartavya Path) in New Delhi, marking the commencement of the Constitution and India becoming a republic.",
+    "upsc": "Tests the distinction between Independence Day (15 Aug) and Republic Day (26 Jan), the significance of 26 January (linked to 1930 Purna Swaraj), and the parade as a symbol of military and cultural diversity.",
+    "remember": "The Chief Guest at the first Republic Day was Indonesian President Sukarno. The tradition of inviting a foreign head of state as Chief Guest began from day one and continues today."
+  },
+  "230": {
+    "label": "Hindi declared official language",
+    "sublabel": "Article 343, Constitution came into force",
+    "year": 1950,
+    "cat": "Post-Independence",
+    "what": "When the Constitution came into force in 1950, Article 343 declared Hindi in Devanagari script as the official language of the Union, with English to continue for 15 years as a transitional measure.",
+    "upsc": "Tests Article 343-351 (Official Language provisions), the Official Languages Act 1963 which kept English indefinitely, and the 1965 anti-Hindi agitations in Tamil Nadu that forced the government to retain English.",
+    "remember": "The 15-year deadline for switching fully to Hindi expired in 1965. Tamil Nadu erupted in violent protests. Self-immolations occurred. The government backed down and retained English. Hindi is official but not the sole language of administration."
+  },
+  "231": {
+    "label": "First Five-Year Plan completed",
+    "sublabel": "exceeded targets, focus on agriculture",
+    "year": 1956,
+    "cat": "Post-Independence",
+    "what": "India's First Five Year Plan (1951-1956) concluded having exceeded its growth target of 2.1%, achieving 3.6% GDP growth. It focused on agriculture, irrigation, and power generation.",
+    "upsc": "Tests the Harrod-Domar model used for the First Plan, the focus areas, and the contrast with the Second Plan (Mahalanobis model, heavy industry). Bhakra-Nangal dam was a flagship project.",
+    "remember": "Nehru called dams the temples of modern India. The Bhakra-Nangal project, inaugurated during this period, remains one of Asia's largest dams and symbolised independent India's industrial ambition."
+  },
+  "232": {
+    "label": "Goa liberated from Portuguese rule",
+    "sublabel": "Operation Vijay, Indian Army entered Goa",
+    "year": 1961,
+    "cat": "Post-Independence",
+    "what": "India launched Operation Vijay on 18 December 1961, and the Indian Army entered Goa, ending 451 years of Portuguese colonial rule. Portugal surrendered in 36 hours.",
+    "upsc": "Tests why Nehru delayed action on Goa (non-violence principle, international pressure), the criticism from Western powers, and the contrast with India's position on other colonial territories.",
+    "remember": "The USA and UK condemned India's military action in the UN Security Council. The Soviet Union vetoed the resolution against India. Nehru was called a hypocrite for using force after preaching non-violence. He said Goa was never a colony by choice."
+  },
+  "233": {
+    "label": "Lal Bahadur Shastri became PM",
+    "sublabel": "after Nehru's death, second PM of India",
+    "year": 1964,
+    "cat": "Post-Independence",
+    "what": "Lal Bahadur Shastri became India's second Prime Minister on 9 June 1964 after Jawaharlal Nehru died in office. He served until his sudden death in Tashkent on 11 January 1966.",
+    "upsc": "Tests his slogan Jai Jawan Jai Kisan, leadership in the 1965 war, the Tashkent Agreement, and his death in mysterious circumstances. He remains the only PM to die outside India while in office.",
+    "remember": "Shastri was so small in physical stature that his feet barely touched the floor when seated in Nehru's chair. He was so frugal that after his death his family was found to be in debt. His simplicity made him beloved."
+  },
+  "234": {
+    "label": "Privy Purses abolished",
+    "sublabel": "Indira Gandhi ended payments to former royals",
+    "year": 1971,
+    "cat": "Post-Independence",
+    "what": "Indira Gandhi abolished the privy purses paid to former rulers of princely states through the 26th Constitutional Amendment, ending an annual payment that had been guaranteed at the time of accession.",
+    "upsc": "Tests the 26th Amendment, the Supreme Court's initial striking down of the Presidential Order (before the Amendment), and this as part of Indira's Garibi Hatao socialist agenda before the 1971 elections.",
+    "remember": "The Nizam of Hyderabad received Rs. 50 lakh annually as privy purse. The Maharaja of Mysore received Rs. 26 lakh. Total annual outflow was about Rs. 5 crore. Indira abolished it partly for savings, mostly for politics."
+  },
+  "235": {
+    "label": "ISRO founded",
+    "sublabel": "under Vikram Sarabhai's vision",
+    "year": 1969,
+    "cat": "Post-Independence",
+    "what": "The Indian Space Research Organisation was formally established on 15 August 1969 under the Department of Atomic Energy, building on INCOSPAR which Vikram Sarabhai had founded in 1962.",
+    "upsc": "Tests the distinction between INCOSPAR (1962) and ISRO (1969), Vikram Sarabhai as the father of Indian space programme, and the founding philosophy of using space for development.",
+    "remember": "India's space programme was born in a church. The first rocket was launched from St. Mary Magdalene Church in Thumba, Kerala in 1963. Parts were transported on bicycles. From that church to Chandrayaan-3 took exactly 60 years."
+  },
+  "236": {
+    "label": "Project Tiger launched",
+    "sublabel": "by Indira Gandhi, 9 reserves created",
+    "year": 1973,
+    "cat": "Post-Independence",
+    "what": "Project Tiger was launched on 1 April 1973 by Prime Minister Indira Gandhi to protect tigers from extinction. Nine tiger reserves were initially created across India.",
+    "upsc": "Tests the Wildlife Protection Act 1972 which preceded it, the current number of tiger reserves, India's tiger census, and the National Tiger Conservation Authority (NTCA) established under the 2006 amendment.",
+    "remember": "India's tiger population had fallen from an estimated 40,000 at independence to just 1,827 when Project Tiger launched. The 2022 census counted 3,167 tigers. India now hosts about 75% of the world's striking tiger population."
+  },
+  "237": {
+    "label": "Indian Airlines hijacking to Lahore",
+    "sublabel": "triggered TADA and anti-terror legislation",
+    "year": 1984,
+    "cat": "Post-Independence",
+    "what": "The 1984 hijacking of an Indian Airlines aircraft to Lahore was one of several incidents that accelerated India's anti-terrorism legislation, eventually leading to TADA (Terrorist and Disruptive Activities Prevention Act) in 1985.",
+    "upsc": "Tests TADA as India's first major anti-terrorism law, its controversial provisions (preventive detention, confessions to police), and the lineage from TADA to POTA to UAPA used today.",
+    "remember": "TADA was so widely misused that it was allowed to lapse in 1995 after a Supreme Court rebuke. It was replaced by POTA in 2002 after the Parliament attack, which was itself repealed in 2004. UAPA is now the primary tool."
+  },
+  "238": {
+    "label": "Mandal Commission report submitted",
+    "sublabel": "B.P. Mandal recommended 27% OBC reservation",
+    "year": 1980,
+    "cat": "Post-Independence",
+    "what": "The Second Backward Classes Commission, chaired by B.P. Mandal, submitted its report in 1980 recommending 27% reservation in central government jobs for Other Backward Classes. It sat on a shelf for 10 years before V.P. Singh implemented it in 1990.",
+    "upsc": "Tests the distinction between the report submission (1980) and implementation (1990), the Indra Sawhney case (1992), the 50% cap on total reservations, and the exclusion of the creamy layer.",
+    "remember": "The report was submitted to Indira Gandhi who buried it for political reasons. V.P. Singh implemented it in 1990 knowing it would be politically explosive. It ended his government. But it permanently changed Indian electoral politics."
+  },
+  "239": {
+    "label": "Narasimha Rao became PM",
+    "sublabel": "minority government, architect of liberalisation",
+    "year": 1991,
+    "cat": "Post-Independence",
+    "what": "P.V. Narasimha Rao became Prime Minister in June 1991 leading a minority Congress government. Despite having no majority, he pushed through the most sweeping economic reforms in India's history alongside Finance Minister Manmohan Singh.",
+    "upsc": "Tests Rao's political manoeuvring to survive as a minority PM, his role in liberalisation alongside Singh, the Look East Policy he initiated, and his handling of the Babri Masjid demolition controversy.",
+    "remember": "Rao won a crucial confidence vote in 1993 by what critics called vote-buying. He was later charged in the JMM bribery case. A Congress PM who transformed India economically was later frozen out of the party he served. His statue at the AICC was installed only in 2023."
+  },
+  "240": {
+    "label": "Pokhran-I nuclear test",
+    "sublabel": "Smiling Buddha, India's first nuclear test",
+    "year": 1974,
+    "cat": "Post-Independence",
+    "what": "India conducted its first nuclear test codenamed Smiling Buddha at Pokhran, Rajasthan on 18 May 1974 under PM Indira Gandhi. India called it a peaceful nuclear explosion.",
+    "upsc": "Tests the distinction from Pokhran-II (1998), the international reaction including formation of Nuclear Suppliers Group (NSG) directly in response to India's test, and India's policy of no-first-use.",
+    "remember": "The NSG was created specifically to stop India from getting nuclear materials after this test. For 32 years it blocked India. The 2008 US-India civil nuclear deal and NSG waiver was India's ultimate diplomatic victory over the regime created to contain it."
+  },
+  "241": {
+    "label": "Rajiv Gandhi assassinated",
+    "sublabel": "by LTTE suicide bomber at Sriperumbudur",
+    "year": 1991,
+    "cat": "Post-Independence",
+    "what": "Rajiv Gandhi was assassinated on 21 May 1991 by an LTTE suicide bomber named Thenmozhi Rajaratnam at an election rally in Sriperumbudur, Tamil Nadu.",
+    "upsc": "Tests the LTTE motive (Indian Peacekeeping Force sent to Sri Lanka by Rajiv in 1987), the IPKF controversy, and the assassination's impact on the 1991 elections which Congress subsequently won.",
+    "remember": "The bomb was concealed in a garland. Rajiv bent to receive it. The assassin hugged him. Fourteen others died with him. The photographer Haribabu, who died in the blast, captured the final moments on film. His camera was found intact."
+  },
+  "242": {
+    "label": "Atal Bihari Vajpayee became PM",
+    "sublabel": "first non-Congress PM to complete full term",
+    "year": 1999,
+    "cat": "Post-Independence",
+    "what": "Atal Bihari Vajpayee became Prime Minister for the third time in October 1999 after the NDA coalition won elections, becoming the first non-Congress PM to serve a full five-year term.",
+    "upsc": "Tests his key policies: Pokhran-II (1998), Lahore bus diplomacy, Kargil war, National Highways Development Project (Golden Quadrilateral), Sarva Shiksha Abhiyan, and the India-Pakistan Composite Dialogue.",
+    "remember": "Vajpayee was a poet and orator before a politician. He was the only BJP leader Nehru praised. He introduced the Golden Quadrilateral highway project connecting the four metros, the largest highway project in Indian history at the time."
+  },
+  "243": {
+    "label": "Right to Food campaign and NFSA",
+    "sublabel": "Supreme Court orders mid-day meals in schools",
+    "year": 2001,
+    "cat": "Post-Independence",
+    "what": "The Supreme Court's 2001 interim order in the Right to Food case directed all state governments to implement the mid-day meal scheme in primary schools, a landmark order that transformed school attendance and child nutrition.",
+    "upsc": "Tests the Right to Food case (PUCL vs Union of India), the Supreme Court's use of PILs to enforce Directive Principles, and the journey from the 2001 order to the National Food Security Act 2013.",
+    "remember": "Before mid-day meals, many poor children came to school hungry and left after the first period. The Supreme Court fed India's children with a court order. School enrolment increased by 15-25% in states that implemented it seriously."
+  },
+  "244": {
+    "label": "Demonetisation announced",
+    "sublabel": "Rs. 500 and Rs. 1000 notes banned overnight",
+    "year": 2016,
+    "cat": "Post-Independence",
+    "what": "PM Modi announced on 8 November 2016 that Rs. 500 and Rs. 1000 currency notes would cease to be legal tender from midnight, affecting 86% of India's currency in circulation.",
+    "upsc": "Tests the stated objectives (black money, counterfeiting, digital payments), the economic disruption, the RBI's role, GDP impact debates, and the Supreme Court's 2023 upholding of the decision.",
+    "remember": "India ran out of new notes to replace the demonetised ones for weeks. People died waiting in queues. The informal economy, which was 90% cash-based, was devastated. The Supreme Court later upheld the decision 4-1 but called the process flawed."
+  },
+  "245": {
+    "label": "Battle of Plassey",
+    "sublabel": "Clive defeated Siraj ud-Daulah",
+    "year": 1757,
+    "cat": "Colonial India",
+    "what": "Robert Clive and the EIC defeated Nawab Siraj ud-Daulah of Bengal at Plassey on 23 June 1757 through the treachery of Mir Jafar, beginning British political control over India.",
+    "upsc": "Tests Mir Jafar's betrayal, the Black Hole of Calcutta incident (1756) that preceded it, and the massive wealth transferred from Bengal to Britain that historians link to funding the Industrial Revolution.",
+    "remember": "The battle lasted barely a few hours. Mir Jafar's forces, forming the bulk of the Nawab's army, simply stood aside. Clive had negotiated the betrayal weeks in advance. The real battle was fought in letters, not on the field."
+  },
+  "246": {
+    "label": "Ilbert Bill controversy",
+    "sublabel": "Indian judges to try European offenders",
+    "year": 1883,
+    "cat": "Colonial India",
+    "what": "Viceroy Ripon's Ilbert Bill proposed allowing Indian judges to try European offenders in criminal cases. The European community in India launched a fierce campaign against it, forcing a diluted version.",
+    "upsc": "Tests the racial hierarchy embedded in colonial law, the European opposition that revealed the limits of reform, and how the controversy radicalised Indian opinion and gave momentum to the early Congress.",
+    "remember": "The European backlash against the Ilbert Bill shocked Indians. It made clear that the British in India would never accept legal equality with Indians. Surendranath Banerjee called it the turning point that made Indians realise they needed a political organisation. The INC was founded two years later."
+  },
+  "247": {
+    "label": "Vernacular Press Act",
+    "sublabel": "censored Indian language newspapers",
+    "year": 1878,
+    "cat": "Colonial India",
+    "what": "Viceroy Lytton passed the Vernacular Press Act in 1878 to muzzle Indian language newspapers that were criticising British policies. It allowed magistrates to seize printing presses without trial.",
+    "upsc": "Tests the press freedom issue in colonial India, the Act's repeal in 1882 by Ripon, and the contrast with how English language papers (like The Times of India) were treated differently.",
+    "remember": "The Act was called the Gagging Act by Indians. Amrita Bazar Patrika, a Bengali paper targeted by the Act, converted to English overnight to escape its provisions. The British were outmanoeuvred by a printing press decision made in one evening."
+  },
+  "248": {
+    "label": "Hunter Commission on education",
+    "sublabel": "reviewed Wood's Despatch, shaped colonial education",
+    "year": 1882,
+    "cat": "Colonial India",
+    "what": "The Hunter Commission of 1882 reviewed the state of education in India following Wood's Despatch of 1854. It recommended expansion of primary education and greater role for private enterprise in higher education.",
+    "upsc": "Tests the sequence of education policy milestones: Macaulay's Minute (1835), Wood's Despatch (1854), Hunter Commission (1882), Sadler Commission (1917-19). Each shifted priorities in colonial education policy.",
+    "remember": "Wood's Despatch is called the Magna Carta of Indian education. The Hunter Commission followed up by pointing out its failures , primary education had been neglected for 28 years while higher education expanded. The same debate continues in independent India."
+  },
+  "249": {
+    "label": "Bengal famine",
+    "sublabel": "3 million died under Churchill's war policy",
+    "year": 1943,
+    "cat": "Colonial India",
+    "what": "The Bengal famine of 1943 killed between 2 and 3 million people. It was caused not by crop failure but by wartime policies including diversion of food to British troops, denial of boats to prevent Japanese use, and Churchill's refusal to send aid.",
+    "upsc": "Tests Amartya Sen's analysis that the famine was man-made not natural, the wartime context, Churchill's documented refusal to divert ships carrying food to Bengal, and this as a case study in colonial exploitation.",
+    "remember": "Churchill reportedly said when asked about the famine: why hasn't Gandhi died yet? Food was being exported from Bengal even as people starved. The denial of denial , this famine was a policy choice, not a natural disaster."
+  },
+  "250": {
+    "label": "Bal Gangadhar Tilak imprisoned",
+    "sublabel": "6 years in Mandalay for sedition",
+    "year": 1908,
+    "cat": "Colonial India",
+    "what": "Bal Gangadhar Tilak was sentenced to six years imprisonment in Mandalay (Burma) in 1908 for writing articles deemed to encourage violence against the British after the Muzaffarpur bomb case.",
+    "upsc": "Tests Section 124A (sedition) of the Indian Penal Code which was used against Tilak, and the public response including a six-day general strike in Bombay, the first general strike in Indian history.",
+    "remember": "The workers of Bombay went on a six-day general strike spontaneously to protest Tilak's arrest. No one organised it. It emerged organically. It was the first time Indian workers used mass industrial action as a political tool."
+  },
+  "251": {
+    "label": "Jallianwala Bagh Massacre",
+    "sublabel": "General Dyer's order at Amritsar, Baisakhi",
+    "year": 1919,
+    "cat": "Colonial India",
+    "what": "On 13 April 1919 (Baisakhi), General Dyer ordered troops to fire on a peaceful crowd at Jallianwala Bagh, Amritsar. Official count 379 dead, actual estimates exceed 1000. Dyer blocked the only exit before ordering firing.",
+    "upsc": "Tests the date (Baisakhi), the Hunter Commission findings, Udham Singh's revenge killing of Michael O'Dwyer in London in 1940, and Tagore returning his knighthood in protest.",
+    "remember": "Dyer was not punished. The House of Lords praised him. The British public raised over 26,000 pounds for him. Rabindranath Tagore wrote to the Viceroy: I wish to stand shorn of all special distinctions, by the side of those of my countrymen who have been humiliated."
+  },
+  "252": {
+    "label": "Nehru Report",
+    "sublabel": "first Indian constitutional blueprint",
+    "year": 1928,
+    "cat": "Colonial India",
+    "what": "The Nehru Report, drafted by Motilal Nehru's committee in 1928, was the first attempt by Indians to draft their own constitutional framework. It proposed Dominion Status, joint electorates, and fundamental rights.",
+    "upsc": "Tests it as India's first self-drafted constitutional document, the rejection by Jinnah (who proposed the 14 points as counter), and Jawaharlal Nehru's opposition to Dominion Status (he wanted Purna Swaraj).",
+    "remember": "The Nehru Report created a rift between father and son. Motilal was willing to accept Dominion Status. Jawaharlal wanted complete independence. The son won , Lahore 1929 declared Purna Swaraj. It was the only political argument a father publicly lost to his son."
+  },
+  "253": {
+    "label": "Government of India Act 1858",
+    "sublabel": "Crown Rule replaced East India Company",
+    "year": 1858,
+    "cat": "Colonial India",
+    "what": "The Government of India Act 1858 transferred all powers of the East India Company to the British Crown following the 1857 revolt. The Governor-General became the Viceroy, representing the Crown directly.",
+    "upsc": "Tests the institutional changes: Secretary of State for India replaced Board of Control, India Council was advisory body, and Queen Victoria's Proclamation promised equality and non-interference in religion.",
+    "remember": "The EIC was the most powerful corporation in history. It ruled 250 million people, had its own army, and minted its own coins. In 1858 it was dissolved by a single Act of Parliament. The world's most powerful company was wound up in an afternoon."
+  },
+  "254": {
+    "label": "Arms Act",
+    "sublabel": "Indians prohibited from bearing arms",
+    "year": 1878,
+    "cat": "Colonial India",
+    "what": "Viceroy Lytton's Arms Act of 1878 prohibited Indians from possessing arms without a licence, while exempting Europeans. It was a direct response to fears of another 1857-type uprising.",
+    "upsc": "Tests alongside the Vernacular Press Act (same year, same Viceroy) as examples of repressive Lytton-era legislation. Also tested in context of Indian resentment that fuelled the early nationalist movement.",
+    "remember": "The Arms Act and the Vernacular Press Act were passed in the same year by the same Viceroy. One silenced Indian voices, the other disarmed Indian bodies. Both were repealed within a few years as counterproductive. But the resentment they created lasted generations."
+  },
+  "255": {
+    "label": "Wavell Plan and Simla Conference",
+    "sublabel": "failed attempt at Indian self-governance",
+    "year": 1945,
+    "cat": "Colonial India",
+    "what": "Viceroy Wavell proposed a plan in June 1945 for an Executive Council of Indians to govern, with equal Hindu-Muslim representation. The Simla Conference collapsed when Jinnah insisted the League alone represent Muslims.",
+    "upsc": "Tests this as the last serious pre-partition unity attempt before the Cabinet Mission. Jinnah's insistence that no Congress Muslim could represent Muslims was a key sticking point that previewed partition logic.",
+    "remember": "Gandhi pointed out that Congress had Muslim members and could not be called a Hindu party. Jinnah said only the League spoke for Muslims. This argument about who represents whom was the core of the partition debate. The Simla Conference failure made partition almost inevitable."
+  },
+  "256": {
+    "label": "Royal Indian Navy Mutiny",
+    "sublabel": "sailors revolted against British rule",
+    "year": 1946,
+    "cat": "Colonial India",
+    "what": "In February 1946, sailors of the Royal Indian Navy mutinied in Bombay, raising slogans of Jai Hind and flying Congress, League and Communist flags together. The mutiny spread to 78 ships and 20 shore establishments.",
+    "upsc": "Tests its significance as proof that the Indian military could no longer be relied upon by the British, directly accelerating the independence timeline. Also tests Congress and League leaders criticising the mutiny as premature.",
+    "remember": "Both Gandhi and Jinnah condemned the mutiny. Sardar Patel negotiated its end by promising amnesty. The sailors felt betrayed. But the British got the message: their grip on the Indian military was gone. Independence was announced within the year."
+  },
+  "257": {
+    "label": "Curzon's Bengal Partition annulled",
+    "sublabel": "at Delhi Durbar, both sides claimed victory",
+    "year": 1911,
+    "cat": "Colonial India",
+    "what": "King George V announced the annulment of the Bengal Partition at the Delhi Durbar of 1911, reuniting Bengal. The capital was simultaneously moved from Calcutta to Delhi. Both were presented as royal gifts.",
+    "upsc": "Tests the two announcements at the same Durbar: Bengal reunification and capital shift to Delhi. The British framed annulment as a generous concession, not an admission of defeat. UPSC asks about both in the same question.",
+    "remember": "The partition had been announced with great fanfare in 1905. Its annulment six years later was a humiliation for the British who had insisted it was an administrative necessity. It proved that sustained mass agitation could reverse British policy."
+  },
+  "258": {
+    "label": "Champaran Satyagraha",
+    "sublabel": "Gandhi's first civil disobedience in India",
+    "year": 1917,
+    "cat": "Colonial India",
+    "what": "Gandhi led the Champaran Satyagraha in Bihar in 1917 against the tinkathia system, which forced indigo farmers to cultivate indigo on 3/20 of their land for European planters at fixed prices. It was Gandhi's first major civil disobedience in India.",
+    "upsc": "Tests this as Gandhi's first application of Satyagraha on Indian soil after South Africa, the tinkathia system, and the Champaran Agrarian Act 1918 that resulted from it.",
+    "remember": "Gandhi was ordered to leave Champaran by the British Collector. He refused. He said he recognised the legitimacy of the order but would disobey it as a matter of conscience. The Collector backed down. It was the first time British authority blinked before Gandhi."
+  },
+  "259": {
+    "label": "Kheda Satyagraha",
+    "sublabel": "Gandhi's no-tax campaign for drought-hit farmers",
+    "year": 1918,
+    "cat": "Colonial India",
+    "what": "Gandhi led the Kheda Satyagraha in 1918 in Gujarat, where farmers demanded suspension of land revenue after crop failure. The government eventually instructed officials to recover taxes only from those who could afford to pay.",
+    "upsc": "Tests it alongside Champaran (1917) and Ahmedabad Mill Strike (1918) as Gandhi's early Satyagrahas in India before the national Non-Cooperation Movement. Vallabhbhai Patel was Gandhi's key lieutenant in Kheda.",
+    "remember": "Kheda was where Sardar Patel first worked with Gandhi. Patel had been a successful barrister. After Kheda, he gave it all up for the independence movement. The Iron Man of India was forged in a farmers' tax dispute in Gujarat."
+  },
+  "260": {
+    "label": "Renaissance began in Florence",
+    "sublabel": "rebirth of arts and learning in Europe",
+    "year": 1400,
+    "cat": "World History",
+    "what": "The Renaissance, a cultural and intellectual revival of classical learning, began in Florence around 1400 under the patronage of the Medici family. It spread across Europe over the next two centuries.",
+    "upsc": "Tests the Renaissance as the intellectual precursor to the Scientific Revolution and Enlightenment, which directly influenced 18th-19th century reform movements that impacted India through British colonial education.",
+    "remember": "The Medici family were bankers who funded artists and scholars because culture was a political tool. Leonardo da Vinci, Michelangelo, Raphael were all Medici clients. The greatest art in history was commissioned as corporate sponsorship."
+  },
+  "261": {
+    "label": "Vasco da Gama's second voyage to India",
+    "sublabel": "arrived with warships, not trade goods",
+    "year": 1502,
+    "cat": "World History",
+    "what": "Vasco da Gama's second voyage to India in 1502 was a military expedition, not a trade mission. He bombarded Calicut, massacred Arab traders, and forced Indian rulers to accept Portuguese trading terms.",
+    "upsc": "Tests the shift from trade to coercion in early European colonialism, the Portuguese Estado da India system, and the contrast between da Gama's first visit (welcomed) and second (terrorised).",
+    "remember": "Da Gama captured a ship carrying 400 Muslim pilgrims returning from Mecca. He locked them inside and burned the ship. This was Europe's introduction to India's coast: as a trading partner on the first visit, as a war crime on the second."
+  },
+  "262": {
+    "label": "Thirty Years War ended",
+    "sublabel": "Peace of Westphalia, birth of nation-states",
+    "year": 1648,
+    "cat": "World History",
+    "what": "The Thirty Years War (1618-1648) was Europe's most destructive religious war. The Peace of Westphalia that ended it established the principle of state sovereignty, the foundation of the modern international order.",
+    "upsc": "Tests the Westphalian system of sovereignty as the basis of modern international law, the UN Charter's non-interference principle, and India's consistent invocation of Westphalian sovereignty in foreign policy.",
+    "remember": "The Westphalian principle of non-interference in internal affairs is why India cites sovereignty when criticised for Kashmir, human rights, or minority issues. Every time India says this is our internal matter it is invoking a peace treaty from 1648."
+  },
+  "263": {
+    "label": "Industrial Revolution began in Britain",
+    "sublabel": "steam power transformed manufacturing",
+    "year": 1760,
+    "cat": "World History",
+    "what": "The Industrial Revolution began in Britain around 1760 with the mechanisation of textile production using James Watt's steam engine. It transformed Britain from an agrarian to an industrial economy within a century.",
+    "upsc": "Tests the connection between Bengal's wealth (looted after Plassey 1757) and British industrial capital, the deindustrialisation of India under colonial rule, and why Indian handloom weavers were ruined.",
+    "remember": "The timing is not a coincidence. Britain looted Bengal's treasury of millions after Plassey in 1757. The Industrial Revolution began three years later. Indian wealth funded British industrialisation. Indian artisans were then destroyed by the machine-made goods they helped finance."
+  },
+  "264": {
+    "label": "Haitian Revolution",
+    "sublabel": "first successful slave revolt, created Haiti",
+    "year": 1804,
+    "cat": "World History",
+    "what": "The Haitian Revolution (1791-1804) led by Toussaint Louverture and Jean-Jacques Dessalines resulted in Haiti becoming the first Black republic and the first country founded by formerly enslaved people.",
+    "upsc": "Tests as a world history example of successful anti-colonial resistance, its influence on later independence movements, and the brutal French demand for reparations (paid until 1947) that crippled Haiti.",
+    "remember": "France demanded Haiti pay 150 million francs as reparations for the loss of its slaves and plantations. Haiti paid this debt until 1947. A country founded by people freed from slavery spent 143 years paying their former enslavers for the crime of becoming free."
+  },
+  "265": {
+    "label": "Unification of Germany",
+    "sublabel": "Bismarck's blood and iron policy",
+    "year": 1871,
+    "cat": "World History",
+    "what": "Germany was unified as the German Empire on 18 January 1871 at Versailles after Prussia's victory in the Franco-Prussian War. Otto von Bismarck became the first Chancellor of unified Germany.",
+    "upsc": "Tests Bismarck's realpolitik, the balance of power in Europe that followed, and how German unification disturbed European stability and contributed to the alliance system that led to WWI.",
+    "remember": "Bismarck declared the German Empire in the Hall of Mirrors at Versailles, the palace of the French kings. The humiliation was deliberate. Fifty years later, France returned the favour by forcing Germany to sign the Treaty of Versailles in the same room."
+  },
+  "266": {
+    "label": "Opium Wars between Britain and China",
+    "sublabel": "forced China to accept drug trade",
+    "year": 1839,
+    "cat": "World History",
+    "what": "Britain fought two Opium Wars against China (1839-42 and 1856-60) to force China to accept imports of opium grown in British India. China was defeated and forced to open ports and cede Hong Kong.",
+    "upsc": "Tests the triangular trade (India opium to China, Chinese tea to Britain, British goods to India), the unequal treaties, and as an example of European imperial coercion that parallels India's own experience.",
+    "remember": "Britain fought a war to force a country to buy drugs. The opium was grown in Bengal. The profits funded the British Indian government. China's defeat in the Opium Wars began its Century of Humiliation. The trade was declared legal by British courts."
+  },
+  "267": {
+    "label": "Scramble for Africa completed",
+    "sublabel": "90% of Africa colonised by European powers",
+    "year": 1914,
+    "cat": "World History",
+    "what": "By 1914 European powers had colonised 90% of Africa, up from 10% in 1880, following the Berlin Conference of 1884-85. Only Ethiopia and Liberia remained independent.",
+    "upsc": "Tests the consequences of the Berlin Conference, the artificial borders that cause current African conflicts, and the comparison with Indian decolonisation as part of the global wave after WWII.",
+    "remember": "Ethiopia defeated Italy at the Battle of Adwa in 1896, the only African country to defeat a European colonial army in the Scramble era. Emperor Haile Selassie later became a symbol of African resistance. Ethiopia's independence inspired pan-Africanism globally."
+  },
+  "268": {
+    "label": "League of Nations first assembly",
+    "sublabel": "met in Geneva, India was a founding member",
+    "year": 1920,
+    "cat": "World History",
+    "what": "The League of Nations held its first assembly in Geneva in November 1920. India was a founding member despite not being an independent nation, represented by the British Indian government.",
+    "upsc": "Tests the anomaly of India's League membership as a non-sovereign state, the League's structure, and India's later role in shaping the UN's decolonisation agenda based on this experience.",
+    "remember": "India sat at the League of Nations as a colony. It voted, sent delegates, and signed treaties as if it were a country. It was simultaneously a subject nation and an international actor. This created the legal precedent for India's immediate full UN membership at independence."
+  },
+  "269": {
+    "label": "Bolshevik Revolution",
+    "sublabel": "Lenin seized power in October 1917",
+    "year": 1917,
+    "cat": "World History",
+    "what": "Lenin's Bolsheviks seized power in Petrograd on 25 October 1917 (Julian calendar), overthrowing the Provisional Government. It was the first successful communist revolution.",
+    "upsc": "Tests the two 1917 revolutions (February toppled the Tsar, October brought the Bolsheviks), Lenin's New Economic Policy, the formation of the USSR in 1922, and the Revolution's influence on Indian socialist thought.",
+    "remember": "The revolution was announced by a single gunshot from the cruiser Aurora. Lenin had been sent back to Russia by Germany in a sealed train to destabilise the Russian war effort. It was the most consequential train journey in history."
+  },
+  "270": {
+    "label": "Marshall Plan announced",
+    "sublabel": "US aid rebuilt war-devastated Europe",
+    "year": 1947,
+    "cat": "World History",
+    "what": "US Secretary of State George Marshall announced the European Recovery Program (Marshall Plan) in June 1947, offering billions in aid to rebuild war-devastated European economies and prevent communist takeover.",
+    "upsc": "Tests the Cold War context of the Marshall Plan, why the USSR refused it and prevented Eastern European nations from accepting, and how it created the economic division of Europe that defined the Cold War.",
+    "remember": "The USSR called the Marshall Plan dollar imperialism. Stalin ordered Eastern European countries to refuse it. Those that accepted rebuilt into prosperous democracies within 20 years. Those that refused spent 40 years in poverty. Stalin's paranoia cost his allies a generation."
+  },
+  "271": {
+    "label": "Decolonisation wave in Africa",
+    "sublabel": "17 African nations became independent",
+    "year": 1960,
+    "cat": "World History",
+    "what": "1960 is called the Year of Africa , 17 African nations gained independence in a single year. British PM Macmillan's Wind of Change speech acknowledged that African nationalism was an unstoppable force.",
+    "upsc": "Tests the decolonisation wave and its link to the Non-Aligned Movement, India's role in supporting African independence through the UN, and the Bandung Conference (1955) which preceded it.",
+    "remember": "Macmillan's Wind of Change speech was delivered in South Africa. He was telling the apartheid government to the face that colonialism was over. The South African PM did not clap. South Africa left the Commonwealth the following year."
+  },
+  "272": {
+    "label": "Cuban Missile Crisis resolved",
+    "sublabel": "Kennedy-Khrushchev back-channel deal",
+    "year": 1962,
+    "cat": "World History",
+    "what": "The 13-day Cuban Missile Crisis ended on 28 October 1962 when Khrushchev agreed to remove Soviet missiles from Cuba. The secret deal also included US removal of Jupiter missiles from Turkey and a no-invasion pledge on Cuba.",
+    "upsc": "Tests the resolution mechanism, the establishment of the Moscow-Washington hotline, and the shift toward nuclear arms control that followed (Partial Test Ban Treaty 1963, NPT 1968).",
+    "remember": "The public deal was: Soviets remove Cuba missiles, US promises not to invade Cuba. The secret deal was: US removes missiles from Turkey within 6 months. Kennedy never admitted to the Turkey part. Khrushchev kept the secret too. The world never knew how close it came."
+  },
+  "273": {
+    "label": "Iran hostage crisis",
+    "sublabel": "52 Americans held for 444 days",
+    "year": 1979,
+    "cat": "World History",
+    "what": "Iranian revolutionaries seized the US Embassy in Tehran on 4 November 1979 and held 52 Americans hostage for 444 days following the Islamic Revolution and US support for the Shah.",
+    "upsc": "Tests the Islamic Revolution of 1979, Khomeini's ideology, the US-Iran relationship breakdown, and the crisis as the beginning of the current Iran-US standoff that affects oil prices and regional security.",
+    "remember": "The hostages were released on the exact minute Ronald Reagan was inaugurated as President, 20 January 1981. They had been held 444 days. Carter had spent his entire presidency trying to free them. The timing was deliberate humiliation."
+  },
+  "274": {
+    "label": "Apartheid ended in South Africa",
+    "sublabel": "Nelson Mandela freed, first free elections",
+    "year": 1994,
+    "cat": "World History",
+    "what": "South Africa held its first fully democratic elections in April 1994, ending the apartheid system. Nelson Mandela, released from prison in 1990 after 27 years, became the first Black President.",
+    "upsc": "Tests India's historic anti-apartheid stance (India was the first country to impose sanctions on South Africa in 1946), the UN role, Mandela's influence on Indian foreign policy, and the Bharat Ratna awarded to Mandela.",
+    "remember": "India imposed sanctions on South Africa in 1946, 48 years before the West. Mandela never forgot this. He visited India before any Western country after his release. Nelson Mandela and Jawaharlal Nehru had corresponded from their respective prisons."
+  },
+  "275": {
+    "label": "Kyoto Protocol signed",
+    "sublabel": "first global binding climate commitments",
+    "year": 1997,
+    "cat": "World History",
+    "what": "The Kyoto Protocol was adopted in December 1997, the first international treaty with binding greenhouse gas reduction targets for developed nations. The USA signed but never ratified. It came into force in 2005.",
+    "upsc": "Tests the distinction between Kyoto (binding only for developed nations) and Paris Agreement (voluntary NDCs for all), the Common But Differentiated Responsibilities principle, and India's position as a developing nation exempt from Kyoto targets.",
+    "remember": "The US Senate voted 95-0 against ratifying Kyoto before it was even signed. The world's largest emitter at the time refused to be bound. India and China were exempt as developing nations. This fundamental unfairness drove the 20-year impasse in climate negotiations before Paris."
+  },
+  "276": {
+    "label": "Iltutmish consolidated Delhi Sultanate",
+    "sublabel": "first sultan recognised by Caliph of Baghdad",
+    "year": 1229,
+    "cat": "Medieval India",
+    "what": "Iltutmish (r. 1211-1236) secured recognition from the Caliph of Baghdad in 1229, giving the Delhi Sultanate formal Islamic legitimacy. He is considered the real founder of the Sultanate as a stable power.",
+    "upsc": "Tests Iltutmish's achievements: completion of Qutb Minar, introduction of silver tanka and copper jital coins, the iqta system, and his appointment of Razia Sultana as successor.",
+    "remember": "Iltutmish was a slave who bought his own freedom, became a general, married his master's daughter, and founded a dynasty. He then appointed his daughter Razia as successor over his sons. A former slave gave the Delhi Sultanate its first female ruler."
+  },
+  "277": {
+    "label": "Ghiyasuddin Balban's reign",
+    "sublabel": "theory of divine kingship, iron fist rule",
+    "year": 1266,
+    "cat": "Medieval India",
+    "what": "Ghiyasuddin Balban ruled the Delhi Sultanate from 1266-1287 and introduced the theory of divine kingship. He reorganised the army, established a powerful spy system, and crushed the Chahalgani (group of 40 nobles).",
+    "upsc": "Tests his theory of kingship (king as shadow of God), the Sijda (prostration) and Paibos (kissing feet) rituals, destruction of the Chahalgani, and his administrative reforms that strengthened central authority.",
+    "remember": "Balban never smiled in public for 40 years. He believed a king who laughed in court was showing weakness. He executed nobles who displeased him with no warning. His iron rule kept the Sultanate intact against the Mongol threat."
+  },
+  "278": {
+    "label": "Muhammad bin Tughlaq shifted capital",
+    "sublabel": "Delhi to Daulatabad, disastrous experiment",
+    "year": 1327,
+    "cat": "Medieval India",
+    "what": "Sultan Muhammad bin Tughlaq ordered the entire population of Delhi to move to Daulatabad (Devagiri) in the Deccan in 1327 to create a centrally located capital. He reversed the decision two years later after widespread suffering.",
+    "upsc": "Tests this alongside the token currency experiment (1330) as examples of Tughlaq's visionary but impractical policies. Ibn Battuta documented both. UPSC asks which policies led to the Sultanate's decline.",
+    "remember": "The story of emptying Delhi comes from dramatic chroniclers and should be handled with care. What is certain is that the policy was deeply disruptive and badly remembered."
+  },
+  "279": {
+    "label": "Firuz Shah Tughlaq's reign",
+    "sublabel": "welfare works, canals, hospitals",
+    "year": 1351,
+    "cat": "Medieval India",
+    "what": "Firuz Shah Tughlaq (r. 1351-1388) reversed his predecessor's harsh policies, built hospitals, rest houses, and an extensive canal system in the Doab region. He also collected and translated Sanskrit texts.",
+    "upsc": "Tests the contrast between Firuz Shah's administration and Muhammad bin Tughlaq's experiments. His canal system between the Yamuna and Sutlej is considered a major achievement in pre-colonial irrigation.",
+    "remember": "Firuz Shah commissioned the translation of Sanskrit texts on medicine, astronomy and philosophy into Persian. He also moved two Ashokan pillars to Delhi, demonstrating curiosity about pre-Islamic Indian history that was unusual for a Muslim sultan."
+  },
+  "280": {
+    "label": "Battle of Panipat (First)",
+    "sublabel": "Babur defeated Ibrahim Lodi, Mughal era began",
+    "year": 1526,
+    "cat": "Medieval India",
+    "what": "Babur defeated Ibrahim Lodi at the First Battle of Panipat on 21 April 1526, using artillery and the Tulughma flanking tactics. The Mughal Empire began with this battle.",
+    "upsc": "Tests all three Panipat battles in sequence: 1526 (Mughal Empire established), 1556 (Mughal Empire consolidated), 1761 (Maratha power broken). UPSC frequently asks which battle happened in which year.",
+    "remember": "Babur outnumbered 8 to 1, won in a single afternoon. He used the one advantage Lodi had never faced: cannons. The noise alone panicked the war elephants who turned and crushed their own forces. Technology defeats numbers."
+  },
+  "281": {
+    "label": "Humayun recaptured Delhi",
+    "sublabel": "restored Mughal Empire after 15 years in exile",
+    "year": 1555,
+    "cat": "Medieval India",
+    "what": "Humayun recaptured Delhi in July 1555 after 15 years of exile in Persia and Afghanistan, defeating Sikandar Sur. He died just 6 months later in an accident at his library.",
+    "upsc": "Tests Humayun's exile (caused by Sher Shah Suri), his time at the Persian Safavid court, and the irony that he died shortly after regaining his empire. His son Akbar was left to consolidate what Humayun had recovered.",
+    "remember": "Humayun fell down the steps of his library while descending to answer the call to prayer. He slipped on his robe and died three days later from a head injury. He spent 15 years reclaiming his empire and 6 months enjoying it."
+  },
+  "282": {
+    "label": "Akbar abolished Jizya tax",
+    "sublabel": "removed discrimination against non-Muslims",
+    "year": 1564,
+    "cat": "Medieval India",
+    "what": "Akbar abolished the Jizya tax on non-Muslims in 1564, as part of his policy of Sulh-i-kul (universal peace). This was a major departure from standard Islamic governance practice.",
+    "upsc": "Tests Sulh-i-kul as Akbar's governing philosophy, the abolition of Jizya (reimposed by Aurangzeb in 1679), and Akbar's other tolerance measures including the Ibadat Khana debates.",
+    "remember": "Jizya had been levied on non-Muslims in India since 712 CE. Akbar abolished it after 850 years of continuous collection. Aurangzeb reimposed it in 1679. The 115-year gap between Akbar's abolition and Aurangzeb's reimposition is the central comparison UPSC draws between the two emperors."
+  },
+  "283": {
+    "label": "Guru Nanak Dev Ji born",
+    "sublabel": "founder of Sikhism, born at Nankana Sahib",
+    "year": 1469,
+    "cat": "Medieval India",
+    "what": "Guru Nanak Dev Ji was born on 15 April 1469 at Rai Bhoi Ki Talwandi (now Nankana Sahib in Pakistan). He founded Sikhism and composed the Japji Sahib, incorporated into the Guru Granth Sahib.",
+    "upsc": "Tests the founding of Sikhism, the ten Gurus, the compilation of Guru Granth Sahib by Guru Arjan Dev Ji (1604), and Sikhism's synthesis of Bhakti and Sufi traditions that challenged both Hindu caste hierarchy and Muslim orthodoxy.",
+    "remember": "Guru Nanak's first words after his spiritual awakening were: there is no Hindu, there is no Muslim. He then spent 30 years travelling to Mecca, Tibet, Sri Lanka and Baghdad. He is believed to have walked over 28,000 km to spread his message."
+  },
+  "284": {
+    "label": "Guru Arjan Dev martyrdom",
+    "sublabel": "first Sikh martyr, tortured by Jahangir",
+    "year": 1606,
+    "cat": "Medieval India",
+    "what": "Guru Arjan Dev Ji, the fifth Sikh Guru who compiled the Adi Granth (Guru Granth Sahib), was executed by Mughal Emperor Jahangir in 1606 on charges of blessing a rebel prince.",
+    "upsc": "Tests the first Sikh martyrdom, its role in transforming Sikhism from a pacifist to a militarised faith (Guru Hargobind subsequently wore two swords), and the beginning of Mughal-Sikh conflict.",
+    "remember": "Before his martyrdom, Guru Arjan Dev was made to sit on a burning hot iron plate and had hot sand poured on him. He remained calm throughout. His martyrdom transformed his successor Guru Hargobind into a warrior guru who said a Sikh must be both spiritual and temporal."
+  },
+  "285": {
+    "label": "Vijayanagara Empire at its peak",
+    "sublabel": "under Krishna Deva Raya, golden age",
+    "year": 1509,
+    "cat": "Medieval India",
+    "what": "Krishna Deva Raya (r. 1509-1529) brought the Vijayanagara Empire to its peak of power and cultural achievement. He defeated the Bahmani Sultanates, patronised Telugu and Kannada literature, and his court hosted the Ashtadiggajas poets.",
+    "upsc": "Tests Krishna Deva Raya's military achievements, his texts Amuktamalyada and Jambavati Kalyanam, his title Andhra Bhoja, and Portuguese traveller Domingo Paes's description of Hampi as one of the best-provisioned cities in the world.",
+    "remember": "Krishna Deva Raya defeated every kingdom he fought in 20 years of rule. Portuguese travellers described his court as rivalling anything in Europe. He wrote poetry in Telugu about a woman's devotion to Vishnu while running a vast empire. Hampi was then the world's second largest city after Beijing."
+  },
+  "286": {
+    "label": "Sher Shah Suri's revenue reforms",
+    "sublabel": "land measurement, standardised coins, postal system",
+    "year": 1540,
+    "cat": "Medieval India",
+    "what": "During his brief rule (1540-1545), Sher Shah Suri introduced systematic land revenue based on measurement (not estimation), standardised the silver rupee, created a postal system, and built the Grand Trunk Road.",
+    "upsc": "Tests that Todar Mal later systematised Sher Shah's revenue methods under Akbar, the silver rupee's continuity to modern day, and Sher Shah as the greatest administrator between the Mauryas and the Mughals.",
+    "remember": "Sher Shah ruled for only 5 years. He achieved more administrative reform in 5 years than most rulers achieve in 50. He died in a gunpowder explosion at the Siege of Kalinjar. He was directing artillery when an accidental explosion killed him. Death by his own innovation."
+  },
+  "287": {
+    "label": "Maratha Confederacy formed",
+    "sublabel": "Peshwa became effective ruler after Shivaji's successors",
+    "year": 1720,
+    "cat": "Medieval India",
+    "what": "After the deaths of Shivaji (1680) and his son Sambhaji (1689), effective Maratha power shifted to the Peshwas (prime ministers). Under Bajirao I (1720-1740) the Marathas expanded into a pan-Indian confederacy.",
+    "upsc": "Tests the Peshwa system as the real power behind the Maratha throne, Bajirao I's military genius (never lost a battle), the five Maratha chiefs (Bhonsle, Scindia, Holkar, Gaikwad, Peshwa), and why the confederacy was weaker than a centralised state.",
+    "remember": "Bajirao I proposed marching to Delhi and placing a Hindu emperor on the Mughal throne. He came within 60 miles of Delhi before turning back. He told his men: let us strike at the trunk, the branches will fall themselves. He died at 40, having never lost a single battle."
+  },
+  "288": {
+    "label": "Nizam established Hyderabad state",
+    "sublabel": "Asaf Jah broke from Mughal control",
+    "year": 1724,
+    "cat": "Medieval India",
+    "what": "Asaf Jah I, the Mughal Governor of the Deccan, defeated a rival in 1724 and established the independent Hyderabad state. The Nizams ruled Hyderabad for over 200 years until 1948.",
+    "upsc": "Tests the fragmentation of the Mughal Empire in the 18th century, the Nizam as the largest Indian princely state, and the integration of Hyderabad into India in 1948 (Operation Polo).",
+    "remember": "The Nizams of Hyderabad were so wealthy that they were once called the richest family in the world. The last Nizam, Mir Osman Ali Khan, kept the Jacob Diamond (one of the world's largest) as a paperweight. After integration, his wealth was frozen and he died in relative poverty."
+  },
+  "289": {
+    "label": "Battle of Talikota",
+    "sublabel": "Vijayanagara Empire destroyed by Deccan Sultanates",
+    "year": 1565,
+    "cat": "Medieval India",
+    "what": "The Battle of Talikota in 1565 saw the combined forces of the Bijapur, Ahmadnagar, Bidar and Golconda Sultanates defeat the Vijayanagara army. The capital Hampi was sacked and never rebuilt.",
+    "upsc": "Tests the Deccan Sultanates coalition, the internal betrayal by two Muslim commanders in the Vijayanagara army, and the destruction of Hampi as the end of the last great Hindu empire of medieval India.",
+    "remember": "Hampi took 6 months to loot and burn. A city that had taken 200 years to build was destroyed in half a year. The ruins scattered over 26 square kilometres today are what remains of what was once one of the richest cities on earth."
+  },
+  "290": {
+    "label": "Aurangzeb's Deccan campaigns",
+    "sublabel": "25-year war drained the Mughal Empire",
+    "year": 1681,
+    "cat": "Medieval India",
+    "what": "Aurangzeb personally led campaigns in the Deccan from 1681 until his death in 1707, spending 26 years trying to crush the Maratha resistance. The treasury was drained, the army exhausted, and the empire began to collapse.",
+    "upsc": "Tests this as the primary cause of Mughal decline: a 26-year war with no decisive victory, a 300-mile long camp following Aurangzeb that became a moving city of 500,000 people, and the Marathas' successful guerrilla resistance.",
+    "remember": "Aurangzeb died in his Deccan camp at 88, having spent the last 26 years of his life at war. He wrote a final letter admitting he had come to rule the world but failed. He was buried in a simple grave with no monument, as he had requested. The greatest Mughal emperor died defeated."
+  },
+  "291": {
+    "label": "Vedic period settlements on Ganges plain",
+    "sublabel": "eastward migration from Indus region",
+    "year": -900,
+    "cat": "Ancient India",
+    "what": "By around 900 BCE, the focus of Vedic civilisation had shifted eastward from the Indus-Saraswati region to the Gangetic plains, where iron tools enabled dense forest clearance and intensive agriculture.",
+    "upsc": "Tests the transition from Later Vedic to the Mahajanapada period, the role of iron technology in enabling the Gangetic settlements, and the geographical shift from Punjab to Bihar-UP as the centre of Indian civilisation.",
+    "remember": "Iron tools changed everything. The Gangetic forest was too dense to clear with stone or bronze tools. Iron axes and ploughs made the Gangetic plain cultivable for the first time. The same river plain became the heartland of the Maurya, Gupta, and later Mughal empires."
+  },
+  "292": {
+    "label": "Ajatashatru expanded Magadha",
+    "sublabel": "defeated Vajji republic and Kashi",
+    "year": -492,
+    "cat": "Ancient India",
+    "what": "Ajatashatru (r. 492-460 BCE) expanded Magadha by defeating the Vajji confederacy (Vaishali) and Kashi. He built the fort of Rajgir and began Pataliputra, which became the Mauryan capital.",
+    "upsc": "Tests Magadha's rise as the dominant Mahajanapada, the defeat of the Vajji republic (Vaishali), and the founding of Pataliputra. Both Buddha and Mahavira lived during Ajatashatru's reign.",
+    "remember": "Ajatashatru killed his father Bimbisara to seize the throne. Both the Buddha and Mahavira were alive during his reign and he met both of them. His reign marks the point when Magadha became the dominant power that would eventually become the Maurya Empire."
+  },
+  "293": {
+    "label": "Chandragupta Maurya met Alexander's successors",
+    "sublabel": "Treaty with Seleucus, married Greek princess",
+    "year": -305,
+    "cat": "Ancient India",
+    "what": "Chandragupta Maurya defeated Seleucus Nicator (Alexander's general who took over eastern territories) around 305 BCE. The peace treaty involved Seleucus ceding eastern territories in exchange for 500 war elephants and a royal marriage alliance.",
+    "upsc": "Tests the Maurya-Seleucid Treaty as India's first recorded diplomatic agreement with a Western power, Megasthenes (Seleucus's ambassador) whose Indica is a primary source for Mauryan India, and the scale of territory ceded.",
+    "remember": "Seleucus gave Chandragupta his daughter in marriage and got 500 war elephants. He then used those elephants to defeat his rivals in the west. Chandragupta turned a military defeat into a diplomatic masterpiece. The elephants went on to decide battles across the Mediterranean."
+  },
+  "294": {
+    "label": "Megasthenes visited Pataliputra",
+    "sublabel": "wrote Indica, primary source for Mauryan India",
+    "year": -302,
+    "cat": "Ancient India",
+    "what": "Megasthenes, the Greek ambassador sent by Seleucus to Chandragupta's court, lived in Pataliputra and wrote the Indica, the first detailed Western account of India. The original is lost but survives in fragments quoted by later authors.",
+    "upsc": "Tests Indica as a primary source for Mauryan administration, Megasthenes's description of Pataliputra's city administration, and his observations about the caste system, army, and agricultural practices.",
+    "remember": "Megasthenes described Pataliputra as a city of 400,000 people with walls and 570 towers, surrounded by a moat. No city in Europe at that time approached this scale. He also noted there was no slavery in India, which puzzled his Greek readers who considered slavery natural."
+  },
+  "295": {
+    "label": "Kanishka I convened Fourth Buddhist Council",
+    "sublabel": "Kushan emperor, spread Buddhism to Central Asia",
+    "year": 100,
+    "cat": "Ancient India",
+    "what": "Kanishka I, the great Kushan emperor, convened the Fourth Buddhist Council in Kashmir around 100 CE to resolve disputes in Buddhist doctrine. He patronised Buddhism and spread it along the Silk Road to Central Asia and China.",
+    "upsc": "Tests the four Buddhist councils (First: Rajgriha; Second: Vaishali; Third: Pataliputra under Ashoka; Fourth: Kashmir under Kanishka), the Mahayana-Hinayana split, and Kanishka's role in spreading Buddhism internationally.",
+    "remember": "Kanishka's coins are the first to depict the Buddha in human form. Before Kanishka, Buddhist art showed the Buddha only through symbols (footprints, umbrella, wheel). The human image of Buddha that the world knows was created during the Kushana period."
+  },
+  "296": {
+    "label": "Samudragupta's conquests",
+    "sublabel": "Allahabad Pillar Inscription describes all India campaign",
+    "year": 350,
+    "cat": "Ancient India",
+    "what": "Samudragupta (r. 335-375 CE) conducted a military campaign across India described in the Allahabad Pillar Inscription by his court poet Harishena. He is called the Napoleon of India for his conquests.",
+    "upsc": "Tests the Allahabad Pillar Inscription as a primary source, Samudragupta's policy of different treatment for different regions (annexation in the north, tribute in the south), and his title Kaviraja (king of poets).",
+    "remember": "The Allahabad Pillar was originally an Ashokan pillar. Samudragupta had his achievements inscribed on Ashoka's pillar. Then Jahangir added his own inscription. Then the British added information about their surveys. One pillar holds 2000 years of Indian history."
+  },
+  "297": {
+    "label": "Fa Hien visited India",
+    "sublabel": "Chinese pilgrim documented Gupta period",
+    "year": 405,
+    "cat": "Ancient India",
+    "what": "The Chinese Buddhist pilgrim Fa Hien (Faxian) visited India from 399-414 CE during the reign of Chandragupta II, documenting Buddhism, the Gupta administration, and daily life. His account is a primary source for the Gupta period.",
+    "upsc": "Tests Fa Hien alongside Hieun Tsang as the two key Chinese pilgrims. Fa Hien documented the Gupta Golden Age, describing a peaceful prosperous society with no capital punishment and unlocked houses.",
+    "remember": "Fa Hien described Gupta India as a land where people left their doors unlocked and no one needed to register travel. He had walked from China through Central Asia and was astonished by the prosperity. His account is the closest thing we have to a tourist's view of ancient India."
+  },
+  "298": {
+    "label": "Chalukya dynasty founded",
+    "sublabel": "Badami Chalukyas dominant in Deccan",
+    "year": 543,
+    "cat": "Ancient India",
+    "what": "Pulakesi I founded the Chalukya dynasty at Badami (Vatapi) in 543 CE. The Badami Chalukyas became the dominant power in the Deccan, famously defeating Harsha's northward expansion.",
+    "upsc": "Tests Pulakesi II's defeat of Harsha's southward expansion (634 CE), the Chalukya-Pallava conflicts, and the Aihole inscription by court poet Ravikirti which describes Pulakesi II's achievements.",
+    "remember": "Pulakesin II's success against Harsha made the Narmada an important political boundary between northern and southern spheres."
+  },
+  "299": {
+    "label": "Rashtrakuta dynasty at peak",
+    "sublabel": "Kailasa Temple at Ellora commissioned",
+    "year": 757,
+    "cat": "Ancient India",
+    "what": "The Rashtrakuta dynasty, dominant in the Deccan from the 8th to 10th centuries, reached its cultural peak under Dantidurga and his successors. Krishna I commissioned the monolithic Kailasa Temple at Ellora around 757 CE.",
+    "upsc": "Tests the Kailasa Temple as the world's largest monolithic rock-cut temple, carved downward from a single cliff face, and the Rashtrakutas as patrons of both Hindu and Jain art alongside their political dominance.",
+    "remember": "The Kailasa Temple at Ellora was carved from the top down. They first cut the top of the rock, then carved downward, removing 200,000 tonnes of rock to reveal the temple. It was completed in less than 20 years. Modern engineers say they could not replicate it today."
+  },
+  "300": {
+    "label": "Adi Shankaracharya's Advaita Vedanta",
+    "sublabel": "philosophical consolidation of Hinduism",
+    "year": 788,
+    "cat": "Ancient India",
+    "what": "Adi Shankaracharya (788-820 CE) travelled across India consolidating Hindu philosophy through his Advaita Vedanta doctrine (non-dualism) and establishing four mathas at Sringeri, Puri, Dwarka and Badrinath.",
+    "upsc": "Tests Advaita Vedanta as a philosophical system, the four mathas as organisational tools to spread Hinduism, and Shankaracharya's role in reviving Hinduism at a time when Buddhism was the dominant intellectual tradition.",
+    "remember": "Shankaracharya died at 32. In 32 years he walked across the entire Indian subcontinent multiple times, wrote major philosophical texts, and established four institutions that still exist 1200 years later. He is considered the most influential Hindu philosopher in history."
+  },
+  "301": {
+    "label": "Rajendra Chola's naval expedition",
+    "sublabel": "conquered Sri Vijaya, expanded to Southeast Asia",
+    "year": 1025,
+    "cat": "Ancient India",
+    "what": "Rajendra Chola launched a massive naval expedition in 1025 CE that conquered parts of the Sri Vijaya empire (Malay Peninsula and Sumatra) and established Chola suzerainty over Southeast Asian trade routes.",
+    "upsc": "Tests Rajendra Chola's naval power as the greatest in Indian history, his title Gangaikonda (the one who brought the Ganga), and the Chola cultural influence on Southeast Asian art, religion, and political systems visible today.",
+    "remember": "Rajendra Chola's navy crossed 2000 km of open ocean to defeat Sri Vijaya. The Hindu temples of Angkor Wat and throughout Southeast Asia trace their architectural origins to the Chola style. India's maritime legacy is carried in every Thai, Cambodian and Balinese temple."
+  },
+  "302": {
+    "label": "Second Urbanisation in Gangetic plains",
+    "sublabel": "cities emerged alongside Mahajanapadas",
+    "year": -600,
+    "cat": "Ancient India",
+    "what": "Around 600 BCE, the Gangetic plains saw the emergence of new urban centres, marking India's Second Urbanisation (after the Indus Valley). Cities like Varanasi, Rajgir, Vaishali, and Champa developed as centres of trade and culture.",
+    "upsc": "Tests the distinction between the First Urbanisation (Indus Valley) and Second Urbanisation (Gangetic cities), the role of iron tools in enabling dense settlement, and the connection to the Mahajanapada period.",
+    "remember": "Varanasi is continuously inhabited for at least 3000 years, making it one of the oldest continuously inhabited cities on earth. Mark Twain wrote: Benares is older than history, older than tradition, older even than legend, and looks twice as old as all of them put together."
+  },
+  "303": {
+    "label": "Vakataka dynasty and Gupta alliance",
+    "sublabel": "Chandragupta II's daughter married Vakataka king",
+    "year": 380,
+    "cat": "Ancient India",
+    "what": "The Vakataka dynasty of the Deccan formed a matrimonial alliance with the Guptas through Chandragupta II's daughter Prabhavati Gupta. This alliance extended Gupta influence into the Deccan without military conquest.",
+    "upsc": "Tests the Gupta strategy of matrimonial alliances for expansion, the Vakataka patronage of the Ajanta cave paintings (commissioned during this period), and the Gupta-Vakataka cultural synthesis.",
+    "remember": "The Ajanta cave paintings were commissioned by Vakataka patrons during the Gupta period. The artists who painted them created the greatest pre-Renaissance narrative painting tradition in the world. These caves were then sealed and forgotten until a British soldier rediscovered them in 1819."
+  },
+  "304": {
+    "label": "Huna invasions and Gupta decline",
+    "sublabel": "White Huns broke Gupta power in northwest",
+    "year": 455,
+    "cat": "Ancient India",
+    "what": "The Huna (White Hun) invasions beginning around 455 CE under Toramana and then Mihirakula devastated northwestern India and broke the Gupta Empire's hold over its northern provinces, accelerating its decline.",
+    "upsc": "Tests the Huna invasions alongside the weak successors and the Vakataka separation as causes of Gupta decline, and that Yashodharman of Malwa eventually defeated Mihirakula, the most brutal Huna ruler.",
+    "remember": "Mihirakula was described by contemporaries as the most cruel ruler India had ever seen. He reportedly threw elephants off cliffs to watch them die. He was eventually defeated and humiliated by a regional king. The Gupta Empire never recovered from the Huna century."
+  },
+  "305": {
+    "label": "Pallava dynasty established at Kanchipuram",
+    "sublabel": "major power in Tamil region",
+    "year": 275,
+    "cat": "Ancient India",
+    "what": "The Pallava dynasty established its capital at Kanchipuram around the 3rd century CE and became the dominant power in the Tamil region for 500 years, creating the Dravidian architectural style.",
+    "upsc": "Tests the Pallava contribution to Dravidian architecture (rathas, mandapas, structural temples), the Pallava-Chalukya conflicts, and the Grantha script that the Pallavas developed, which became the parent script for Tamil, Kannada, and Southeast Asian scripts.",
+    "remember": "Pallava-era scripts influenced writing systems across Southeast Asia. That is one of those quiet facts with huge civilisational reach."
+  },
+  "306": {
+    "label": "Kalidasa wrote Meghadutam",
+    "sublabel": "greatest Sanskrit lyric poem",
+    "year": 415,
+    "cat": "Ancient India",
+    "what": "Kalidasa composed Meghadutam (The Cloud Messenger) during the Gupta period, a lyric poem in which a yaksha exiled from his beloved asks a cloud to carry a message to her. It is considered the pinnacle of Sanskrit lyric poetry.",
+    "upsc": "Tests Kalidasa as the greatest Sanskrit poet and playwright, the Gupta period as the Golden Age of Sanskrit literature, and specific works: Meghadutam, Raghuvamsa, Kumarasambhava, Abhijnanashakuntalam, Vikramorvasiyam.",
+    "remember": "Meghadutam is about a cloud being asked to carry a love message 1000 km from central India to the Himalayas. The poem describes the entire Indian landscape along the cloud's route. Ancient Indians created the world's first poetic geography of their own land."
+  },
+  "307": {
+    "label": "Chandrashekhar Azad's last stand",
+    "sublabel": "died in Alfred Park, Allahabad",
+    "year": 1931,
+    "cat": "Personalities",
+    "what": "Chandrashekhar Azad, leader of the Hindustan Socialist Republican Association, died on 27 February 1931 in Alfred Park (now Azad Park), Allahabad. Surrounded by British police, he shot himself rather than be captured.",
+    "upsc": "Tests HSRA alongside Bhagat Singh's activities, Azad's vow to never be arrested (he kept it), and his role in organising the revolutionary movement that ran parallel to Gandhi's non-violent independence struggle.",
+    "remember": "Azad had sworn as a teenager that he would never be arrested. He kept his word by shooting himself. He was 24. He had told Bhagat Singh: the day I am arrested, consider me dead. He was never arrested."
+  },
+  "308": {
+    "label": "Sarojini Naidu became Congress president",
+    "sublabel": "first woman president of Indian National Congress",
+    "year": 1925,
+    "cat": "Personalities",
+    "what": "Sarojini Naidu became the first woman President of the Indian National Congress at the Kanpur session in 1925. Known as the Nightingale of India, she was also a poet and later became Governor of Uttar Pradesh.",
+    "upsc": "Tests her as first woman INC president, her participation in Salt March, and her role as first woman Governor (of UP) in independent India. Also tested as a poet and women's rights advocate.",
+    "remember": "Sarojini Naidu was called the Nightingale of India for her poetry but she called herself a sparrow that had been mistaken for a nightingale. She told Gandhi that it cost a lot of money to keep him in poverty, referring to the expensive arrangements made for his simple lifestyle."
+  },
+  "309": {
+    "label": "Dadabhai Naoroji's Drain Theory",
+    "sublabel": "proved British were draining India's wealth",
+    "year": 1867,
+    "cat": "Personalities",
+    "what": "Dadabhai Naoroji (1825-1917), called the Grand Old Man of India, presented his Drain Theory in 1867, demonstrating through statistical analysis that Britain was systematically extracting India's wealth through home charges, trade imbalances, and civil service salaries.",
+    "upsc": "Tests the Drain Theory as the first systematic economic critique of colonialism, Naoroji's Poverty and Un-British Rule in India (1901), and his election to the British Parliament (first Indian MP, 1892).",
+    "remember": "Naoroji was elected to the British Parliament in 1892, representing Finsbury, London. A British MP calling for Indian independence while sitting in the House of Commons was so embarrassing to the British government that Lord Salisbury called him a black man. The insult backfired enormously."
+  },
+  "310": {
+    "label": "Gopal Ganesh Agarkar founded Sudharak",
+    "sublabel": "rationalist reformer, opponent of Tilak",
+    "year": 1888,
+    "cat": "Personalities",
+    "what": "Gopal Ganesh Agarkar (1856-1895) founded the Marathi journal Sudharak in 1888, arguing that social reform must precede political freedom. He was Tilak's co-founder of the New English School but disagreed sharply on the priority of reform vs. independence.",
+    "upsc": "Tests the Agarkar-Tilak debate as the defining 19th century argument in Indian public life: social reform first (Agarkar) or political freedom first (Tilak). This debate influenced Gandhi and continues in modern Indian public discourse.",
+    "remember": "Agarkar and Tilak founded a school together, lived in the same house, and became opponents. Agarkar said: what use is independence if casteism remains? Tilak said: what use is reform without freedom? Both were right. Independent India is still having this argument."
+  },
+  "311": {
+    "label": "Maulana Abul Kalam Azad",
+    "sublabel": "youngest Congress president, opposed partition",
+    "year": 1888,
+    "cat": "Personalities",
+    "what": "Maulana Abul Kalam Azad (1888-1958) became Congress President at 35, the youngest ever, and served twice. He fiercely opposed partition, arguing that Islam was as much at home in India as Hinduism. He became India's first Education Minister.",
+    "upsc": "Tests his role in the Khilafat Movement, his opposition to partition alongside Gandhi, his 6-year Congress presidency (1940-1946), and his role in establishing IITs and founding the UGC as Education Minister.",
+    "remember": "Azad predicted that partition would be a tragedy for Muslims. He said Muslims who went to Pakistan would be second class citizens in a Muslim country, while Muslims who stayed in India would be treated with suspicion. He was correct on both counts. His book India Wins Freedom was released 30 years after his death."
+  },
+  "312": {
+    "label": "Annie Besant founded Home Rule League",
+    "sublabel": "Irish activist demanded Indian self-rule",
+    "year": 1916,
+    "cat": "Personalities",
+    "what": "Annie Besant (1847-1933), an Irish activist and Theosophist leader, founded the Indian Home Rule League in 1916, advocating for Indian self-governance within the British Empire. She was also the first woman Congress president (1917).",
+    "upsc": "Tests Besant alongside Tilak (who founded a parallel Home Rule League the same year), her role as first woman Congress president, and the Home Rule Movement as a bridge between the moderate and extremist phases of Congress.",
+    "remember": "Annie Besant was an Irish woman who became more Indian than most Indians. She learned Sanskrit, translated Hindu scriptures, and fought for Indian independence. She was interned by the British in 1917 for her activities. The internment made her a nationalist hero overnight."
+  },
+  "313": {
+    "label": "C.V. Raman discovered Raman Effect",
+    "sublabel": "first Indian to win Nobel Prize in Science",
+    "year": 1928,
+    "cat": "Personalities",
+    "what": "C.V. Raman discovered the Raman Effect (inelastic scattering of light) on 28 February 1928. He won the Nobel Prize in Physics in 1930, becoming the first Asian to win a Nobel Prize in science.",
+    "upsc": "Tests the Raman Effect, National Science Day observed on 28 February, and Raman's founding of the Raman Research Institute in Bangalore.",
+    "remember": "Raman made the discovery using equipment costing just Rs. 200. He had been told he needed expensive European laboratories to do serious science. He proved them wrong. National Science Day is celebrated on 28 February every year to commemorate this moment."
+  },
+  "314": {
+    "label": "Homi Bhabha established TIFR",
+    "sublabel": "founded India's atomic research programme",
+    "year": 1945,
+    "cat": "Personalities",
+    "what": "Homi Jehangir Bhabha established the Tata Institute of Fundamental Research (TIFR) in Bombay in 1945 and later founded the Bhabha Atomic Research Centre (BARC), creating the foundation for India's nuclear programme.",
+    "upsc": "Tests the Three Stage Nuclear Power Programme Bhabha designed (thorium-based), BARC, TIFR, and his role as chairman of India's Atomic Energy Commission until his death in a plane crash in 1966.",
+    "remember": "Bhabha designed India's nuclear programme around thorium because India has 25% of the world's thorium reserves but very little uranium. If the programme he designed is fully implemented, India's energy needs could be met for thousands of years. The third stage is still being developed."
+  },
+  "315": {
+    "label": "Jayaprakash Narayan's Total Revolution",
+    "sublabel": "JP Movement against Indira Gandhi's Emergency",
+    "year": 1974,
+    "cat": "Personalities",
+    "what": "Jayaprakash Narayan (JP) launched his Total Revolution movement in 1974, calling for transformation of all aspects of Indian society. His Bihar movement against corruption became the catalyst for the 1975 Emergency.",
+    "upsc": "Tests JP's Total Revolution concept (political, social, economic, cultural, educational, moral, intellectual revolutions together), his call to the police and military to disobey unjust orders, and the formation of the Janata Party that defeated Indira in 1977.",
+    "remember": "JP told the army and police publicly that they were not bound to follow unconstitutional orders. This was the speech that Indira Gandhi used as justification for declaring Emergency. Indira feared a repeat of 1917 Russia. JP was arrested within hours of the Emergency declaration."
+  },
+  "316": {
+    "label": "B.R. Ambedkar converted to Buddhism",
+    "sublabel": "mass conversion in Nagpur, 600,000 followers",
+    "year": 1956,
+    "cat": "Personalities",
+    "what": "On 14 October 1956, B.R. Ambedkar converted to Buddhism at a public ceremony in Nagpur along with approximately 600,000 of his followers. He died six weeks later on 6 December 1956.",
+    "upsc": "Tests the date and significance of the conversion, the Nagpur ceremony, Ambedkar's reasons (Buddhism rejected caste, was indigenous to India), and the Navayana Buddhism he practiced as distinct from traditional Buddhism.",
+    "remember": "Ambedkar had announced he would not die a Hindu 21 years before he converted. He kept his word. He chose Buddhism because it was born in India, had no caste system, and emphasised reason over revelation. He died six weeks after the conversion, having fulfilled his final vow."
+  },
+  "317": {
+    "label": "Vinoba Bhave's Bhoodan Movement",
+    "sublabel": "land gift movement, 4 million acres donated",
+    "year": 1951,
+    "cat": "Personalities",
+    "what": "Vinoba Bhave launched the Bhoodan (land gift) movement in 1951 by walking through India asking landowners to voluntarily donate land to the landless. He collected pledges for over 4 million acres.",
+    "upsc": "Tests Bhoodan as a Gandhian alternative to land reform through legislation, the Gramdan (village gift) variant, and why it ultimately failed to redistribute meaningful land despite the large acreage pledged.",
+    "remember": "Vinoba walked 70,000 km over 13 years collecting land pledges. Much of what was pledged was unusable land. Landowners gave away their worst fields. The movement showed the limits of voluntary redistribution against structural inequality."
+  },
+  "318": {
+    "label": "Ela Bhatt founded SEWA",
+    "sublabel": "Self Employed Women's Association, Ahmedabad",
+    "year": 1972,
+    "cat": "Personalities",
+    "what": "Ela Bhatt founded the Self Employed Women's Association (SEWA) in Ahmedabad in 1972, organising women workers in the informal economy , rag pickers, street vendors, home-based workers , into a trade union.",
+    "upsc": "Tests SEWA as India's largest trade union for informal sector workers, Ela Bhatt's contribution to microfinance and women's economic empowerment, and SEWA Bank as a pioneer of financial inclusion for poor women.",
+    "remember": "SEWA Bank was started with Rs. 10 membership fees from rag pickers and vegetable vendors. It is now a cooperative bank with hundreds of thousands of members. The women who swept streets and sold vegetables created their own bank because no commercial bank would serve them."
+  },
+  "319": {
+    "label": "M.S. Swaminathan Green Revolution",
+    "sublabel": "father of India's Green Revolution",
+    "year": 1966,
+    "cat": "Personalities",
+    "what": "M.S. Swaminathan collaborated with Norman Borlaug to develop High Yielding Variety wheat seeds adapted to Indian conditions, launching the Green Revolution that transformed India from a food-deficit to food-surplus nation.",
+    "upsc": "Tests Swaminathan's specific contribution (adapting Borlaug's Mexican wheat to Indian conditions), his Swaminathan Commission Report (2004-2006) on farmer welfare, and the criticism that the Green Revolution's ecological costs were not anticipated.",
+    "remember": "Swaminathan said later in life that the Green Revolution was a mixed blessing. He had saved millions from starvation but created dependence on chemical fertilisers and depleted groundwater. He spent the second half of his career designing the Evergreen Revolution to fix what the first revolution broke."
+  },
+  "320": {
+    "label": "Ratan Tata modernised Tata Group",
+    "sublabel": "acquired Jaguar Land Rover and Corus Steel",
+    "year": 1991,
+    "cat": "Personalities",
+    "what": "Ratan Tata took over as chairman of the Tata Group in 1991 and transformed it from a domestic conglomerate into a global company, acquiring Tetley (2000), Corus Steel (2007), and Jaguar Land Rover (2008).",
+    "upsc": "Tests Tata Group's global acquisitions as examples of Indian corporate internationalisation, the significance of an Indian company buying British and European icons, and Ratan Tata's role in India's economic liberalisation era.",
+    "remember": "Tata bought Jaguar Land Rover from Ford for 2.3 billion dollars in 2008. Ford had paid 2.5 billion for it in 1989 and was desperate to sell. The company the British created to symbolise British engineering prestige is now owned by an Indian company and makes most of its profits in China."
+  },
+  "321": {
+    "label": "Milkha Singh won Commonwealth gold",
+    "sublabel": "Flying Sikh, first Indian to win at Commonwealth Games",
+    "year": 1958,
+    "cat": "Personalities",
+    "what": "Milkha Singh won the gold medal in the 400m at the 1958 Commonwealth Games in Cardiff, becoming the first Indian athlete to win gold at the Commonwealth Games. He survived the 1947 partition as an orphan.",
+    "upsc": "Tests Indian sporting history, the 1960 Rome Olympics where Milkha came fourth by 0.1 seconds (still discussed as India's greatest near-miss), and his personal story from partition refugee to national hero.",
+    "remember": "Milkha Singh watched his parents and siblings killed in the 1947 partition. He ran, literally, for his life. He channelled that trauma into athletics. Pakistani General Ayub Khan called him the Flying Sikh after he defeated Pakistan's best runner. The man who survived partition became a symbol of partition's potential."
+  },
+  "322": {
+    "label": "DRDO established",
+    "sublabel": "Defence Research and Development Organisation",
+    "year": 1958,
+    "cat": "Science & Tech",
+    "what": "The Defence Research and Development Organisation (DRDO) was established on 1 January 1958 by integrating existing defence research institutions. It develops military technology including missiles, aircraft, and electronic warfare systems.",
+    "upsc": "Tests DRDO's key programmes: Integrated Guided Missile Development Programme (Agni, Prithvi, Akash, Trishul, Nag), the Tejas light combat aircraft, and the ASAT test in 2019 (Mission Shakti).",
+    "remember": "DRDO launched Mission Shakti on 27 March 2019, destroying a live Indian satellite in low earth orbit with an anti-satellite missile. India became the fourth country after USA, Russia and China to demonstrate this capability. PM Modi announced it in a national address."
+  },
+  "323": {
+    "label": "Polio eradication in India",
+    "sublabel": "WHO certified India polio-free",
+    "year": 2014,
+    "cat": "Science & Tech",
+    "what": "The World Health Organisation certified India polio-free on 27 March 2014, three years after the last reported case in 2011. The Pulse Polio immunisation programme, launched in 1995, was the world's largest public health campaign.",
+    "upsc": "Tests the Pulse Polio programme, the two oral polio vaccine drops given to children under 5, India's status as one of the most difficult countries to eradicate polio due to population density, and the public health significance.",
+    "remember": "India was considered the hardest country in the world to eradicate polio because of dense population, poor sanitation, and high birth rate. When India was certified polio-free, health officials cried. It was the public health equivalent of a moon landing."
+  },
+  "324": {
+    "label": "Param supercomputer developed",
+    "sublabel": "C-DAC broke Western technology blockade",
+    "year": 1991,
+    "cat": "Science & Tech",
+    "what": "India's Centre for Development of Advanced Computing (C-DAC) developed the Param 8000 supercomputer in 1991 after the USA denied India access to Cray supercomputers citing security concerns. It was one of the fastest computers in the world at the time.",
+    "upsc": "Tests the technology denial that motivated domestic development, C-DAC's role in India's IT ecosystem, and the Param series as the foundation of India's high-performance computing capability.",
+    "remember": "The USA denied India Cray supercomputers because it feared India would use them for nuclear weapons design. India built its own in 18 months. The technology denial that was meant to keep India weak gave India a domestic supercomputing industry. It is the recurring pattern of India's technology story."
+  },
+  "325": {
+    "label": "India's first IIT established",
+    "sublabel": "IIT Kharagpur, modelled on MIT",
+    "year": 1951,
+    "cat": "Science & Tech",
+    "what": "IIT Kharagpur was established on 18 August 1951, the first of the Indian Institutes of Technology. It was built on the site of a British detention facility and modelled on MIT, with American technical assistance.",
+    "upsc": "Tests the IIT Act 1961, the Institutes of Technology Act, the expansion to 23 IITs today, and the brain drain debate around IIT graduates emigrating. Nehru called the IITs temples of learning.",
+    "remember": "IIT Kharagpur was built in a former colonial prison where Indian freedom fighters had been detained. The first students studied in cells where nationalists had been imprisoned. Independence had turned a prison into a university."
+  },
+  "326": {
+    "label": "AIIMS established in New Delhi",
+    "sublabel": "premier medical institution, fully residential",
+    "year": 1956,
+    "cat": "Science & Tech",
+    "what": "All India Institute of Medical Sciences (AIIMS) was established in New Delhi in 1956 as an autonomous institution for medical education and research, created by an Act of Parliament.",
+    "upsc": "Tests AIIMS as an Institute of National Importance, the AIIMS Act 1956, the expansion to 22 AIIMS across India, and the institution's role in producing India's medical leadership.",
+    "remember": "AIIMS New Delhi remains the most competitive educational institution in India. More students compete for AIIMS MBBS seats than for any other course in any country. The entrance exam is harder to crack than IIT-JEE. A doctor from AIIMS is recognised globally."
+  },
+  "327": {
+    "label": "Indian Ocean Tsunami",
+    "sublabel": "deadliest natural disaster in recorded history",
+    "year": 2004,
+    "cat": "Science & Tech",
+    "what": "The Indian Ocean earthquake and tsunami on 26 December 2004 killed over 230,000 people across 14 countries. India's Andaman and Nicobar Islands, Tamil Nadu, and Kerala were severely affected.",
+    "upsc": "Tests India's disaster management response, the Indian Ocean Tsunami Warning System established afterward, the Disaster Management Act 2005, and the NDMA (National Disaster Management Authority) created as a result.",
+    "remember": "The tsunami was caused by the third largest earthquake ever recorded. It released energy equivalent to 23,000 Hiroshima bombs. The waves travelled 8000 km. Indian villages that had maintained ancient oral traditions warning of water receding before a wave survived. Villages that had lost these traditions did not."
+  },
+  "328": {
+    "label": "Cyclone Amphan devastated Bengal",
+    "sublabel": "strongest cyclone ever recorded in Bay of Bengal",
+    "year": 2020,
+    "cat": "Science & Tech",
+    "what": "Cyclone Amphan made landfall in West Bengal in May 2020 as an extremely severe storm and caused enormous damage in eastern India and Bangladesh.",
+    "upsc": "Tests the IMD's warning systems, large-scale evacuation, disaster management, and the growing discussion about climate-linked cyclone intensity in the Bay of Bengal.",
+    "remember": "India evacuated 5 million people before Amphan struck. Despite being the strongest Bay of Bengal cyclone in recorded history, deaths were under 100 due to the evacuation. In 1999 a weaker Odisha cyclone killed 10,000 with no warning system. India's investment in disaster preparedness saved millions of lives."
+  },
+  "329": {
+    "label": "Digital India programme launched",
+    "sublabel": "internet connectivity and e-governance push",
+    "year": 2015,
+    "cat": "Science & Tech",
+    "what": "The Digital India programme was launched on 1 July 2015 with the goal of transforming India into a digitally empowered society through broadband connectivity, digital literacy, and e-governance services.",
+    "upsc": "Tests the three vision areas (digital infrastructure, governance and services on demand, digital empowerment), the BharatNet project for rural broadband, and achievements like UPI's global expansion.",
+    "remember": "India's UPI (Unified Payments Interface) processes more digital transactions than the USA, UK, Germany, France and Australia combined. A programme launched to bring internet to villages created the world's most used digital payment system. India went from cash-only to digital-first in under a decade."
+  },
+  "330": {
+    "label": "Agni-V missile tested",
+    "sublabel": "intercontinental ballistic missile, range 5000 km",
+    "year": 2012,
+    "cat": "Science & Tech",
+    "what": "India successfully tested the Agni-V intercontinental ballistic missile on 19 April 2012, with a range of over 5,000 km capable of reaching most of Asia and parts of Europe. India joined the elite club of nations with ICBM capability.",
+    "upsc": "Tests India's missile programme, strategic deterrence, and the distinction between conventional defence projects and the nuclear-capable delivery system debate.",
+    "remember": "For UPSC, the important thing is strategic reach and deterrence, not one dramatic city-to-city time estimate."
+  },
+  "331": {
+    "label": "National Rural Health Mission launched",
+    "sublabel": "transformed rural healthcare infrastructure",
+    "year": 2005,
+    "cat": "Science & Tech",
+    "what": "The National Rural Health Mission (NRHM) was launched on 5 April 2005 to improve healthcare delivery in rural India through community health workers (ASHA), improved infrastructure, and flexible funding to states.",
+    "upsc": "Tests the ASHA (Accredited Social Health Activist) programme, the district hospital strengthening, and NRHM's merger into the National Health Mission in 2013. IMR and MMR reductions are attributed partly to NRHM.",
+    "remember": "India trained nearly 1 million women as ASHA workers across rural India. These women , most without formal education beyond Class 8 , became the frontline of India's health system. They are credited with saving hundreds of thousands of lives by improving vaccination rates and maternal care."
+  },
+  "332": {
+    "label": "Aadhaar launched",
+    "sublabel": "world's largest biometric identification system",
+    "year": 2009,
+    "cat": "Science & Tech",
+    "what": "The Unique Identification Authority of India (UIDAI) was established in 2009 to create Aadhaar, a 12-digit biometric identity number linked to fingerprints and iris scans. Over 1.3 billion Indians have Aadhaar numbers.",
+    "upsc": "Tests the Aadhaar Act 2016, the Supreme Court's 2018 partial upholding of Aadhaar (constitutional but cannot be mandatory for private services), and the JAM (Jan Dhan-Aadhaar-Mobile) trinity for welfare delivery.",
+    "remember": "Aadhaar is the world's largest biometric database. It has enrolled more people than any identification system in history. The first person to be enrolled was Ranjana Sonawane from Maharashtra in 2010. The system she helped launch eventually covered all 1.3 billion Indians."
+  },
+  "333": {
+    "label": "Mars Orbiter Mission (Mangalyaan)",
+    "sublabel": "India first Asian nation to reach Mars",
+    "year": 2014,
+    "cat": "Science & Tech",
+    "what": "ISRO's Mars Orbiter Mission entered Martian orbit on 24 September 2014, making India the first Asian nation and first in the world to succeed on a debut Mars attempt. The mission cost Rs. 450 crore, less than many Hollywood films.",
+    "upsc": "Tests the mission's scientific objectives (study Martian atmosphere and geology), the cost efficiency of ISRO, India joining the elite club of Mars missions alongside USA, Russia and ESA, and PM Modi's announcement live on television.",
+    "remember": "India reached Mars for Rs. 450 crore. The Hollywood film Gravity, released the same year, had a budget of Rs. 700 crore. ISRO scientists used their mobile phones as processing units to simulate trajectory. The mission operated for 7 years, far beyond its planned 6-month life."
+  },
+  "334": {
+    "label": "India's COVID vaccination programme",
+    "sublabel": "world's largest vaccination drive",
+    "year": 2021,
+    "cat": "Science & Tech",
+    "what": "India launched the world's largest vaccination programme on 16 January 2021, using indigenously developed Covaxin (Bharat Biotech) and licensed Covishield (Oxford-AstraZeneca manufactured by SII). India administered over 2 billion doses.",
+    "upsc": "Tests the two vaccines (Covaxin as India's first indigenously developed COVID vaccine), CoWIN platform for digital vaccination management, the Vaccine Maitri programme that supplied vaccines to 90 countries, and the ICMR-BBT collaboration.",
+    "remember": "India administered 25 million doses in a single day in June 2021, a world record. The CoWIN app that managed bookings was subsequently offered to other countries as a public good. India's digital vaccination infrastructure is now a model being studied globally."
+  },
+  "335": {
+    "label": "India launched first weather satellite INSAT-1B",
+    "sublabel": "revolutionised weather forecasting in India",
+    "year": 1983,
+    "cat": "Science & Tech",
+    "what": "INSAT-1B, launched in 1983, was the first fully operational satellite of the Indian National Satellite System. It provided telecommunications, broadcasting, and meteorological services, transforming weather prediction across India.",
+    "upsc": "Tests the INSAT series as India's first operational satellite system, its role in Doordarshan expansion (television reached rural India via INSAT), and the improvement in cyclone prediction that reduced coastal deaths.",
+    "remember": "Before INSAT, India had no early warning for cyclones. After INSAT, fishermen received weather warnings and coastal communities were evacuated. The same satellite that brought Doordarshan to villages also started saving lives from storms. Technology's highest purpose is when it saves lives."
+  },
+  "336": {
+    "label": "India's first mission to the Moon Chandrayaan-1",
+    "sublabel": "confirmed water molecules on the Moon",
+    "year": 2008,
+    "cat": "Science & Tech",
+    "what": "Chandrayaan-1, launched on 22 October 2008, was India's first lunar mission. Its Moon Impact Probe became the first Indian object to touch the Moon, and the mission's instruments confirmed the presence of water molecules in the lunar soil.",
+    "upsc": "Tests the Moon Impact Probe carrying the Indian flag, the water discovery (NASA's M3 instrument on Chandrayaan-1 made the detection), and the mission's early end due to communication loss in 2009.",
+    "remember": "India found water on the Moon before landing there. The water discovery changed the entire calculus of lunar exploration because water means rocket fuel, oxygen, and potentially habitation. India's first Moon mission made the Moon a more useful place for all humanity."
+  },
+  "337": {
+    "label": "Chandrayaan-2 launched",
+    "sublabel": "Vikram lander failed but orbiter still operational",
+    "year": 2019,
+    "cat": "Science & Tech",
+    "what": "Chandrayaan-2 was launched on 22 July 2019. The Vikram lander lost communication during descent and crashed near the south pole on 7 September 2019. The orbiter however continues to function and has mapped the lunar surface.",
+    "upsc": "Tests the failure analysis (braking software error in last 2.1 km), PM Modi's presence at mission control and public consolation of ISRO scientists, and how the failure led directly to the successful Chandrayaan-3.",
+    "remember": "PM Modi was watching live when Vikram crashed. He walked to the ISRO director and hugged him saying don't worry, India is proud of you. That image, of a leader consoling scientists after failure rather than punishing them, is credited with giving ISRO the confidence to try again and succeed."
+  },
+  "338": {
+    "label": "Jyotiba Phule founded Satyashodhak Samaj",
+    "sublabel": "truth-seeking society against caste oppression",
+    "year": 1873,
+    "cat": "Social Reform",
+    "what": "Jyotirao Phule founded the Satyashodhak Samaj (Truth-Seeker's Society) in Pune in 1873, targeting Brahmanical dominance and caste hierarchy. He and his wife Savitribai Phule had already opened schools for girls and lower castes.",
+    "upsc": "Tests Phule's Gulamgiri (Slavery), the first school for girls opened by Savitribai Phule in 1848, and Phule's connection to both Ambedkar's anti-caste movement and the Dravidian movement.",
+    "remember": "Savitribai Phule was pelted with stones and dung on her way to teach girls every morning. She carried a spare sari to change into after reaching school. She is now on a postage stamp. The people who pelted her are forgotten."
+  },
+  "339": {
+    "label": "Child Marriage Restraint Act",
+    "sublabel": "Sarda Act, minimum marriage age set",
+    "year": 1929,
+    "cat": "Social Reform",
+    "what": "The Child Marriage Restraint Act of 1929, also called the Sarda Act (after its sponsor Harbilas Sarda), set the minimum age of marriage at 18 for men and 14 for women. It was the first national legislation against child marriage.",
+    "upsc": "Tests the Sarda Act alongside the Age of Consent Act 1891 as steps in legislating against child marriage, subsequent amendments (1978 raising ages to 21 and 18), and the Prohibition of Child Marriage Act 2006.",
+    "remember": "When the Sarda Act was passed, most Indian girls were married before puberty. The average age of marriage for girls in some communities was 5-7 years. Sarda fought for the bill for years against fierce orthodox opposition. The minimum age he achieved was still 14, a compromise from the 16 he sought."
+  },
+  "340": {
+    "label": "Savitribai Phule opened first girls' school",
+    "sublabel": "Pune, first woman teacher in India",
+    "year": 1848,
+    "cat": "Social Reform",
+    "what": "Savitribai Phule and Jyotirao Phule opened India's first school for girls in Pune on 1 January 1848. Savitribai became India's first woman teacher, defying violent opposition from those who considered women's education taboo.",
+    "upsc": "Tests Savitribai Phule as a pioneer of women's education, the intersection of gender and caste in education reform, and her role alongside her husband in the broader Satyashodhak movement.",
+    "remember": "Savitribai is now officially recognised as India's first woman teacher. A university is named after her. She lived in the same century as Queen Victoria but achieved something Victoria never did: she personally taught girls from the lowest castes how to read, one by one, daily, against violent opposition."
+  },
+  "341": {
+    "label": "Gopal Krishna Gokhale founded Servants of India Society",
+    "sublabel": "dedicated public servants for social work",
+    "year": 1905,
+    "cat": "Social Reform",
+    "what": "Gopal Krishna Gokhale founded the Servants of India Society in Pune in 1905, training individuals to dedicate their lives to public service by taking a vow of poverty and working on education, healthcare, and social causes.",
+    "upsc": "Tests Gokhale as the Moderate leader who was Gandhi's political mentor, the Society as an organisational model, and his differences with Tilak on the priority of social reform versus political independence.",
+    "remember": "Gandhi spent a year in India after returning from South Africa at Gokhale's insistence, travelling and learning before joining politics. Gokhale told him: you do not know India. Go see it first. Gandhi obeyed. The India Gandhi came to know through those travels shaped his entire political strategy."
+  },
+  "342": {
+    "label": "CSDS and community development programme",
+    "sublabel": "India's first community development blocks",
+    "year": 1952,
+    "cat": "Social Reform",
+    "what": "India launched its Community Development Programme in October 1952, creating community development blocks across rural India to improve agriculture, education, health, and social life through trained extension workers.",
+    "upsc": "Tests the CDP as the predecessor of Panchayati Raj, the Balwant Rai Mehta Committee (1957) that recommended replacing CDP with elected Panchayats, and the programme's ultimate failure to achieve participation.",
+    "remember": "The Community Development Programme was India's first attempt at planned rural development. It failed because it relied on government officials rather than elected representatives. The Balwant Rai Mehta Committee's conclusion was simple: you cannot develop people, you can only enable them to develop themselves."
+  },
+  "343": {
+    "label": "Special Marriage Act",
+    "sublabel": "enabled inter-religious marriages without conversion",
+    "year": 1954,
+    "cat": "Social Reform",
+    "what": "The Special Marriage Act of 1954 enabled Indians of any religion to marry without religious conversion or ceremonies, with civil registration. It applies to all Indian citizens regardless of religion.",
+    "upsc": "Tests the Act as enabling inter-faith marriages, its distinction from personal law marriages, the requirement for 30-day notice (subject to challenge as unconstitutional), and its relevance to debates on Uniform Civil Code.",
+    "remember": "The Special Marriage Act is the closest India has to a Uniform Civil Code for marriage. A Hindu marrying a Muslim can use it without either converting. The 30-day public notice requirement was designed for objections but became a tool to harass inter-faith couples."
+  },
+  "344": {
+    "label": "Dowry Prohibition Act",
+    "sublabel": "made giving and taking dowry illegal",
+    "year": 1961,
+    "cat": "Social Reform",
+    "what": "The Dowry Prohibition Act of 1961 made the giving and taking of dowry a criminal offence punishable with imprisonment. Despite the law, dowry deaths continue and the Dowry Prohibition Rules were strengthened in 1985.",
+    "upsc": "Tests Section 498A IPC (dowry harassment), Section 304B IPC (dowry death), the 1983 amendments adding these sections, and India's statistics on dowry deaths which remain among the highest in the world.",
+    "remember": "India records approximately 7,000 dowry deaths per year despite the law. The 1961 Act was well-intentioned but enforcement has been historically weak. The 1983 amendment which added dowry harassment as a cognisable offence was more effective but led to misuse complaints."
+  },
+  "345": {
+    "label": "Maharashtra and Gujarat created",
+    "sublabel": "Bombay bifurcated on linguistic lines",
+    "year": 1960,
+    "cat": "Social Reform",
+    "what": "Maharashtra and Gujarat were carved out of the bilingual Bombay State on 1 May 1960 following the Samyukta Maharashtra movement. The bifurcation completed the linguistic reorganisation of western India.",
+    "upsc": "Tests the Samyukta Maharashtra movement (1956-1960), the deaths of 105 protesters in police firing that preceded the bifurcation, and 1 May as Maharashtra Day and Gujarat Day.",
+    "remember": "Bombay city was the contentious prize. Both Maharashtra and Gujarat claimed it. The States Reorganisation Commission of 1955 had actually recommended keeping Bombay under central administration to avoid the dispute. The demand for Bombay as Maharashtra's capital was only won after 105 people died."
+  },
+  "346": {
+    "label": "Namdeo Dhasal founded Dalit Panthers",
+    "sublabel": "militant Dalit rights movement in Maharashtra",
+    "year": 1972,
+    "cat": "Social Reform",
+    "what": "Namdeo Dhasal founded the Dalit Panthers in Mumbai in 1972, inspired by the American Black Panthers. It was a militant response to continuing atrocities against Dalits despite constitutional protections.",
+    "upsc": "Tests the Dalit Panthers as a response to the failure of constitutional protections to prevent Dalit atrocities, Dhasal's poetry as a vehicle for Dalit assertion, and the broader context of Ambedkar's legacy in post-independence Maharashtra.",
+    "remember": "The Dalit Panthers' manifesto called for land redistribution, equal wages, and an end to untouchability through collective resistance, not just constitutional appeals. It represented the frustration of a generation that had waited 25 years for Ambedkar's constitutional promises to materialise."
+  },
+  "347": {
+    "label": "NALSA judgment on transgender rights",
+    "sublabel": "Supreme Court recognised third gender",
+    "year": 2014,
+    "cat": "Social Reform",
+    "what": "The Supreme Court's NALSA vs Union of India judgment in April 2014 recognised transgender persons as a third gender and directed the government to provide reservations and rights. It was India's most significant LGBTQ rights ruling before Section 377.",
+    "upsc": "Tests the NALSA judgment alongside the Section 377 decriminalisation (2018) as milestones in LGBTQ rights, the self-identification principle it established, and the Transgender Persons Protection of Rights Act 2019.",
+    "remember": "The NALSA judgment was based partly on India's ancient recognition of the hijra community in Mughal court records and Hindu texts. The court said India has historically known a third gender and the Constitution cannot be read to deny them rights. History was used to advance modernity."
+  },
+  "348": {
+    "label": "Section 377 decriminalised",
+    "sublabel": "Supreme Court struck down colonial anti-gay law",
+    "year": 2018,
+    "cat": "Social Reform",
+    "what": "The Supreme Court unanimously struck down Section 377 of the IPC on 6 September 2018, decriminalising consensual same-sex relations between adults. The law dated from 1861 and had been used to harass the LGBTQ community.",
+    "upsc": "Tests the journey from Naz Foundation (2009 Delhi HC struck down 377) to Suresh Kumar Koushal (2013 Supreme Court reinstated 377) to Navtej Johar (2018 Supreme Court final decriminalisation).",
+    "remember": "Section 377 was written by Lord Macaulay in 1860. Britain decriminalised homosexuality in 1967. India was still using a British Victorian-era law to criminalise its citizens 157 years after it was written, 51 years after Britain itself abandoned it."
+  },
+  "349": {
+    "label": "Maternity Benefit Amendment Act",
+    "sublabel": "paid maternity leave extended to 26 weeks",
+    "year": 2017,
+    "cat": "Social Reform",
+    "what": "The Maternity Benefit (Amendment) Act 2017 extended paid maternity leave from 12 to 26 weeks for women working in establishments with 10 or more employees, making India's maternity leave one of the most generous in the world.",
+    "upsc": "Tests the amendment alongside the Sexual Harassment at Workplace Act 2013 and the Maternity Benefit Act 1961 as examples of women's labour rights legislation. India's 26-week leave is compared globally.",
+    "remember": "India's 26 weeks of paid maternity leave is more than the USA (which has zero guaranteed paid leave), more than China (18 weeks), and close to Scandinavian countries. A developing country with a stronger maternity leave policy than the world's largest economy."
+  },
+  "350": {
+    "label": "Lokpal and Lokayukta Act",
+    "sublabel": "anti-corruption ombudsman established",
+    "year": 2013,
+    "cat": "Social Reform",
+    "what": "The Lokpal and Lokayukta Act 2013 established the Lokpal (national anti-corruption ombudsman) and mandated Lokayuktas in states. It was the result of the Anna Hazare-led Jan Lokpal movement that brought millions to the streets.",
+    "upsc": "Tests the Anna Hazare movement (2011), the demands for an independent anti-corruption body, the difference between the demanded Jan Lokpal and the enacted Lokpal, and the first Lokpal appointment in 2019.",
+    "remember": "Anna Hazare's fast in 2011 at Ramlila Maidan brought more people to a protest than any event since independence. The Parliament was forced to pass a resolution supporting the Jan Lokpal concept. The final law was weaker than demanded, but an institution that did not exist was created."
+  },
+  "351": {
+    "label": "Protection of Women from Domestic Violence Act",
+    "sublabel": "first law recognising domestic violence as a crime",
+    "year": 2005,
+    "cat": "Social Reform",
+    "what": "The Protection of Women from Domestic Violence Act 2005 was India's first comprehensive civil law addressing domestic violence, recognising physical, emotional, sexual, verbal, and economic abuse. It created a new class of Protection Officers.",
+    "upsc": "Tests the Act alongside Section 498A IPC and the Dowry Prohibition Act as the framework of women's protection laws, the civil versus criminal remedy distinction, and the residence rights provision that keeps women in the matrimonial home.",
+    "remember": "Before 2005, India had criminal laws against specific acts like dowry harassment, but no law that recognised the pattern of domestic violence as a whole. A wife could complain about being beaten, but the law had no concept of emotional abuse, financial control, or the repeated pattern that constitutes domestic violence."
+  },
+  "352": {
+    "label": "First Amendment to Indian Constitution",
+    "sublabel": "restricted free speech, added Ninth Schedule",
+    "year": 1951,
+    "cat": "Constitutional",
+    "what": "The First Amendment (1951) added reasonable restrictions to free speech, inserted Articles 31A and 31B to protect land reform laws, and created the Ninth Schedule which placed certain laws beyond judicial review.",
+    "upsc": "Tests the Ninth Schedule as one of UPSC's most tested constitutional topics , laws placed in it cannot be challenged in court. The Supreme Court in IR Coelho (2007) held that Ninth Schedule laws can still be reviewed if they violate basic structure.",
+    "remember": "Nehru passed the First Amendment within a year of the Constitution coming into force. The Supreme Court had struck down some land reform laws. Nehru's response was to create a schedule where laws are immune from judicial review. The Constitution was amended to overrule the Supreme Court."
+  },
+  "353": {
+    "label": "Supreme Court established in India",
+    "sublabel": "replaced Federal Court, sat for first time",
+    "year": 1950,
+    "cat": "Constitutional",
+    "what": "The Supreme Court of India was established on 28 January 1950, replacing the Federal Court of India and the Privy Council as the final court of appeal. Justice Harilal Jekisundas Kania became the first Chief Justice.",
+    "upsc": "Tests the Supreme Court's original, appellate, and advisory jurisdiction (Article 143), the distinction from the Federal Court it replaced, and the significance of ending appeals to the Privy Council in London.",
+    "remember": "Until 1950, an Indian's final legal appeal went to the Privy Council in London. Indian citizens were judged ultimately by British lords who had never visited India and knew nothing of Indian conditions. The Supreme Court ended 200 years of external judicial sovereignty."
+  },
+  "354": {
+    "label": "Kesavananda Bharati judgment",
+    "sublabel": "basic structure doctrine established",
+    "year": 1973,
+    "cat": "Constitutional",
+    "what": "The Supreme Court in Kesavananda Bharati vs State of Kerala (1973) held 7-6 that while Parliament can amend any part of the Constitution, it cannot destroy its basic structure. This is the most important constitutional judgment in Indian history.",
+    "upsc": "The single most important judgment for UPSC. It saved Indian democracy from becoming a legal dictatorship.",
+    "remember": "It was decided by just ONE vote (7-6). If one judge had changed his mind, politicians could technically have voted to end democracy or secularism tomorrow."
+  },
+  "355": {
+    "label": "Menaka Gandhi judgment",
+    "sublabel": "expanded Article 21 to include due process",
+    "year": 1978,
+    "cat": "Constitutional",
+    "what": "The Supreme Court in Maneka Gandhi vs Union of India (1978) held that the right to life under Article 21 includes the right to live with human dignity and cannot be taken away by any arbitrary procedure. It expanded Article 21 to cover due process.",
+    "upsc": "Tests the shift from the narrow AK Gopalan (1950) interpretation to the expansive Maneka Gandhi reading of Article 21, and how subsequent judgments used Maneka to derive rights to education, health, livelihood, and shelter from Article 21.",
+    "remember": "The government had impounded Maneka Gandhi's passport without giving reasons. The Supreme Court said the right to travel abroad is part of personal liberty under Article 21, and any procedure curtailing it must be fair, just, and reasonable. That last phrase opened Article 21 to become the most expansive right in the Constitution."
+  },
+  "356": {
+    "label": "SR Bommai judgment",
+    "sublabel": "restricted misuse of Article 356, President's Rule",
+    "year": 1994,
+    "cat": "Constitutional",
+    "what": "The Supreme Court in SR Bommai vs Union of India (1994) held that the imposition of President's Rule under Article 356 is subject to judicial review and that a dismissed state government must be allowed to prove its majority on the floor of the House.",
+    "upsc": "Tests Article 356 (President's Rule), the Sarkaria Commission recommendations incorporated in the judgment, and the floor test requirement. Article 356 had been used 125 times by 1994, often for political purposes.",
+    "remember": "President's Rule was used 90 times between 1950 and 1994, almost always to dismiss opposition-party state governments. The SR Bommai judgment made this politically harder. After 1994, President's Rule has been imposed fewer than 20 times. One Supreme Court judgment changed how India's federal system works."
+  },
+  "357": {
+    "label": "Right to Property removed as Fundamental Right",
+    "sublabel": "44th Amendment, became legal right under Article 300A",
+    "year": 1978,
+    "cat": "Constitutional",
+    "what": "The 44th Constitutional Amendment (1978) removed the Right to Property from the list of Fundamental Rights (Article 19 and Article 31) and made it a constitutional right under Article 300A , enforceable but not a fundamental right.",
+    "upsc": "Tests the progression: Property as FR in original Constitution, curtailed by 1st and 4th Amendments, removed entirely by 44th Amendment. Article 300A still protects property from arbitrary acquisition without compensation.",
+    "remember": "Property was the most litigated Fundamental Right in India's first 28 years. Zamindars used it to challenge land reform. The government used successive amendments to restrict it. Eventually Indira Gandhi removed it entirely. Property went from being among the most sacred rights to not being a fundamental right at all."
+  },
+  "358": {
+    "label": "Vishaka Guidelines on sexual harassment",
+    "sublabel": "Supreme Court created workplace law before Parliament",
+    "year": 1997,
+    "cat": "Constitutional",
+    "what": "The Supreme Court in Vishaka vs State of Rajasthan (1997) laid down binding guidelines on prevention of sexual harassment at the workplace, filling a legislative vacuum. These guidelines had the force of law until Parliament passed the POSH Act in 2013.",
+    "upsc": "These guidelines had the force of law until the POSH Act was finally passed in 2013.",
+    "remember": "The Vishaka Guidelines came from a case where a woman was gang-raped for stopping a child marriage. The perpetrators were acquitted. The outrage led to a PIL. The Supreme Court, finding no law on workplace sexual harassment, simply wrote one. A court created law because Parliament had failed to."
+  },
+  "359": {
+    "label": "NJAC struck down, collegium system upheld",
+    "sublabel": "Supreme Court struck down its own replacement",
+    "year": 2015,
+    "cat": "Constitutional",
+    "what": "The Supreme Court struck down the National Judicial Appointments Commission (NJAC) Act in 2015, which would have given the executive a role in judicial appointments. The collegium system (judges appointing judges) was upheld.",
+    "upsc": "Tests the collegium system (no constitutional basis, evolved through Three Judges Cases), the NJAC as the government's attempt to reclaim appointment power, and the tension between judicial independence and executive accountability.",
+    "remember": "The NJAC had been passed unanimously by Parliament and ratified by all state legislatures , the most broadly supported constitutional amendment in recent history. The Supreme Court struck it down anyway. Five judges overruled every elected representative in the country. Whether that is judicial independence or judicial overreach is the central debate."
+  },
+  "360": {
+    "label": "Puttaswamy judgment: Privacy as Fundamental Right",
+    "sublabel": "nine-judge bench, unanimous ruling",
+    "year": 2017,
+    "cat": "Constitutional",
+    "what": "In Justice KS Puttaswamy vs Union of India (2017), a nine-judge Supreme Court bench unanimously held that the right to privacy is a fundamental right under Article 21. The case arose from a challenge to the Aadhaar programme.",
+    "upsc": "Tests the right to privacy as part of Article 21, the overruling of MP Sharma (1954) and Kharak Singh (1962) which had held privacy was not a fundamental right, and the subsequent implications for data protection law.",
+    "remember": "India spent 63 years without a constitutional right to privacy. The government had argued in court that Indians have no fundamental right to privacy and the Founding Fathers never intended one. Nine judges disagreed unanimously. The right that authoritarian governments fear most was declared fundamental."
   }
 }
