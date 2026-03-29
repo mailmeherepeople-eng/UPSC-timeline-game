@@ -578,13 +578,44 @@
   /* ── END GAME BUTTON ── */
   .end-game-bar {
     display: none;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    width: var(--tl-card-w);
+    gap: 35px;
   }
   .end-game-bar.visible { display: flex; }
+  .btn-end {
+    width: 140px;
+    height: 55px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Source Sans 3', sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .btn-end-score {
+    background: #1380D0;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(19,128,208,0.35);
+    transition: background 0.15s, transform 0.12s;
+  }
+  .btn-end-score:hover { background: #0f6db5; transform: translateY(-2px); }
+  .btn-end-score:active { transform: translateY(0); }
+  .btn-end-replay {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(8,189,128,0.35);
+    transition: background 0.15s, transform 0.12s;
+  }
+  .btn-end-replay:hover { background: var(--accent-dark); transform: translateY(-2px); }
+  .btn-end-replay:active { transform: translateY(0); }
 
   /* ── TOAST (year pill - sits in the gap between card stage and timeline) ── */
   /* ── GAME OVER ── */
@@ -824,23 +855,33 @@
     filter: contrast(1.3) saturate(1.4);
   }
 
-  /* ── LIFE LOST - DANGER VIDEO ── */
-  #danger-video {
+  /* ── LIFE LOST - HEART BURST ── */
+  /* Each burst div is positioned over its heart at runtime via JS.
+     It starts tiny (scale 0) and expands outward from that exact spot. */
+  .heart-burst {
     position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
+    width: 120px;
+    height: 120px;
     pointer-events: none;
     z-index: 299;
+    transform: translate(-50%, -50%) scale(0);
     opacity: 0;
-    transition: opacity 0.1s ease;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
+    transition: none;
   }
-  #danger-video.visible {
-    opacity: 0.75;
-    filter: contrast(1.2) saturate(1.5) hue-rotate(0deg);
+  .heart-burst.firing {
+    animation: burstExpand 0.6s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+  }
+  @keyframes burstExpand {
+    0%   { transform: translate(-50%, -50%) scale(0.1); opacity: 0.9; }
+    60%  { transform: translate(-50%, -50%) scale(3.5); opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) scale(5);   opacity: 0; }
+  }
+  .heart-burst-vid {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    image-rendering: pixelated;
   }
 
   /* Milestone text label */
@@ -1422,7 +1463,8 @@
     <div class="stage-label" id="stage-label"><strong style="font-size:11px;color:var(--text);">WHEN</strong> DOES THIS EVENT BELONG?</div>
     <div id="current-card-container"></div>
     <div class="end-game-bar" id="end-game-bar">
-      <button class="btn-primary" style="width:100%;" onclick="showScreen('gameover')">See My Score</button>
+      <button class="btn-end btn-end-score" onclick="showScreen('gameover')">See My Score</button>
+      <button class="btn-end btn-end-replay" onclick="startGame()">Replay Game</button>
     </div>
     <div class="drag-hint" id="drag-hint">👆 Press &amp; hold the card, then drag it to the timeline below</div>
     <!-- Dark/light toggle floats bottom-right of card stage -->
@@ -1507,10 +1549,25 @@
   <source src="videos/flamefire.webm" type="video/webm">
 </video>
 
-<!-- WEBM DANGER - life lost effect (only on last life) -->
-<video id="danger-video" muted playsinline preload="auto">
-  <source src="videos/dangerpulse.webm" type="video/webm">
-</video>
+<!-- WEBM DANGER - life lost effect, one per heart position, randomised source -->
+<div class="heart-burst" id="heart-burst-0">
+  <video class="heart-burst-vid" muted playsinline preload="auto">
+    <source src="videos/dangerpulse.webm" type="video/webm">
+    <source src="videos/dangerpulse1.webm" type="video/webm">
+  </video>
+</div>
+<div class="heart-burst" id="heart-burst-1">
+  <video class="heart-burst-vid" muted playsinline preload="auto">
+    <source src="videos/dangerpulse.webm" type="video/webm">
+    <source src="videos/dangerpulse1.webm" type="video/webm">
+  </video>
+</div>
+<div class="heart-burst" id="heart-burst-2">
+  <video class="heart-burst-vid" muted playsinline preload="auto">
+    <source src="videos/dangerpulse.webm" type="video/webm">
+    <source src="videos/dangerpulse1.webm" type="video/webm">
+  </video>
+</div>
 <div class="flame-label" id="flame-label">
   <span class="flame-label-text" id="flame-label-text"></span>
   <span class="flame-label-sub" id="flame-label-sub"></span>
@@ -2161,21 +2218,41 @@ const MILESTONES = {
 };
 
 let _fireTimeout = null;
-let _dangerTimeout = null;
 
-function triggerDangerBurst(){
-  const vid = document.getElementById('danger-video');
+// Available danger pulse webm files — add more as you drop them into videos/
+const _burstTimeouts = [null, null, null];
+
+function triggerDangerBurst(heartIndex){
+  const burstEl = document.getElementById('heart-burst-' + heartIndex);
+  if(!burstEl) return;
+  const vid = burstEl.querySelector('.heart-burst-vid');
+
+  // Position burst over this heart's center
+  const hearts = document.querySelectorAll('#lives-display .heart');
+  const heart = hearts[heartIndex];
+  if(heart){
+    const r = heart.getBoundingClientRect();
+    burstEl.style.left = (r.left + r.width  / 2) + 'px';
+    burstEl.style.top  = (r.top  + r.height / 2) + 'px';
+  }
+
+  // Reset animation
+  burstEl.classList.remove('firing');
+  burstEl.offsetHeight; // reflow
+
+  // Reset video and play — no source swap so it uses preloaded buffer
   vid.currentTime = 0;
-  vid.classList.add('visible');
+  burstEl.classList.add('firing');
   const p = vid.play();
   if(p !== undefined) p.catch(()=>{});
 
-  if(_dangerTimeout) clearTimeout(_dangerTimeout);
-  _dangerTimeout = setTimeout(()=>{
-    vid.classList.remove('visible');
+  // Clear and reset after animation
+  if(_burstTimeouts[heartIndex]) clearTimeout(_burstTimeouts[heartIndex]);
+  _burstTimeouts[heartIndex] = setTimeout(()=>{
+    burstEl.classList.remove('firing');
     vid.pause();
-    _dangerTimeout = null;
-  }, 1800);
+    _burstTimeouts[heartIndex] = null;
+  }, 700);
 }
 
 function triggerMilestoneBurst(streakVal){
@@ -2493,7 +2570,7 @@ function scrollToCard(idx){
 //  SOUND - AudioContext with fetch decode (reliable on GitHub Pages)
 // ═══════════════════════════════════════════════════════════
 let _ac = null;
-const _sfxBuffers = { correct: null, wrong: [], milestone: null, lifeLost: null };
+const _sfxBuffers = { correct: null, wrong: [], milestone: null };
 let _audioReady = false;
 
 function getAC(){
@@ -2519,10 +2596,9 @@ async function initAudio(){
   getAC().resume();
   _sfxBuffers.correct   = await loadSound('sounds/correct.mp3');
   _sfxBuffers.milestone = await loadSound('sounds/milestone.mp3');
-  _sfxBuffers.lifeLost  = await loadSound('sounds/life-lost.mp3');
   const wrongLoads = await Promise.all([1,2,3,4,5,6].map(n => loadSound(`sounds/wrong${n}.mp3`)));
   _sfxBuffers.wrong = wrongLoads.filter(b => b !== null);
-  console.log(`Chronology audio ready. Correct: ${!!_sfxBuffers.correct}, Wrong variants: ${_sfxBuffers.wrong.length}, Milestone: ${!!_sfxBuffers.milestone}, LifeLost: ${!!_sfxBuffers.lifeLost}`);
+  console.log(`Chronology audio ready. Correct: ${!!_sfxBuffers.correct}, Wrong variants: ${_sfxBuffers.wrong.length}, Milestone: ${!!_sfxBuffers.milestone}`);
 }
 
 // Play a loaded buffer
@@ -2530,6 +2606,8 @@ function playBuffer(buffer){
   if(!buffer) return;
   try {
     const ac = getAC();
+    // Always resume - iOS suspends AudioContext aggressively
+    if(ac.state === 'suspended') ac.resume();
     const src = ac.createBufferSource();
     const gain = ac.createGain();
     src.buffer = buffer;
@@ -2552,10 +2630,6 @@ function playWrongSound(){
 
 function playMilestoneSound(){
   playBuffer(_sfxBuffers.milestone);
-}
-
-function playLifeLostSound(){
-  playBuffer(_sfxBuffers.lifeLost);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -2645,13 +2719,11 @@ function handleDrop(dropIdx){
     playWrongSound();
     haptic([60, 40, 60]);
 
-    // On last life: play danger sound after wrong sound finishes (~800ms), then trigger danger video
-    if(lives === 1){
-      setTimeout(()=>{
-        playLifeLostSound();
-        triggerDangerBurst();
-      }, 800);
-    }
+    // Every life lost: burst from the heart that just broke
+    const brokenHeartIdx = lives;
+    setTimeout(()=>{
+      triggerDangerBurst(brokenHeartIdx);
+    }, 800);
     timeline.push({ev:placed,wrong:true});
     const ns=[...timeline].sort((a,b)=>a.ev.year-b.ev.year);
     const pi=ns.findIndex(i=>i.ev.id===placed.id);
