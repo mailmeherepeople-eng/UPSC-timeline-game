@@ -339,16 +339,18 @@
 
   /* ── DRAGGABLE CARD (the one to place) ── */
   .event-card {
-    border:1.5px solid var(--border); border-radius:var(--radius);
-    cursor:grab; user-select:none; box-shadow:var(--shadow-sm);
-    transition:box-shadow 0.15s, transform 0.15s, border-color 0.1s;
-    position:relative; overflow:hidden;
+    border: 1.5px solid var(--border); border-radius: var(--radius);
+    cursor: grab; user-select: none; box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.15s, transform 0.15s, border-color 0.1s;
+    position: relative; overflow: hidden;
     width: var(--tl-card-w);
     height: var(--tl-card-h);
-    flex-shrink:0;
-    animation:slideUp 0.3s ease;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s ease;
     touch-action: none;
-    background: #1a1a1a; /* dark fallback while image loads */
+    background: var(--surface);
   }
   .event-card:hover { box-shadow:var(--shadow-md); transform:translateY(-2px); }
   .event-card.pressing {
@@ -380,105 +382,91 @@
   .card-label { font-family: 'Lora', serif; font-size:12px; font-weight:600; color:var(--text); line-height:1.35; margin-bottom:2px; }
   .card-sublabel { font-size:10px; color:var(--muted); font-style:italic; }
 
-  /* ── CARD IMAGE BACKGROUND (Option B) ── */
-  /* The card bg image sits behind everything.
-     A gradient overlay makes the bottom text readable.
-     The stripe stays at the top as a category colour accent. */
-  .card-bg-img {
-    position: absolute;
-    inset: 0;
+  /* ── CARD LAYOUT: 90px image top, text body bottom ── */
+  .card-img-banner {
+    width: 100%;
+    height: 90px;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+  }
+  .card-img-banner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    z-index: 0;
-    border-radius: calc(var(--radius) - 1px);
+    object-position: center 30%;
   }
-  .card-bg-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    border-radius: calc(var(--radius) - 1px);
-    /* Gradient: transparent top, dark bottom for text */
-    background: linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.08) 0%,
-      rgba(0,0,0,0.30) 45%,
-      rgba(0,0,0,0.82) 100%
-    );
-  }
-  /* Wrong card gets red tint over the overlay */
-  .tl-card.wrong .card-bg-overlay {
-    background: linear-gradient(
-      to bottom,
-      rgba(192,57,43,0.15) 0%,
-      rgba(192,57,43,0.35) 45%,
-      rgba(0,0,0,0.88) 100%
-    );
-  }
-  /* Correct card gets green tint */
-  .tl-card.just-correct .card-bg-overlay {
-    background: linear-gradient(
-      to bottom,
-      rgba(8,189,128,0.12) 0%,
-      rgba(8,189,128,0.25) 45%,
-      rgba(0,0,0,0.82) 100%
-    );
-  }
-  /* Text content sits above the overlay */
-  .card-img-content {
+  .card-img-banner::after {
+    content: '';
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    z-index: 2;
-    padding: 8px 9px 8px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--surface));
+  }
+  .tl-card.wrong .card-img-banner::after {
+    background: linear-gradient(to bottom, transparent, var(--danger-light));
+  }
+  .tl-card.just-correct .card-img-banner::after {
+    background: linear-gradient(to bottom, transparent, var(--success-light));
+  }
+  /* Text body sits below the image, fills remaining space */
+  .card-img-content {
+    flex: 1;
+    padding: 6px 9px 8px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    margin-top: -20px;
   }
   .card-img-cat {
-    font-size: 8px;
+    font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 3px;
+    color: #ffffff;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    flex-shrink: 0;
+    margin-bottom: 3px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.7);
   }
   .card-img-label {
     font-family: 'Lora', serif;
     font-size: 11px;
     font-weight: 700;
-    color: #fff;
+    color: var(--text);
     line-height: 1.3;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    margin-bottom: 3px;
-    text-shadow: 0 1px 6px rgba(0,0,0,0.7);
+    flex: 1;
+    text-shadow: 0 1px 4px rgba(255,255,255,0.5);
   }
   .card-img-sublabel {
-    font-size: 8.5px;
-    color: rgba(255,255,255,0.6);
+    font-size: 8px;
+    color: var(--muted);
     font-style: italic;
-    overflow: hidden;
     white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 5px;
+    flex-shrink: 0;
+    margin-top: 3px;
   }
   .card-img-year {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
     font-family: 'Lora', serif;
-    color: #fff;
-    border-top: 1px solid rgba(255,255,255,0.22);
+    color: var(--text);
+    border-top: 1px solid var(--border);
     padding-top: 4px;
-  }
-  /* Fallback when image missing — use category colour bg */
-  .card-no-img .card-bg-overlay {
-    background: var(--cat-bg, #eee);
+    margin-top: 4px;
+    flex-shrink: 0;
   }
   /*
    * --tl-card-w: fixed width of every timeline card
@@ -527,30 +515,35 @@
     background:#c8c2b8; flex-shrink:0;
   }
   .tl-card {
-    border:1.5px solid var(--border);
-    border-radius:var(--radius);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
     width: var(--tl-card-w);
     height: var(--tl-card-h);
-    position:relative; overflow:hidden;
-    transition:border-color 0.2s;
-    flex-shrink:0;
-    background: #1a1a1a; /* dark fallback while image loads */
+    overflow: hidden;
+    transition: border-color 0.2s;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
   }
 
   .tl-card.just-correct {
-    border-color:var(--success);
+    border-color: var(--success);
     border-width: 2px;
     animation: popIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), correctRipple 0.6s ease;
   }
   .tl-card.wrong {
-    border-color:var(--danger) !important;
+    border-color: var(--danger) !important;
     border-width: 2px !important;
   }
   .tl-card.wrong-flash {
-    border-color:var(--danger);
+    border-color: var(--danger);
     border-width: 2px;
     animation: shake 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97), wrongPulse 0.6s ease;
   }
+  /* Option C: the fade from image into body needs to match wrong/correct body bg */
+  .tl-card.wrong .card-img-banner::after { background: linear-gradient(to bottom, transparent, var(--danger-light)); }
+  .tl-card.just-correct .card-img-banner::after { background: linear-gradient(to bottom, transparent, var(--success-light)); }
 
   /* ── DROP ZONES ──
    * Strategy: the drop zone is absolutely positioned over the gap between cards.
@@ -2375,18 +2368,22 @@ function renderCurrentCard(){
   const card = document.createElement('div');
   card.className = 'event-card';
   card.setAttribute('draggable', 'true');
-  card.style.position = 'relative';
-  card.style.overflow = 'hidden';
+  card.style.cssText = 'display:flex;flex-direction:column;overflow:hidden;background:var(--surface);';
 
   card.innerHTML = `
-    <div class="card-stripe" style="background:${col.text};position:relative;z-index:3;"></div>
-    ${col.img ? `<img class="card-bg-img" src="${col.img}" alt="" loading="lazy" onerror="this.style.display='none'">` : ''}
-    <div class="card-bg-overlay"></div>
+    <div class="card-stripe" style="background:${col.text};flex-shrink:0;height:3px;"></div>
+    <div class="card-img-banner">
+      ${col.img
+        ? `<img src="${col.img}" alt="" loading="lazy" onerror="this.parentElement.style.background='${col.bg}';this.style.display='none'">`
+        : `<div style="width:100%;height:100%;background:${col.bg};display:flex;align-items:center;justify-content:center;font-size:28px;">${col.emoji}</div>`}
+    </div>
     <div class="card-img-content">
-      <div class="card-img-cat">${currentCard.cat}</div>
-      <div class="card-img-label">${currentCard.label}</div>
-      <div class="card-img-sublabel">${currentCard.sublabel}</div>
-      <div class="card-img-year" style="color:transparent;border-top-color:rgba(255,255,255,0.15);user-select:none;">?</div>
+      <div>
+        <div class="card-img-cat">${currentCard.cat}</div>
+        <div class="card-img-label">${currentCard.label}</div>
+        <div class="card-img-sublabel">${currentCard.sublabel}</div>
+      </div>
+      <div class="card-img-year" style="color:transparent;user-select:none;">?</div>
     </div>
   `;
 
@@ -2558,20 +2555,23 @@ function makeTlCard(item, extraClass=''){
   if(item.wrong) cls += ' wrong';
   if(extraClass) cls += ' ' + extraClass;
   card.className = cls;
-  card.style.position = 'relative';
-  card.style.overflow = 'hidden';
-
-  const divColor = item.wrong ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.22)';
+  const cardBg = item.wrong ? 'var(--danger-light)' : 'var(--surface)';
+  card.style.cssText = `display:flex;flex-direction:column;overflow:hidden;background:${cardBg};`;
 
   card.innerHTML = `
-    <div class="card-stripe" style="background:${col.text};position:relative;z-index:3;"></div>
-    ${col.img ? `<img class="card-bg-img" src="${col.img}" alt="" loading="lazy" onerror="this.style.display='none'">` : ''}
-    <div class="card-bg-overlay"></div>
+    <div class="card-stripe" style="background:${col.text};flex-shrink:0;height:3px;"></div>
+    <div class="card-img-banner">
+      ${col.img
+        ? `<img src="${col.img}" alt="" loading="lazy" onerror="this.parentElement.style.background='${col.bg}';this.style.display='none'">`
+        : `<div style="width:100%;height:100%;background:${col.bg};display:flex;align-items:center;justify-content:center;font-size:28px;">${col.emoji}</div>`}
+    </div>
     <div class="card-img-content">
-      <div class="card-img-cat">${item.ev.cat}</div>
-      <div class="card-img-label">${item.ev.label}</div>
-      <div class="card-img-sublabel">${item.ev.sublabel}</div>
-      <div class="card-img-year" style="border-top-color:${divColor};">${fy(item.ev.year)}</div>
+      <div>
+        <div class="card-img-cat">${item.ev.cat}</div>
+        <div class="card-img-label">${item.ev.label}</div>
+        <div class="card-img-sublabel">${item.ev.sublabel}</div>
+      </div>
+      <div class="card-img-year">${fy(item.ev.year)}</div>
     </div>
   `;
   wrap.appendChild(tick);
