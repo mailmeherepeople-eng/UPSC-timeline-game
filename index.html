@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Chronology: UnacademyX UPSC</title>
+<title>Chronology: UPSC History</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -113,11 +113,10 @@
   .start-eyebrow { font-size:11px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:18px; }
   .start-title { font-size:clamp(36px,6vw,56px); font-weight:700; color:var(--text); letter-spacing:-1px; line-height:1.1; margin-bottom:16px; font-family:'Lora',serif; }
   .start-title .ch { color: #08bd80; }
-  .start-title .rest { color: #1380D0; }
+  .start-title .rest { color: var(--text); }
   .start-desc { font-size:16px; color:var(--muted); max-width:440px; line-height:1.75; margin-bottom:36px; }
-  /* How to Play: Unacademy blue */
   .btn-primary {
-    background: #1380D0;
+    background: #08bd80;
     color: #fff;
     border: none;
     border-radius: 12px;
@@ -128,19 +127,19 @@
     cursor: pointer;
     letter-spacing: 0.4px;
     transition: background 0.15s, transform 0.12s, box-shadow 0.12s;
-    box-shadow: 0 4px 14px rgba(19,128,208,0.35), 0 1px 3px rgba(0,0,0,0.12);
+    box-shadow: 0 4px 14px rgba(8,189,128,0.35), 0 1px 3px rgba(0,0,0,0.12);
   }
   .btn-primary:hover {
-    background: #0f6db5;
+    background: #06a06c;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(19,128,208,0.4), 0 2px 6px rgba(0,0,0,0.14);
+    box-shadow: 0 6px 20px rgba(8,189,128,0.4), 0 2px 6px rgba(0,0,0,0.14);
   }
   .btn-primary:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(19,128,208,0.25);
+    box-shadow: 0 2px 8px rgba(8,189,128,0.25);
   }
 
-  /* Start Game: Unacademy green */
+  /* Start Game button */
   .btn-start {
     background: var(--accent);
     color: #fff;
@@ -412,6 +411,15 @@
     position: relative;
     z-index: 1;
     margin-top: -20px;
+    min-height: 0;
+  }
+  /* Inner wrapper: flex column so label + sublabel share space properly */
+  .card-text-wrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
   }
   .card-img-cat {
     font-size: 10px;
@@ -434,6 +442,7 @@
     line-height: 1.3;
     overflow: hidden;
     flex: 1;
+    min-height: 0;
     text-shadow: 0 1px 4px rgba(255,255,255,0.5);
   }
   .card-img-sublabel {
@@ -660,12 +669,12 @@
     line-height: 1.3;
   }
   .btn-end-score {
-    background: #1380D0;
+    background: #08bd80;
     color: #fff;
-    box-shadow: 0 4px 14px rgba(19,128,208,0.35);
+    box-shadow: 0 4px 14px rgba(8,189,128,0.35);
     transition: background 0.15s, transform 0.12s;
   }
-  .btn-end-score:hover { background: #0f6db5; transform: translateY(-2px); }
+  .btn-end-score:hover { background: #06a06c; transform: translateY(-2px); }
   .btn-end-score:active { transform: translateY(0); }
   .btn-end-replay {
     background: var(--accent);
@@ -1799,7 +1808,7 @@
       if(EVENTS.length>0){renderCollection();}else{document.getElementById('collection-count').textContent='Loading...';loadEvents().then(renderCollection);}
     ">My Collection <span class="col-notif-dot" id="col-notif-dot" style="display:none;">●</span></button>
   </div>
-  <p class="start-note">350+ curated events · 9 UPSC categories · by <span style="color:#08bd80;font-weight:700;font-family:'Source Sans 3',sans-serif;">Unacademy</span><span style="color:#1380D0;font-weight:700;font-style:italic;font-family:'Source Sans 3',sans-serif;">X</span></p>
+  <p class="start-note">360 curated events · 9 UPSC categories</p>
 </div>
 
 <!-- TUTORIAL -->
@@ -1998,19 +2007,11 @@
     <div class="share-card-title">Your Result</div>
     <div class="gameover-stats" id="go-stats"></div>
     <div id="sc-cats"></div>
-    <div class="share-card-brand">Chronology &nbsp;·&nbsp; <strong>UnacademyX</strong></div>
+    <div class="share-card-brand">Chronology &nbsp;·&nbsp; <strong>UPSC History</strong></div>
   </div>
 
   <div class="share-feedback" id="share-feedback">Copied to clipboard!</div>
 
-  <div id="iconic-cta" style="display:none;margin-bottom:16px;width:100%;max-width:320px;">
-    <a href="https://unacademy.com/goal/upsc-civil-services-examination-ias-preparation/KSCGY/subscriptions"
-       target="_blank" rel="noopener"
-       class="btn-primary"
-       style="display:block;text-align:center;text-decoration:none;width:100%;box-sizing:border-box;">
-      Fix those wrong answers with Unacademy Iconic
-    </a>
-  </div>
   <div class="btn-group" style="width:100%;max-width:320px;">
     <button class="btn-primary" id="share-btn" style="width:100%;" onclick="shareScore()">🔗 Challenge a Friend</button>
     <button class="btn-primary" style="width:100%;" onclick="startGame()">Play Again</button>
@@ -2270,7 +2271,7 @@ function _sbRun(label, fn) {
 
 // ═══════════════════════════════════════════════════════════
 //  WEBVIEW BRIDGE
-//  The native Unacademy app calls this after loading the WebView:
+//  The native app calls this after loading the WebView:
 //    webView.evaluateJavascript(
 //      "window.ChronologyBridge.setUser({ userId: 'user_123' })", null
 //    );
@@ -2593,7 +2594,7 @@ const CAT = {
 //  EVENTS — loaded from data/events.json with localStorage cache
 //  v2 cache key: bump to v3 when events.json content changes
 // ═══════════════════════════════════════════════════════════
-const EVENTS_CACHE_KEY = 'chronology-events-v5';
+const EVENTS_CACHE_KEY = 'chronology-events-v4';
 let EVENTS = [];
 
 async function loadEvents(){
@@ -2936,20 +2937,20 @@ function closeCardDetail(){
 //  CORRECT QUIPS - shown in toast when user gets one right
 // ═══════════════════════════════════════════════════════════
 const CORRECT_QUIPS = [
-  "🔥 Bilkul sahi! Even Mrunal would be proud.",
-  "✅ Sahi jawab! Your neurons are Unacademy-approved.",
+  "🔥 Bilkul sahi! UPSC topper energy detected.",
+  "✅ Sahi jawab! Your neurons are working overtime.",
   "🎯 Spot on! You're basically a walking NCERT now.",
   "⭐ Correct! Topper material detected. UPSC ki date confirm karo.",
-  "💪 Shabash! That answer just paid for one month of Unacademy Prime.",
+  "💪 Shabash! That answer just paid for one month of your prep.",
   "🧠 Big brain energy! Chanakya would've hired you as a minister.",
   "🚀 Nailed it! UPSC 2025 mein naam aane wala hai.",
   "🎉 Sahi hai! Your history teacher would finally be happy.",
-  "✨ Excellent! Even Polity professor Faizan Mustafa is impressed.",
+  "✨ Excellent! Even Chandragupta is impressed from the afterlife.",
   "📚 Correct! Prelims clear aur mains bhi lagta hai pakka hai.",
   "💡 Waah! That's the kind of answer that gets you an IAS posting.",
   "🏆 Perfect! Rank 1 se kam kuch nahi tere liye.",
   "😎 Ek dum sahi! Desh mein ek aur IAS officer aa raha hai.",
-  "🔑 Right answer! Now imagine knowing ALL of these. Subscribe to Unacademy Prime 😉",
+  "🔑 Right answer! Now imagine knowing ALL of these.",
   "🌟 Brilliant! Nehru would've written a letter about you.",
 ];
 
@@ -2957,21 +2958,21 @@ const CORRECT_QUIPS = [
 //  WRONG QUIPS - shown in toast when user gets one wrong
 // ═══════════════════════════════════════════════════════════
 const WRONG_QUIPS = [
-  "❌ Oops! You would've known this if you subscribed to Unacademy Prime. Just saying. 😇",
-  "💔 Wrong! This was covered in last week's Unacademy live class. Attendance: 0.",
-  "📺 Yeh toh Unacademy ke free YouTube video mein bhi tha. Did you skip it?",
-  "🙈 Galat! Our educators covered this 47 times. We checked.",
-  "😬 Wrong! UPSC is merciless, but Unacademy Prime is not. Subscribe karo.",
-  "📖 Chapter 3 of the Unacademy study material. We forgive you. Subscribe?",
-  "🔔 Notification miss kar diya? This was yesterday's current affairs on UnacademyX.",
-  "😅 Galat jawab! Don't worry. Unacademy Prime ka 7-day free trial hai. Hint hint.",
-  "🤦 Our toppers answer this in their sleep. You can too. Just subscribe first.",
-  "⚡ Wrong! Even our mock test Series 1 had this. Just saying. No pressure.",
-  "🎓 Incorrect! The Unacademy educator who taught this is crying somewhere.",
+  "❌ Oops! Thoda aur padhai ki zaroorat hai. Keep going.",
+  "💔 Wrong! Yeh toh syllabus mein tha yaar. Dobara dekho.",
+  "📺 Galat! NCERT ke chapter 3 mein tha yeh. Did you skip it?",
+  "🙈 Galat! Yeh exam mein 47 baar aaya hai. We checked.",
+  "😬 Wrong! UPSC is merciless — but you can still beat it.",
+  "📖 Chapter 3. We forgive you. Ek baar aur padh lo.",
+  "🔔 Notification miss kar diya? Yeh last week ka topic tha.",
+  "😅 Galat jawab! Don't worry — mistakes make memory stronger.",
+  "🤦 Toppers answer this in their sleep. You'll get there.",
+  "⚡ Wrong! Mock test Series 1 mein bhi tha yeh. Just saying.",
+  "🎓 Incorrect! Your future self will remember this one.",
   "😤 Nahi hua! Itna toh 11th class NCERT mein tha yaar.",
-  "🙏 Galat! Unacademy Prime mein ek baar dekh lo. Ek baar hi kaafi hai.",
-  "📱 Wrong! This was trending on the UnacademyX app. Just saying.",
-  "🤷 Humne bataya tha, tum soya the. Unacademy Prime subscribe karo yaar.",
+  "🙏 Galat! Ek baar aur dekh lo. Ek baar hi kaafi hai.",
+  "📱 Wrong! Yeh recent exam mein bhi poochha gaya tha.",
+  "🤷 Humne bataya tha, tum soya the. Ab toh yaad rahega.",
 ];
 
 function getRandFrom(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
@@ -2981,29 +2982,29 @@ function getRandFrom(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 // ═══════════════════════════════════════════════════════════
 const JOKES = {
   terrible: [
-    "You placed the 1857 Revolt after Chandrayaan-3. The British would like a word. Also, so would Unacademy.",
-    "UPSC mains mein ek essay hai: 'Describe your biggest failure.' You just got a practice run. Unacademy Prime still has time to save you. 🙏",
-    "History repeated itself. First as tragedy, then as your timeline. Subscribe karo, ek baar aur try karo.",
-    "Babur aur APJ Abdul Kalam ek hi zamane mein nahi the. But after a Unacademy Prime subscription, you'll know exactly when they were.",
-    "Your score suggests you may have been studying the wrong subject. Unacademy covers 12. Pick one.",
+    "You placed the 1857 Revolt after Chandrayaan-3. The British would like a word.",
+    "UPSC mains mein ek essay hai: 'Describe your biggest failure.' You just got a practice run. Keep going. 🙏",
+    "History repeated itself. First as tragedy, then as your timeline. Try again — you'll get it.",
+    "Babur aur APJ Abdul Kalam ek hi zamane mein nahi the. But you'll know exactly when they were next time.",
+    "Your score suggests you may have been studying the wrong subject. UPSC covers 12. Pick one.",
   ],
   low: [
-    "A UPSC topper sees this timeline and has flashbacks to their 4th attempt. You're building character. And Unacademy is building you.",
-    "Pandit Nehru gave his 'Tryst with Destiny' speech. Your timeline gave us a 'Twist of Destiny.' Very creative. Unacademy can uncreative-ify you.",
-    "You got some right! Prelims ke liye 33% cutoff hoti hai. Aap almost wahan hain. Unacademy Prime will close that gap.",
-    "The Gupta Age was India's Golden Age. Yours is still under construction. Let Unacademy be your Chandragupta.",
+    "A UPSC topper sees this timeline and has flashbacks to their 4th attempt. You're building character.",
+    "Pandit Nehru gave his 'Tryst with Destiny' speech. Your timeline gave us a 'Twist of Destiny.' Very creative.",
+    "You got some right! Prelims ke liye 33% cutoff hoti hai. Aap almost wahan hain.",
+    "The Gupta Age was India's Golden Age. Yours is still under construction. Keep digging.",
   ],
   medium: [
-    "Not bad! You're at the level where UPSC will reject you with a rank that's juuust out of the cut-off. Unacademy interview prep, anyone?",
-    "Solid effort! Chandragupta would've made you a district-level official. Aim for DM with Unacademy Prime.",
-    "You clearly know your history. Now please study Polity, Economy, Environment, Ethics, and Current Affairs. Unacademy has all of them. No excuse.",
-    "You're somewhere between 'I read NCERT once' and 'Unacademy topper.' The latter is closer than you think.",
+    "Not bad! You're at the level where UPSC will reject you with a rank that's juuust out of the cut-off.",
+    "Solid effort! Chandragupta would've made you a district-level official. Aim for DM.",
+    "You clearly know your history. Now please study Polity, Economy, Environment, Ethics, and Current Affairs.",
+    "You're somewhere between 'I read NCERT once' and 'UPSC topper.' The latter is closer than you think.",
   ],
   high: [
-    "IAS material! Your GS-1 score would make Bipin Chandra proud. Now let Unacademy handle your GS-2, 3, 4 and Essay too.",
-    "Outstanding! You ARE the testimonial that our sales team puts on the website. We're calling you.",
-    "Shabash! Even Chanakya would give you a passing grade. Now ace Ethics Paper with Unacademy. Chanakya didn't have ethics, you need to.",
-    "Excellent! At this rate, the only thing between you and an IAS posting is a 45-minute interview. UnacademyX interview prep is the next step.",
+    "IAS material! Your GS-1 score would make Bipin Chandra proud. Now tackle GS-2, 3 and 4.",
+    "Outstanding! You ARE the testimonial on every topper's blog post. We're calling you.",
+    "Shabash! Even Chanakya would give you a passing grade. Now ace Ethics Paper. Chanakya didn't have ethics, you need to.",
+    "Excellent! At this rate, the only thing between you and an IAS posting is a 45-minute interview.",
   ],
 };
 
@@ -3547,7 +3548,7 @@ function renderCurrentCard(){
         : `<div style="width:100%;height:100%;background:${col.bg};display:flex;align-items:center;justify-content:center;font-size:28px;">${col.emoji}</div>`}
     </div>
     <div class="card-img-content">
-      <div>
+      <div class="card-text-wrap">
         <div class="card-img-cat">${currentCard.cat}</div>
         <div class="card-img-label">${currentCard.label}</div>
         <div class="card-img-sublabel">${currentCard.sublabel}</div>
@@ -3771,7 +3772,7 @@ function makeTlCard(item, extraClass=''){
         : `<div style="width:100%;height:100%;background:${col.bg};display:flex;align-items:center;justify-content:center;font-size:28px;">${col.emoji}</div>`}
     </div>
     <div class="card-img-content">
-      <div>
+      <div class="card-text-wrap">
         <div class="card-img-cat">${item.ev.cat}</div>
         <div class="card-img-label">${item.ev.label}</div>
         <div class="card-img-sublabel">${item.ev.sublabel}</div>
@@ -4167,19 +4168,6 @@ function prepareGameOverScreen(){
     </div>
   `;
 
-  // Show Unacademy Iconic CTA: personalised with weakest category if available
-  const weakest = getWeakestCategory();
-  const ctaEl = document.getElementById('iconic-cta');
-  const ctaLink = ctaEl.querySelector('a');
-  if(wrong > 0){
-    ctaEl.style.display = 'block';
-    ctaLink.textContent = weakest
-      ? `Strengthen ${weakest} with Unacademy Iconic`
-      : 'Fix those wrong answers with Unacademy Iconic';
-  } else {
-    ctaEl.style.display = 'none';
-  }
-
   // Category breakdown: shows history across all sessions
   document.getElementById('sc-cats').innerHTML = buildCategoryBreakdown();
 }
@@ -4196,7 +4184,7 @@ function shareScore(){
   const tierLabel = score>=40 ? '🏆 LEGENDARY' : score>=20 ? '🌟 Good' : score>=8 ? '📚 Decent' : '😬 Rough';
 
   const text =
-`🏛️ Chronology by UnacademyX
+`🏛️ Chronology: UPSC History
 
 ${tierLabel}: ${score} pts on the UPSC timeline!
 🔥 Best streak: ${maxStreak} | ✅ ${correct} correct | ❌ ${wrong} wrong
@@ -4209,7 +4197,7 @@ https://mailmeherepeople-eng.github.io/UPSC-timeline-game`;
   // Web Share API with clipboard fallback
   if(navigator.share){
     navigator.share({
-      title: 'Chronology: UnacademyX',
+      title: 'Chronology: UPSC History',
       text: text,
     }).catch(()=>{});
   } else {
