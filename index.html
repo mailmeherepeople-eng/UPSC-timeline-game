@@ -1792,8 +1792,8 @@
   </button>
   <div class="start-eyebrow">UPSC History &amp; Polity</div>
   <h1 class="start-title"><span class="ch">Ch</span><span class="rest">ronology</span></h1>
-  <p class="start-desc">Test your UPSC History knowledge by placing events in the correct chronological order. Three wrong placements and the game ends.</p>
-  <p style="font-size:14px;color:var(--accent);font-weight:600;margin-bottom:32px;margin-top:-16px;">Can you unlock all the cards?</p>
+  <p class="start-desc">360 historical events. No dates given. Place them in order or lose a life. How far can you go?</p>
+  <p style="font-size:14px;color:var(--accent);font-weight:600;margin-bottom:32px;margin-top:-16px;">Can you unlock all 360 cards?</p>
   <div style="display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;max-width:280px;margin:0 auto;">
     <button class="btn-primary" style="width:100%;" onclick="showScreen('tutorial')">How to Play</button>
     <button class="btn-start" id="btn-start" style="width:100%;" onclick="startGame()">Start Game</button>
@@ -1808,7 +1808,8 @@
       if(EVENTS.length>0){renderCollection();}else{document.getElementById('collection-count').textContent='Loading...';loadEvents().then(renderCollection);}
     ">My Collection <span class="col-notif-dot" id="col-notif-dot" style="display:none;">●</span></button>
   </div>
-  <p class="start-note">360 curated events · 9 UPSC categories</p>
+  <p class="start-note">360 events · 9 categories · 3 lives</p>
+  <p style="margin-top:10px;font-size:11px;font-family:'Source Sans 3',sans-serif;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:lowercase;">a <span style="color:var(--accent);">git gud</span> game</p>
 </div>
 
 <!-- TUTORIAL -->
