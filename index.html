@@ -188,17 +188,30 @@
   .btn-secondary:active { transform: translateY(0); }
   .start-note { margin-top:16px; font-size:12px; color:#bbb; }
 
-  /* ── BACK BUTTON - small, top-left of any screen ── */
+  /* ── BACK BUTTON - premium frosted pill ── */
   .btn-back {
-    position:absolute; top:18px; left:20px;
-    background:none; border:none; cursor:pointer;
-    font-size:13px; font-weight:600; color:var(--muted);
+    position: absolute; top: 16px; left: 16px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 7px 14px 7px 10px;
+    cursor: pointer;
+    font-size: 13px; font-weight: 700; color: var(--text);
     font-family: 'Source Sans 3', sans-serif;
-    display:flex; align-items:center; gap:5px;
-    padding:6px 10px; border-radius:8px;
-    transition:color 0.15s, background 0.15s;
+    display: flex; align-items: center; gap: 5px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.15s, transform 0.12s, border-color 0.15s, background 0.15s;
+    letter-spacing: 0.1px;
+    z-index: 20;
   }
-  .btn-back:hover { color:var(--text); background:var(--border); }
+  .btn-back svg { flex-shrink:0; transition: transform 0.15s; }
+  .btn-back:hover {
+    border-color: var(--muted);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+  .btn-back:hover svg { transform: translateX(-2px); }
+  .btn-back:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
 
   /* ── GAME SCREEN: strict fixed grid, zero scroll outside timeline ── */
   #screen-game {
@@ -702,17 +715,34 @@
     background: var(--bg); position:relative;
   }
   .tut-eyebrow { font-size:11px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
-  .tut-title { font-family: 'Source Sans 3', sans-serif; font-size:28px; font-weight:700; color:var(--text); margin-bottom:32px; }
+  .tut-title { font-family: 'Source Sans 3', sans-serif; font-size:28px; font-weight:700; color:var(--text); margin-bottom:16px; }
 
-  /* Step indicator dots */
-  .tut-dots { display:flex; gap:8px; justify-content:center; margin-bottom:32px; }
-  .tut-dot { width:8px; height:8px; border-radius:50%; background:var(--border); transition:background 0.2s; }
-  .tut-dot.active { background:var(--accent); }
+  /* Step indicator dots — active dot becomes a pill to hint swipability */
+  .tut-dots { display:flex; gap:8px; justify-content:center; margin-bottom:20px; align-items:center; }
+  .tut-dot { width:8px; height:8px; border-radius:50%; background:var(--border); transition:background 0.2s, width 0.2s; }
+  .tut-dot.active { background:var(--accent); width:22px; border-radius:4px; }
 
-  /* Step panels */
-  .tut-steps { width:100%; max-width:480px; position:relative; }
-  .tut-step { display:none; flex-direction:column; align-items:center; }
-  .tut-step.active { display:flex; animation:slideUp 0.35s ease; }
+  /* Step panels — horizontal scroll-snap */
+  .tut-steps {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+  }
+  .tut-steps::-webkit-scrollbar { display: none; }
+  .tut-step {
+    flex: 0 0 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scroll-snap-align: start;
+  }
 
   .tut-step-num { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
   .tut-step-heading { font-family: 'Source Sans 3', sans-serif; font-size:20px; font-weight:700; color:var(--text); margin-bottom:10px; }
@@ -729,7 +759,7 @@
 
   /* Mini card used in demos */
   .demo-card {
-    background:#fff; border:1.5px solid var(--border); border-radius:8px;
+    background:var(--surface); border:1.5px solid var(--border); border-radius:8px;
     padding:10px 14px; text-align:left; width:130px; flex-shrink:0;
     box-shadow:0 2px 8px rgba(0,0,0,0.08); position:relative; overflow:hidden;
   }
@@ -737,7 +767,7 @@
   .demo-card .dc-emoji { font-size:22px; margin-bottom:4px; display:block; }
   .demo-card .dc-label { font-family: 'Source Sans 3', sans-serif; font-size:11px; font-weight:600; color:var(--text); line-height:1.3; }
   .demo-card .dc-sub { font-size:9px; color:var(--muted); font-style:italic; margin-top:2px; }
-  .demo-card .dc-year { font-size:12px; font-weight:700; font-family: 'Source Sans 3', sans-serif; color:var(--text); border-top:1px solid #eee; padding-top:5px; margin-top:6px; }
+  .demo-card .dc-year { font-size:12px; font-weight:700; font-family: 'Source Sans 3', sans-serif; color:var(--text); border-top:1px solid var(--border); padding-top:5px; margin-top:6px; }
 
   /* Mini timeline in demo */
   .demo-timeline {
@@ -748,14 +778,14 @@
     background:var(--border); z-index:0;
   }
   .demo-tl-item { display:flex; flex-direction:column; align-items:center; z-index:1; }
-  .demo-tl-tick { width:2px; height:14px; background:#ccc; }
+  .demo-tl-tick { width:2px; height:14px; background:var(--border); }
   .demo-tl-card {
-    background:#fff; border:1.5px solid var(--border); border-radius:6px;
+    background:var(--surface); border:1.5px solid var(--border); border-radius:6px;
     padding:6px 8px; width:100px; position:relative; overflow:hidden;
   }
   .demo-tl-card .dc-stripe { position:absolute;top:0;left:0;right:0;height:2px;border-radius:6px 6px 0 0; }
   .demo-tl-card .dc-label { font-family: 'Source Sans 3', sans-serif; font-size:9px; font-weight:600; color:var(--text); line-height:1.3; }
-  .demo-tl-card .dc-year { font-size:10px; font-weight:700; font-family: 'Source Sans 3', sans-serif; color:var(--text); border-top:1px solid #eee; padding-top:3px; margin-top:4px; }
+  .demo-tl-card .dc-year { font-size:10px; font-weight:700; font-family: 'Source Sans 3', sans-serif; color:var(--text); border-top:1px solid var(--border); padding-top:3px; margin-top:4px; }
   .demo-drop-gap {
     width:44px; height:90px; display:flex; align-items:center; justify-content:center;
     flex-shrink:0; z-index:1;
@@ -831,8 +861,8 @@
   }
 
   /* Step 3 - correct/wrong feedback demo */
-  .demo-result-correct { border-color:var(--success) !important; background:#edf7ef !important; }
-  .demo-result-wrong   { border-color:var(--danger)  !important; background:#fdf0ee !important; }
+  .demo-result-correct { border-color:var(--success) !important; background:var(--success-light) !important; }
+  .demo-result-wrong   { border-color:var(--danger)  !important; background:var(--danger-light)  !important; }
 
   /* Demo1 phase label */
   .d1-phase-label {
@@ -1780,7 +1810,12 @@
 
 <!-- TUTORIAL -->
 <div id="screen-tutorial" class="screen">
-  <button class="btn-back" onclick="showScreen('start')">← Back</button>
+  <button class="btn-back" onclick="goBack()">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back
+  </button>
   <div class="tut-eyebrow">Quick Guide</div>
   <h2 class="tut-title">How to Play</h2>
 
@@ -1841,10 +1876,10 @@
             <!-- WW2 placed card (hidden until dropped) -->
             <div class="demo-tl-item" id="s1-ww2placed" style="display:none;">
               <div class="demo-tl-tick"></div>
-              <div class="demo-tl-card" style="border-color:var(--success);background:#edf7ef;">
+              <div class="demo-tl-card" style="border-color:var(--success);background:var(--success-light);">
                 <div class="dc-stripe" style="background:var(--success);"></div>
                 <div class="dc-label">World War 2</div>
-                <div class="dc-year" style="color:var(--success);">1939 CE</div>
+                <div class="dc-year" style="color:var(--success);border-top-color:var(--success);">1939 CE</div>
               </div>
             </div>
             <!-- Independence -->
@@ -1882,7 +1917,7 @@
             <div class="demo-tl-card demo-result-correct" style="width:110px;">
               <div class="dc-stripe" style="background:var(--success);"></div>
               <div class="dc-label">World War 2</div>
-              <div class="dc-year" style="border-top-color:#c3e6cb;color:var(--success);">1939 CE</div>
+              <div class="dc-year" style="border-top-color:var(--success);color:var(--success);">1939 CE</div>
             </div>
           </div>
           <div style="text-align:center;">
@@ -1890,7 +1925,7 @@
             <div class="demo-tl-card demo-result-wrong" style="width:110px;">
               <div class="dc-stripe" style="background:var(--danger);"></div>
               <div class="dc-label">World War 2</div>
-              <div class="dc-year" style="border-top-color:#f5c6c6;">1939 CE</div>
+              <div class="dc-year" style="border-top-color:var(--danger);">1939 CE</div>
             </div>
           </div>
         </div>
@@ -3031,33 +3066,49 @@ let tutStep = 0;
 let tutDemoTimer = null;
 
 function tutNav(dir){
-  tutStep += dir;
-  if(tutStep < 0) tutStep = 0;
+  const steps = document.querySelector('.tut-steps');
+  if(!steps) return;
+  const w = steps.offsetWidth;
+  tutStep = Math.max(0, Math.min(1, tutStep + dir));
+  steps.scrollTo({ left: tutStep * w, behavior: 'smooth' });
+  updateTutUI();
+}
 
-  // Update steps
-  document.querySelectorAll('.tut-step').forEach((s,i)=>{
-    s.classList.toggle('active', i===tutStep);
-  });
-  // Update dots
-  document.querySelectorAll('.tut-dot').forEach((d,i)=>{
-    d.classList.toggle('active', i===tutStep);
-  });
-
-  // Update buttons
+function updateTutUI(){
+  // Dots
+  document.querySelectorAll('.tut-dot').forEach((d,i)=>d.classList.toggle('active', i===tutStep));
+  // Prev button
   document.getElementById('tut-prev').style.display = tutStep===0 ? 'none' : '';
+  // Next button
   const nextBtn = document.getElementById('tut-next');
   if(tutStep===1){
     nextBtn.textContent = 'Got it. Start Game';
     nextBtn.onclick = ()=>{ tutStep=0; _s1Active=false; startGame(); };
   } else {
-    nextBtn.textContent = 'Next';
+    nextBtn.textContent = 'Next →';
     nextBtn.onclick = ()=>tutNav(1);
   }
-
-  // Start/stop merged animation on step 0
-  clearTimeout(tutDemoTimer); _d1Active = false;
+  // Animation: run on step 0 only
   if(tutStep===0 && !_s1Active){ _s1Active=true; playS1(); }
   if(tutStep!==0){ _s1Active=false; }
+}
+
+function initTutScroll(){
+  const steps = document.querySelector('.tut-steps');
+  if(!steps || steps._scrollBound) return;
+  steps._scrollBound = true;
+  let scrollTimer;
+  steps.addEventListener('scroll', ()=>{
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(()=>{
+      const w = steps.offsetWidth;
+      const newStep = Math.round(steps.scrollLeft / w);
+      if(newStep !== tutStep){
+        tutStep = newStep;
+        updateTutUI();
+      }
+    }, 60);
+  }, { passive: true });
 }
 
 let _d1Active = false;
@@ -3235,24 +3286,67 @@ function playD1Edge(){
   }, 3400);
 }
 
+// ═══════════════════════════════════════════════════════════
+//  NAVIGATION — history stack + hardware back button support
+// ═══════════════════════════════════════════════════════════
+const _screenStack = [];
+
+// Map screen id → the screen to go back to
+const _backMap = {
+  tutorial:   'start',
+  game:       'start',
+  gameover:   'start',
+  collection: 'start',
+};
+
+function goBack(){
+  const prev = _screenStack[_screenStack.length - 2];
+  if(prev){ showScreen(prev); }
+  else { showScreen('start'); }
+}
+
+// Hardware back button (Android, browser back gesture)
+window.addEventListener('popstate', ()=>{
+  const current = _screenStack[_screenStack.length - 1];
+  const dest = _backMap[current] || 'start';
+  // Don't push history here — browser already popped it
+  _screenStack.pop();
+  _showScreenInternal(dest);
+});
+
 // Reset tutorial state when navigating away
 function showScreen(id){
+  // Push history entry so hardware back works
+  history.pushState({ screen: id }, '', '');
+  _screenStack.push(id);
+  _showScreenInternal(id);
+}
+
+function _showScreenInternal(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-'+id).classList.add('active');
   if(id === 'tutorial'){
+    // Bind scroll listener once
+    initTutScroll();
+    // Reset to step 0
+    tutStep = 0;
+    const steps = document.querySelector('.tut-steps');
+    if(steps) steps.scrollLeft = 0;
+    updateTutUI();
     // Auto-start the merged drag animation on step 0
     _s1Active = true;
     playS1();
   } else {
     clearTimeout(tutDemoTimer); _d1Active = false; _s1Active = false;
-    // Reset tutorial to step 0 for next time
+    // Reset tutorial scroll to step 0 for next time
     tutStep=0;
-    document.querySelectorAll('.tut-step').forEach((s,i)=>s.classList.toggle('active',i===0));
-    document.querySelectorAll('.tut-dot').forEach((d,i)=>d.classList.toggle('active',i===0));
+    const steps = document.querySelector('.tut-steps');
+    if(steps) steps.scrollLeft = 0;
     const nb=document.getElementById('tut-next');
-    if(nb){ nb.textContent='Next'; nb.onclick=()=>tutNav(1); }
+    if(nb){ nb.textContent='Next →'; nb.onclick=()=>tutNav(1); }
     const pb=document.getElementById('tut-prev');
     if(pb) pb.style.display='none';
+    document.querySelectorAll('.tut-dot').forEach((d,i)=>d.classList.toggle('active',i===0));
   }
 }
 
@@ -4135,6 +4229,10 @@ https://mailmeherepeople-eng.github.io/UPSC-timeline-game`;
     });
   }
 }
+
+// Seed history on load so the first hardware back press doesn't exit the app
+history.replaceState({ screen: 'start' }, '', '');
+_screenStack.push('start');
 
 </script>
 </body>
