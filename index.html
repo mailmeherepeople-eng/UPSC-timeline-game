@@ -4221,22 +4221,24 @@ async function initAudio(){
   if(_audioReady) return;
   _audioReady = true;
   getAC().resume();
-  _sfxBuffers.correct   = await loadSound('sounds/correct.mp3');
-  _sfxBuffers.milestone = await loadSound('sounds/milestone.mp3');
-  const wrongLoads = await Promise.all([1,2,3,4,5,6].map(n => loadSound(`sounds/wrong${n}.mp3`)));
+  // Cache-bust: bump _sfxV when swapping audio files
+  const _sfxV = 2;
+  _sfxBuffers.correct   = await loadSound(`sounds/correct.mp3?v=${_sfxV}`);
+  _sfxBuffers.milestone = await loadSound(`sounds/milestone.mp3?v=${_sfxV}`);
+  const wrongLoads = await Promise.all([1,2,3,4,5,6].map(n => loadSound(`sounds/wrong${n}.mp3?v=${_sfxV}`)));
   _sfxBuffers.wrong = wrongLoads.filter(b => b !== null);
 
   // Category tap sounds — one per category
   const catSounds = {
-    'Ancient India':     'sounds/categories/ancient_india.mp3',
-    'Medieval India':    'sounds/categories/medieval_india.mp3',
-    'Colonial India':    'sounds/categories/colonial_india.mp3',
-    'Post-Independence': 'sounds/categories/post_independence.mp3',
-    'World History':     'sounds/categories/world_history.mp3',
-    'Science & Tech':    'sounds/categories/science_tech.mp3',
-    'Personalities':     'sounds/categories/personalities.mp3',
-    'Social Reform':     'sounds/categories/social_reform.mp3',
-    'Constitutional':    'sounds/categories/constitutional.mp3',
+    'Ancient India':     `sounds/categories/ancient_india.mp3?v=${_sfxV}`,
+    'Medieval India':    `sounds/categories/medieval_india.mp3?v=${_sfxV}`,
+    'Colonial India':    `sounds/categories/colonial_india.mp3?v=${_sfxV}`,
+    'Post-Independence': `sounds/categories/post_independence.mp3?v=${_sfxV}`,
+    'World History':     `sounds/categories/world_history.mp3?v=${_sfxV}`,
+    'Science & Tech':    `sounds/categories/science_tech.mp3?v=${_sfxV}`,
+    'Personalities':     `sounds/categories/personalities.mp3?v=${_sfxV}`,
+    'Social Reform':     `sounds/categories/social_reform.mp3?v=${_sfxV}`,
+    'Constitutional':    `sounds/categories/constitutional.mp3?v=${_sfxV}`,
   };
   await Promise.all(Object.entries(catSounds).map(async ([cat, path]) => {
     _sfxBuffers.catTap[cat] = await loadSound(path);
