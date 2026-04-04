@@ -14,6 +14,7 @@
     --text: #1c1a16;
     --muted: #8a8478;
     --accent: #4F46E5;
+    --accent-rgb: 79, 70, 229;
     --accent-dark: #4338CA;
     --accent-light: #EEF2FF;
     --accent-text: #3730A3;
@@ -35,6 +36,7 @@
     --text: #f0ede8;
     --muted: #888480;
     --accent: #818CF8;
+    --accent-rgb: 129, 140, 248;
     --accent-dark: #6366F1;
     --accent-light: #1e1b4b;
     --accent-text: #A5B4FC;
@@ -732,6 +734,11 @@
     display: flex;
     flex-direction: column;
     background: var(--surface);
+    /* Allow iOS to scroll the timeline horizontally even though tl-cards
+       now have JS touch listeners (addLongPress). Without this declaration,
+       iOS defers scroll initiation when it sees a touchstart handler on a
+       child element, breaking -webkit-overflow-scrolling: touch. */
+    touch-action: pan-x;
   }
 
   .tl-card.just-correct {
@@ -752,6 +759,28 @@
   .tl-card.wrong .card-img-banner::after { background: linear-gradient(to bottom, transparent, var(--danger-light)); }
   .tl-card.just-correct .card-img-banner::after { background: linear-gradient(to bottom, transparent, var(--success-light)); }
 
+  /* ── HOLD-TO-READ GLOW — builds from 500ms → 1000ms, then flashes open ── */
+  @keyframes holdGlowBuild {
+    0%   { box-shadow: 0 0 0 0px rgba(var(--accent-rgb),0),   0 0 0px  0px rgba(var(--accent-rgb),0);   }
+    25%  { box-shadow: 0 0 0 2px rgba(var(--accent-rgb),0.18),0 0 10px 1px rgba(var(--accent-rgb),0.08); }
+    75%  { box-shadow: 0 0 0 3px rgba(var(--accent-rgb),0.30),0 0 18px 3px rgba(var(--accent-rgb),0.13); }
+    100% { box-shadow: 0 0 0 4px rgba(var(--accent-rgb),0.38),0 0 24px 4px rgba(var(--accent-rgb),0.16); }
+  }
+  @keyframes holdOpenFlash {
+    0%   { box-shadow: 0 0 0 4px rgba(var(--accent-rgb),0.38),0 0 24px 4px rgba(var(--accent-rgb),0.16); }
+    45%  { box-shadow: 0 0 0 5px rgba(var(--accent-rgb),0.55),0 0 32px 6px rgba(var(--accent-rgb),0.24); }
+    100% { box-shadow: 0 0 0 2px rgba(var(--accent-rgb),0.12),0 0 10px 1px rgba(var(--accent-rgb),0.06); }
+  }
+  .tl-card.hold-glow {
+    border-color: rgba(var(--accent-rgb), 0.55);
+    transition: border-color 0.4s ease;
+    animation: holdGlowBuild 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
+  }
+  .tl-card.hold-open {
+    border-color: rgba(var(--accent-rgb), 0.7);
+    animation: holdOpenFlash 0.2s ease-out forwards;
+  }
+
   /* ── DROP ZONES ── */
   .drop-zone {
     /* Always card-width — invisible, exact size of the card */
@@ -767,6 +796,12 @@
     background: transparent;
     /* Smooth open/close */
     transition: margin 0.2s cubic-bezier(0.34, 1.1, 0.64, 1);
+    /* Don't eat pointer events when no drag is active — lets long-press reach placed cards */
+    pointer-events: none;
+  }
+  /* Re-enable drop zone pointer events only during an active mouse drag */
+  #screen-game.dragging-active .drop-zone {
+    pointer-events: all;
   }
 
   /* When active: zero out margins so both neighbours get pushed apart equally */
@@ -3090,7 +3125,7 @@ const CAT = {
 //  EVENTS — loaded from data/events.json with localStorage cache
 //  v2 cache key: bump to v3 when events.json content changes
 // ═══════════════════════════════════════════════════════════
-const EVENTS_CACHE_KEY = 'chronology-events-v4';
+const EVENTS_CACHE_KEY = 'chronology-events-v5';
 let EVENTS = [];
 
 async function loadEvents(){
@@ -3105,7 +3140,7 @@ async function loadEvents(){
 
   // Fetch from server
   try {
-    const res = await fetch('data/events.json');
+    const res = await fetch('data/events_updated.json');
     if(!res.ok) throw new Error('fetch failed');
     const data = await res.json();
     try { localStorage.setItem(EVENTS_CACHE_KEY, JSON.stringify(data)); } catch(e){}
@@ -4204,6 +4239,7 @@ function renderCurrentCard(){
     card.style.boxShadow  = '';
     card.classList.remove('pressing');
     card.classList.remove('dragging');
+    document.getElementById('screen-game').classList.remove('dragging-active');
   }
 
   card.addEventListener('dragstart', e=>{
@@ -4211,6 +4247,7 @@ function renderCurrentCard(){
     card.classList.remove('dragging');
     e.dataTransfer.setData('text/plain','card');
     e.dataTransfer.effectAllowed='move';
+    document.getElementById('screen-game').classList.add('dragging-active');
 
     // Suppress browser ghost entirely
     const blank = document.createElement('div');
@@ -4351,6 +4388,82 @@ function renderCurrentCard(){
   c.appendChild(card);
 }
 
+// ═══════════════════════════════════════════════════════════
+//  HOLD-TO-READ — long-press a placed timeline card to open
+//  its detail modal. Attach only to inert placed cards, never
+//  to the active draggable card — no gameplay interference.
+// ═══════════════════════════════════════════════════════════
+function addLongPress(el, ev) {
+  let phaseTimer   = null;
+  let hapticTimers = [];
+  let startX = 0, startY = 0;
+
+  const GLOW_START      = 500;   // ms — glow + first haptic begins here
+  const OPEN_AFTER_GLOW = 500;   // ms after glow starts = 1000ms total hold
+  const MOVE_THRESHOLD  = 8;     // px — cancel if finger drifts (scroll safe)
+
+  function tryHaptic(pattern) {
+    try { if (navigator.vibrate) navigator.vibrate(pattern); } catch(e) {}
+  }
+
+  function start(x, y) {
+    startX = x; startY = y;
+
+    // Phase 1 — 500ms: start glow, fire first subtle haptic tick
+    phaseTimer = setTimeout(() => {
+      el.classList.add('hold-glow');
+      tryHaptic(18);
+
+      // Escalating haptic pulses as glow builds toward open
+      const h1 = setTimeout(() => tryHaptic(24), 160);  // ~660ms total
+      const h2 = setTimeout(() => tryHaptic(32), 340);  // ~840ms total
+      hapticTimers = [h1, h2];
+
+      // Phase 2 — 1000ms: flash and open
+      phaseTimer = setTimeout(() => {
+        el.classList.remove('hold-glow');
+        el.classList.add('hold-open');
+        tryHaptic([28, 12, 55]);  // build-pause-land culmination
+
+        setTimeout(() => {
+          el.classList.remove('hold-open');
+          openCardDetail(ev);
+        }, 190);
+
+      }, OPEN_AFTER_GLOW);
+
+    }, GLOW_START);
+  }
+
+  function cancel() {
+    clearTimeout(phaseTimer);
+    hapticTimers.forEach(t => clearTimeout(t));
+    hapticTimers = [];
+    phaseTimer = null;
+    el.classList.remove('hold-glow', 'hold-open');
+  }
+
+  function moved(x, y) {
+    if (Math.abs(x - startX) > MOVE_THRESHOLD ||
+        Math.abs(y - startY) > MOVE_THRESHOLD) cancel();
+  }
+
+  // Touch — passive listeners so scroll is never blocked
+  el.addEventListener('touchstart',  e => start(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+  el.addEventListener('touchmove',   e => moved(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+  el.addEventListener('touchend',    cancel);
+  el.addEventListener('touchcancel', cancel);
+
+  // Mouse (desktop)
+  el.addEventListener('mousedown',   e => { if (e.button === 0) start(e.clientX, e.clientY); });
+  el.addEventListener('mousemove',   e => { if (e.buttons === 1) moved(e.clientX, e.clientY); });
+  el.addEventListener('mouseup',     cancel);
+  el.addEventListener('mouseleave',  cancel);
+
+  // Block native long-press context menu on mobile
+  el.addEventListener('contextmenu', e => e.preventDefault());
+}
+
 function makeTlCard(item, extraClass=''){
   const col = CAT[item.ev.cat] || {text:'#555', bg:'#eee', emoji:'📌', img:''};
   const wrap = document.createElement('div');
@@ -4382,6 +4495,7 @@ function makeTlCard(item, extraClass=''){
       <div class="card-img-year">${fy(item.ev.year)}</div>
     </div>
   `;
+  addLongPress(card, item.ev);
   wrap.appendChild(tick);
   wrap.appendChild(card);
   return {wrap, card};
@@ -4534,6 +4648,12 @@ const _sfxBuffers = {
   milestone: null,
   catTap: {} // keyed by category name
 };
+const _sfxSpecial = {
+  new_high:   null,  // new personal best
+  zero:       null,  // game over with 0 points
+  near_miss:  null,  // died within 3 points of high score
+  suspicious: null,  // new high score despite 2+ wrong answers
+};
 let _audioReady = false;
 
 function getAC(){
@@ -4558,10 +4678,10 @@ async function initAudio(){
   _audioReady = true;
   getAC().resume();
   // Cache-bust: bump _sfxV when swapping audio files
-  const _sfxV = 2;
-  _sfxBuffers.correct   = await loadSound(`sounds/correct.mp3?v=${_sfxV}`);
+  const _sfxV = 3;
+  _sfxBuffers.correct   = await loadSound(`sounds/right_sounds/correct.mp3?v=${_sfxV}`);
   _sfxBuffers.milestone = await loadSound(`sounds/milestone.mp3?v=${_sfxV}`);
-  const wrongLoads = await Promise.all([1,2,3,4,5,6].map(n => loadSound(`sounds/wrong${n}.mp3?v=${_sfxV}`)));
+  const wrongLoads = await Promise.all([1,2,3,4,5,6,7,8].map(n => loadSound(`sounds/wrong_sounds/wrong${n}.mp3?v=${_sfxV}`)));
   _sfxBuffers.wrong = wrongLoads.filter(b => b !== null);
 
   // Category tap sounds — one per category
@@ -4579,6 +4699,12 @@ async function initAudio(){
   await Promise.all(Object.entries(catSounds).map(async ([cat, path]) => {
     _sfxBuffers.catTap[cat] = await loadSound(path);
   }));
+
+  // Special end-game sounds
+  _sfxSpecial.new_high   = await loadSound(`sounds/special_sounds/new_high.mp3?v=${_sfxV}`);
+  _sfxSpecial.zero       = await loadSound(`sounds/special_sounds/zero.mp3?v=${_sfxV}`);
+  _sfxSpecial.near_miss  = await loadSound(`sounds/special_sounds/near_miss.mp3?v=${_sfxV}`);
+  _sfxSpecial.suspicious = await loadSound(`sounds/special_sounds/suspicious.mp3?v=${_sfxV}`);
 
   console.log(`Chronology audio ready. Correct: ${!!_sfxBuffers.correct}, Wrong: ${_sfxBuffers.wrong.length}, Milestone: ${!!_sfxBuffers.milestone}, CatTaps: ${Object.keys(_sfxBuffers.catTap).length}`);
 }
@@ -4617,6 +4743,25 @@ function playMilestoneSound(){
 function playCatTapSound(cat){
   const buf = _sfxBuffers.catTap[cat];
   if(buf) playBuffer(buf);
+}
+
+// Special end-game sounds — priority order matters
+// prevHigh = score BEFORE this session updated it, wrongCount = wrongs this session
+function playSpecialEndSound(prevHigh, wrongCount){
+  if(score > prevHigh && wrongCount >= 2){
+    // New high score but with a lot of wrong answers — suspicious
+    playBuffer(_sfxSpecial.suspicious);
+  } else if(score > prevHigh){
+    // Clean new high score
+    playBuffer(_sfxSpecial.new_high);
+  } else if(score === 0){
+    // Zero points — total defeat
+    playBuffer(_sfxSpecial.zero);
+  } else if(prevHigh > 0 && score > 0 && (prevHigh - score) <= 3){
+    // Died within 3 points of high score without beating it
+    playBuffer(_sfxSpecial.near_miss);
+  }
+  // else: normal game over, no special sound
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -4740,6 +4885,11 @@ function triggerGameOver(){
   gameEnded=true;
   currentCard=null;
   clearQuip();
+
+  // Capture these BEFORE prepareGameOverScreen updates localStorage
+  const _prevHigh    = parseInt(localStorage.getItem('chronology-high') || '0');
+  const _wrongCount  = timeline.filter(i => i.wrong).length;
+
   prepareGameOverScreen();
   document.getElementById('current-card-container').innerHTML='';
 
@@ -4772,6 +4922,7 @@ function triggerGameOver(){
   if(maxStreak < 1){
     // no streak to show — go straight to bar
     _showEndBar(score, newCount, 300);
+    setTimeout(() => playSpecialEndSound(_prevHigh, _wrongCount), 400);
   } else {
     _showStreakMoment(maxStreak, isStreakRecord);
     // Hold for 3 seconds, then fade out and show bar
@@ -4781,6 +4932,7 @@ function triggerGameOver(){
     }, holdDur);
     const barDelay = holdDur + 400;
     _showEndBar(score, newCount, barDelay);
+    setTimeout(() => playSpecialEndSound(_prevHigh, _wrongCount), barDelay + 100);
   }
 }
 
