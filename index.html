@@ -686,12 +686,12 @@
 
   .timeline-wrapper {
     flex: 1;
-    overflow-x: auto;
+    overflow-x: scroll;
     overflow-y: hidden;
     padding: 42px 12px 20px;
-    -webkit-overflow-scrolling: touch;
     touch-action: pan-x;
     overscroll-behavior-x: contain;
+    -webkit-transform: translateZ(0);
   }
   .timeline-track {
     display:flex; align-items:flex-start;
