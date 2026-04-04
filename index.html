@@ -690,6 +690,7 @@
     overflow-y: hidden;
     padding: 42px 12px 20px;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
   }
   .timeline-track {
     display:flex; align-items:flex-start;
@@ -708,6 +709,7 @@
     position:relative; z-index:2; flex-shrink:0;
     width: var(--tl-card-w);
     transition: width 0.32s cubic-bezier(0.34, 1.2, 0.64, 1);
+    touch-action: pan-x;
   }
 
   /* Push-apart: item starts at 0 width and expands */
@@ -722,6 +724,7 @@
   .tl-tick {
     width:2px; height: var(--tl-tick-h);
     background:#c8c2b8; flex-shrink:0;
+    touch-action: pan-x;
   }
   .tl-card {
     border: 1.5px solid var(--border);
@@ -734,6 +737,8 @@
     display: flex;
     flex-direction: column;
     background: var(--surface);
+    user-select: none;
+    -webkit-user-select: none;
     /* Allow iOS to scroll the timeline horizontally even though tl-cards
        now have JS touch listeners (addLongPress). Without this declaration,
        iOS defers scroll initiation when it sees a touchstart handler on a
@@ -3122,10 +3127,10 @@ const CAT = {
 
 
 // ═══════════════════════════════════════════════════════════
-//  EVENTS — loaded from data/events.json with localStorage cache
-//  v2 cache key: bump to v3 when events.json content changes
+//  EVENTS — loaded from data/events_updated.json with localStorage cache
+//  v2 cache key: bump to v3 when events_updated.json content changes
 // ═══════════════════════════════════════════════════════════
-const EVENTS_CACHE_KEY = 'chronology-events-v5';
+const EVENTS_CACHE_KEY = 'chronology-events-v6';
 let EVENTS = [];
 
 async function loadEvents(){
@@ -3146,7 +3151,7 @@ async function loadEvents(){
     try { localStorage.setItem(EVENTS_CACHE_KEY, JSON.stringify(data)); } catch(e){}
     buildEvents(data);
   } catch(e){
-    console.warn('Chronology: could not load events.json', e);
+    console.warn('Chronology: could not load events_updated.json', e);
   }
 }
 
@@ -3164,7 +3169,7 @@ function buildEvents(data){
 }
 
 // ═══════════════════════════════════════════════════════════
-//  TUTORIAL CARDS — randomly drawn from events.json
+//  TUTORIAL CARDS — randomly drawn from events_updated.json
 //  Picks a left + right pair, then a correct event (fits between)
 //  and a wrong event (doesn't fit between) for the two phases.
 // ═══════════════════════════════════════════════════════════
