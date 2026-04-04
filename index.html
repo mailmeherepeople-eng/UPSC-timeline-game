@@ -4573,7 +4573,8 @@ function renderTimeline(flashIdx=null, flashClass=''){
     const isLast = (i === last-1);
     track.appendChild(makeDropZone(i+1, isLast ? 'drop-zone-end' : ''));
   });
-  // Re-apply transform scroll position (clamps if track shrank)
+  // Recalculate max scroll (track width changed), then re-clamp position
+  tlUpdateMax();
   tlSetScroll(_tlScroll);
 }
 
@@ -4589,19 +4590,26 @@ function renderAll(){
 // ═══════════════════════════════════════════════════════════
 let _tlScroll = 0;
 let _tlAnimId = null;
+let _tlMaxCache = 0;
+const _tlEls = { track: null, wrap: null };
 
-function tlGetMax(){
-  const track = document.getElementById('timeline-track');
-  const wrap  = document.getElementById('timeline-wrapper');
-  if(!track||!wrap) return 0;
-  return Math.max(0, track.scrollWidth - wrap.clientWidth);
+function _tlRefs(){
+  if(!_tlEls.track) _tlEls.track = document.getElementById('timeline-track');
+  if(!_tlEls.wrap)  _tlEls.wrap  = document.getElementById('timeline-wrapper');
+}
+
+// Call after renderTimeline() or window resize — reads layout once
+function tlUpdateMax(){
+  _tlRefs();
+  if(!_tlEls.track||!_tlEls.wrap){ _tlMaxCache=0; return; }
+  _tlMaxCache = Math.max(0, _tlEls.track.scrollWidth - _tlEls.wrap.clientWidth);
 }
 
 function tlSetScroll(val){
-  const track = document.getElementById('timeline-track');
-  if(!track) return;
-  _tlScroll = Math.max(0, Math.min(val, tlGetMax()));
-  track.style.transform = 'translateX(' + (-_tlScroll) + 'px)';
+  _tlRefs();
+  if(!_tlEls.track) return;
+  _tlScroll = Math.max(0, Math.min(val, _tlMaxCache));
+  _tlEls.track.style.transform = 'translateX(' + (-_tlScroll) + 'px)';
 }
 
 function tlScrollBy(delta){
@@ -4623,6 +4631,9 @@ function tlSmoothScrollTo(target, duration){
     else _tlAnimId = null;
   })(performance.now());
 }
+
+// Recalculate max scroll on resize
+window.addEventListener('resize', ()=>{ tlUpdateMax(); tlSetScroll(_tlScroll); });
 
 // Scroll input handlers — touch, mouse wheel, mouse drag
 (function(){
