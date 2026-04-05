@@ -418,7 +418,6 @@
     align-items: stretch;
     height: 100vh;
     overflow: hidden;
-    overflow: clip;
     position: relative;
   }
 
@@ -501,20 +500,6 @@
   }
 
   /* Row 4: (toast row removed) */
-
-  /* Drag hint — visible until first card placed */
-  .drag-hint {
-    font-size: 10px;
-    color: #bbb;
-    flex-shrink: 0;
-    transition: opacity 0.4s ease, max-height 0.4s ease;
-    max-height: 20px;
-    overflow: hidden;
-  }
-  .drag-hint.hidden {
-    opacity: 0;
-    max-height: 0;
-  }
 
   /* Row 5: timeline — takes all remaining space */
 
@@ -687,17 +672,16 @@
 
   .timeline-wrapper {
     flex: 1;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    overflow: hidden;
     padding: 42px 12px 20px;
     touch-action: pan-x;
-    overscroll-behavior-x: contain;
-    -webkit-transform: translateZ(0);
+    position: relative;
   }
   .timeline-track {
     display:flex; align-items:flex-start;
     min-width:max-content; position:relative;
     touch-action: pan-x;
+    will-change: transform;
   }
   .timeline-line {
     position:absolute;
@@ -2247,6 +2231,260 @@
     font-family: 'Source Sans 3', sans-serif;
     cursor: pointer; white-space: nowrap; flex-shrink: 0;
   }
+  /* ══════════════════════════════════════════════════════════
+     FIRST-PLAY TUTORIAL
+  ══════════════════════════════════════════════════════════ */
+
+  /* Dim scrim */
+  .tut-scrim {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(0,0,0,0); pointer-events: none;
+    transition: background 0.45s ease;
+  }
+  .tut-scrim.tut-on { background: rgba(0,0,0,0.54); pointer-events: all; }
+
+  /* Phase 1a: spotlight active card — card glows, sublabel bright */
+  #screen-game.tut-p1a .card-stage { z-index: 150; position: relative; }
+  #screen-game.tut-p1a .timeline-wrapper { z-index: 150; position: relative; }
+  #screen-game.tut-p1a .event-card {
+    box-shadow: 0 0 0 3px var(--accent), 0 0 0 7px rgba(var(--accent-rgb),0.22), 0 0 32px 8px rgba(var(--accent-rgb),0.18) !important;
+    border-color: var(--accent) !important;
+    animation: slideUp 0.3s ease, tutCardPulse 2s ease-in-out 0.5s infinite !important;
+  }
+  #screen-game.tut-p1a .card-img-sublabel {
+    color: var(--accent-text) !important;
+    font-weight: 700 !important;
+    text-shadow: 0 0 12px rgba(var(--accent-rgb),0.6);
+  }
+
+  /* Phase 1b: spotlight both cards — dim card internals except year on timeline */
+  #screen-game.tut-p1b .card-stage { z-index: 150; position: relative; }
+  #screen-game.tut-p1b .timeline-wrapper { z-index: 150; position: relative; }
+  #screen-game.tut-p1b .tl-card .card-img-banner,
+  #screen-game.tut-p1b .tl-card .card-img-cat,
+  #screen-game.tut-p1b .tl-card .card-img-label,
+  #screen-game.tut-p1b .tl-card .card-img-sublabel,
+  #screen-game.tut-p1b .tl-card .card-stripe { opacity: 0.2; }
+  #screen-game.tut-p1b .tl-card .card-img-year {
+    color: var(--accent-text) !important;
+    font-size: 13px !important;
+    text-shadow: 0 0 14px rgba(var(--accent-rgb),0.7);
+  }
+
+  /* Phase 1c: spotlight both (auto-move) — no special dimming */
+  #screen-game.tut-p1c .card-stage       { z-index: 150; position: relative; }
+  #screen-game.tut-p1c .timeline-wrapper { z-index: 150; position: relative; }
+
+  /* Continue button — positioned dynamically below the pill */
+  .tut-continue {
+    position: fixed; z-index: 215;
+    background: var(--accent); color: #fff;
+    border: none; border-radius: 12px; padding: 10px 28px;
+    font-size: 13px; font-weight: 700; font-family: 'Source Sans 3', sans-serif;
+    cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+    box-shadow: 0 4px 14px rgba(var(--accent-rgb),0.35);
+    letter-spacing: 0.3px;
+  }
+  .tut-continue.tut-on { opacity: 1; pointer-events: all; }
+
+  /* Tap-to-dismiss overlay (for joke + final messages) */
+  .tut-tap-overlay {
+    position: fixed; inset: 0; z-index: 300;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.54);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+    cursor: pointer;
+  }
+  .tut-tap-overlay.tut-on { opacity: 1; pointer-events: all; }
+  .tut-tap-pill {
+    background: rgba(8,6,3,0.93);
+    border: 1.5px solid rgba(var(--accent-rgb),0.55);
+    border-radius: 24px; padding: 18px 28px;
+    text-align: center; max-width: 300px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    animation: tutMsgIn 0.5s cubic-bezier(0.34,1.5,0.64,1) forwards;
+  }
+  .tut-tap-title { font-size: 15px; font-weight: 700; color: #fff; line-height: 1.35; margin-bottom: 6px; font-family: 'Source Sans 3', sans-serif; }
+  .tut-tap-sub { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.7); line-height: 1.5; margin-bottom: 12px; font-family: 'Source Sans 3', sans-serif; }
+  .tut-tap-hint { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.5px; }
+
+  /* Phase 2 (guided drag): spotlight card stage + timeline, card glows */
+  #screen-game.tut-p2 .card-stage       { z-index: 150; position: relative; }
+  #screen-game.tut-p2 .timeline-wrapper { z-index: 150; position: relative; }
+  #screen-game.tut-p2 .event-card {
+    box-shadow: 0 0 0 3px var(--accent), 0 0 0 7px rgba(var(--accent-rgb),0.22), 0 0 32px 8px rgba(var(--accent-rgb),0.18) !important;
+    border-color: var(--accent) !important;
+    animation: slideUp 0.3s ease, tutCardPulse 2s ease-in-out 0.5s infinite !important;
+  }
+  @keyframes tutCardPulse {
+    0%,100% { box-shadow: 0 0 0 3px var(--accent), 0 0 0 7px rgba(var(--accent-rgb),0.18), 0 0 28px 6px rgba(var(--accent-rgb),0.12); }
+    50%     { box-shadow: 0 0 0 3px var(--accent), 0 0 0 11px rgba(var(--accent-rgb),0.30), 0 0 42px 12px rgba(var(--accent-rgb),0.20); }
+  }
+  /* Correct DZ glow in phase 2 */
+  .drop-zone.tut-glow { pointer-events: all !important; margin-left: 0 !important; margin-right: 0 !important; }
+  .drop-zone.tut-glow::before {
+    content: ''; position: absolute; inset: 8px;
+    border: 2px dashed rgba(var(--accent-rgb), 0.5); border-radius: var(--radius);
+    animation: tutDzGlow 2s ease-in-out infinite; pointer-events: none;
+  }
+  @keyframes tutDzGlow {
+    0%,100% { border-color: rgba(var(--accent-rgb),0.3); box-shadow: inset 0 0 20px rgba(var(--accent-rgb),0.05); }
+    50%     { border-color: rgba(var(--accent-rgb),0.65); box-shadow: inset 0 0 30px rgba(var(--accent-rgb),0.12); }
+  }
+
+  /* Flying card (phase 1 auto-place) */
+  .tut-flying-card {
+    position: fixed; z-index: 200; pointer-events: none;
+    width: var(--tl-card-w); height: var(--tl-card-h);
+    border: 1.5px solid var(--accent); border-radius: var(--radius);
+    overflow: hidden; display: flex; flex-direction: column;
+    background: var(--surface);
+    box-shadow: 0 0 0 3px var(--accent), var(--shadow-lg);
+  }
+  .tut-flying-card.tut-animate {
+    transition: left var(--tut-fly-dur) cubic-bezier(0.34,1.15,0.64,1),
+                top var(--tut-fly-dur) cubic-bezier(0.34,1.15,0.64,1),
+                transform var(--tut-fly-dur) cubic-bezier(0.34,1.15,0.64,1);
+  }
+
+  /* Hand icon (phase 1 — flies with the card) */
+  .tut-hand {
+    position: fixed; z-index: 211; pointer-events: none;
+    font-size: 28px; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .tut-hand.tut-on { opacity: 1; }
+  .tut-hand.tut-animate {
+    transition: left var(--tut-fly-dur) cubic-bezier(0.34,1.15,0.64,1),
+                top var(--tut-fly-dur) cubic-bezier(0.34,1.15,0.64,1),
+                opacity 0.3s;
+  }
+
+  /* Phase 3 (hold-to-read): spotlight timeline — unchanged from original tut-s2 */
+  #screen-game.tut-s2 .timeline-wrapper { z-index: 150; position: relative; }
+  #screen-game.tut-s2 .tl-item.tut-target { z-index: 160; position: relative; }
+  #screen-game.tut-s2 .tl-item.tut-target .tl-card {
+    border-color: rgba(var(--accent-rgb),0.65) !important;
+    animation: tutTargetPulse 2s ease-in-out infinite !important;
+  }
+  @keyframes tutTargetPulse {
+    0%,100% { box-shadow: 0 0 0 3px rgba(var(--accent-rgb),0.20), 0 0 20px 4px rgba(var(--accent-rgb),0.10); }
+    50%     { box-shadow: 0 0 0 5px rgba(var(--accent-rgb),0.36), 0 0 36px 10px rgba(var(--accent-rgb),0.18); }
+  }
+
+  /* Animated finger */
+  .tut-finger {
+    position: fixed; font-size: 28px; z-index: 210;
+    pointer-events: none; opacity: 0;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35));
+    transition: opacity 0.3s;
+  }
+  .tut-finger.tut-on { opacity: 1; }
+
+  /* Instruction pill */
+  .tut-pill {
+    position: fixed; z-index: 210;
+    background: rgba(8,6,3,0.93);
+    border: 1.5px solid rgba(var(--accent-rgb),0.55);
+    border-radius: 24px; padding: 11px 20px;
+    display: flex; align-items: center; gap: 10px;
+    pointer-events: none;
+    opacity: 0; transform: translateY(8px) scale(0.95);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34,1.3,0.64,1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    white-space: normal; max-width: 300px; text-align: center;
+  }
+  .tut-pill.tut-on { opacity: 1; transform: translateY(0) scale(1); }
+  .tut-pill-icon { font-size: 18px; }
+  .tut-pill-text { font-size: 13px; font-weight: 700; color: #fff; letter-spacing: -0.1px; line-height: 1.35; font-family: 'Source Sans 3', sans-serif; }
+  .tut-pill-text em { color: #818cf8; font-style: normal; }
+
+  /* Small anchor label — points at DZ or placed card */
+  .tut-anchor-lbl {
+    position: fixed; z-index: 210;
+    background: rgba(8,6,3,0.93);
+    border: 1.5px solid rgba(var(--accent-rgb),0.45);
+    border-radius: 12px; padding: 7px 14px;
+    pointer-events: none;
+    opacity: 0; transform: scale(0.9);
+    transition: opacity 0.3s, transform 0.3s cubic-bezier(0.34,1.3,0.64,1);
+    backdrop-filter: blur(10px);
+    font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.8);
+    letter-spacing: 1px; text-transform: uppercase;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    font-family: 'Source Sans 3', sans-serif;
+  }
+  .tut-anchor-lbl::after {
+    content: ''; position: absolute; bottom: -7px; left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent; border-right: 6px solid transparent;
+    border-top: 7px solid rgba(8,6,3,0.93);
+  }
+  .tut-anchor-lbl.tut-on { opacity: 1; transform: scale(1); }
+
+  /* Step dots */
+  .tut-dots {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    z-index: 210; display: flex; gap: 6px; align-items: center;
+    pointer-events: none; opacity: 0; transition: opacity 0.3s;
+  }
+  .tut-dots.tut-on { opacity: 1; }
+  .tut-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.28); transition: background 0.3s, width 0.25s; }
+  .tut-dot.tut-active { background: #fff; width: 16px; border-radius: 3px; }
+  .tut-dot.tut-done   { background: rgba(129,140,248,0.8); }
+
+  /* Tutorial message box */
+  .tut-msg-wrap {
+    position: fixed; inset: 0; z-index: 300;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+  }
+  .tut-msg {
+    background: rgba(8,6,3,0.95); border-radius: 20px; padding: 22px 36px; text-align: center;
+    opacity: 0; transform: scale(0.65);
+    backdrop-filter: blur(12px); box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    pointer-events: none; min-width: 220px;
+  }
+  .tut-msg.tut-in  { animation: tutMsgIn  0.5s cubic-bezier(0.34,1.5,0.64,1) forwards; }
+  .tut-msg.tut-out { animation: tutMsgOut 0.3s ease forwards; }
+  @keyframes tutMsgIn  { 0%{opacity:0;transform:scale(0.65)} 60%{opacity:1;transform:scale(1.04)} 100%{opacity:1;transform:scale(1)} }
+  @keyframes tutMsgOut { 0%{opacity:1;transform:scale(1)} 100%{opacity:0;transform:scale(0.9)} }
+  .tut-msg.tut-green { border: 1.5px solid rgba(39,97,58,0.6); }
+  .tut-msg.tut-green .tut-msg-title { color: #4ade80; }
+  .tut-msg.tut-gold  { border: 1.5px solid rgba(217,119,6,0.5); }
+  .tut-msg.tut-gold  .tut-msg-title { color: #fbbf24; }
+  .tut-msg-icon  { font-size: 28px; margin-bottom: 8px; display: block; }
+  .tut-msg-title { font-family: 'Lora', serif; font-size: 19px; font-weight: 700; margin-bottom: 4px; line-height: 1.2; color: #fff; }
+  .tut-msg-sub   { font-size: 12px; color: rgba(255,255,255,0.48); line-height: 1.6; font-family: 'Source Sans 3', sans-serif; }
+
+  /* Skip tutorial button — prominent, premium */
+  .tut-skip {
+    position: fixed; bottom: 20px; right: 16px; z-index: 215;
+    background: rgba(30,28,24,0.85);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 24px; padding: 9px 20px;
+    font-size: 12px; font-weight: 700;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer; font-family: 'Source Sans 3', sans-serif;
+    opacity: 0; transition: opacity 0.3s, transform 0.12s, border-color 0.15s;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.3);
+    letter-spacing: 0.3px;
+  }
+  .tut-skip.tut-on { opacity: 1; }
+  .tut-skip:hover { color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.5); }
+  .tut-skip:active { transform: translateY(0); }
+
+  /* Screen flash on step completion */
+  .tut-sflash { position: fixed; inset: 0; pointer-events: none; opacity: 0; z-index: 50; }
+  .tut-sflash.tut-flash-green { background: radial-gradient(circle at center, rgba(39,97,58,0.22) 0%, transparent 60%); animation: tutFlashPulse 0.4s ease-out forwards; }
+  .tut-sflash.tut-flash-blue  { background: radial-gradient(circle at center, rgba(79,70,229,0.18) 0%, transparent 60%); animation: tutFlashPulse 0.35s ease-out forwards; }
+  @keyframes tutFlashPulse { 0%{opacity:0} 20%{opacity:1} 100%{opacity:0} }
+
 </style>
 </head>
 <body>
@@ -2439,7 +2677,6 @@
   <div class="card-stage" style="position:relative;">
     <div class="stage-label" id="stage-label"><strong style="font-size:11px;color:var(--text);">WHEN</strong> DOES THIS EVENT BELONG?</div>
     <div id="current-card-container"></div>
-    <div class="drag-hint" id="drag-hint">👆 Drag the card down to the timeline below</div>
     <!-- Dark/light toggle floats bottom-right of card stage -->
     <button class="dark-toggle-game" onclick="toggleDark()" id="dark-toggle-game">
       <span id="dark-icon-game">🌙</span>
@@ -2700,6 +2937,39 @@
 <div class="flame-label" id="flame-label">
   <span class="flame-label-text" id="flame-label-text"></span>
   <span class="flame-label-sub" id="flame-label-sub"></span>
+</div>
+
+<!-- FIRST-PLAY TUTORIAL OVERLAYS (fixed, sit above game during first play) -->
+<div class="tut-sflash" id="tut-sflash"></div>
+<div class="tut-scrim"      id="tut-scrim" onclick="_tutScrimTap()"></div>
+<div id="tut-tap-catcher" style="position:fixed;inset:0;z-index:160;display:none;cursor:pointer;" onclick="_tutScrimTap()"></div>
+<div class="tut-hand"       id="tut-hand">👆</div>
+<div class="tut-finger"     id="tut-finger">👆</div>
+<div class="tut-pill"       id="tut-pill">
+  <span class="tut-pill-icon" id="tut-pill-icon"></span>
+  <div class="tut-pill-text"  id="tut-pill-text"></div>
+</div>
+<div class="tut-anchor-lbl" id="tut-anchor-lbl">Drop it here</div>
+<div class="tut-dots"       id="tut-dots">
+  <div class="tut-dot" id="tut-dot-0"></div>
+  <div class="tut-dot" id="tut-dot-1"></div>
+  <div class="tut-dot" id="tut-dot-2"></div>
+</div>
+<button class="tut-continue" id="tut-continue" onclick="_tutContinue()">Tap to continue</button>
+<div class="tut-tap-overlay" id="tut-tap-overlay" onclick="_tutTapDismiss()">
+  <div class="tut-tap-pill" id="tut-tap-pill">
+    <div class="tut-tap-title" id="tut-tap-title"></div>
+    <div class="tut-tap-sub" id="tut-tap-sub"></div>
+    <div class="tut-tap-hint">Tap anywhere to continue</div>
+  </div>
+</div>
+<button class="tut-skip" id="tut-skip" onclick="_tutSkip()">Skip tutorial</button>
+<div class="tut-msg-wrap">
+  <div class="tut-msg"        id="tut-msg">
+    <span class="tut-msg-icon"  id="tut-msg-icon">✓</span>
+    <div class="tut-msg-title"  id="tut-msg-title">Exactly right.</div>
+    <div class="tut-msg-sub"    id="tut-msg-sub">One more thing to show you.</div>
+  </div>
 </div>
 
 <script>
@@ -3558,6 +3828,8 @@ function openCardDetail(ev){
 
 function closeCardDetail(){
   document.getElementById('card-detail-overlay').classList.remove('visible');
+  // Tutorial phase 3: show final message after user closes the modal
+  if(_tutStep === 4) _tutOnModalClosed();
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -3650,7 +3922,6 @@ function getJoke(score) {
 let deck=[], timeline=[], currentCard=null;
 let lives=3, score=0, locked=false, gameEnded=false;
 let streak=0, maxStreak=0;
-let hintDismissed=false;
 let _sessionStartTime = null;
 let _sessionCompleted = false;
 
@@ -3677,6 +3948,7 @@ function closeQuitModal(){
 function confirmQuit(){
   document.getElementById('quit-modal').classList.remove('visible');
   gameEnded=true;
+  _tutTeardown();
   const badge2 = document.getElementById('end-new-badge');
   if(badge2){ badge2.textContent=''; badge2.classList.remove('show'); }
   _hideStreakMoment();
@@ -3996,9 +4268,665 @@ function _showScreenInternal(id){
 }
 
 // ═══════════════════════════════════════════════════════════
+//  FIRST-PLAY TUTORIAL (3-phase)
+//  Phase 1 — auto-place: card flies itself to timeline (free point)
+//  Phase 2 — guided drag: user drags with finger hint + DZ glow
+//  Phase 3 — hold-to-read: user learns press-and-hold on a placed card
+//  Stored in localStorage: 'chronology-tutorial-done' = '1'
+//  Mirrored to Supabase players.tutorial_done (fire-and-forget).
+// ═══════════════════════════════════════════════════════════
+
+// ── Timing constants (tweak these) ──
+const _TUT_T = {
+  PILL_FADE_IN:       400,   // ms before pill appears after scrim
+  DELAY_BEFORE_FLY:   1400,  // ms pause before card starts flying
+  FLY_DURATION:       1500,  // ms for card to fly to timeline
+  HAND_APPEAR_BEFORE: 400,   // hand appears this long before flight
+  LAND_SETTLE:        300,   // ms pause after landing before TL insert
+  DELAY_BEFORE_P2:    600,   // ms pause after P1 insert before P2
+  P2_PILL_DELAY:      400,   // ms before P2 pill appears
+  P2_GLOW_DELAY:      700,   // ms before correct DZ starts glowing
+  P2_FINGER_DELAY:    1000,  // ms before P2 finger animation starts
+};
+
+const _TUT_LS_KEY = 'chronology-tutorial-done';
+let _tutStep            = 0;    // 0=off 1=P1-autoplace 2=P2-guideddrag 3=P3-holdtoread 4=done
+let _tutFingerRAF       = null;
+let _tutTargetItem      = null; // .tl-item highlighted in phase 3
+let _tutPlacedEvId      = null; // ev id placed in phase 2 (for phase 3 targeting)
+let _tutAutoCorrectIdx  = -1;   // correct DZ index computed for auto-place
+
+function _tutIsDone(){
+  return localStorage.getItem(_TUT_LS_KEY) === '1';
+}
+
+function _tutMarkDone(){
+  localStorage.setItem(_TUT_LS_KEY, '1');
+  if(_sbReady && _playerId){
+    _sbRun('tut:done', ()=>
+      _sb.from('players').update({ tutorial_done: true }).eq('id', _playerId)
+    );
+  }
+}
+
+function _tutTeardown(){
+  _tutStep = 0;
+  _stopTutFinger();
+  const sg = document.getElementById('screen-game');
+  sg.classList.remove('tut-p1a','tut-p1b','tut-p1c','tut-p2','tut-s2');
+  document.getElementById('tut-scrim').classList.remove('tut-on');
+  document.getElementById('tut-pill').classList.remove('tut-on');
+  document.getElementById('tut-anchor-lbl').classList.remove('tut-on');
+  document.getElementById('tut-finger').classList.remove('tut-on');
+  document.getElementById('tut-hand').classList.remove('tut-on','tut-animate');
+  document.getElementById('tut-dots').classList.remove('tut-on');
+  document.getElementById('tut-skip').classList.remove('tut-on');
+  document.getElementById('tut-continue').classList.remove('tut-on');
+  document.getElementById('tut-tap-overlay').classList.remove('tut-on');
+  document.getElementById('tut-tap-catcher').style.display = 'none';
+  _tutTapCallback = null;
+  document.getElementById('tut-msg').className = 'tut-msg';
+  document.getElementById('tut-sflash').className = 'tut-sflash';
+  // Remove flying card if present
+  const fc = document.getElementById('tut-fly-card');
+  if(fc) fc.remove();
+  // Remove DZ glow
+  document.querySelectorAll('.tut-glow').forEach(d=>d.classList.remove('tut-glow','tut-correct-dz'));
+  if(_tutTargetItem){ _tutTargetItem.classList.remove('tut-target'); _tutTargetItem=null; }
+}
+
+// ═══════════════════════════════════════════════════════════
+//  PHASE 1 — AUTO-PLACE (3 instructional steps then auto-fly)
+// ═══════════════════════════════════════════════════════════
+let _tutP1Sub = 0; // sub-step within phase 1: 0=a, 1=b, 2=c
+
+function _tutLaunchPhase1(){
+  _tutStep = 1;
+  _tutP1Sub = 0;
+
+  document.getElementById('tut-scrim').classList.add('tut-on');
+
+  // Step dots: 3 dots, first active
+  document.getElementById('tut-dots').classList.add('tut-on');
+  document.getElementById('tut-dot-0').className = 'tut-dot tut-active';
+  document.getElementById('tut-dot-1').className = 'tut-dot';
+  document.getElementById('tut-dot-2').className = 'tut-dot';
+
+  // Skip button
+  document.getElementById('tut-skip').classList.add('tut-on');
+
+  // Start sub-step A after brief delay
+  setTimeout(()=>{
+    if(_tutStep !== 1) return;
+    _tutP1StepA();
+  }, _TUT_T.PILL_FADE_IN);
+}
+
+// Step A: spotlight active card — "guess the year"
+function _tutP1StepA(){
+  _tutP1Sub = 0;
+  const sg = document.getElementById('screen-game');
+  sg.classList.remove('tut-p1b','tut-p1c');
+  sg.classList.add('tut-p1a');
+
+  document.getElementById('tut-pill-icon').textContent = '';
+  document.getElementById('tut-pill-text').innerHTML = 'Guess the year this event happened<br><span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.35);margin-top:4px;display:inline-block;">Tap anywhere to continue</span>';
+  document.getElementById('tut-tap-catcher').style.display = 'block';
+
+  // Pill over the "WHEN DOES THIS EVENT BELONG?" label
+  const card = document.getElementById('active-card');
+  const pill = document.getElementById('tut-pill');
+  if(card){
+    const cr = card.getBoundingClientRect();
+    pill.style.left = Math.max(8, cr.left + cr.width/2 - 150) + 'px';
+    pill.style.top  = Math.max(10, cr.top - 60) + 'px';
+  }
+  pill.classList.add('tut-on');
+}
+
+// Step B1: spotlight both cards — "look at the year"
+function _tutP1StepB(){
+  _tutP1Sub = 1;
+  const sg = document.getElementById('screen-game');
+  sg.classList.remove('tut-p1a','tut-p1c');
+  sg.classList.add('tut-p1b');
+
+  document.getElementById('tut-pill-icon').textContent = '';
+  document.getElementById('tut-pill-text').innerHTML = 'Look at the year of the card below<br><span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.35);margin-top:4px;display:inline-block;">Tap anywhere to continue</span>';
+
+  _tutPosPillInStageGap();
+  document.getElementById('tut-pill').classList.add('tut-on');
+}
+
+// Step B2: same spotlight — "before or after?"
+function _tutP1StepB2(){
+  _tutP1Sub = 1.5;
+
+  document.getElementById('tut-pill-icon').textContent = '';
+  document.getElementById('tut-pill-text').innerHTML = 'Do you think the top event happened BEFORE or AFTER the bottom event?<br><span style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.35);margin-top:4px;display:inline-block;">Tap anywhere to continue</span>';
+
+  _tutPosPillInStageGap();
+  document.getElementById('tut-pill').classList.add('tut-on');
+}
+
+// Step C: spotlight both — "move it in the correct chronology" + auto-fly
+function _tutP1StepC(){
+  _tutP1Sub = 2;
+  document.getElementById('tut-tap-catcher').style.display = 'none';
+  const sg = document.getElementById('screen-game');
+  sg.classList.remove('tut-p1a','tut-p1b');
+  sg.classList.add('tut-p1c');
+
+  document.getElementById('tut-pill-icon').textContent = '';
+  document.getElementById('tut-pill-text').innerHTML = 'Once you have made a choice, place it in the correct order';
+  _tutPosPillAboveCard();
+  document.getElementById('tut-pill').classList.add('tut-on');
+
+  // 3s delay so user can read, then hand appears and auto-fly
+  const PRE_FLY = 3000;
+  setTimeout(()=>{
+    if(_tutStep !== 1) return;
+    _tutShowHandOnCard();
+  }, PRE_FLY);
+
+  setTimeout(()=>{
+    if(_tutStep !== 1) return;
+    _tutFlyCard();
+  }, PRE_FLY + 400);
+}
+
+// Scrim tap handler — advances tutorial steps
+function _tutScrimTap(){
+  if(_tutStep !== 1) return;
+  const pill = document.getElementById('tut-pill');
+  pill.classList.remove('tut-on');
+  // Brief delay so the pill fades out before the next step fades it back in at a new position
+  setTimeout(()=>{
+    if(_tutStep !== 1) return;
+    if(_tutP1Sub === 0) _tutP1StepB();
+    else if(_tutP1Sub === 1) _tutP1StepB2();
+    else if(_tutP1Sub === 1.5) _tutP1StepC();
+  }, 150);
+}
+
+// Legacy — continue button (kept for compatibility but unused now)
+function _tutContinue(){ _tutScrimTap(); }
+
+function _tutFlyCard(){
+  if(_tutStep !== 1) return;
+  const card = document.getElementById('active-card');
+  const hand = document.getElementById('tut-hand');
+  if(!card) return;
+
+  // Pill stays visible during flight ("move the card to the correct chronology")
+
+  // Compute correct DZ index
+  const sorted = [...timeline].sort((a,b)=>a.ev.year-b.ev.year);
+  _tutAutoCorrectIdx = 0;
+  for(let i=0; i<=sorted.length; i++){
+    const before = sorted[i-1];
+    const after  = sorted[i];
+    if((!before||before.ev.year<=currentCard.year)&&(!after||after.ev.year>=currentCard.year)){
+      _tutAutoCorrectIdx = i; break;
+    }
+  }
+
+  // Get target position from the timeline
+  const track = document.getElementById('timeline-track');
+  const items = track.querySelectorAll('.tl-item');
+  let targetX, targetY;
+  if(items.length > 0){
+    if(_tutAutoCorrectIdx === 0){
+      const first = items[0].getBoundingClientRect();
+      targetX = first.left - 155/2;
+      targetY = first.top + 18;
+    } else if(_tutAutoCorrectIdx >= items.length){
+      const last = items[items.length-1].getBoundingClientRect();
+      targetX = last.right + 10;
+      targetY = last.top + 18;
+    } else {
+      const prev = items[_tutAutoCorrectIdx-1].getBoundingClientRect();
+      targetX = prev.right + 10;
+      targetY = prev.top + 18;
+    }
+  } else {
+    const tw = document.getElementById('timeline-wrapper').getBoundingClientRect();
+    targetX = tw.left + tw.width/2 - 155/2;
+    targetY = tw.top + 60;
+  }
+
+  // Create flying card at card's current position
+  const cardRect = card.getBoundingClientRect();
+  const flyCard = document.createElement('div');
+  flyCard.className = 'tut-flying-card';
+  flyCard.id = 'tut-fly-card';
+  flyCard.innerHTML = card.innerHTML;
+  flyCard.style.left = cardRect.left + 'px';
+  flyCard.style.top  = cardRect.top + 'px';
+  flyCard.style.setProperty('--tut-fly-dur', _TUT_T.FLY_DURATION + 'ms');
+  document.body.appendChild(flyCard);
+
+  // Hide original card
+  card.style.opacity = '0';
+
+  // Hand: set fly duration and trigger flight
+  hand.style.setProperty('--tut-fly-dur', _TUT_T.FLY_DURATION + 'ms');
+
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      flyCard.classList.add('tut-animate');
+      flyCard.style.left = targetX + 'px';
+      flyCard.style.top  = targetY + 'px';
+      flyCard.style.transform = 'scale(0.97)';
+
+      hand.classList.add('tut-animate');
+      hand.style.left = (targetX + 155/2 - 14) + 'px';
+      hand.style.top  = (targetY + 90 - 10) + 'px';
+    });
+  });
+
+  // After flight completes → land
+  setTimeout(()=> _tutOnAutoPlaceLand(), _TUT_T.FLY_DURATION + _TUT_T.LAND_SETTLE);
+}
+
+function _tutOnAutoPlaceLand(){
+  if(_tutStep !== 1) return;
+
+  // Remove flying card, hand, and pill
+  const fc = document.getElementById('tut-fly-card');
+  if(fc) fc.remove();
+  document.getElementById('tut-hand').classList.remove('tut-on','tut-animate');
+  document.getElementById('tut-pill').classList.remove('tut-on');
+
+  // Actually place the card via the real game logic
+  // We set a flag so handleDrop knows this is an auto-place and doesn't trigger tutorial callbacks
+  locked = false; // ensure not locked
+  _tutStep = -1;  // temporary: handleDrop sees _tutStep!=2 so it won't call phase2 callback
+  handleDrop(_tutAutoCorrectIdx);
+  _tutStep = 1;   // restore
+
+  // After the handleDrop re-render settles (900ms), transition to phase 2
+  setTimeout(()=>{
+    if(_tutStep !== 1) return;
+    document.getElementById('screen-game').classList.remove('tut-p1a','tut-p1b','tut-p1c');
+    _tutLaunchPhase2();
+  }, _TUT_T.DELAY_BEFORE_P2 + 900);
+}
+
+// ═══════════════════════════════════════════════════════════
+//  PHASE 2 — GUIDED DRAG (user places with hints)
+// ═══════════════════════════════════════════════════════════
+function _tutLaunchPhase2(){
+  _tutStep = 2;
+  const sg = document.getElementById('screen-game');
+  sg.classList.add('tut-p2');
+
+  // Scrim stays on
+  document.getElementById('tut-scrim').classList.add('tut-on');
+
+  // Step dots: dot-0 done, dot-1 active, dot-2 pending
+  document.getElementById('tut-dots').classList.add('tut-on');
+  document.getElementById('tut-dot-0').className = 'tut-dot tut-done';
+  document.getElementById('tut-dot-1').className = 'tut-dot tut-active';
+  document.getElementById('tut-dot-2').className = 'tut-dot';
+
+  // Skip button
+  document.getElementById('tut-skip').classList.add('tut-on');
+
+  // Mark correct DZ with glow
+  setTimeout(()=>{
+    if(_tutStep !== 2) return;
+    _tutMarkWrongDZGlow();
+  }, _TUT_T.P2_GLOW_DELAY);
+
+  // Pill
+  setTimeout(()=>{
+    if(_tutStep !== 2) return;
+    document.getElementById('tut-pill-icon').textContent = '';
+    document.getElementById('tut-pill-text').innerHTML = "Guess this event's year now, I'm helping you with the first one";
+    _tutPosPillAboveCard();
+    document.getElementById('tut-pill').classList.add('tut-on');
+  }, _TUT_T.P2_PILL_DELAY);
+
+  // Finger animation from card to glowing DZ
+  setTimeout(()=>{
+    if(_tutStep !== 2) return;
+    _startTutFingerDrag();
+  }, _TUT_T.P2_FINGER_DELAY);
+}
+
+function _tutMarkWrongDZGlow(){
+  // Compute correct DZ index, then pick a WRONG one (the prank)
+  const sorted = [...timeline].sort((a,b)=>a.ev.year-b.ev.year);
+  let correctIdx = 0;
+  for(let i=0; i<=sorted.length; i++){
+    const before = sorted[i-1];
+    const after  = sorted[i];
+    if((!before||before.ev.year<=currentCard.year)&&(!after||after.ev.year>=currentCard.year)){
+      correctIdx = i; break;
+    }
+  }
+  // Pick a wrong index: prefer one step off from correct
+  const maxIdx = sorted.length;
+  let wrongIdx = correctIdx > 0 ? correctIdx - 1 : correctIdx + 1;
+  if(wrongIdx > maxIdx) wrongIdx = 0;
+  if(wrongIdx === correctIdx) wrongIdx = correctIdx > 0 ? 0 : maxIdx; // fallback
+
+  const track = document.getElementById('timeline-track');
+  track.querySelectorAll('.drop-zone').forEach(dz=>{
+    if(parseInt(dz.dataset.idx) === wrongIdx){
+      dz.classList.add('tut-glow','tut-correct-dz');
+    }
+  });
+}
+
+function _tutDismissPhase2Hints(){
+  _stopTutFinger();
+  document.getElementById('tut-pill').classList.remove('tut-on');
+  // Remove DZ glow
+  document.querySelectorAll('.tut-glow').forEach(d=>d.classList.remove('tut-glow','tut-correct-dz'));
+}
+
+// Called from handleDrop when _tutStep===2
+function _tutOnPhase2Drop(placedEv){
+  _tutPlacedEvId = placedEv ? placedEv.id : null;
+  _tutDismissPhase2Hints();
+  document.getElementById('tut-dots').classList.remove('tut-on');
+  document.getElementById('tut-skip').classList.remove('tut-on');
+  document.getElementById('tut-scrim').classList.remove('tut-on');
+  document.getElementById('screen-game').classList.remove('tut-p2');
+
+  // Immediate transition to phase 3 after renderTimeline settles (900ms in handleDrop)
+  _tutStep = 3;
+  setTimeout(()=>{
+    if(_tutStep !== 3) return;
+    _tutLaunchPhase3();
+  }, 1200);
+}
+
+// Called from handleDrop when _tutStep===2 and placement is WRONG (the prank)
+function _tutOnPhase2Wrong(placedEv){
+  _tutPlacedEvId = placedEv ? placedEv.id : null;
+  _tutDismissPhase2Hints();
+  document.getElementById('tut-skip').classList.remove('tut-on');
+  document.getElementById('screen-game').classList.remove('tut-p2');
+
+  // Show joke message after the wrong-flash settles — stays until user taps
+  setTimeout(()=>{
+    _tutShowTapMsg('WOW you trusted me?', 'THAT WAS WRONG! lmao noob', ()=>{
+      _tutStep = 3;
+      document.getElementById('tut-scrim').classList.remove('tut-on');
+      document.getElementById('tut-dots').classList.remove('tut-on');
+      setTimeout(()=>{
+        if(_tutStep !== 3) return;
+        _tutLaunchPhase3();
+      }, 600);
+    });
+  }, 1300);
+}
+
+// ═══════════════════════════════════════════════════════════
+//  PHASE 3 — HOLD-TO-READ
+// ═══════════════════════════════════════════════════════════
+function _tutLaunchPhase3(){
+  const sg = document.getElementById('screen-game');
+  sg.classList.add('tut-s2');
+  document.getElementById('tut-scrim').classList.add('tut-on');
+
+  // Step dots: dot-0 done, dot-1 done, dot-2 active
+  document.getElementById('tut-dots').classList.add('tut-on');
+  document.getElementById('tut-dot-0').className = 'tut-dot tut-done';
+  document.getElementById('tut-dot-1').className = 'tut-dot tut-done';
+  document.getElementById('tut-dot-2').className = 'tut-dot tut-active';
+
+  // Find and mark the placed card from phase 2
+  const track = document.getElementById('timeline-track');
+  const items = track.querySelectorAll('.tl-item');
+  _tutTargetItem = null;
+  if(_tutPlacedEvId){
+    items.forEach(item=>{
+      if(item.dataset.evId === String(_tutPlacedEvId)) _tutTargetItem = item;
+    });
+  }
+  if(!_tutTargetItem && items.length > 0) _tutTargetItem = items[0];
+  if(_tutTargetItem) _tutTargetItem.classList.add('tut-target');
+
+  // Pill
+  document.getElementById('tut-pill-icon').textContent = '';
+  document.getElementById('tut-pill-text').innerHTML = 'Press and hold a card to read about it';
+  _tutPosPillAbovePlaced();
+  document.getElementById('tut-pill').classList.add('tut-on');
+
+  // Skip button
+  document.getElementById('tut-skip').classList.add('tut-on');
+
+  // Anchor label below placed card
+  _tutPosLblBelowPlaced();
+  document.getElementById('tut-anchor-lbl').textContent = 'Hold this card';
+  document.getElementById('tut-anchor-lbl').classList.add('tut-on');
+
+  // Animated hold finger
+  setTimeout(()=>_startTutFingerHold(), 600);
+}
+
+// Called from addLongPress just before openCardDetail fires
+function _tutCheckStep2Trigger(){
+  if(_tutStep !== 3) return;
+  _tutStep = 4; // waiting for modal close
+  _stopTutFinger();
+  document.getElementById('tut-pill').classList.remove('tut-on');
+  document.getElementById('tut-anchor-lbl').classList.remove('tut-on');
+  document.getElementById('tut-dots').classList.remove('tut-on');
+  document.getElementById('tut-skip').classList.remove('tut-on');
+  document.getElementById('tut-scrim').classList.remove('tut-on');
+  document.getElementById('screen-game').classList.remove('tut-s2');
+  if(_tutTargetItem){ _tutTargetItem.classList.remove('tut-target'); _tutTargetItem=null; }
+  _tutMarkDone();
+  // Final message will show when user closes the modal (see closeCardDetail → _tutOnModalClosed)
+}
+
+// Called from closeCardDetail when _tutStep===4
+function _tutOnModalClosed(){
+  _tutFlash('blue');
+  setTimeout(()=>{
+    _tutShowTapMsg('You\'re sorted.', 'Don\'t forget. You already lost a life coz of YOUR mistake.', ()=>{
+      _tutTeardown();
+    });
+  }, 300);
+}
+
+// ── FINGER ANIMATIONS ───────────────────────────────────────
+function _stopTutFinger(){
+  if(_tutFingerRAF){ cancelAnimationFrame(_tutFingerRAF); _tutFingerRAF=null; }
+  const f = document.getElementById('tut-finger');
+  if(f) f.classList.remove('tut-on');
+}
+
+function _startTutFingerDrag(){
+  const finger = document.getElementById('tut-finger');
+  const card   = document.getElementById('active-card');
+  const dz     = document.querySelector('.tut-correct-dz');
+  if(!card||!dz) return;
+
+  const cr=card.getBoundingClientRect(), dr=dz.getBoundingClientRect();
+  const sx=cr.left+cr.width/2-14, sy=cr.top+cr.height/2-10;
+  const ex=dr.left+dr.width/2-14, ey=dr.top+dr.height/2-10;
+
+  finger.style.left=sx+'px'; finger.style.top=sy+'px';
+  finger.classList.add('tut-on');
+
+  let p=0,dir=1,pause=0;
+  function tick(){
+    if(!finger.classList.contains('tut-on')) return;
+    if(pause>0){ pause--; _tutFingerRAF=requestAnimationFrame(tick); return; }
+    p+=0.013*dir;
+    if(p>=1){ p=1; dir=-1; pause=45; }
+    else if(p<=0){ p=0; dir=1; pause=22; }
+    const t = p<0.5 ? 4*p*p*p : 1-Math.pow(-2*p+2,3)/2;
+    const sc = (p>0.05&&p<0.92) ? 0.86 : 1;
+    finger.style.left      = (sx+(ex-sx)*t)+'px';
+    finger.style.top       = (sy+(ey-sy)*t)+'px';
+    finger.style.transform = `scale(${sc})`;
+    _tutFingerRAF = requestAnimationFrame(tick);
+  }
+  _tutFingerRAF = requestAnimationFrame(tick);
+}
+
+function _startTutFingerHold(){
+  if(!_tutTargetItem) return;
+  const finger  = document.getElementById('tut-finger');
+  const tlCard  = _tutTargetItem.querySelector('.tl-card');
+  if(!tlCard) return;
+
+  const r  = tlCard.getBoundingClientRect();
+  const cx = r.left+r.width/2-14, cy=r.top+r.height/2-10;
+  finger.style.left=cx+'px'; finger.style.top=cy+'px';
+  finger.classList.add('tut-on');
+
+  let frame=0;
+  const PRESS=15,HOLD=65,LIFT=15,IDLE=30,CY=PRESS+HOLD+LIFT+IDLE;
+  function tick(){
+    if(!finger.classList.contains('tut-on')) return;
+    const f=frame%CY;
+    let s=1;
+    if(f<PRESS)               s=1-0.18*(f/PRESS);
+    else if(f<PRESS+HOLD)     s=0.82;
+    else if(f<PRESS+HOLD+LIFT)s=0.82+0.18*((f-PRESS-HOLD)/LIFT);
+    finger.style.transform=`scale(${s})`;
+    frame++;
+    _tutFingerRAF=requestAnimationFrame(tick);
+  }
+  _tutFingerRAF=requestAnimationFrame(tick);
+}
+
+// ── POSITIONING HELPERS ──────────────────────────────────────
+function _tutPosPillInStageGap(){
+  const pill = document.getElementById('tut-pill');
+  const header = document.querySelector('.game-header');
+  const card = document.getElementById('active-card');
+  if(header && card){
+    const hr = header.getBoundingClientRect();
+    const cr = card.getBoundingClientRect();
+    // Center pill vertically between header bottom and card top
+    const gapMid = (hr.bottom + cr.top) / 2;
+    pill.style.left = Math.max(8, cr.left + cr.width/2 - 150) + 'px';
+    pill.style.top  = (gapMid - 25) + 'px';
+  } else {
+    _tutPosPillAtTop();
+  }
+}
+
+function _tutPosPillAtTop(){
+  const pill = document.getElementById('tut-pill');
+  const header = document.querySelector('.game-header');
+  if(header){
+    const hr = header.getBoundingClientRect();
+    pill.style.left = Math.max(8, hr.left + hr.width/2 - 150) + 'px';
+    pill.style.top  = (hr.top + 6) + 'px';
+  }
+}
+
+function _tutPosContinueBelowPill(){
+  const pill = document.getElementById('tut-pill');
+  const btn  = document.getElementById('tut-continue');
+  const pr   = pill.getBoundingClientRect();
+  btn.style.left = (pr.left + pr.width/2 - 70) + 'px';
+  btn.style.top  = (pr.bottom + 10) + 'px';
+}
+
+function _tutPosContinueBelowCard(){
+  const card = document.getElementById('active-card');
+  const btn  = document.getElementById('tut-continue');
+  if(!card) return;
+  const cr = card.getBoundingClientRect();
+  btn.style.left = (cr.left + cr.width/2 - 70) + 'px';
+  btn.style.top  = (cr.bottom + 12) + 'px';
+}
+
+function _tutShowHandOnCard(){
+  const card = document.getElementById('active-card');
+  if(!card) return;
+  const hand = document.getElementById('tut-hand');
+  const r = card.getBoundingClientRect();
+  hand.style.left = (r.left + r.width/2 - 14) + 'px';
+  hand.style.top  = (r.top + r.height/2 - 10) + 'px';
+  hand.classList.remove('tut-animate');
+  hand.classList.add('tut-on');
+}
+
+function _tutPosPillAboveCard(){
+  const card=document.getElementById('active-card'); if(!card) return;
+  const r=card.getBoundingClientRect(), pill=document.getElementById('tut-pill');
+  pill.style.left = Math.max(8, r.left+r.width/2-150)+'px';
+  pill.style.top  = Math.max(60, r.top-58)+'px';
+}
+
+function _tutPosPillAbovePlaced(){
+  if(!_tutTargetItem) return;
+  const tlCard=_tutTargetItem.querySelector('.tl-card'); if(!tlCard) return;
+  const r=tlCard.getBoundingClientRect(), pill=document.getElementById('tut-pill');
+  pill.style.left = Math.max(8, r.left+r.width/2-165)+'px';
+  pill.style.top  = Math.max(60, r.top-62)+'px';
+}
+
+function _tutPosLblBelowPlaced(){
+  if(!_tutTargetItem) return;
+  const tlCard=_tutTargetItem.querySelector('.tl-card'); if(!tlCard) return;
+  const r=tlCard.getBoundingClientRect(), lbl=document.getElementById('tut-anchor-lbl');
+  lbl.style.left = Math.max(8, r.left+r.width/2-60)+'px';
+  lbl.style.top  = (r.bottom+12)+'px';
+}
+
+// ── MESSAGE BOX ──────────────────────────────────────────────
+function _tutShowMsg(cls, icon, title, sub, onDone, delay){
+  const m=document.getElementById('tut-msg');
+  document.getElementById('tut-msg-icon').textContent  = icon;
+  document.getElementById('tut-msg-title').textContent = title;
+  document.getElementById('tut-msg-sub').textContent   = sub;
+  m.className='tut-msg '+cls;
+  void m.offsetWidth;
+  m.classList.add('tut-in');
+  setTimeout(()=>{
+    m.classList.remove('tut-in');
+    m.classList.add('tut-out');
+    setTimeout(()=>{ m.className='tut-msg'; if(onDone) onDone(); }, 330);
+  }, delay);
+}
+
+// ── TAP-TO-DISMISS OVERLAY ───────────────────────────────────
+let _tutTapCallback = null;
+
+function _tutShowTapMsg(title, sub, onDone){
+  document.getElementById('tut-tap-title').textContent = title;
+  document.getElementById('tut-tap-sub').textContent = sub;
+  document.getElementById('tut-tap-overlay').classList.add('tut-on');
+  _tutTapCallback = onDone || null;
+}
+
+function _tutTapDismiss(){
+  document.getElementById('tut-tap-overlay').classList.remove('tut-on');
+  if(_tutTapCallback){ const cb = _tutTapCallback; _tutTapCallback = null; cb(); }
+}
+
+// ── SCREEN FLASH ────────────────────────────────────────────
+function _tutFlash(color){
+  const el = document.getElementById('tut-sflash');
+  el.className = 'tut-sflash tut-flash-' + color;
+  setTimeout(()=>{ el.className = 'tut-sflash'; }, 500);
+}
+
+// ── SKIP TUTORIAL ───────────────────────────────────────────
+function _tutSkip(){
+  _tutMarkDone();
+  _tutTeardown();
+}
+
+// ═══════════════════════════════════════════════════════════
 //  START GAME
 // ═══════════════════════════════════════════════════════════
 function startGame() {
+  // Clean up any active tutorial overlays from a previous run
+  if(_tutStep > 0) _tutTeardown();
   initAudio();
   const s=shuffle(EVENTS);
   timeline=[{ev:s[0],wrong:false}];
@@ -4006,7 +4934,7 @@ function startGame() {
   currentCard=s[1];
   deck=s.slice(2);
   lives=3; score=0; locked=false; gameEnded=false;
-  streak=0; maxStreak=0; hintDismissed=false;
+  streak=0; maxStreak=0;
   _sessionStartTime = new Date().toISOString();
   _sessionCompleted = false;
   // reset end-game elements
@@ -4019,6 +4947,10 @@ function startGame() {
   clearQuip();
   showScreen('game');
   renderAll();
+  // First-play tutorial: launch after a brief delay so the card slide-up animation finishes
+  if(!_tutIsDone()){
+    setTimeout(()=>_tutLaunchPhase1(), 500);
+  }
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -4194,6 +5126,7 @@ function renderCurrentCard(){
   const col = CAT[currentCard.cat] || {text:'#555', bg:'#f0f0f0', emoji:'📌', img:''};
   const card = document.createElement('div');
   card.className = 'event-card';
+  card.id = 'active-card';
   card.setAttribute('draggable', 'true');
   card.style.cssText = 'display:flex;flex-direction:column;overflow:hidden;background:var(--surface);';
 
@@ -4225,30 +5158,29 @@ function renderCurrentCard(){
   function onDragMove(e){
     if(!mouseClone) return;
     if(e.clientX === 0 && e.clientY === 0) return;
+
+    // ── READ phase (all getBoundingClientRect before any transform write) ──
+    const wrap = _tlEls.wrap;
+    const wr = wrap ? wrap.getBoundingClientRect() : null;
+    let hitDZ = null;
+    _cachedDZs.forEach(dz=>{
+      const r = dz.getBoundingClientRect();
+      if(e.clientX>=r.left && e.clientX<=r.right && e.clientY>=r.top && e.clientY<=r.bottom) hitDZ=dz;
+    });
+
+    // ── WRITE phase (DOM mutations after all reads) ──
     mouseClone.style.left = (e.clientX - mouseOffsetX) + 'px';
     mouseClone.style.top  = (e.clientY - mouseOffsetY) + 'px';
 
-    // Edge scrolling
-    const wrapper = document.getElementById('timeline-wrapper');
-    if(wrapper){
-      const wr = wrapper.getBoundingClientRect();
-      const EDGE = 72;
-      const MAX_SPEED = 14;
-      if(e.clientX < wr.left + EDGE){
-        const dist = Math.max(0, e.clientX - wr.left);
-        wrapper.scrollLeft -= MAX_SPEED * (1 - dist / EDGE);
-      } else if(e.clientX > wr.right - EDGE){
-        const dist = Math.max(0, wr.right - e.clientX);
-        wrapper.scrollLeft += MAX_SPEED * (1 - dist / EDGE);
+    if(wr){
+      const EDGE=72, MAX_SPEED=14;
+      if(e.clientX < wr.left+EDGE){
+        tlScrollBy(-MAX_SPEED * (1 - Math.max(0,e.clientX-wr.left)/EDGE));
+      } else if(e.clientX > wr.right-EDGE){
+        tlScrollBy(MAX_SPEED * (1 - Math.max(0,wr.right-e.clientX)/EDGE));
       }
     }
-
-    // Highlight drop zone under cursor
-    document.querySelectorAll('.drop-zone').forEach(dz=>{
-      const r = dz.getBoundingClientRect();
-      const over = e.clientX>=r.left && e.clientX<=r.right && e.clientY>=r.top && e.clientY<=r.bottom;
-      if(over) setActiveDZ(dz);
-    });
+    if(hitDZ) setActiveDZ(hitDZ);
   }
 
   function cleanupMouseClone(){
@@ -4268,6 +5200,8 @@ function renderCurrentCard(){
     e.dataTransfer.setData('text/plain','card');
     e.dataTransfer.effectAllowed='move';
     document.getElementById('screen-game').classList.add('dragging-active');
+    // Dismiss tutorial hints the moment drag begins (phase 2)
+    if(_tutStep===2) _tutDismissPhase2Hints();
 
     // Suppress browser ghost entirely
     const blank = document.createElement('div');
@@ -4340,10 +5274,6 @@ function renderCurrentCard(){
   }, {passive:true});
 
   card.addEventListener('touchmove', e=>{
-    // NOTE: no e.preventDefault() — touch-action:none on .event-card CSS
-    // already prevents scroll/zoom. Removing the non-passive handler lets
-    // iOS WebKit (Safari, Chrome, Instagram WKWebView) freely scroll
-    // other containers like the timeline.
     if(!touchClone) return;
     const t = e.touches[0];
 
@@ -4352,38 +5282,34 @@ function renderCurrentCard(){
       touchClone.style.opacity = '0.92';
       card.style.visibility = 'hidden';
       card.classList.remove('pressing');
+      // Dismiss tutorial hints the moment touch drag begins (phase 2)
+      if(_tutStep===2) _tutDismissPhase2Hints();
     }
 
+    // ── READ phase (all layout reads before any transform write) ──
+    const wrap = _tlEls.wrap;
+    const wr = wrap ? wrap.getBoundingClientRect() : null;
+    let hitDZ = null;
+    _cachedDZs.forEach(dz=>{
+      const r = dz.getBoundingClientRect();
+      if(t.clientX>=r.left && t.clientX<=r.right && t.clientY>=r.top && t.clientY<=r.bottom) hitDZ=dz;
+    });
+
+    // ── WRITE phase (DOM mutations after all reads) ──
     touchClone.style.left = (t.clientX - touchOffsetX) + 'px';
     touchClone.style.top  = (t.clientY - touchOffsetY) + 'px';
 
-    // ── Edge scrolling ──
-    const wrapper = document.getElementById('timeline-wrapper');
-    if(wrapper){
-      const wr = wrapper.getBoundingClientRect();
-      const EDGE = 72; // px from edge that triggers scroll
-      const MAX_SPEED = 14; // max px per frame
-      let scrollSpeed = 0;
-      if(t.clientX < wr.left + EDGE){
-        // Finger near left edge — scroll left
-        const dist = Math.max(0, t.clientX - wr.left);
-        scrollSpeed = -MAX_SPEED * (1 - dist / EDGE);
-      } else if(t.clientX > wr.right - EDGE){
-        // Finger near right edge — scroll right
-        const dist = Math.max(0, wr.right - t.clientX);
-        scrollSpeed = MAX_SPEED * (1 - dist / EDGE);
+    if(wr){
+      const EDGE=72, MAX_SPEED=14;
+      let scrollSpeed=0;
+      if(t.clientX < wr.left+EDGE){
+        scrollSpeed = -MAX_SPEED * (1 - Math.max(0,t.clientX-wr.left)/EDGE);
+      } else if(t.clientX > wr.right-EDGE){
+        scrollSpeed = MAX_SPEED * (1 - Math.max(0,wr.right-t.clientX)/EDGE);
       }
-      if(scrollSpeed !== 0){
-        wrapper.scrollLeft += scrollSpeed;
-      }
+      if(scrollSpeed!==0) tlScrollBy(scrollSpeed);
     }
-
-    // Highlight drop zone under finger
-    document.querySelectorAll('.drop-zone').forEach(dz=>{
-      const r = dz.getBoundingClientRect();
-      const over = t.clientX>=r.left && t.clientX<=r.right && t.clientY>=r.top && t.clientY<=r.bottom;
-      if(over) setActiveDZ(dz);
-    });
+    if(hitDZ) setActiveDZ(hitDZ);
   }, {passive:true});
 
   function onTouchEnd(e){
@@ -4394,7 +5320,7 @@ function renderCurrentCard(){
     if(wasDragging){
       // Find which drop zone finger lifted from
       let handled = false;
-      document.querySelectorAll('.drop-zone').forEach(dz=>{
+      _cachedDZs.forEach(dz=>{
         if(handled) return;
         const r = dz.getBoundingClientRect();
         if(t.clientX>=r.left && t.clientX<=r.right && t.clientY>=r.top && t.clientY<=r.bottom){
@@ -4421,8 +5347,8 @@ function addLongPress(el, ev) {
   let hapticTimers = [];
   let startX = 0, startY = 0;
 
-  const GLOW_START      = 500;   // ms — glow + first haptic begins here
-  const OPEN_AFTER_GLOW = 500;   // ms after glow starts = 1000ms total hold
+  const GLOW_START      = 250;   // ms — glow + first haptic begins here
+  const OPEN_AFTER_GLOW = 250;   // ms after glow starts = 500ms total hold
   const MOVE_THRESHOLD  = 8;     // px — cancel if finger drifts (scroll safe)
 
   function tryHaptic(pattern) {
@@ -4432,21 +5358,24 @@ function addLongPress(el, ev) {
   function start(x, y) {
     startX = x; startY = y;
 
-    // Phase 1 — 500ms: start glow, fire first subtle haptic tick
+    // Phase 1 — 250ms: start glow, fire first subtle haptic tick
     phaseTimer = setTimeout(() => {
       el.classList.add('hold-glow');
       tryHaptic(18);
 
       // Escalating haptic pulses as glow builds toward open
-      const h1 = setTimeout(() => tryHaptic(24), 160);  // ~660ms total
-      const h2 = setTimeout(() => tryHaptic(32), 340);  // ~840ms total
+      const h1 = setTimeout(() => tryHaptic(24), 80);   // ~330ms total
+      const h2 = setTimeout(() => tryHaptic(32), 170);  // ~420ms total
       hapticTimers = [h1, h2];
 
-      // Phase 2 — 1000ms: flash and open
+      // Phase 2 — 500ms total: flash and open
       phaseTimer = setTimeout(() => {
         el.classList.remove('hold-glow');
         el.classList.add('hold-open');
         tryHaptic([28, 12, 55]);  // build-pause-land culmination
+
+        // Tutorial step 2 trigger: fires when user holds any placed card
+        _tutCheckStep2Trigger();
 
         setTimeout(() => {
           el.classList.remove('hold-open');
@@ -4491,6 +5420,7 @@ function makeTlCard(item, extraClass=''){
   const col = CAT[item.ev.cat] || {text:'#555', bg:'#eee', emoji:'📌', img:''};
   const wrap = document.createElement('div');
   wrap.className = 'tl-item';
+  wrap.dataset.evId = item.ev.id;  // used by tutorial step 2 to find the placed card
   const tick = document.createElement('div');
   tick.className = 'tl-tick';
 
@@ -4575,6 +5505,10 @@ function renderTimeline(flashIdx=null, flashClass=''){
     const isLast = (i === last-1);
     track.appendChild(makeDropZone(i+1, isLast ? 'drop-zone-end' : ''));
   });
+  // Cache drop zones and recalculate max scroll
+  _cachedDZs = Array.from(track.querySelectorAll('.drop-zone'));
+  tlUpdateMax();
+  tlSetScroll(_tlScroll);
 }
 
 function renderAll(){
@@ -4582,29 +5516,86 @@ function renderAll(){
 }
 
 // ═══════════════════════════════════════════════════════════
-//  iOS TOUCH-SCROLL FALLBACK — if native CSS overflow-x scroll
-//  is blocked by WebKit (WKWebView, Safari, Chrome on iOS),
-//  this manually scrolls the timeline via scrollLeft.
+//  TRANSFORM-BASED TIMELINE SCROLL
+//  Bypasses native overflow scroll entirely — moves the track
+//  with translateX via touch events. Works on every browser
+//  including iOS WebKit, WKWebView, Instagram in-app browser.
 // ═══════════════════════════════════════════════════════════
+let _tlScroll = 0;
+let _tlAnimId = null;
+let _tlMaxCache = 0;
+let _cachedDZs = [];
+const _tlEls = { track: null, wrap: null };
+
+function _tlRefs(){
+  if(!_tlEls.track) _tlEls.track = document.getElementById('timeline-track');
+  if(!_tlEls.wrap)  _tlEls.wrap  = document.getElementById('timeline-wrapper');
+}
+
+// Call after renderTimeline() or window resize — reads layout once
+function tlUpdateMax(){
+  _tlRefs();
+  if(!_tlEls.track||!_tlEls.wrap){ _tlMaxCache=0; return; }
+  _tlMaxCache = Math.max(0, _tlEls.track.scrollWidth - _tlEls.wrap.clientWidth);
+}
+
+function tlSetScroll(val){
+  _tlRefs();
+  if(!_tlEls.track) return;
+  _tlScroll = Math.max(0, Math.min(val, _tlMaxCache));
+  _tlEls.track.style.transform = 'translateX(' + (-_tlScroll) + 'px)';
+}
+
+function tlScrollBy(delta){
+  tlSetScroll(_tlScroll + delta);
+}
+
+function tlSmoothScrollTo(target, duration){
+  duration = duration || 300;
+  if(_tlAnimId){ cancelAnimationFrame(_tlAnimId); _tlAnimId=null; }
+  const start = _tlScroll;
+  const delta = target - start;
+  if(Math.abs(delta) < 1){ tlSetScroll(target); return; }
+  const t0 = performance.now();
+  (function step(now){
+    const p = Math.min((now - t0) / duration, 1);
+    const ease = p<0.5 ? 2*p*p : -1+(4-2*p)*p;
+    tlSetScroll(start + delta * ease);
+    if(p < 1) _tlAnimId = requestAnimationFrame(step);
+    else _tlAnimId = null;
+  })(performance.now());
+}
+
+// Recalculate max scroll on resize
+window.addEventListener('resize', ()=>{ tlUpdateMax(); tlSetScroll(_tlScroll); });
+
+// Scroll input handlers — touch, mouse wheel, mouse drag
 (function(){
   const w = document.getElementById('timeline-wrapper');
   if(!w) return;
-  let sx=0, sl=0, active=false, vx=0, lx=0, lt=0, raf=null;
+
+  // ── Touch (mobile) ──
+  let sx=0, sl=0, active=false, vx=0, lx=0, lt=0, coast=null;
+
+  function stopCoast(){
+    if(_tlAnimId){ cancelAnimationFrame(_tlAnimId); _tlAnimId=null; }
+    if(coast){ cancelAnimationFrame(coast); coast=null; }
+  }
 
   w.addEventListener('touchstart', e=>{
+    stopCoast();
     const t=e.touches[0];
-    sx=t.clientX; sl=w.scrollLeft; active=false;
+    sx=t.clientX; sl=_tlScroll; active=false;
     vx=0; lx=t.clientX; lt=Date.now();
-    if(raf){cancelAnimationFrame(raf);raf=null;}
   },{passive:true});
 
   w.addEventListener('touchmove', e=>{
     const t=e.touches[0], dx=sx-t.clientX;
     if(!active && Math.abs(dx)>4) active=true;
     if(active){
-      w.scrollLeft = sl+dx;
+      tlSetScroll(sl + dx);
       const now=Date.now(), dt=now-lt;
-      if(dt>0){vx=(lx-t.clientX)/dt;}
+      if(dt>0) vx=(lx-t.clientX)/dt;
       lx=t.clientX; lt=now;
     }
   },{passive:true});
@@ -4612,14 +5603,46 @@ function renderAll(){
   w.addEventListener('touchend', ()=>{
     if(active && Math.abs(vx)>0.08){
       let v=vx*16;
-      (function coast(){
-        if(Math.abs(v)<0.5)return;
-        w.scrollLeft+=v; v*=0.95;
-        raf=requestAnimationFrame(coast);
+      (function glide(){
+        if(Math.abs(v)<0.5){ coast=null; return; }
+        tlScrollBy(v); v*=0.95;
+        coast=requestAnimationFrame(glide);
       })();
     }
     active=false;
   },{passive:true});
+
+  // ── Mouse wheel (desktop) ──
+  w.addEventListener('wheel', e=>{
+    e.preventDefault();
+    stopCoast();
+    // Use deltaX if available (horizontal scroll), else fall back to deltaY
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    tlScrollBy(delta);
+  },{passive:false});
+
+  // ── Mouse drag (desktop — click and drag to scroll) ──
+  let mx=0, msl=0, mdrag=false;
+
+  w.addEventListener('mousedown', e=>{
+    // Only left button, and not on interactive elements
+    if(e.button!==0) return;
+    stopCoast();
+    mx=e.clientX; msl=_tlScroll; mdrag=true;
+    w.style.cursor='grabbing';
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', e=>{
+    if(!mdrag) return;
+    tlSetScroll(msl + (mx - e.clientX));
+  });
+
+  window.addEventListener('mouseup', ()=>{
+    if(!mdrag) return;
+    mdrag=false;
+    w.style.cursor='';
+  });
 })();
 
 // ═══════════════════════════════════════════════════════════
@@ -4629,16 +5652,14 @@ function scrollToCard(idx){
   setTimeout(()=>{
     const wrapper = document.getElementById('timeline-wrapper');
     if(!wrapper) return;
-    // Find the idx-th .tl-item in the track
     const items = wrapper.querySelectorAll('.tl-item');
     const target = items[idx];
     if(!target) return;
-    const wRect  = wrapper.getBoundingClientRect();
-    const tRect  = target.getBoundingClientRect();
-    // Current scroll + offset of card centre relative to wrapper centre
-    const cardCenterInWrapper = tRect.left - wRect.left + tRect.width/2;
+    const wRect = wrapper.getBoundingClientRect();
+    const tRect = target.getBoundingClientRect();
+    const cardCenter = tRect.left - wRect.left + tRect.width/2;
     const wrapperCenter = wRect.width / 2;
-    wrapper.scrollBy({ left: cardCenterInWrapper - wrapperCenter, behavior: 'smooth' });
+    tlSmoothScrollTo(_tlScroll + (cardCenter - wrapperCenter));
   }, 80);
 }
 
@@ -4865,12 +5886,6 @@ function handleDrop(dropIdx){
   // Immediately wipe the card from the stage - no remnant
   document.getElementById('current-card-container').innerHTML='';
 
-  // Dismiss the drag hint after first placement
-  if(!hintDismissed){
-    hintDismissed = true;
-    const hint = document.getElementById('drag-hint');
-    if(hint) hint.classList.add('hidden');
-  }
 
   // Clear the previous quip
   clearQuip();
@@ -4905,6 +5920,8 @@ function handleDrop(dropIdx){
     // Trigger milestone celebration after a short delay so toast is visible first
     if(MILESTONES[streak]) setTimeout(()=>triggerMilestoneBurst(streak), 400);
     setTimeout(()=>{renderTimeline(); nextCard();},900);
+    // Tutorial phase 2: on drop, transition to phase 3
+    if(_tutStep===2) _tutOnPhase2Drop(placed);
 
   } else {
     const hadStreak = streak;
@@ -4933,6 +5950,8 @@ function handleDrop(dropIdx){
       if(lives<=0){ triggerGameOver(); }
       else{ renderTimeline(); nextCard(); }
     },1100);
+    // Tutorial phase 2: wrong placement — show joke, then phase 3
+    if(_tutStep===2) _tutOnPhase2Wrong(placed);
   }
 }
 
@@ -4958,10 +5977,7 @@ function triggerGameOver(){
   document.getElementById('current-card-container').innerHTML='';
 
   // Scroll timeline to start
-  setTimeout(()=>{
-    const w=document.getElementById('timeline-wrapper');
-    if(w) w.scrollTo({left:0,behavior:'smooth'});
-  },200);
+  setTimeout(()=>{ tlSmoothScrollTo(0); },200);
 
   // Determine run quality
   const isGood = score >= 30;
